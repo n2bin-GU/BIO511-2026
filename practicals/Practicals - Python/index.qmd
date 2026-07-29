@@ -19,11 +19,12 @@ This repository contains practical exercises for the BIO511 Genomics course. Use
 ### 🖥️ Command Line Programming
 Here are the practical exercises related to command line programming section of the course:
 
-- **[Practical 1: CLI Basics](PRACTICAL_INTRO_TO_COMMAND_LINE.qmd)**
-- **[Practical 2: Setting up the HPC](PRACTICAL_SETTING_UP_THE_HPC.qmd)**
-- **[Practical 3: Workspace Management and Data Management](PRACTICAL_WORKSPACE_MANAGEMENT.qmd)**
-- **[Practical 4: Scripting and Advanced Text Manipulation](PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.qmd)**
-- **[Practical 5: Software & Containers](PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.qmd)**
+- **[Practical 1: CLI Basics](../Practicals%20-%20CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.qmd)**
+- **[Practical 2: High performance computing clusters - intro](../Practicals%20-%20CLI/PRACTICAL_HPC_CLUSTERS_INTRO.qmd)**
+- **[Practical 3: Setting up the HPC](../Practicals%20-%20CLI/PRACTICAL_SETTING_UP_THE_HPC.qmd)**
+- **[Practical 4: Workspace Management and Data Management](../Practicals%20-%20CLI/PRACTICAL_WORKSPACE_MANAGEMENT.qmd)**
+- **[Practical 5: Scripting and Advanced Text Manipulation](../Practicals%20-%20CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.qmd)**
+- **[Practical 6: Software & Containers](../Practicals%20-%20CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.qmd)**
 
 ### 🧬 Genomics Workflows
 *Coming Soon...*
@@ -37,7 +38,7 @@ Here are the pracical exercises related to python programming
 - **[Practical 3: functions](PRACTICAL_FUNCTIONS.qmd)**
 - **[Practical 4: modules](PRACTICAL_MODULES.qmd)**
 - **[Practical 5: files](PRACTICAL_FILES.qmd)**
-- **[Practical 6: plots](PRACTICALS_PLOTTING.qmd)**
+- **[Practical 6: plots](PRACTICAL_PLOTTING.qmd)**
 - **[Practical 7: Algorithmic Thinking in Genomics](PRACTICAL_ALGORITHMIC_THINKING.qmd)**
 
 

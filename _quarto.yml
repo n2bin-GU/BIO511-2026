@@ -25,21 +25,23 @@ website:
         contents:
         - href: "practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.qmd"
           text: "Practical 1: CLI Basics"
+        - href: "practicals/Practicals - CLI/PRACTICAL_HPC_CLUSTERS_INTRO.qmd"
+          text: "Practical 2: High performance computing clusters - intro"
         - href: "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.qmd"
-          text: "Practical 2: Setting up the HPC"
+          text: "Practical 3: Setting up the HPC"
         - href: "practicals/Practicals - CLI/PRACTICAL_WORKSPACE_MANAGEMENT.qmd"
-          text: "Practical 3: Workspace Management and Data Management"
+          text: "Practical 4: Workspace Management and Data Management"
         - href: "practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.qmd"
-          text: "Practical 4: Scripting and Advanced Text Manipulation"
+          text: "Practical 5: Scripting and Advanced Text Manipulation"
         - href: "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.qmd"
-          text: "Practical 5: Software & Containers"
+          text: "Practical 6: Software & Containers"
       - section: "Coding Best Practices"
         contents:
         - href: "practicals/Practicals - Git/PRACTICAL_GIT_SESSION1.qmd"
           text: "Practical 1: Git Fundamentals: Session 1"
         - href: "practicals/Practicals - Git/PRACTICAL_GIT_SESSION2.qmd"
           text: "Practical 2: Git Fundamentals: Session 2"
-        - href: "practicals/Practicals - Git/PRACTICAL_BEST_CODING_PRACTISES.qmd"
+        - href: "practicals/Practicals - CLI/PRACTICAL_BEST_CODING_PRACTISES.qmd"
           text: "Practical 3: Best Coding Practices"
 
     - id: gwf
