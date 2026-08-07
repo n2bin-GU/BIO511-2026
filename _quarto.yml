@@ -35,10 +35,8 @@ website:
           text: "Practical 5: Software & Containers"
       - section: "Coding Best Practices"
         contents:
-        - href: "practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd"
-          text: "Practical 1: Git Fundamentals"
-        - href: "practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd"
-          text: "Practical 2: Algorithmic Thinking"
+        - href: "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.qmd"
+          text: "Practical 1: Best Practices"
 
     - id: gwf
       title: "Genomics Workflows"
@@ -77,6 +75,9 @@ website:
         text: "Practical 5: Files"
       - href: "practicals/Practicals - Python/PRACTICAL_PLOTTING.qmd"
         text: "Practical 6: Plotting"
+      - href: "practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING_IN_GENOMICS.qmd"
+        text: "Practical 7: Algorithmic Thinking in Genomics"
+
 
 format:
   html:
