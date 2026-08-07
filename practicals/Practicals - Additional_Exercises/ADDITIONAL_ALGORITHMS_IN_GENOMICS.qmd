@@ -1,0 +1,1366 @@
+---
+title: "Additional 1: Algorithmic Thinking in Genomics"
+author: "Vahid Atabaigielmi, Tor Kling"
+date: today
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+    theme: cosmo
+---
+
+# Introduction
+
+By this point in the course you have worked with the command line, Git, Python, files, functions, plotting, and genomics workflows. This practical is meant as a capstone. Instead of asking only "how do I write this loop?", we now ask a deeper question:
+
+**What kind of problem is this, and what kind of algorithm is powerful enough to solve it at genomic scale?**
+
+Modern bioinformatics depends on a small number of recurring algorithmic ideas. Sequence alignment, read mapping, genome assembly, gene prediction, taxonomic classification, and variant calling all look different on the surface, but many of them reuse the same patterns:
+
+- break a biological object into computable pieces
+- score many possible explanations
+- search efficiently through a huge space of possibilities
+- use data structures that avoid scanning everything
+- accept tradeoffs between exactness, speed, memory, and biological realism
+
+::: {.callout-note}
+## Learning Objectives
+
+By the end of this additional exercise, you should be able to:
+
+- Describe dynamic programming, seed-and-extend search, indexing, graph assembly, hidden Markov models, and probabilistic variant calling at a conceptual level
+- Convert pseudocode descriptions of algorithms into runnable Python code
+- Call that python code in simple efficient bash scripts 
+
+:::
+
+# Where Does the Word Algorithm Come From?
+
+The word **algorithm** comes from the name of the Persian mathematician **Muhammad ibn Musa al-Khwarizmi**, who lived around the 9th century. His name was later Latinized in Europe as **Algoritmi**.
+
+![Modern statue of Muhammad ibn Musa al-Khwarizmi in Madrid. This is a later commemorative statue, not a historical portrait. Image source: Wikimedia Commons, CC0.](images/al-khwarizmi-statue.jpg){fig-alt="A modern statue of Muhammad ibn Musa al-Khwarizmi holding a book." width="45%"}
+
+One reason his name became so strongly connected with algorithmic thinking is that his mathematical works described **general, repeatable procedures** for solving problems. In his work on **al-jabr**, he gave systematic methods for solving linear and quadratic equations, which are polynomial equations of degree 1 and degree 2. The important idea was not just finding one answer, but describing a method that could be followed again and again for similar problems.
+
+Over time, this name became associated with step-by-step methods for doing calculations. That meaning eventually developed into the modern word **algorithm**: a precise set of instructions for solving a problem.
+
+In short:
+
+```text
+al-Khwarizmi -> Algoritmi -> algorithm
+```
+
+The word **algebra** also comes from the title of one of his mathematical works, which included the Arabic word **al-jabr**.
+
+# Warm-up: Algorithmic Thinking as Planning
+
+Before we look at genomics algorithms, let us start with a smaller planning problem. Planning is a useful way to think algorithmically because it forces us to define a **starting state**, a **goal state**, and the **actions** that can move us from one state to another.
+
+This warm-up is adapted from a planning example in the **Artificial Intelligence Core Course** at Saarland University, Germany.
+
+Imagine this toy problem:
+
+**Question:** What is the shortest sequence of valid actions that gets us from the starting state to the goal state?
+
+Jane starts at home. A virus problem must be solved at location F. She can solve it in one of two ways:
+
+- buy disinfectant and use it at location F
+- buy both a mask and toilet paper, then use them at location F
+
+However, she first needs to withdraw money from the cash point before buying anything.
+
+```{mermaid}
+flowchart LR
+  A["A: Home"]
+  B["B: Drug Store (toilet paper)"]
+  C["C: Cash Point"]
+  E["E: Mask Shop"]
+  F["F: Virus Location"]
+  G["G: Pharmacy (disinfectant)"]
+
+  E --- B
+  B --- A
+  A --- C
+  C --- G
+  C --- F
+```
+
+In planning language, we can describe the problem like this:
+
+| Planning concept | Meaning in this example |
+|---|---|
+| Initial state | Jane is at location A |
+| Goal state | The virus problem is solved |
+| Action | Something Jane can do, such as `walk`, `withdrawMoney`, or `buyDisinfectant` |
+| Preconditions | What must already be true before an action can happen |
+| Effects | What changes after the action is performed |
+| Plan | A sequence of actions that reaches the goal |
+| Optimal plan | A valid plan with the lowest cost, often the fewest actions |
+
+For example, the action `buyDisinfectant` can be written as:
+
+```text
+Action: buyDisinfectant
+Preconditions:
+    at(G)
+    hasMoney
+Effects:
+    hasDisinfectant
+    no longer hasMoney
+```
+
+One valid plan is:
+
+```text
+walk(A, C)
+withdrawMoney
+walk(C, G)
+buyDisinfectant
+walk(G, C)
+walk(C, F)
+useDisinfectant
+```
+
+This is algorithmic thinking in a very direct form. We are not just listing commands randomly. We are reasoning about what must be true before each step, what each step changes, and whether the final goal has been reached.
+
+The same logic appears in bioinformatics workflows:
+
+| Planning idea | Genomics workflow analogue |
+|---|---|
+| Initial state | Raw sequencing reads |
+| Goal state | Interpretable biological result |
+| Action | Run quality control, trim reads, map reads, assemble contigs, annotate genes |
+| Preconditions | Required input files, software, indexes, databases, or parameters |
+| Effects | New output files, filtered reads, alignments, assemblies, variant calls |
+| Plan | The workflow connecting all steps |
+| Optimal plan | A workflow that is accurate, reproducible, efficient, and appropriate for the question |
+
+For example:
+
+```text
+raw FASTQ files
+-> quality control
+-> trimming
+-> read mapping or assembly
+-> variant calling or annotation
+-> biological interpretation
+```
+
+This is why algorithmic thinking matters. A workflow is not only a list of tools. It is a plan where every step has inputs, assumptions, outputs, and consequences.
+
+# Why Genomics Needs Sophisticated Algorithms
+
+A small Python exercise might loop through four sequences. A real genomics dataset might contain:
+
+- millions of short reads
+- billions of reference genome positions
+- sequencing errors
+- repeated regions
+- contamination
+- uneven coverage
+- uncertain biological signals
+
+A naive solution often looks reasonable until the dataset becomes real.
+
+For example, imagine mapping 10 million reads to a 5 million base pair bacterial genome by checking each read at every possible position.
+
+```text
+For each read:
+    For each position in the genome:
+        Compare the read to the genome at that position
+```
+
+If the reads are 150 bp long, this can require trillions of character comparisons. The algorithm is simple, but not practical.
+
+Bioinformatics therefore depends on better strategies:
+
+- **indexing**: build a searchable representation of the genome
+- **dynamic programming**: reuse partial results instead of recomputing them
+- **heuristics**: quickly find likely answers when exact search is too expensive
+- **graphs**: represent relationships between k-mers, reads, genes, or genomes
+- **probabilistic models**: reason under uncertainty
+
+# Algorithmic Vocabulary
+
+Before looking at genomics examples, it helps to name a few core ideas.
+
+| Concept | Meaning in practice |
+|---|---|
+| Input | The data the algorithm starts with, such as reads, sequences, or tables |
+| Output | The result, such as an alignment, assembly, variant list, or classification |
+| State | Information the algorithm remembers while running |
+| Score | A number used to compare possible answers |
+| Search space | All possible solutions the algorithm could consider |
+| Complexity | How runtime or memory grows as input grows |
+| Exact algorithm | Guaranteed to find the optimal answer under its model |
+| Heuristic algorithm | Faster strategy that may approximate or miss some answers |
+| Data structure | A special organization of data that makes some operations efficient |
+
+In genomics, the most important question is often not "can I solve this for one sequence?" but "can I solve this for millions of sequences before tomorrow morning?"
+
+# Example 1: Exact String Matching and k-mers
+
+One of the simplest genomics algorithms is exact string matching: finding where a DNA pattern occurs in a longer sequence.
+
+**Question:** Where does the pattern `ATG` occur in a genome, and which short sequence words occur most often?
+
+Naive algorithm:
+
+```text
+For each position in the genome:
+    Compare the pattern to the genome at that position
+    If all characters match:
+        Report the position
+```
+
+Python example:
+
+```python
+genome = "TTGATGCCCATGAAATGA"
+pattern = "ATG"
+
+matches = []
+
+for i in range(len(genome) - len(pattern) + 1):
+    if genome[i:i + len(pattern)] == pattern:
+        matches.append(i)
+
+print(matches)
+```
+
+This is fine for a small genome and a short pattern. But large-scale genomics often uses **k-mers**, fixed-length sequence words, to make matching faster.
+
+```python
+sequence = "ATGACCATGATTACGCCAAGCT"
+k = 3
+
+kmer_counts = {}
+
+for i in range(len(sequence) - k + 1):
+    kmer = sequence[i:i + k]
+    if kmer not in kmer_counts:
+        kmer_counts[kmer] = 0
+    kmer_counts[kmer] = kmer_counts[kmer] + 1
+
+print(kmer_counts)
+```
+
+k-mers are used in many genomics tools:
+
+- read error correction
+- genome assembly
+- metagenomic classification
+- contamination checks
+- genome distance estimation
+- fast pre-filtering before alignment
+
+The key idea is that long biological sequences can be represented as collections of shorter sequence words.
+
+# Example 2: Dynamic Programming for Sequence Alignment
+
+**Question:** How do we compare two sequences when they may contain substitutions, insertions, and deletions?
+
+For example:
+
+```text
+Sequence A: A C G T A C
+Sequence B: A C - T G C
+```
+
+The challenge is that many alignments are possible. A brute-force search over all alignments becomes impossible as sequence length grows.
+
+Dynamic programming solves this by breaking the alignment into smaller subproblems and storing their scores in a matrix.
+
+Well known algorithms:
+
+| Algorithm | Use |
+|---|---|
+| Needleman-Wunsch | Global alignment of two full sequences |
+| Smith-Waterman | Local alignment of best matching subsequences |
+| Viterbi | Most likely path through a hidden Markov model |
+
+For global alignment, define:
+
+```text
+score[i][j] = best alignment score between the first i bases of sequence A
+              and the first j bases of sequence B
+```
+
+At each cell, the algorithm chooses among three possibilities:
+
+```text
+diagonal: align A[i] with B[j]
+up:       align A[i] with a gap
+left:     align B[j] with a gap
+```
+
+Simplified recurrence:
+
+```text
+score[i][j] = max(
+    score[i-1][j-1] + match_or_mismatch,
+    score[i-1][j]   + gap_penalty,
+    score[i][j-1]   + gap_penalty
+)
+```
+
+This is algorithmically sophisticated because the method does not try every full alignment independently. It reuses partial solutions. Runtime is still usually proportional to the product of sequence lengths, `O(nm)`, but that is far better than enumerating all possible alignments.
+
+::: {.callout-tip}
+## Biological Interpretation
+
+The scoring system is a biological model. A high match score says matches are likely or valuable. A strong gap penalty says insertions/deletions are costly. Changing the scoring scheme changes what kind of alignment the algorithm prefers.
+:::
+
+# Example 3: BLAST and Seed-and-Extend
+
+**Question:** How can we find sequences in a large database that are similar to a query sequence without doing a slow full dynamic-programming alignment against every database sequence?
+
+Smith-Waterman is sensitive, but too slow for searching a query against a huge database. BLAST uses a heuristic strategy called **seed-and-extend**.
+
+The basic idea:
+
+```text
+Break the query into short words
+Find exact or high-scoring word matches in the database
+Use those matches as seeds
+Extend around each seed to build a longer local alignment
+Report alignments with sufficiently high scores
+```
+
+This is not guaranteed to find every possible optimal alignment, but it is fast and usually biologically useful.
+
+BLAST demonstrates an important principle:
+
+**A good bioinformatics algorithm is often not the mathematically perfect one. It is the one that makes a useful tradeoff for the biological question and dataset size.**
+
+Use BLAST-like thinking when:
+
+- the database is large
+- approximate matches are acceptable
+- speed matters
+- you need candidate homologs rather than a proof of optimality
+
+# Example 4: Read Mapping with Indexes, BWT, and FM-index
+
+**Question:** Where did each sequencing read most likely come from in the reference genome?
+
+A naive mapper compares every read to every genome position. Modern mappers avoid this by building an index of the reference genome.
+
+Well known ideas and tools:
+
+| Idea | Used for |
+|---|---|
+| suffix arrays | fast substring search |
+| Burrows-Wheeler Transform (BWT) | compressed representation that preserves searchable structure |
+| FM-index | memory-efficient exact matching based on BWT |
+| BWA and Bowtie | widely used read mappers based on these ideas |
+
+Conceptual algorithm:
+
+```text
+Build an index of the reference genome
+For each read:
+    Search for exact seed matches using the index
+    Extend or refine candidate matches
+    Score candidate alignments
+    Report the best location or mark the read as ambiguous
+```
+
+The cleverness is in the index. Instead of storing every possible alignment, the algorithm stores the reference in a form that supports fast backward search.
+
+This is why read mapping can be feasible even when there are millions of reads. The expensive work is partly shifted into building an efficient reference index.
+
+::: {.callout-note}
+## Ambiguous Mapping
+
+Not every read has a unique best location. Repeats, conserved genes, paralogs, and low-complexity regions can all produce ambiguous mappings. A mapper must decide whether to report multiple locations, choose one, lower mapping quality, or discard the read.
+:::
+
+# Example 5: Genome Assembly with de Bruijn Graphs
+
+**Question:** Can we reconstruct a genome from many short sequencing reads without already knowing the reference?
+
+One classical approach is **overlap-layout-consensus**:
+
+```text
+Find overlaps between reads
+Arrange reads into a layout
+Derive a consensus sequence
+```
+
+This works well conceptually, but all-vs-all read overlap can become expensive for large short-read datasets.
+
+Many short-read assemblers use **de Bruijn graphs** instead.
+
+The idea:
+
+1. Break reads into k-mers
+2. Treat k-mers or k-1-mers as graph components
+3. Connect nodes when k-mers overlap
+4. Find paths through the graph that reconstruct sequence
+
+Example with k = 4:
+
+```text
+Read: ATGAC
+k-mers: ATGA, TGAC
+
+ATGA connects ATG -> TGA
+TGAC connects TGA -> GAC
+```
+
+The graph represents sequence adjacency. Genome assembly becomes a graph traversal problem.
+
+Why this is powerful:
+
+- repeated k-mers collapse repeated sequence into graph structures
+- sequencing errors often appear as low-coverage tips or bubbles
+- coverage can help distinguish real sequence from noise
+
+Why this is hard:
+
+- repeats longer than the read length create ambiguity
+- uneven coverage can break paths
+- sequencing errors create extra graph branches
+- plasmids, contamination, and strain mixtures complicate the graph
+
+Tools such as SPAdes use graph-based assembly ideas, combined with many practical improvements.
+
+# Example 6: Hidden Markov Models for Genes and Proteins
+
+**Question:** Given an observed DNA or protein sequence, what hidden biological states most likely generated it?
+
+A hidden Markov model, or HMM, is useful when the observed data are visible but the underlying biological state is hidden.
+
+Example:
+
+```text
+Observed sequence: A T G G C A T A A ...
+Hidden state:      intergenic, start codon, coding region, stop codon, ...
+```
+
+An HMM includes:
+
+- states, such as coding and non-coding
+- transition probabilities between states
+- emission probabilities for observed bases or amino acids
+
+The **Viterbi algorithm** finds the most likely sequence of hidden states.
+
+Conceptual pseudocode:
+
+```text
+For each position in the sequence:
+    For each possible hidden state:
+        Calculate the best score for arriving at this state
+        Store where that best score came from
+Trace back from the best final state to recover the most likely path
+```
+
+HMMs appear in:
+
+- gene prediction
+- protein domain detection
+- profile HMM searches, such as HMMER
+- annotation of conserved protein families
+
+HMMs are powerful because they let us model biological uncertainty. Instead of saying "this position definitely is coding", the algorithm asks which hidden explanation is most probable under the model.
+
+# Example 7: Variant Calling as Probabilistic Inference
+
+**Question:** Given the reads observed at a genomic position, which genotype is most likely?
+
+For example, suppose the reference has `A`, but the reads show:
+
+```text
+A A A G A G A A G A
+```
+
+Is this a real A/G variant, sequencing error, mapping error, or contamination?
+
+A simple rule might say:
+
+```text
+If more than 20 percent of reads support G:
+    call a variant
+```
+
+That can work as a toy algorithm, but real variant callers use probabilistic models. They consider:
+
+- base quality
+- mapping quality
+- read depth
+- strand bias
+- expected ploidy
+- prior probability of variation
+- likelihood of each possible genotype
+
+Conceptual algorithm:
+
+```text
+For each genomic position:
+    Collect reads overlapping the position
+    For each possible genotype:
+        Calculate how likely the observed reads are under that genotype
+    Combine likelihoods with prior assumptions
+    Report the genotype with strongest support
+    Attach a confidence score
+```
+
+This is algorithmic thinking under uncertainty. The output is not only a base call, but also a confidence estimate.
+
+# Comparing Algorithms
+
+Different genomics tasks require different algorithmic strategies.
+
+| Problem | Common algorithmic idea | Example tools or methods |
+|---|---|---|
+| Pairwise sequence alignment | dynamic programming | Needleman-Wunsch, Smith-Waterman |
+| Database homology search | seed-and-extend heuristic | BLAST |
+| Short-read mapping | indexing, BWT, FM-index | BWA, Bowtie |
+| Genome assembly | graphs, k-mers | de Bruijn graph assemblers, SPAdes |
+| Protein domain detection | profile HMMs | HMMER |
+| Gene prediction | HMMs and probabilistic models | many prokaryotic/eukaryotic gene callers |
+| Variant calling | genotype likelihoods, Bayesian reasoning | bcftools, GATK-style models |
+| Metagenomic classification | k-mer indexes, lowest common ancestor | Kraken-style classifiers |
+| Genome similarity | sketches, MinHash | Mash-style distance estimation |
+
+No algorithm is best for every case. The right choice depends on the question, data type, genome size, error profile, and acceptable tradeoffs.
+
+# Runnable Python Implementations
+
+The code below gives small, teaching-scale implementations of the algorithmic ideas introduced above. These examples are meant to be readable and runnable in plain Python. They are **not** replacements for production tools such as BLAST, BWA, Bowtie, SPAdes, HMMER, bcftools, or GATK.
+
+The value of writing these toy versions is that you can see the algorithmic structure directly.
+
+## Exact Matching and k-mer Counting
+
+```python
+def exact_match_positions(genome, pattern):
+    """Return all zero-based positions where pattern occurs in genome."""
+    positions = []
+
+    for i in range(len(genome) - len(pattern) + 1):
+        window = genome[i:i + len(pattern)]
+        if window == pattern:
+            positions.append(i)
+
+    return positions
+
+
+def count_kmers(sequence, k):
+    """Count all k-mers in a sequence."""
+    counts = {}
+
+    if k <= 0 or k > len(sequence):
+        return counts
+
+    for i in range(len(sequence) - k + 1):
+        kmer = sequence[i:i + k]
+        if kmer not in counts:
+            counts[kmer] = 0
+        counts[kmer] = counts[kmer] + 1
+
+    return counts
+
+
+genome = "TTGATGCCCATGAAATGA"
+print(exact_match_positions(genome, "ATG"))
+print(count_kmers("ATGACCATGATTACGCCAAGCT", 4))
+```
+
+## Needleman-Wunsch Global Alignment
+
+This is a small implementation of global alignment. It aligns two full sequences from beginning to end.
+
+```python
+def needleman_wunsch(seq_a, seq_b, match=1, mismatch=-1, gap=-2):
+    rows = len(seq_a) + 1
+    cols = len(seq_b) + 1
+
+    score = [[0 for _ in range(cols)] for _ in range(rows)]
+    pointer = [["" for _ in range(cols)] for _ in range(rows)]
+
+    for i in range(1, rows):
+        score[i][0] = score[i - 1][0] + gap
+        pointer[i][0] = "up"
+
+    for j in range(1, cols):
+        score[0][j] = score[0][j - 1] + gap
+        pointer[0][j] = "left"
+
+    for i in range(1, rows):
+        for j in range(1, cols):
+            if seq_a[i - 1] == seq_b[j - 1]:
+                diagonal_score = score[i - 1][j - 1] + match
+            else:
+                diagonal_score = score[i - 1][j - 1] + mismatch
+
+            up_score = score[i - 1][j] + gap
+            left_score = score[i][j - 1] + gap
+
+            best_score = max(diagonal_score, up_score, left_score)
+            score[i][j] = best_score
+
+            if best_score == diagonal_score:
+                pointer[i][j] = "diagonal"
+            elif best_score == up_score:
+                pointer[i][j] = "up"
+            else:
+                pointer[i][j] = "left"
+
+    aligned_a = []
+    aligned_b = []
+    i = len(seq_a)
+    j = len(seq_b)
+
+    while i > 0 or j > 0:
+        if pointer[i][j] == "diagonal":
+            aligned_a.append(seq_a[i - 1])
+            aligned_b.append(seq_b[j - 1])
+            i = i - 1
+            j = j - 1
+        elif pointer[i][j] == "up":
+            aligned_a.append(seq_a[i - 1])
+            aligned_b.append("-")
+            i = i - 1
+        else:
+            aligned_a.append("-")
+            aligned_b.append(seq_b[j - 1])
+            j = j - 1
+
+    return score[-1][-1], "".join(reversed(aligned_a)), "".join(reversed(aligned_b))
+
+
+alignment_score, aligned_a, aligned_b = needleman_wunsch("ATGC", "ATC")
+print(alignment_score)
+print(aligned_a)
+print(aligned_b)
+```
+
+## Smith-Waterman Local Alignment
+
+This version finds the best local matching region between two sequences.
+
+```python
+def smith_waterman(seq_a, seq_b, match=2, mismatch=-1, gap=-1):
+    rows = len(seq_a) + 1
+    cols = len(seq_b) + 1
+
+    score = [[0 for _ in range(cols)] for _ in range(rows)]
+    pointer = [["" for _ in range(cols)] for _ in range(rows)]
+
+    best_score = 0
+    best_position = (0, 0)
+
+    for i in range(1, rows):
+        for j in range(1, cols):
+            if seq_a[i - 1] == seq_b[j - 1]:
+                diagonal_score = score[i - 1][j - 1] + match
+            else:
+                diagonal_score = score[i - 1][j - 1] + mismatch
+
+            up_score = score[i - 1][j] + gap
+            left_score = score[i][j - 1] + gap
+
+            best_cell_score = max(0, diagonal_score, up_score, left_score)
+            score[i][j] = best_cell_score
+
+            if best_cell_score == 0:
+                pointer[i][j] = "stop"
+            elif best_cell_score == diagonal_score:
+                pointer[i][j] = "diagonal"
+            elif best_cell_score == up_score:
+                pointer[i][j] = "up"
+            else:
+                pointer[i][j] = "left"
+
+            if best_cell_score > best_score:
+                best_score = best_cell_score
+                best_position = (i, j)
+
+    aligned_a = []
+    aligned_b = []
+    i, j = best_position
+
+    while i > 0 and j > 0 and pointer[i][j] != "stop":
+        if pointer[i][j] == "diagonal":
+            aligned_a.append(seq_a[i - 1])
+            aligned_b.append(seq_b[j - 1])
+            i = i - 1
+            j = j - 1
+        elif pointer[i][j] == "up":
+            aligned_a.append(seq_a[i - 1])
+            aligned_b.append("-")
+            i = i - 1
+        else:
+            aligned_a.append("-")
+            aligned_b.append(seq_b[j - 1])
+            j = j - 1
+
+    return best_score, "".join(reversed(aligned_a)), "".join(reversed(aligned_b))
+
+
+local_score, local_a, local_b = smith_waterman("TTACGTAA", "GGACGTT")
+print(local_score)
+print(local_a)
+print(local_b)
+```
+
+## BLAST-like Seed-and-Extend Search
+
+This is a simplified seed-and-extend search. Real BLAST uses richer scoring, word neighborhoods, statistical significance, and optimized indexes.
+
+```python
+def seed_and_extend(query, database, k=4, max_mismatches=2):
+    """Search a query against named target sequences using exact seeds."""
+    hits = []
+    seen_hits = set()
+
+    for target_name, target in database.items():
+        for query_start in range(len(query) - k + 1):
+            seed = query[query_start:query_start + k]
+            target_start = target.find(seed)
+
+            while target_start != -1:
+                left_extension = min(query_start, target_start)
+                query_left = query_start - left_extension
+                target_left = target_start - left_extension
+
+                right_extension = min(
+                    len(query) - (query_start + k),
+                    len(target) - (target_start + k)
+                )
+                query_right = query_start + k + right_extension
+                target_right = target_start + k + right_extension
+
+                query_alignment = query[query_left:query_right]
+                target_alignment = target[target_left:target_right]
+
+                mismatches = 0
+                for q_base, t_base in zip(query_alignment, target_alignment):
+                    if q_base != t_base:
+                        mismatches = mismatches + 1
+
+                hit_key = (target_name, target_left, query_left, len(query_alignment), mismatches)
+
+                if mismatches <= max_mismatches and hit_key not in seen_hits:
+                    seen_hits.add(hit_key)
+                    hits.append({
+                        "target": target_name,
+                        "target_start": target_left,
+                        "query_start": query_left,
+                        "length": len(query_alignment),
+                        "mismatches": mismatches,
+                        "query_alignment": query_alignment,
+                        "target_alignment": target_alignment
+                    })
+
+                target_start = target.find(seed, target_start + 1)
+
+    return sorted(hits, key=lambda hit: (-hit["length"], hit["mismatches"]))
+
+
+database = {
+    "gene_A": "GGGATGACCATGATTACGCCAAGCTTT",
+    "gene_B": "TTTCCCGGGAAATTTCCCGGG"
+}
+
+for hit in seed_and_extend("ATGACCATGATT", database, k=4):
+    print(hit)
+```
+
+## Suffix Array, BWT, and FM-index-style Exact Search
+
+This code shows the core idea behind BWT/FM-index searching. It builds a suffix array, creates a Burrows-Wheeler Transform, and uses backward search to find exact matches.
+
+```python
+def suffix_array(text):
+    return sorted(range(len(text)), key=lambda position: text[position:])
+
+
+def burrows_wheeler_transform(text):
+    if not text.endswith("$"):
+        text = text + "$"
+
+    sa = suffix_array(text)
+    bwt = []
+
+    for position in sa:
+        if position == 0:
+            bwt.append(text[-1])
+        else:
+            bwt.append(text[position - 1])
+
+    return "".join(bwt), sa, text
+
+
+def build_fm_index(bwt):
+    alphabet = sorted(set(bwt))
+    running_counts = {}
+
+    for character in alphabet:
+        running_counts[character] = 0
+
+    occ = []
+    for character in bwt:
+        occ.append(running_counts.copy())
+        running_counts[character] = running_counts[character] + 1
+    occ.append(running_counts.copy())
+
+    first_column_start = {}
+    total = 0
+    for character in alphabet:
+        first_column_start[character] = total
+        total = total + running_counts[character]
+
+    return first_column_start, occ
+
+
+def fm_index_positions(pattern, bwt, suffix_array_values, first_column_start, occ):
+    top = 0
+    bottom = len(bwt)
+
+    for character in reversed(pattern):
+        if character not in first_column_start:
+            return []
+
+        top = first_column_start[character] + occ[top][character]
+        bottom = first_column_start[character] + occ[bottom][character]
+
+        if top >= bottom:
+            return []
+
+    return sorted(suffix_array_values[top:bottom])
+
+
+reference = "GATTACAGATTACA"
+bwt, sa, indexed_text = burrows_wheeler_transform(reference)
+first_column_start, occ = build_fm_index(bwt)
+
+print(indexed_text)
+print(bwt)
+print(fm_index_positions("TACA", bwt, sa, first_column_start, occ))
+```
+
+## de Bruijn Graph Assembly
+
+This code builds a tiny de Bruijn graph from reads and reconstructs a simple non-branching path. Real assemblers must handle coverage, errors, repeats, paired-end links, and graph simplification.
+
+```python
+def build_de_bruijn_graph(reads, k):
+    graph = {}
+
+    for read in reads:
+        for i in range(len(read) - k + 1):
+            kmer = read[i:i + k]
+            prefix = kmer[:-1]
+            suffix = kmer[1:]
+
+            if prefix not in graph:
+                graph[prefix] = []
+            graph[prefix].append(suffix)
+
+            if suffix not in graph:
+                graph[suffix] = []
+
+    return graph
+
+
+def reconstruct_simple_path(graph, start_node):
+    """Follow the first available edge until the path stops."""
+    graph_copy = {}
+    for node, neighbors in graph.items():
+        graph_copy[node] = neighbors.copy()
+
+    contig = start_node
+    current_node = start_node
+
+    while current_node in graph_copy and len(graph_copy[current_node]) > 0:
+        next_node = graph_copy[current_node].pop(0)
+        contig = contig + next_node[-1]
+        current_node = next_node
+
+    return contig
+
+
+reads = ["ATGAC", "TGACC", "GACCT"]
+graph = build_de_bruijn_graph(reads, k=4)
+print(graph)
+print(reconstruct_simple_path(graph, "ATG"))
+```
+
+## Viterbi Algorithm for a Hidden Markov Model
+
+This toy HMM has two hidden states: `coding` and `noncoding`. The observed data are DNA bases. The Viterbi algorithm finds the most likely hidden-state path.
+
+```python
+import math
+
+
+def log_probability(value):
+    return math.log(value)
+
+
+def viterbi(observations, states, start_probability, transition_probability, emission_probability):
+    dynamic_table = []
+    backpointer = []
+
+    first_column = {}
+    first_backpointer = {}
+
+    for state in states:
+        first_column[state] = (
+            log_probability(start_probability[state]) +
+            log_probability(emission_probability[state][observations[0]])
+        )
+        first_backpointer[state] = None
+
+    dynamic_table.append(first_column)
+    backpointer.append(first_backpointer)
+
+    for position in range(1, len(observations)):
+        column = {}
+        column_backpointer = {}
+
+        for current_state in states:
+            best_previous_state = None
+            best_score = None
+
+            for previous_state in states:
+                score = (
+                    dynamic_table[position - 1][previous_state] +
+                    log_probability(transition_probability[previous_state][current_state]) +
+                    log_probability(emission_probability[current_state][observations[position]])
+                )
+
+                if best_score is None or score > best_score:
+                    best_score = score
+                    best_previous_state = previous_state
+
+            column[current_state] = best_score
+            column_backpointer[current_state] = best_previous_state
+
+        dynamic_table.append(column)
+        backpointer.append(column_backpointer)
+
+    final_state = max(dynamic_table[-1], key=dynamic_table[-1].get)
+    best_path = [final_state]
+
+    for position in range(len(observations) - 1, 0, -1):
+        final_state = backpointer[position][final_state]
+        best_path.append(final_state)
+
+    best_path.reverse()
+    return best_path
+
+
+states = ["coding", "noncoding"]
+start_probability = {"coding": 0.5, "noncoding": 0.5}
+transition_probability = {
+    "coding": {"coding": 0.90, "noncoding": 0.10},
+    "noncoding": {"coding": 0.10, "noncoding": 0.90}
+}
+emission_probability = {
+    "coding": {"A": 0.20, "T": 0.20, "G": 0.30, "C": 0.30},
+    "noncoding": {"A": 0.30, "T": 0.30, "G": 0.20, "C": 0.20}
+}
+
+print(viterbi("ATGGCGC", states, start_probability, transition_probability, emission_probability))
+```
+
+## Probabilistic Variant Calling
+
+This is a simplified genotype-likelihood example for a diploid organism. It uses base quality values to compare possible genotypes.
+
+```python
+def phred_to_error_probability(quality_score):
+    return 10 ** (-quality_score / 10)
+
+
+def probability_of_base_given_allele(observed_base, allele, quality_score):
+    error_probability = phred_to_error_probability(quality_score)
+
+    if observed_base == allele:
+        return 1 - error_probability
+
+    return error_probability / 3
+
+
+def genotype_likelihood(read_bases, quality_scores, genotype):
+    alleles = genotype.split("/")
+    likelihood = 1.0
+
+    for observed_base, quality_score in zip(read_bases, quality_scores):
+        allele_probabilities = []
+
+        for allele in alleles:
+            probability = probability_of_base_given_allele(
+                observed_base,
+                allele,
+                quality_score
+            )
+            allele_probabilities.append(probability)
+
+        likelihood = likelihood * (sum(allele_probabilities) / len(allele_probabilities))
+
+    return likelihood
+
+
+def call_genotype(read_bases, quality_scores, candidate_genotypes):
+    likelihoods = {}
+
+    for genotype in candidate_genotypes:
+        likelihoods[genotype] = genotype_likelihood(read_bases, quality_scores, genotype)
+
+    best_genotype = max(likelihoods, key=likelihoods.get)
+    return best_genotype, likelihoods
+
+
+read_bases = ["A", "A", "A", "G", "A", "G", "A", "A", "G", "A"]
+quality_scores = [30, 31, 29, 30, 32, 28, 30, 31, 30, 29]
+candidate_genotypes = ["A/A", "A/G", "G/G"]
+
+print(call_genotype(read_bases, quality_scores, candidate_genotypes))
+```
+
+## k-mer Lowest Common Ancestor Classification
+
+This is a small version of the idea used in k-mer based metagenomic classifiers. A read is broken into k-mers, each k-mer votes for a taxon, and ambiguous k-mers are assigned to the lowest common ancestor.
+
+```python
+def lineage(taxon, parent):
+    path = []
+
+    while taxon is not None:
+        path.append(taxon)
+        taxon = parent[taxon]
+
+    return path
+
+
+def lowest_common_ancestor(taxa, parent):
+    if len(taxa) == 0:
+        return None
+
+    taxon_list = list(taxa)
+    first_lineage = lineage(taxon_list[0], parent)
+    other_lineages = []
+
+    for taxon in taxon_list[1:]:
+        other_lineages.append(lineage(taxon, parent))
+
+    for ancestor in first_lineage:
+        found_in_all = True
+        for other_lineage in other_lineages:
+            if ancestor not in other_lineage:
+                found_in_all = False
+        if found_in_all:
+            return ancestor
+
+    return "root"
+
+
+def build_kmer_taxon_index(reference_sequences, k):
+    index = {}
+
+    for taxon, sequence in reference_sequences.items():
+        for i in range(len(sequence) - k + 1):
+            kmer = sequence[i:i + k]
+            if kmer not in index:
+                index[kmer] = set()
+            index[kmer].add(taxon)
+
+    return index
+
+
+def classify_read_lca(read, k, kmer_index, parent):
+    votes = {}
+
+    for i in range(len(read) - k + 1):
+        kmer = read[i:i + k]
+        matching_taxa = kmer_index.get(kmer, set())
+
+        if len(matching_taxa) > 0:
+            taxon = lowest_common_ancestor(matching_taxa, parent)
+            if taxon not in votes:
+                votes[taxon] = 0
+            votes[taxon] = votes[taxon] + 1
+
+    return sorted(votes.items(), key=lambda item: -item[1])
+
+
+parent = {
+    "root": None,
+    "Bacteria": "root",
+    "Escherichia": "Bacteria",
+    "Salmonella": "Bacteria",
+    "E_coli": "Escherichia",
+    "S_enterica": "Salmonella"
+}
+
+reference_sequences = {
+    "E_coli": "ATGACCATGATTACGCCAAGCT",
+    "S_enterica": "TTTACCATGATTACTTTGGGCA"
+}
+
+kmer_index = build_kmer_taxon_index(reference_sequences, k=5)
+print(classify_read_lca("ACCATGATTA", 5, kmer_index, parent))
+```
+
+## MinHash Sketching for Genome Similarity
+
+MinHash approximates similarity between large sets. In genomics, the set might be all k-mers from a genome. Tools such as Mash use related sketching ideas for fast genome distance estimation.
+
+```python
+def make_kmer_set(sequence, k):
+    kmers = set()
+
+    for i in range(len(sequence) - k + 1):
+        kmers.add(sequence[i:i + k])
+
+    return kmers
+
+
+def stable_hash(text):
+    """Small deterministic hash for teaching. Python's built-in hash changes between runs."""
+    value = 0
+
+    for character in text:
+        value = (value * 131 + ord(character)) % (2 ** 32)
+
+    return value
+
+
+def minhash_sketch(sequence, k=5, sketch_size=10):
+    hashed_kmers = []
+
+    for kmer in make_kmer_set(sequence, k):
+        hashed_kmers.append(stable_hash(kmer))
+
+    hashed_kmers.sort()
+    return hashed_kmers[:sketch_size]
+
+
+def sketch_similarity(sketch_a, sketch_b):
+    set_a = set(sketch_a)
+    set_b = set(sketch_b)
+
+    if len(set_a | set_b) == 0:
+        return 0
+
+    return len(set_a & set_b) / len(set_a | set_b)
+
+
+genome_a = "ATGACCATGATTACGCCAAGCT"
+genome_b = "ATGACCATGATTACTCCAAGCT"
+genome_c = "GGGGTTTACCCGGGTTTAAAA"
+
+sketch_a = minhash_sketch(genome_a)
+sketch_b = minhash_sketch(genome_b)
+sketch_c = minhash_sketch(genome_c)
+
+print(sketch_similarity(sketch_a, sketch_b))
+print(sketch_similarity(sketch_a, sketch_c))
+```
+
+# A Capstone Way to Think About Bioinformatics Problems
+
+When you meet a new bioinformatics problem, try this structure.
+
+## 1. Define the biological question
+
+Examples:
+
+- Which species are present?
+- Which reads map to this genome?
+- Which genes are different between samples?
+- Which contigs look contaminated?
+- Which variants are supported by the reads?
+
+## 2. Translate it into a computational question
+
+Examples:
+
+- classify each read or k-mer
+- align reads to a reference
+- compare counts or annotations across samples
+- identify unusual coverage or taxonomic signal
+- estimate the most likely genotype
+
+## 3. Identify the input size
+
+Small data can tolerate simple loops. Large data often need indexing, streaming, or specialized tools.
+
+Ask:
+
+- How many sequences?
+- How long are they?
+- How many files?
+- Can everything fit in memory?
+- Is one exact answer required, or is a high-quality approximation acceptable?
+
+## 4. Choose an algorithmic pattern
+
+| If the problem involves... | Consider... |
+|---|---|
+| comparing two sequences | dynamic programming |
+| searching many sequences quickly | indexing or seed-and-extend |
+| reconstructing sequence from reads | graph algorithms |
+| hidden biological states | HMMs |
+| uncertain observations | probabilistic inference |
+| huge numbers of similar objects | hashing, k-mers, sketches |
+
+## 5. Write pseudocode
+
+Pseudocode forces you to make the logic explicit before syntax gets in the way.
+
+```text
+Input:
+    FASTQ reads
+    Reference genome
+
+Goal:
+    Report likely mapping position for each read
+
+Algorithm:
+    Build an index of the reference genome
+    For each read:
+        Find seed matches in the index
+        Extend candidate matches
+        Score candidate alignments
+        If one match is clearly best:
+            Report the position
+        Else:
+            Mark the read as ambiguous
+```
+
+# Exercises
+
+## Exercise 1: From Naive to Scalable
+
+A student writes this algorithm for read mapping:
+
+```text
+For each read:
+    For every position in the reference genome:
+        Count mismatches
+        Keep the position with the fewest mismatches
+```
+
+Answer:
+
+1. Why is this algorithm too slow for large datasets?
+2. Which data structure or algorithmic idea could improve it?
+3. What biological situations could still make mapping difficult?
+
+## Exercise 2: Dynamic Programming Matrix
+
+Take two short sequences:
+
+```text
+Sequence A: A T G C
+Sequence B: A T C
+```
+
+Sketch a small alignment matrix by hand. You do not need perfect scoring. Focus on the idea that each cell depends on neighboring cells.
+
+Then answer:
+
+1. What does one cell in the matrix represent?
+2. Why does dynamic programming avoid recomputing the same subproblems?
+3. Why does the scoring scheme matter biologically?
+
+## Exercise 3: k-mer Counter
+
+Write Python code that counts all 4-mers in this sequence:
+
+```python
+sequence = "ATGACCATGATTACGCCAAGCT"
+```
+
+Then answer:
+
+1. Which 4-mer occurs most often?
+2. What would happen if `k` were very small?
+3. What would happen if `k` were larger than the read length?
+
+## Exercise 4: Build a Tiny de Bruijn Graph
+
+Use k = 4 and the reads:
+
+```text
+ATGAC
+TGACC
+GACCT
+```
+
+List the k-mers and the k-1 overlaps.
+
+Then answer:
+
+1. What are the nodes?
+2. What are the edges?
+3. What path reconstructs the sequence?
+4. How would a sequencing error change the graph?
+
+## Exercise 5: Choose the Algorithm
+
+For each task, choose one algorithmic idea from this practical and justify your choice.
+
+1. Search a protein sequence against a large protein database
+2. Map 10 million bacterial reads to a reference genome
+3. Assemble short reads without a reference genome
+4. Identify conserved protein domains
+5. Call SNPs from aligned reads
+6. Estimate whether two genomes are very similar without aligning them fully
+
+## Exercise 6: Capstone Design
+
+Design a workflow for this problem:
+
+**You receive paired-end bacterial sequencing reads from an unknown isolate. You want to identify the species, assemble the genome, and annotate likely genes.**
+
+Write:
+
+1. The biological question
+2. The computational tasks
+3. The likely inputs and outputs
+4. At least three algorithmic ideas that would appear in the workflow
+5. One edge case or failure mode for each major step
+
+# Summary
+
+Algorithmic thinking in genomics is the ability to move between biology, data, and computation. A mature bioinformatics workflow is not just a list of commands. It is a chain of algorithmic decisions.
+
+At small scale, a simple loop may be enough. At genomic scale, the same problem may require indexing, dynamic programming, graph traversal, probabilistic inference, or a carefully chosen heuristic. Understanding these ideas helps you use tools more intelligently, interpret outputs more critically, and design workflows that are both reproducible and biologically meaningful.
+
+# References
+
+## Course and Textbook References
+
+- Rahmann, S. [Lecture "Algorithms for Sequence Analysis"](https://www.rahmannlab.de/lehre/alsa.html). Saarland University, Germany.
+- Artificial Intelligence Core Course. Planning example/course material. Saarland University, Germany.
+- Navarro, G. and Raffinot, M. *Flexible Pattern Matching in Strings*. Cambridge University Press.
+- Gusfield, D. *Algorithms on Strings, Trees, and Sequences*. Cambridge University Press.
+- Makinen, V., Belazzougui, D., Cunial, F. and Tomescu, A. I. *Genome-Scale Algorithm Design: Biological Sequence Analysis in the Era of High-Throughput Sequencing*. Cambridge University Press.
+
+## Algorithm and Tool References
+
+- Needleman, S. B. and Wunsch, C. D. (1970). [A general method applicable to the search for similarities in the amino acid sequence of two proteins](https://doi.org/10.1016/0022-2836(70)90057-4). *Journal of Molecular Biology*.
+- Smith, T. F. and Waterman, M. S. (1981). [Identification of common molecular subsequences](https://doi.org/10.1016/0022-2836(81)90087-5). *Journal of Molecular Biology*.
+- Altschul, S. F. et al. (1990). [Basic local alignment search tool](https://doi.org/10.1016/S0022-2836(05)80360-2). *Journal of Molecular Biology*.
+- Burrows, M. and Wheeler, D. J. (1994). [A block-sorting lossless data compression algorithm](https://www.hpl.hp.com/techreports/Compaq-DEC/SRC-RR-124.pdf). Digital Systems Research Center Research Report.
+- Ferragina, P. and Manzini, G. (2000). [Opportunistic data structures with applications](https://doi.org/10.1109/SFCS.2000.892127). *Proceedings of FOCS*.
+- Li, H. and Durbin, R. (2009). [Fast and accurate short read alignment with Burrows-Wheeler transform](https://doi.org/10.1093/bioinformatics/btp324). *Bioinformatics*.
+- Langmead, B. et al. (2009). [Ultrafast and memory-efficient alignment of short DNA sequences to the human genome](https://doi.org/10.1186/gb-2009-10-3-r25). *Genome Biology*.
+- Pevzner, P. A., Tang, H. and Waterman, M. S. (2001). [An Eulerian path approach to DNA fragment assembly](https://doi.org/10.1073/pnas.171285098). *Proceedings of the National Academy of Sciences*.
+- Bankevich, A. et al. (2012). [SPAdes: A new genome assembly algorithm and its applications to single-cell sequencing](https://doi.org/10.1089/cmb.2012.0021). *Journal of Computational Biology*.
+- Eddy, S. R. (1998). [Profile hidden Markov models](https://doi.org/10.1093/bioinformatics/14.9.755). *Bioinformatics*.
+- Eddy, S. R. (2011). [Accelerated profile HMM searches](https://doi.org/10.1371/journal.pcbi.1002195). *PLOS Computational Biology*.
+- McKenna, A. et al. (2010). [The Genome Analysis Toolkit: A MapReduce framework for analyzing next-generation DNA sequencing data](https://doi.org/10.1101/gr.107524.110). *Genome Research*.
+- Wood, D. E. and Salzberg, S. L. (2014). [Kraken: Ultrafast metagenomic sequence classification using exact alignments](https://doi.org/10.1186/gb-2014-15-3-r46). *Genome Biology*.
+- Ondov, B. D. et al. (2016). [Mash: Fast genome and metagenome distance estimation using MinHash](https://doi.org/10.1186/s13059-016-0997-x). *Genome Biology*.

@@ -9,7 +9,7 @@ format:
     toc-depth: 3
     number-sections: true
     code-fold: false
-    theme: cosmo
+    theme: minty
     css: pages/styles.css
 ---
 
@@ -17,7 +17,7 @@ format:
 
 This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.
 
-### 🖥️ Command Line Programming
+### (⌐ ͡■ ͜ʖ ͡■) Command Line Programming
 Here are the practical exercises related to command line programming section of the course:
 
 #### Introduction to Command Line Programming
@@ -28,9 +28,8 @@ Here are the practical exercises related to command line programming section of 
 - **[Practical 5: Software & Containers](practicals/Practicals%20-%20CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.qmd)**
 
 #### Coding Best Practices
-- **[Practical 1: Git Fundamentals: Session 1](practicals/Practicals%20-%20Git/PRACTICAL_GIT_SESSION1.qmd)**
-- **[Practical 2: Git Fundamentals: Session 2](practicals/Practicals%20-%20Git/PRACTICAL_GIT_SESSION2.qmd)**
-- **[Practical 3: Best Coding Practices](practicals/Practicals%20-%20Git/PRACTICAL_BEST_CODING_PRACTISES.qmd)**
+- **[Practical 1: Git Fundamentals](practicals/Practicals%20-%20Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd)**
+- **[Practical 2: Algorithmic Thinking](practicals/Practicals%20-%20Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd)**
 
 ### 🧬 Genomics Workflows
 The following practical exercises focus on genomics workflows:

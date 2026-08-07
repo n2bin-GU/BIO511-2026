@@ -1,0 +1,9 @@
+---
+title: "Collaborations and Versioning (Intro to Git)"
+author: "Vahid, Tor Kling"
+format:
+  html:
+    theme: cosmo
+number-sections: true
+toc: true
+---

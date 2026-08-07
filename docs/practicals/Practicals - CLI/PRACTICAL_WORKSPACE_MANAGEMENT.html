@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Stuti Jain, Tor Kling">
+<meta name="author" content="Tor Kling, Vahid AtabaigielmiS">
 
 <title>Practical 3 — Workspace &amp; Data Management – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -68,15 +68,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b08f96deee0b642f6814feffc40ccbab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-21e2f2e7e0abe44a720331f65c0fadcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,6 +103,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../pages/styles.css">
@@ -116,8 +118,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">BIO511 Genomics - Practical Repository</span>
     </a>
@@ -129,7 +129,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -161,16 +161,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Git/PRACTICAL_GIT_SESSION1.html">
- <span class="dropdown-text">Practical 1: Git Fundamentals: Session 1</span></a>
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+ <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Git/PRACTICAL_GIT_SESSION2.html">
- <span class="dropdown-text">Practical 2: Git Fundamentals: Session 2</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Git/PRACTICAL_BEST_CODING_PRACTISES.qmd">
- <span class="dropdown-text">Practical 3: Best Coding Practices</span></a>
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+ <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
   </li>
@@ -256,10 +252,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../../index.html" class="sidebar-logo-link">
-      </a>
-      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -314,20 +306,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Git/PRACTICAL_GIT_SESSION1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 1: Git Fundamentals: Session 1</span></a>
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 1: Git Fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Git/PRACTICAL_GIT_SESSION2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 2: Git Fundamentals: Session 2</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Git/PRACTICAL_BEST_CODING_PRACTISES.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 3: Best Coding Practices</span></a>
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 2: Algorithmic Thinking</span></a>
   </div>
 </li>
       </ul>
@@ -343,20 +329,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#workspace-setup" id="toc-workspace-setup" class="nav-link" data-scroll-target="#workspace-setup"><span class="header-section-number">2</span> Workspace Setup</a></li>
-  <li><a href="#symlinks-linking-shared-or-large-data" id="toc-symlinks-linking-shared-or-large-data" class="nav-link" data-scroll-target="#symlinks-linking-shared-or-large-data"><span class="header-section-number">3</span> Symlinks: linking shared or large data</a></li>
-  <li><a href="#finding-searching-files" id="toc-finding-searching-files" class="nav-link" data-scroll-target="#finding-searching-files"><span class="header-section-number">4</span> Finding &amp; Searching Files</a>
+  <li><a href="#workspace-setup" id="toc-workspace-setup" class="nav-link" data-scroll-target="#workspace-setup"><span class="header-section-number">2</span> Workspace Setup</a>
   <ul class="collapse">
-  <li><a href="#locate-by-nametypesize-with-find" id="toc-locate-by-nametypesize-with-find" class="nav-link" data-scroll-target="#locate-by-nametypesize-with-find"><span class="header-section-number">4.1</span> Locate by name/type/size with <code>find</code></a></li>
-  <li><a href="#peek-safely-with-head-tail-less" id="toc-peek-safely-with-head-tail-less" class="nav-link" data-scroll-target="#peek-safely-with-head-tail-less"><span class="header-section-number">4.2</span> Peek safely with <code>head</code>, <code>tail</code>, <code>less</code></a></li>
-  <li><a href="#search-inside-files-with-grep" id="toc-search-inside-files-with-grep" class="nav-link" data-scroll-target="#search-inside-files-with-grep"><span class="header-section-number">4.3</span> Search inside files with <code>grep</code></a></li>
-  <li><a href="#counts-and-quick-summaries-with-wc-sort-uniq" id="toc-counts-and-quick-summaries-with-wc-sort-uniq" class="nav-link" data-scroll-target="#counts-and-quick-summaries-with-wc-sort-uniq"><span class="header-section-number">4.4</span> Counts and quick summaries with <code>wc</code>, <code>sort</code>, <code>uniq</code></a></li>
+  <li><a href="#symlinks-linking-shared-or-large-data" id="toc-symlinks-linking-shared-or-large-data" class="nav-link" data-scroll-target="#symlinks-linking-shared-or-large-data"><span class="header-section-number">2.1</span> Symlinks: linking shared or large data</a></li>
   </ul></li>
-  <li><a href="#file-permissions-readwriteexecute" id="toc-file-permissions-readwriteexecute" class="nav-link" data-scroll-target="#file-permissions-readwriteexecute"><span class="header-section-number">5</span> File Permissions (read/write/execute)</a></li>
-  <li><a href="#local-vs-hpc" id="toc-local-vs-hpc" class="nav-link" data-scroll-target="#local-vs-hpc"><span class="header-section-number">6</span> Local vs HPC</a></li>
-  <li><a href="#guided-practice" id="toc-guided-practice" class="nav-link" data-scroll-target="#guided-practice"><span class="header-section-number">7</span> Guided Practice</a></li>
-  <li><a href="#self-check-mini-quiz" id="toc-self-check-mini-quiz" class="nav-link" data-scroll-target="#self-check-mini-quiz"><span class="header-section-number">8</span> Self-Check (mini-quiz)</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9</span> Summary</a></li>
+  <li><a href="#more-on-files-and-where-to-find-them" id="toc-more-on-files-and-where-to-find-them" class="nav-link" data-scroll-target="#more-on-files-and-where-to-find-them"><span class="header-section-number">3</span> More on files and where to find them</a>
+  <ul class="collapse">
+  <li><a href="#field-delimiters-and-newlines-printf" id="toc-field-delimiters-and-newlines-printf" class="nav-link" data-scroll-target="#field-delimiters-and-newlines-printf"><span class="header-section-number">3.1</span> Field delimiters and newlines (<code>printf</code>)</a></li>
+  <li><a href="#counts-and-quick-summaries-with-wc-sort-uniq-and-cut" id="toc-counts-and-quick-summaries-with-wc-sort-uniq-and-cut" class="nav-link" data-scroll-target="#counts-and-quick-summaries-with-wc-sort-uniq-and-cut"><span class="header-section-number">3.2</span> Counts and quick summaries with <code>wc</code>, <code>sort</code>, <code>uniq</code> and <code>cut</code></a></li>
+  <li><a href="#locate-things-with-find" id="toc-locate-things-with-find" class="nav-link" data-scroll-target="#locate-things-with-find"><span class="header-section-number">3.3</span> Locate things with <code>find</code></a></li>
+  </ul></li>
+  <li><a href="#file-permissions-readwriteexecute-chmod" id="toc-file-permissions-readwriteexecute-chmod" class="nav-link" data-scroll-target="#file-permissions-readwriteexecute-chmod"><span class="header-section-number">4</span> File Permissions (read/write/execute) (<code>chmod</code>)</a></li>
+  <li><a href="#local-vs-hpc" id="toc-local-vs-hpc" class="nav-link" data-scroll-target="#local-vs-hpc"><span class="header-section-number">5</span> Local vs HPC</a></li>
   </ul>
 </nav>
     </div>
@@ -375,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Stuti Jain, Tor Kling </p>
+             <p>Tor Kling, Vahid AtabaigielmiS </p>
           </div>
   </div>
     
@@ -390,35 +374,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>The goal of this practical is to build <strong>good workspace habits</strong> on the command line so your projects are <strong>organized, reproducible, and HPC-friendly</strong>. You’ll practice:</p>
-<ul>
-<li>Project layouts that keep data, scripts, and results separate<br>
-</li>
-<li>Using <strong>symlinks</strong> to reference large/shared data (don’t duplicate!)<br>
-</li>
-<li>Finding/searching files efficiently<br>
-</li>
-<li>Combining commands with <strong>pipes</strong> and <strong>redirection</strong><br>
-</li>
-<li>Managing basic <strong>file permissions</strong><br>
-</li>
-<li>Understanding how these habits translate to the <strong>HPC filesystem</strong></li>
-</ul>
-<blockquote class="blockquote">
-<p><strong>Important</strong><br>
-We <strong>reuse the dataset you created in Practical 1</strong> — the FASTA, gene annotations, and expression data files. Here, we will reorganize them into a structured project layout. If some of them still have different names (such as an E_coli prefix), please rename them back to the original filenames for consistency with this practical.</p>
-</blockquote>
-<div class="callout callout-style-default callout-note callout-titled" title="Did You Know?">
+<p>CLI workspaces are often <strong>messy</strong> if you don’t have a plan. This practical will help you <strong>organize your project</strong> and <strong>build good habits</strong> for working on the command line. It is as important to <strong>organize your workspace</strong> as it is to write good code. A messy workspace can lead to lost files, accidental overwrites or make it a hassle for other people to work with your project. In this practical we introduce concepts that allow us to protect our data, keep our project organized, and make it easier to work with others. We will also introduce some new commands that will help you <strong>find files</strong> and <strong>summarize data</strong>. Lastly we also cover how these habits map onto the HPC filesystem, which is important for when you start working on the cluster.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Did You Know?
+Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Most bioinformatics tools are tiny <strong>LEGO bricks</strong> on the CLI. You connect bricks with <strong>pipes</strong> <code>|</code> to build powerful, reproducible analyses.</p>
+<p>By the end of this practical you should be able to:</p>
+<ul>
+<li>Organize a project into a reproducible folder structure (data/refs/results/scripts/logs)</li>
+<li>Use symlinks to reference shared or large data without duplicating it</li>
+<li>Understand delimiters and newlines in files, and how to use <code>printf</code> to create a formatted files</li>
+<li>Summarize file contents using <code>cut</code>, <code>sort</code>, <code>uniq</code>, and <code>wc</code></li>
+<li>Locate files with <code>find</code></li>
+<li>Set and interpret file permissions with <code>chmod</code></li>
+<li>Understand the differences between working on your local machine and the HPC cluster</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reusing your data from Practical 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For this practical, you will <strong>reuse the files you created in Practical 1</strong>. If you have not completed Practical 1, please do so before starting this one. The files you will need are:</p>
+<ul>
+<li><code>sequences.fasta</code> (FASTA sequences)</li>
+<li><code>gene_annotations.csv</code> (gene annotations)</li>
+<li><code>expression_data.csv</code> (expression data)</li>
+</ul>
 </div>
 </div>
 <hr>
@@ -427,7 +421,7 @@ We <strong>reuse the dataset you created in Practical 1</strong> — the FASTA, 
 <h1 data-number="2"><span class="header-section-number">2</span> Workspace Setup</h1>
 <p>In Practical 1 you created a folder called <strong>CLI_intro/</strong> and placed some mock files there (FASTA sequences, annotations, expression data).<br>
 Now we will <strong>expand this folder into a proper project structure</strong> so that it’s easier to keep track of data, scripts, and results.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a reproducible project layout</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> data refs results scripts logs</span>
@@ -435,7 +429,7 @@ Now we will <strong>expand this folder into a proper project structure</strong> 
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Move the files you created in Practical 1 into the right places</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> sequences.fasta refs/</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> gene_annotations.csv data/</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> expression_data.csv data/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> expression_data.csv data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Your folder tree should now look like:</p>
 <pre><code>CLI_intro/
 ├── data/         # CSV annotation + expression data
@@ -443,193 +437,271 @@ Now we will <strong>expand this folder into a proper project structure</strong> 
 ├── results/      # outputs you generate
 ├── scripts/      # scripts (used later)
 └── logs/         # logs from runs</code></pre>
-<div class="callout callout-style-default callout-tip callout-titled" title="Best Practice">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Best Practice
+Best Practice
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Keep <strong>raw data</strong> read-only and <strong>never</strong> write outputs into <code>data/</code>. Use <code>results/</code> for generated files and <code>logs/</code> for run logs.</p>
+<p>Once we start running scripts and programs, a lot of things typically happen within our project directories and its good to follow some good principles. <strong>raw data</strong>, meaning data that you did not generate yourself, should be kept <strong>read-only</strong> and <strong>never</strong> written to. This is to avoid accidental overwrites or loss of information. Instead, we will use the <code>results/</code> folder for any outputs we generate. Its also a good idea to redirect the information printed to the terminal when running long programs (eg. PROKKA) to a <strong>log file</strong> in the <code>logs/</code> folder. This way, if something goes wrong, we can check the logs to see what happened.</p>
+</div>
+</div>
+<hr>
+<section id="symlinks-linking-shared-or-large-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="symlinks-linking-shared-or-large-data"><span class="header-section-number">2.1</span> Symlinks: linking shared or large data</h2>
+<p>Up until now, the paths we have used have been the real <strong>physical paths</strong> to files/directories. However, sometimes we want to <strong>link</strong> to a ex. database without copying it. This is especially useful for large files (like reference genomes) or shared files (like annotation databases). Instead of copying the file into your project, you can create a <strong>symbolic link (symlink)</strong> that points to the original file. This way, you avoid unnecessary copies and keep one source for files needed for many things.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: link a shared reference into your existing refs/ folder</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ref_db_test</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro/refs</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> ~/ref_db_test ref_test_link   <span class="co"># create a symlink</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> <span class="co"># you should see the symlink with an arrow pointing to the original file</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise: What is the true path of the symlink?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Often when we run commands, we need to provide the path to a file. However, in certain cases the symlink path will break and we instead need to provide the <strong>true path</strong> to the file. <code>cd</code> into the <code>refs/</code> directory and try to figure out a way to get the <strong>true path</strong> of the symlink you just created. Hint: <code>pwd</code> is useful here, but there are many ways that work.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Expected output (no peeking!)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre class="text"><code>/home/&lt;your_username&gt;/ref_db_test</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <hr>
 </section>
-<section id="symlinks-linking-shared-or-large-data" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Symlinks: linking shared or large data</h1>
-<p>A <strong>symbolic link (symlink)</strong> points to a file by <strong>path</strong> (like a shortcut). This avoids unnecessary copies and keeps one <strong>source of truth</strong>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: link a shared reference into your existing refs/ folder</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (If your course provides a shared path on HPC, you'll link that path here.)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Link target --&gt; link name (re-using existing refs/ made above)</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /proj/course/shared_refs/genome.fa refs/genome.fa   <span class="co"># example path</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> refs            <span class="co"># look for the arrow "genome.fa -&gt; /proj/..."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="When to use symlinks">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>When to use symlinks
-</div>
-</div>
-<div class="callout-body-container callout-body">
+</section>
+<section id="more-on-files-and-where-to-find-them" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> More on files and where to find them</h1>
+<p>In the first practical, we introduced several commands for working with files. Now we will try to expand our usage of these commands with some additional commands that are useful for <strong>finding files</strong> and <strong>summarizing their contents</strong>, some of them you might remember from the pipe examples in the first practical.</p>
+<section id="field-delimiters-and-newlines-printf" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="field-delimiters-and-newlines-printf"><span class="header-section-number">3.1</span> Field delimiters and newlines (<code>printf</code>)</h2>
+<p>So by now you know quite well how to peek at files with <code>cat</code> and <code>less</code>, but we didnt talk a lot about what sits inbetween the columns in the files. Columns, or <strong>fields</strong>, are separated by a <strong>delimiter</strong> which can vary depending on the file type. You are probably familiar with .csv files, which are <strong>comma-separated</strong> and thus there is a <code>,</code> between each column. So to create a comma delimited file, we include a <code>,</code> between each column when we <code>echo</code> and redirect. Other examples of delimiters are:</p>
 <ul>
-<li>Large or shared files (reference genomes, annotation bundles)<br>
-</li>
-<li>Data living in shared HPC locations (<code>/proj/...</code>)<br>
-</li>
-<li>Multiple projects needing the <strong>same</strong> resource</li>
+<li><strong>tab</strong> (<code>\t</code>)</li>
+<li><strong>space</strong> (<code></code>)</li>
+<li><strong>pipe</strong> (<code>|</code>)</li>
 </ul>
+<p>To split a line into more rows its also good to know that the <strong>newline</strong> character (<code>\n</code>) is used to separate rows. In this segment we will create a small <strong>tab-separated file</strong> and use it to demonstrate some of the commands used to summarize data.</p>
+<p>We will now construct a toy metadata file with 5 samples, each with a country and tissue type. The file will be <strong>tab-separated</strong> and we will use <code>printf</code> to create it. <code>printf</code> is similar to <code>echo</code>, but it allows us to specify <strong>formatting</strong> for the output. In this case, we will use <code>\t</code> for tabs and <code>\n</code> for newlines.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a small tab-separated file</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'Sample_ID\tCountry\tTissue\nS1\tSE\tgut\nS2\tSE\tgut\nS3\tNO\tskin\nS4\tDK\tgut\nS5\tSE\tskin\n'</span> <span class="op">&gt;</span> data/metadata.tsv</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the file was created correctly</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> data/metadata.tsv</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># If you are unsure of the field delimiter, cat has a useful option to visualize it:</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-A</span> data/metadata.tsv   <span class="co"># shows tab characters (^I), as well as other hidden characters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="counts-and-quick-summaries-with-wc-sort-uniq-and-cut" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="counts-and-quick-summaries-with-wc-sort-uniq-and-cut"><span class="header-section-number">3.2</span> Counts and quick summaries with <code>wc</code>, <code>sort</code>, <code>uniq</code> and <code>cut</code></h2>
+<p>Four commands that are quite lovely in pipes are <code>wc</code>, <code>sort</code>, <code>uniq</code> and <code>cut</code></p>
+<ul>
+<li><code>wc</code> counts lines, words, or characters in a file</li>
+<li><code>sort</code> orders lines according to a specified criteria (alphabetically, numerically, etc.)</li>
+<li><code>uniq</code> removes duplicates from a file, but only <strong>adjacent</strong> duplicates.</li>
+<li><code>cut</code> extracts specific columns from a file, based on a delimiter.</li>
+</ul>
+<p>These can be combined in a <strong>pipeline</strong> to quickly summarize data. For example, if we want to count how many samples are from each country in our metadata file or pull out all gene annotation names from a larger file, but drop all of the info beyond gene name and annotation. However remember to <code>sort</code> before using <code>uniq</code>:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    title[Correct sort/uniq order]
+    In[Unsorted Data] --&gt; A[sort: orders lines so duplicate aggregate] 
+    A --&gt; B[uniq: removes duplicates that are adjacent] 
+    B --&gt; C[File redirect or stdout]
+
+    In -.-&gt; D[uniq: removes duplicates, but miss those that are not adjacent]
+    D -.-&gt; E[Missed duplicates!]
+
+    classDef wrong fill:#f8d7da,stroke:#c0392b,color:#c0392b;
+    class D,E wrong;    
+</pre>
+</div>
+<p></p></figure><p></p>
 </div>
 </div>
-<div class="callout callout-style-default callout-warning callout-titled" title="Common Mistake">
+</div>
+<p>Now lets try these commands on the metadata file we just created.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: cut can be used to extract one specific column, or multiple columns</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv              <span class="co"># column 2 (e.g., country) from a TAB-separated file</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2,3</span> data/metadata.tsv            <span class="co"># columns 2 and 3 (e.g., country and tissue) from a TAB-separated file</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># wc is also very useful to get the lenght of a file, which is good to sanity check in case there is an unexpected number of rows</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> data/metadata.tsv</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------------------------------------------------------------------------------------------------------------------</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># However these commands are at their most iconic together</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Test them step by step here before combining into a single pipeline.</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP-BY-STEP :</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv              <span class="co"># column 2 (e.g., country) from a TAB-separated file</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv <span class="kw">|</span> <span class="fu">sort</span>       <span class="co"># order values to cluster identical ones</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span>   <span class="co"># collapse adjacent duplicates and count</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Now that you’ve seen each stage, try the **pipeline** form that saves the result:</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nr</span> <span class="op">&gt;</span> results/country_counts.txt</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> results/country_counts.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Common Mistake
+Exercise: Summarizing data and changing delimiters
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Don’t create <strong>another</strong> <code>refs/</code> folder somewhere else. Reuse the <strong>existing</strong> <code>CLI_intro/refs/</code> to keep your project tidy.</p>
+<p>Sometimes, certain programs might require data in a specific format. While we often can go back to Excel or likewise to export it in a different format, it is often more efficient to do this directly in the command line. We have now learned a bit about delimiters and how to select specific columns from a file, lets see if we can put it to good use with the commands we learned in the first practical.</p>
+<ul>
+<li>Use <code>cut</code> to extract columns “Gene_ID”, “Chromosome” and “Product” from the <code>gene_annotations.csv</code> file, then use <code>sed</code> to change the delimiter from a comma to tab, then redirect the output to a new file called <code>gene_annotations.tsv</code> in the <code>data/</code> folder.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example solution (Try to solve it yourself before checking!)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Cuts default delimiter is tab, so we need to specify the delimiter as a comma with `-d,` and select the first three columns with `-f1,2,3`. Then we use `sed` to replace commas with tabs and redirect the output to a new file.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d,</span> <span class="at">-f1,2,3</span> data/gene_annotations.csv <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/,/\t/g'</span> <span class="op">&gt;</span> data/gene_annotations.tsv</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cat -A data/gene_annotations.tsv:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Gene_ID^IChromosome^IProduct$</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">lacZ^Iplasmid^Ibeta-galactosidase$</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">rpoB^Ichr^IRNA_polymerase_beta_subunit$</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">gyrA^Ichr^IDNA_gyrase_subunit_A$</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">ompA^Ichr^Iouter_membrane_protein_A$</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">gyrA^Ichr^IDNA_gyrase_subunit_A$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</div>
+</div>
+</div>
+</section>
+<section id="locate-things-with-find" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="locate-things-with-find"><span class="header-section-number">3.3</span> Locate things with <code>find</code></h2>
+<p>It all happens to us eventually, we forget where we put a file or we want to find all files of a certain type. The <code>find</code> command is very useful for this. It can search for files based on name, type, size, and many other criteria. It is also quite useful in automated <strong>scripts</strong>, for bioinformatics it is especially useful in scripts meant for batch processing of many files. We will cover more on scripts in Practical 4, but for now lets see some examples of how to use <code>find</code> to locate files.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A note on regex and wildcards
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>find</code> and a lot of other commands benefit from expanded use with <strong>regex</strong> (regular expressions) and <strong>wildcards</strong>. For example,</p>
+<ul>
+<li><code>*</code> matches any number of characters,</li>
+<li><code>?</code> matches a single character, and</li>
+<li><code>[abc]</code> matches any one of the characters a, b, or c.&nbsp;</li>
+</ul>
+<p>These can be combined to create powerful search patterns with <code>find</code>. For example, <code>*.tsv</code> will match all files that end with <code>.tsv</code>, while <code>data/*[0-9].csv</code> will match all CSV files in the data directory that end with a digit. Other commands like <code>grep</code> and <code>sed</code> also use regex and wildcards, so it is worth <a href="https://computing.stat.berkeley.edu/tutorial-using-bash/regex.html">learning more</a> about them as you become more comfortable with the command line.</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># all TSV files, we use the `*` wildcard to match any characters before the `.tsv` extension</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-name</span> <span class="st">"*.tsv"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We can also search for large files specifically, to not get crowded by small config files</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that M = 1024*1024 bytes, so +1M means files larger than 1 MB, similarity G = 1024*1024*1024 bytes, so +1G means files larger than 1 GB</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> data <span class="at">-type</span> f <span class="at">-size</span> +1M    </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Sometimes we want to limit depth as well, ex. if we only want a current directory and its subs</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-maxdepth</span> 2 <span class="at">-type</span> d   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
-<section id="finding-searching-files" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Finding &amp; Searching Files</h1>
-<section id="locate-by-nametypesize-with-find" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="locate-by-nametypesize-with-find"><span class="header-section-number">4.1</span> Locate by name/type/size with <code>find</code></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-name</span> <span class="st">"*.tsv"</span>           <span class="co"># all TSV files</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> data <span class="at">-type</span> f <span class="at">-size</span> +1M    <span class="co"># files &gt; 1 MB in data/</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-maxdepth</span> 2 <span class="at">-type</span> d     <span class="co"># directories up to depth 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="peek-safely-with-head-tail-less" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="peek-safely-with-head-tail-less"><span class="header-section-number">4.2</span> Peek safely with <code>head</code>, <code>tail</code>, <code>less</code></h2>
-<p>We assume <strong><code>data/metadata.tsv</code></strong> exists, but otherwise create it.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show a small slice so it's visibly different from the full file:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># If you need to create the metadata.tsv file: </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> data/metadata.tsv <span class="op">&lt;&lt; 'EOF'</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">Sample_ID    Country Tissue</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">S1   SE   gut</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">S2   SE   gut</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">S3   NO   skin</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">S4   DK   gut</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">S5   SE   skin</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 2 data/metadata.tsv</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 2 data/metadata.tsv</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> data/metadata.tsv   <span class="co"># press 'q' to quit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Defaults">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Defaults
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>By default, <code>head</code> and <code>tail</code> each print <strong>10 lines</strong> if you don’t specify <code>-n</code>.</p>
-</div>
-</div>
-</section>
-<section id="search-inside-files-with-grep" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="search-inside-files-with-grep"><span class="header-section-number">4.3</span> Search inside files with <code>grep</code></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Case-insensitive search for the word "case" in metadata</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-i</span> <span class="st">"case"</span> data/metadata.tsv</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of FASTA headers (if you have a FASTA in refs/)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">"^&gt;"</span> refs/sequences.fasta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-warning callout-titled" title="Common Mistake">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Common Mistake
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If the command says “No such file or directory”, ensure you’re in <code>~/CLI_intro</code> and the file really exists <strong>there</strong>. Use <code>pwd</code> and <code>ls</code> to verify.</p>
-</div>
-</div>
-</section>
-<section id="counts-and-quick-summaries-with-wc-sort-uniq" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="counts-and-quick-summaries-with-wc-sort-uniq"><span class="header-section-number">4.4</span> Counts and quick summaries with <code>wc</code>, <code>sort</code>, <code>uniq</code></h2>
-<blockquote class="blockquote">
-<p>Correct mental model:<br>
-<code>sort</code> <strong>orders</strong> lines (alphabetically/numerically). <code>uniq</code> only removes <strong>adjacent</strong> duplicates — so you almost always <strong>sort first</strong> before <code>uniq</code>.</p>
-</blockquote>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many rows (lines) are in the metadata?</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> data/metadata.tsv</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP-BY-STEP (encouraged so you see each stage):</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv              <span class="co"># column 2 (e.g., country) from a TAB-separated file</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv <span class="kw">|</span> <span class="fu">sort</span>       <span class="co"># order values to cluster identical ones</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span>   <span class="co"># collapse adjacent duplicates and count</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now that you’ve seen each stage, try the <strong>pipeline</strong> form that saves the result:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nr</span> <span class="op">&gt;</span> results/country_counts.txt</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> results/country_counts.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Delimiter tip">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Delimiter tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>cut</code> defaults to <strong>tab</strong>. If your file is CSV, add <code>-d,</code> (comma) and adjust field numbers accordingly.</p>
-</div>
-</div>
-<hr>
-</section>
-</section>
-<section id="file-permissions-readwriteexecute" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> File Permissions (read/write/execute)</h1>
+<section id="file-permissions-readwriteexecute-chmod" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> File Permissions (read/write/execute) (<code>chmod</code>)</h1>
+<p>All files, directories and most anything created in a linux system has “rules” that govern who can use them and how. These rules are called <strong>permissions</strong> and they are set by the <strong>owner</strong> of the file or directory. Permissions are divided into three categories: <strong>owner</strong>, <strong>group</strong>, and <strong>others</strong>. Each category can have three types of permissions: <strong>read (r)</strong>, <strong>write (w)</strong>, and <strong>execute (x)</strong>. Most often on your own local machine, you are the owner of the files you create, and the group is usually your user group. Others are everyone else on the system. Permissions are important to understand because they can prevent accidental overwrites or deletions of important files, and they can also be used to share files with others in a controlled way.</p>
+<p>Changing permissions is done with the <code>chmod</code> command, which stands for “change mode”. The mode is a three-digit number that represents the permissions for owner, group, and others. Each digit is a sum of the values for read (4), write (2), and execute (1). For example, <code>chmod 644 file.txt</code> sets the permissions to read/write for the owner, and read-only for group and others. You can also use symbolic notation to change permissions, such as <code>chmod u+x file.sh</code> to add execute permission for the owner.</p>
+<ul>
+<li><code>chmod</code> changes the permissions of a file or directory</li>
+</ul>
 <p>Inspect permissions:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data/metadata.tsv</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -rw-r--r--  means: owner can read/write; group &amp; others can read</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data/metadata.tsv</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -rw-r--r--  means: owner can read/write; group &amp; others can read</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Common patterns:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a text file broadly readable</span></span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a text file broadly readable</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 results/country_counts.txt   <span class="co"># u=rw, g=r, o=r</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Protect raw data (read-only for everyone)</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 444 data/<span class="pp">*</span>.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Quick troubleshooting">
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 444 data/<span class="pp">*</span>.csv</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Full permissions for a script (owner can read/write/execute, group and others can read/execute)</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> scripts/test_script.sh</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 scripts/<span class="pp">*</span>.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Quick troubleshooting
+Exercise: Check permissions for a few targets on your system
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>The linux system has a large hierarchy of files and directories, where some might have stricter persmissions than others. Using the <code>ls -l</code> command, check the permissions for the following files/directories on your system:</p>
 <ul>
-<li>“Permission denied”? Check the directory’s permissions: <code>ls -ld .</code><br>
-</li>
-<li>Need to make a <strong>tool</strong> executable? (Used in later scripting practical.)
+<li><code>~</code> (your home directory)</li>
+<li><code>~/CLI_intro</code> (your project directory)</li>
+<li><code>/</code> (the root directory)</li>
+<li><code>/etc/passwd</code> (a system file that contains user account information)</li>
+<li><code>/tmp</code> (a temporary directory that is often used for storing temporary files)</li>
+</ul>
+<p>Then contemplate the following questions and discuss with your peers:</p>
 <ul>
-<li>You’ll use <code>chmod +x script.sh</code> <strong>after</strong> you create scripts in Practical 4.</li>
-</ul></li>
+<li>Is there a pattern in the permissions for these files/directories?</li>
+<li>Why do you think some files/directories have stricter permissions than others?</li>
+<li>How do the permissions for your project directory compare to the system files/directories?</li>
 </ul>
 </div>
 </div>
 <hr>
 </section>
-<section id="local-vs-hpc" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Local vs HPC</h1>
+<section id="local-vs-hpc" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Local vs HPC</h1>
+<p>You have already been introduced to the HPC cluster in Practical 2, so here is mainly a little recap of how the things we covered so far map onto the HPC filesystem. The main difference is that on your local machine you have a lot more freedom to create and delete files, while on the HPC cluster you are more limited in your permissions. This means that you need to be more careful with how you organize your workspace and where you store data. The HPC cluster has a shared filesystem, which means that multiple users can access the same files. This is great for collaboration, but it also means that you need to be careful not to overwrite or delete files that other people are using.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -666,13 +738,13 @@ Now we will <strong>expand this folder into a proper project structure</strong> 
 </tr>
 </tbody>
 </table>
-<div class="callout callout-style-default callout-note callout-titled" title="Guideline on HPC paths">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Guideline on HPC paths
+Best Practices for HPC Workspace Management
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -685,93 +757,59 @@ Now we will <strong>expand this folder into a proper project structure</strong> 
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled" title="Bonus (advanced / optional)">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Bonus (advanced / optional)
+Transferring items between local and HPC:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Transferring between local and HPC:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy a single file</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> data/metadata.tsv your_cid@vera1.c3se.chalmers.se:/home/your_cid/CLI_intro/data/</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sync a directory (only changes)</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avh</span> results/ your_cid@vera1.c3se.chalmers.se:/proj/course/results/</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify integrity on both sides (compare hashes)</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">md5sum</span> data/metadata.tsv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This will be covered more deeply when we work <strong>in-depth</strong> with the HPC.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy a single file</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> data/metadata.tsv your_cid@vera1.c3se.chalmers.se:/home/your_cid/project/data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <hr>
-</section>
-<section id="guided-practice" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Guided Practice</h1>
-<ol type="1">
-<li><strong>Confirm workspace &amp; data are in the right place</strong></li>
-</ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-1</span> data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ol start="2" type="1">
-<li><strong>Link a shared reference</strong> (if provided by the course/HPC)</li>
-</ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust the /proj path to the correct course/project location</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /proj/course/shared_refs/genome.fa refs/genome.fa</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> refs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ol start="3" type="1">
-<li><strong>Answer a question with a pipeline</strong></li>
-</ol>
-<blockquote class="blockquote">
-<p>Q: <em>How many samples per country are in <code>data/metadata.tsv</code>?</em></p>
-</blockquote>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> data/metadata.tsv <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nr</span> <span class="op">&gt;</span> results/country_counts.txt</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> results/country_counts.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ol start="4" type="1">
-<li><strong>Permissions in context</strong></li>
-</ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make results readable by all (typical for text reports)</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 results/country_counts.txt</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># If you have raw data files, make them read-only to avoid accidents</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 444 data/<span class="pp">*</span>.csv   <span class="co"># (skip if none exist)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-</section>
-<section id="self-check-mini-quiz" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Self-Check (mini-quiz)</h1>
-<ol type="1">
-<li>In one sentence, why are <strong>symlinks</strong> preferred for references on HPC?<br>
-</li>
-<li>What’s the difference between <code>&gt;</code> and <code>&gt;&gt;</code>? Between <code>&gt;</code> and <code>|</code>?<br>
-</li>
-<li>Write a one-liner to count unique values in <strong>column 2</strong> of <code>data/metadata.tsv</code>.<br>
-</li>
-<li>Explain why <code>sort</code> usually comes <strong>before</strong> <code>uniq</code>.<br>
-</li>
-<li>Where should <strong>raw data</strong> live? Where should <strong>generated results</strong> be written?</li>
-</ol>
-<hr>
-</section>
-<section id="summary" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Summary</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Takeaways
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li>Expand your <strong>CLI_intro/</strong> workspace from Practical 1 into a reproducible project structure.<br>
-</li>
-<li>Use <strong>symlinks</strong> to avoid copying large/shared data; keep one source of truth.<br>
-</li>
-<li>Build insight with <strong>small steps</strong> (<code>cut</code> → <code>sort</code> → <code>uniq</code>) and then combine with <strong>pipes</strong>.<br>
-</li>
-<li>Use <strong>redirection</strong> to save outputs in <code>results/</code>, not over your inputs.<br>
-</li>
-<li>Manage <strong>permissions</strong> to protect raw data and share read access to results.<br>
-</li>
-<li>These habits <strong>transfer directly</strong> to the HPC filesystem.</li>
+<li>Organize your project, it will save you time and make it much easier to work with others</li>
+<li>Use symlinks to reference shared or large data without duplicating it</li>
+<li>Locate files with <code>find</code>, especially useful as project directories grow with output from programs</li>
+<li>Summarize file contents using <code>cut</code>, <code>sort</code>, <code>uniq</code>, and <code>wc</code>; usefuel for quick summaries of data and sanity checks</li>
+<li>Set and interpret file permissions with <code>chmod</code> to protect raw data and share scripts</li>
+<li>On the HPC we are more limited in our permissions, so we need to be more careful with how we organize our workspace and where we store data</li>
 </ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Additional Tips
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Run <code>ls -l</code> after every <code>ln -s</code> to confirm the arrow points where you expect.</li>
+<li>Use <code>pwd -P</code> to get the true path of a symlinked directory, <code>readlink</code> for files.</li>
+<li>Before piping into a long chain, test each stage separately (as we did with <code>cut</code> → <code>sort</code> → <code>uniq</code>).</li>
+<li>Set raw data to read-only (<code>chmod 444</code>) as soon as you’re done creating it, so a stray script can’t overwrite it.</li>
+</ul>
+</div>
+</div>
 
 
 </section>
@@ -828,14 +866,13 @@ Now we will <strong>expand this folder into a proper project structure</strong> 
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

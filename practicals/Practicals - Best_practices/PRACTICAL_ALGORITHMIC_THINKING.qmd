@@ -1,0 +1,746 @@
+---
+title: "Best Practices 1: Algorithmic Thinking"
+author: "Vahid Atabaigielmi, Tor Kling"
+date: today
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+    theme: minty
+---
+
+# Introduction
+
+By this point in the course you have been introduced to the basics of programming through bash,
+but you have not yet been introduced to the more advanced algorithms that are used in bioinformatics. In this practical, instead of simple questions like "how do i write this loop", we now ask a deeper question:
+
+**What kind of problem is this, and what kind of algorithm is powerful enough to solve it at genomic scale?**
+
+Modern bioinformatics depends on a small number of recurring algorithmic ideas. Sequence alignment, read mapping, genome assembly, gene prediction, taxonomic classification, and variant calling all look different on the surface, but many of them reuse the same patterns:
+
+- break a biological object into computable pieces
+- score many possible explanations
+- search efficiently through a huge space of possibilities
+- use data structures that avoid scanning everything
+- accept tradeoffs between exactness, speed, memory, and biological realism
+
+::: {.callout-note}
+## Learning Objectives
+
+By the end of this practical, you should be able to:
+
+- Explain why naive algorithms often fail on genomic-scale data
+- Recognize common genomics algorithms and the problems they solve
+- Reflect on algorithmic tradeoffs: exact vs heuristic, fast vs sensitive, memory-efficient vs simple
+- Design pseudocode to describe your approach to solving a problem before writing the code
+
+:::
+
+# Where Does the Word Algorithm Come From?
+
+The word **algorithm** comes from the name of the Persian mathematician **Muhammad ibn Musa al-Khwarizmi**, who lived around the 9th century. His name was later Latinized in Europe as **Algoritmi**.
+
+![Modern statue of Muhammad ibn Musa al-Khwarizmi in Madrid. This is a later commemorative statue, not a historical portrait. Image source: Wikimedia Commons, CC0.](images/al-khwarizmi-statue.jpg){fig-alt="A modern statue of Muhammad ibn Musa al-Khwarizmi holding a book." width="45%"}
+
+One reason his name became so strongly connected with algorithmic thinking is that his mathematical works described **general, repeatable procedures** for solving problems. In his work on **al-jabr**, he gave systematic methods for solving linear and quadratic equations, which are polynomial equations of degree 1 and degree 2. The important idea was not just finding one answer, but describing a method that could be followed again and again for similar problems.
+
+Over time, this name became associated with step-by-step methods for doing calculations. That meaning eventually developed into the modern word **algorithm**: a precise set of instructions for solving a problem.
+
+In short:
+
+```text
+al-Khwarizmi -> Algoritmi -> algorithm
+```
+
+The word **algebra** also comes from the title of one of his mathematical works, which included the Arabic word **al-jabr**.
+
+# Warm-up: Algorithmic Thinking as Planning
+
+Before we look at genomics algorithms, let us start with a smaller planning problem. Planning is a useful way to think algorithmically because it forces us to define a **starting state**, a **goal state**, and the **actions** that can move us from one state to another.
+
+This warm-up is adapted from a planning example in the **Artificial Intelligence Core Course** at Saarland University, Germany.
+
+Imagine this toy problem:
+
+**Question:** What is the shortest sequence of valid actions that gets us from the starting state to the goal state?
+
+Jane starts at home. She just got a text on whatsapp that a colleague in her lab spilled some 
+Enterotoxicogenic E. coli (ETEC) on the floor, and theyre out of both tissues, safety gear and disinfectant in their lab at location F. She can solve it in one of two ways:
+
+- buy disinfectant and use it at location F
+- buy both a mask and toilet paper, then use them at location F
+
+However, she first needs to withdraw money from the cash point before buying anything.
+
+```{mermaid}
+flowchart LR
+  A["A: Home"]
+  B["B: ICA (toilet paper)"]
+  C["C: Cash Point"]
+  E["E: Mask Shop"]
+  F["F: Spill location"]
+  G["G: Pharmacy (disinfectant)"]
+
+  E --- B
+  B --- A
+  A --- C
+  C --- G
+  C --- F
+```
+
+In planning language, we can describe the problem like this:
+
+| Planning concept | Meaning in this example |
+|---|---|
+| Initial state | Jane is at location A |
+| Goal state | The spill has been handled |
+| Action | Something Jane can do, such as `walk`, `withdrawMoney`, or `buyDisinfectant` |
+| Preconditions | What must already be true before an action can happen |
+| Effects | What changes after the action is performed |
+| Plan | A sequence of actions that reaches the goal |
+| Optimal plan | A valid plan with the lowest cost, often the fewest actions |
+
+For example, the action `buyDisinfectant` can be written as:
+
+```text
+Action: buyDisinfectant
+Preconditions:
+    at(G)
+    hasMoney
+Effects:
+    hasDisinfectant
+    no longer hasMoney
+```
+
+Imagine you invoke each action as a command in CLI, the pseudocode for each invocation may look
+something like this:
+
+```text
+walk "A" "C"
+withdrawMoney
+walk "C" "G"
+buyDisinfectant
+walk "G" "C"
+walk "C" "F"
+useDisinfectant
+```
+
+:::{.callout-important}
+## Exercise
+There was a second way that Jane could take care of the spill
+
+- Write out the pseudocode for that plan. 
+- What is the cost of that plan in terms of number of actions? Which plan is optimal?
+
+::: {.callout-tip collapse="true"}
+## Solution
+:::
+
+:::
+
+This is algorithmic thinking in a very direct form. We are not just listing commands randomly. We are reasoning about what must be true before each step, what each step changes, and whether the final goal has been reached.
+
+We can even extend this logic to bioinformatic workflows, something you'll get more practice with in 
+the WGS section of the course.
+
+| Planning idea | Genomics workflow |
+|---|---|
+| Initial state | Raw sequencing reads |
+| Goal state | Interpretable biological result |
+| Action | Run quality control, trim reads, map reads, assemble contigs, annotate genes |
+| Preconditions | Required input files, software, indexes, databases, or parameters |
+| Effects | New output files, filtered reads, alignments, assemblies, variant calls |
+| Plan | The workflow connecting all steps |
+| Optimal plan | A workflow that is accurate, reproducible, efficient, and appropriate for the question |
+
+# Algorithms in Genomics 
+
+A small exercise might loop through four sequences. A real genomics dataset might contain:
+
+- millions of short reads
+- billions of reference genome positions
+- sequencing errors
+- repeated regions
+- contamination
+- uneven coverage
+- uncertain biological signals
+
+A naive solution often looks reasonable until the dataset grows in size significantly.
+
+For example, imagine mapping 10 million reads to a 5 million base pair bacterial genome by checking each read at every possible position.
+
+```text
+For each read:
+    For each position in the genome:
+        Compare the read to the genome at that position
+```
+
+If the reads are 150 bp long, this can require trillions of character comparisons. The algorithm is simple, but fails due to not scaling well.
+
+Bioinformatics therefore depends on additional strategies that make our algorithms more advanced, but also more efficient, reusable and robust. 
+
+:::{.callout-note}
+## On complexity and measuring how effective an algorithm is
+
+As you'll notice in the examples, how we perform algorithms matter a lot to how efficient they are. But we can also predict to some extent how they will perform based on a metric for how theyre efficiency scales with input. These metrics are called **time complexity** and **space complexity**, described with an O() (**Big O**) notation they tell us how the time or memory usage of an algorithm grows as the input grows.
+
+A simple for loop that iterates over a list of length n has a time complexity of O(n). A nested for loop that iterates over a list of length n twice has a time complexity of O(n^2). A recursive function that splits the input in half each time has a time complexity of O(log n).
+
+```python
+
+# Example of O(n) time complexity
+for i in range(n):
+    print(i)
+
+# Example of O(n^2) time complexity
+for i in range(n):
+    for j in range(n):
+        print(i, j)
+
+```
+
+More often than not, our pipelines run efficiently enough that we don't need to worry about the exact time complexity, but as data grows and we start to hit memory limits, it becomes more important to understand the complexity of the algorithms we are using.
+
+[Try some common algorithms (or test your own)](https://www.bigocalc.com/)
+
+:::
+
+## Algorithmic Vocabulary
+
+| Concept | Meaning in practice |
+|---|---|
+| Input | The data the algorithm starts with, such as reads, sequences, or tables |
+| Output | The result, such as an alignment, assembly, variant list, or classification |
+| State | Information retained by the algorithm in the background |
+| Score | A number/metric used to compare the possible solutions given by algorithm |
+| Search space | All possible solutions the algorithm could consider |
+| Complexity | How runtime or memory grows as input grows |
+| Exact algorithm | Guaranteed to find the optimal answer under its model |
+| Heuristic algorithm | Faster strategy that may approximate or miss some answers |
+| Dynamic programming | A method that breaks a problem into smaller subproblems and reuses their solutions |
+| Data structure | A special organization of data that makes some operations efficient |
+
+In genomics, the most important question is often not "can I solve this for one sequence?" but "can I compute my full dataset within a reasonable time and memory usage?" The correct algorithmic choice depends on the biological question, the data type, and the scale of the problem.
+
+
+## Exact String Matching and k-mers
+
+One of the simplest genomics algorithms is exact string matching: finding where a DNA pattern occurs in a longer sequence.
+
+**Question:** Where does the pattern `ATG` occur in a genome, and which short sequence words occur most often?
+
+Naive algorithm:
+
+```text
+For each position in the genome:
+    Compare the pattern to the genome at that position
+    If all characters match:
+        Report the position
+```
+
+```bash
+genome="TTGATGCCCATGAAATGA"
+pattern="ATG"
+
+matches=''
+
+for (( i=0; i<=${#genome}-${#pattern}; i++ )); do
+    if [[ ${genome:i:${#pattern}} == $pattern ]]; then
+        matches+="$(($i+1)) "
+    fi
+done
+
+echo "Pattern $pattern occurs at positions: $matches"
+
+```
+
+This is fine for a small genome and a short pattern. But large-scale genomics often uses **k-mers**, fixed-length sequence words, to make matching faster. These are constructed by sliding a window of length `k` across the sequence, moving one base at a time.
+
+```bash
+sequence="ATGACCATGATTACGCCAAGCT"
+k=3
+
+for (( i=0; i<=${#sequence}-k; i++ )); do
+    kmer=${sequence:i:k}
+    echo $kmer
+done
+```
+
+k-mers are used in many genomics tools:
+
+- read error correction
+- genome assembly
+- metagenomic classification
+- contamination checks
+- As sequence variation representations (similar to SNPs, but for short sequences)
+
+:::{.callout-important}
+## Exercise
+Since kmers only move one base at a time, there is typically a lot of redudancy and duplicates. Write bash code that counts all 4-mers in this sequence:
+
+```bash
+sequence="ATGACCATGATTACGCCAAGCT"
+```
+
+Then answer:
+
+1. Which 4-mer occurs most often?
+2. What would happen if `k` were very small (think 1 or 2-mers)?
+3. What would happen if `k` were larger than the read length?
+
+[Hint: Try and pipe the output of the k-mer loop with a combination of `sort` and `uniq` to count the unique k-mers.]
+:::
+
+The key idea is that in bioinformatics, we often use sequence representations that arent necessarily biologically meaningful by themselves, but are computationally useful. k-mers are a good example of this: they are not genes, proteins, or regulatory elements or SNPs, but they are a convenient way to represent sequences for many algorithms and can be analysed to find biologically meaningful patterns.
+
+# What language fits the problem best?
+
+While we did show the previous problem in bash, for most bioinformatics software, the algorithms are implemented in programming languages more suitable for complex data structures and efficient computation, such as C, Perl, Java, R, or Python. The choice of language often depends on the balance between:
+
+ - Execution speed: compiled languages like C are much faster than interpreted languages
+ - Need: For analysis and pipeline development, we rely on interpreted languages like Python/R and the packages they provide. For novel tool development, compiled languages are often preferred.
+ - Whats hot right now: Rust is on the horizon, Perl is fading and Fortran exists mostly as "ye olde" depedencies that a lot of bioinformatics software still use
+ - Availability of libraries: R is preferred for a lot for statistics, while python is excellent for machine learning
+
+Bash (and other UNIX based languages) are staple for bioinformatics pipelines, as it is excellent for string manipulation, file handling, and chaining together multiple tools. So while you may not write a full genomics algorithm in bash, it has  remained a constant for the scaffold code used to run them.
+
+:::{.callout-important}
+## Exercise
+Github typically shows the programming languages used for a repository. Look up these popular bioinformatics tools and:
+
+1. Identify the programming languages used for each repository.
+2. Speculate on the most used programming language for each tool (% of code in that language), does this tell you anything about the repository?
+
+Tools:
+
+- Bowtie2
+- PROKKA
+- BAKTA
+- Kraken2
+- Mash
+- GEMMA
+
+:::
+
+Not all bioinformaticians get into tool development, so in this course we focus on programming for analysis, for that we use interpreted language far more than compiled languages. The most popular language for this at the moment is Python, which you will be introduced to later in the course. In the following examples, we will show algorithms in pseudocode and in Python, as you learn python, you can go back to these examples and see if you understand them better.
+
+# Algorithm Examples
+
+Below we will look at three genomics algorithms that illustrate the ideas of some of the different algorithmic patterns we have discussed. 
+
+## Sequence Alignment with Dynamic Programming
+
+The first genomics algorithm we will look at is sequence alignment. In principle it is as simple
+as what we did for exact string matching, but in practice it is more complicated because we need to allow for substitutions, insertions, and deletions when comparing one or more sequences.
+
+**Question:** How do we compare two sequences when they may contain substitutions, insertions, and deletions?
+
+For example:
+
+```text
+Sequence A: A C G T A C
+Sequence B: A C - T G C
+```
+
+The challenge is that many alignments are possible. A brute-force search over all alignments becomes impossible as sequence length grows.
+
+Dynamic programming solves this by breaking the alignment into smaller subproblems and storing their scores in a matrix.
+
+Well known algorithms:
+
+| Algorithm | Use |
+|---|---|
+| Needleman-Wunsch | Global alignment of two full sequences |
+| Smith-Waterman | Local alignment of best matching subsequences |
+| Viterbi | Most likely path through a hidden Markov model |
+
+For global alignment, define:
+
+```text
+score[i][j] = best alignment score between the first i bases of sequence A
+              and the first j bases of sequence B
+```
+
+At each cell, the algorithm chooses among three possibilities:
+
+```text
+diagonal: align A[i] with B[j]
+up:       align A[i] with a gap
+left:     align B[j] with a gap
+```
+
+Simplified recurrence:
+
+```text
+score[i][j] = max(
+    score[i-1][j-1] + match_or_mismatch,
+    score[i-1][j]   + gap_penalty,
+    score[i][j-1]   + gap_penalty
+)
+```
+
+This is algorithmically sophisticated because the method does not try every full alignment independently. It reuses partial solutions. Runtime is still usually proportional to the product of sequence lengths, `O(nm)`, but that is far better than enumerating all possible alignments.
+
+::: {.callout-tip}
+## Biological Interpretation
+
+The scoring system is a biological model. A high match score says matches are likely or valuable. A strong gap penalty says insertions/deletions are costly. Changing the scoring scheme changes what kind of alignment the algorithm prefers.
+
+:::
+
+## Read Mapping with Indexes, BWT, and FM-index
+
+**Question:** Where did each sequencing read most likely come from in the reference genome?
+
+A naive mapper compares every read to every genome position. Modern mappers avoid this by building an index of the reference genome.
+
+Well known ideas and tools:
+
+| Idea | Used for |
+|---|---|
+| suffix arrays | fast substring search |
+| Burrows-Wheeler Transform (BWT) | compressed representation that preserves searchable structure |
+| FM-index | memory-efficient exact matching based on BWT |
+| BWA and Bowtie | widely used read mappers based on these ideas |
+
+Conceptual algorithm:
+
+```text
+Build an index of the reference genome
+For each read:
+    Search for exact seed matches using the index
+    Extend or refine candidate matches
+    Score candidate alignments
+    Report the best location or mark the read as ambiguous
+```
+
+The cleverness is in the index. Instead of storing every possible alignment, the algorithm stores the reference in a form that supports fast backward search.
+
+This is why read mapping can be feasible even when there are millions of reads. The expensive work is partly shifted into building an efficient reference index.
+
+::: {.callout-note collapse="true"}
+## Code example
+
+This code shows the core idea behind BWT/FM-index searching. It builds a suffix array, creates a Burrows-Wheeler Transform, and uses backward search to find exact matches.
+
+```python
+def suffix_array(text):
+    return sorted(range(len(text)), key=lambda position: text[position:])
+
+
+def burrows_wheeler_transform(text):
+    if not text.endswith("$"):
+        text = text + "$"
+
+    sa = suffix_array(text)
+    bwt = []
+
+    for position in sa:
+        if position == 0:
+            bwt.append(text[-1])
+        else:
+            bwt.append(text[position - 1])
+
+    return "".join(bwt), sa, text
+
+
+def build_fm_index(bwt):
+    alphabet = sorted(set(bwt))
+    running_counts = {}
+
+    for character in alphabet:
+        running_counts[character] = 0
+
+    occ = []
+    for character in bwt:
+        occ.append(running_counts.copy())
+        running_counts[character] = running_counts[character] + 1
+    occ.append(running_counts.copy())
+
+    first_column_start = {}
+    total = 0
+    for character in alphabet:
+        first_column_start[character] = total
+        total = total + running_counts[character]
+
+    return first_column_start, occ
+
+
+def fm_index_positions(pattern, bwt, suffix_array_values, first_column_start, occ):
+    top = 0
+    bottom = len(bwt)
+
+    for character in reversed(pattern):
+        if character not in first_column_start:
+            return []
+
+        top = first_column_start[character] + occ[top][character]
+        bottom = first_column_start[character] + occ[bottom][character]
+
+        if top >= bottom:
+            return []
+
+    return sorted(suffix_array_values[top:bottom])
+
+
+reference = "GATTACAGATTACA"
+bwt, sa, indexed_text = burrows_wheeler_transform(reference)
+first_column_start, occ = build_fm_index(bwt)
+
+print(indexed_text)
+print(bwt)
+print(fm_index_positions("TACA", bwt, sa, first_column_start, occ))
+```
+
+:::
+
+
+## Hidden Markov Models for predicting genes and proteins
+
+Further along when working with genomic pipelines, we typically want to predict what biological
+meaning the sequences have. For example, we may want to predict which parts of a genome are coding, which parts are intergenic, and which parts are regulatory. There are many ways to do this, such as likelihood-based predicitions or HMMs, for now we will focus on HMMs. 
+
+**Question:** Given an observed DNA or protein sequence, what hidden biological states most likely generated it?
+
+A hidden Markov model, or HMM, is useful when the observed data are visible but the underlying biological state is hidden. 
+
+Example:
+
+```text
+Observed sequence: A T G G C A T A A ...
+Hidden state:      intergenic, start codon, coding region, stop codon, ...
+```
+
+An HMM includes:
+
+- states, such as coding and non-coding
+- transition probabilities between states
+- emission probabilities for observed bases or amino acids
+
+The **Viterbi algorithm** finds the most likely sequence of hidden states.
+
+Conceptual pseudocode:
+
+```text
+For each position in the sequence:
+    For each possible hidden state:
+        Calculate the best score for arriving at this state
+        Store where that best score came from
+Trace back from the best final state to recover the most likely path
+```
+
+HMMs appear in:
+
+- gene prediction
+- protein domain detection
+- profile HMM searches, such as HMMER
+- annotation of conserved protein families
+
+HMMs are powerful because they let us model biological uncertainty. Instead of saying "this position definitely is coding", the algorithm asks which hidden explanation is most probable under the model.
+
+
+:::{.callout-note collapse="true"}
+### Code example
+This toy HMM has two hidden states: `coding` and `noncoding`. The observed data are DNA bases. The Viterbi algorithm finds the most likely hidden-state path.
+
+```python
+import math
+
+
+def log_probability(value):
+    return math.log(value)
+
+
+def viterbi(observations, states, start_probability, transition_probability, emission_probability):
+    dynamic_table = []
+    backpointer = []
+
+    first_column = {}
+    first_backpointer = {}
+
+    for state in states:
+        first_column[state] = (
+            log_probability(start_probability[state]) +
+            log_probability(emission_probability[state][observations[0]])
+        )
+        first_backpointer[state] = None
+
+    dynamic_table.append(first_column)
+    backpointer.append(first_backpointer)
+
+    for position in range(1, len(observations)):
+        column = {}
+        column_backpointer = {}
+
+        for current_state in states:
+            best_previous_state = None
+            best_score = None
+
+            for previous_state in states:
+                score = (
+                    dynamic_table[position - 1][previous_state] +
+                    log_probability(transition_probability[previous_state][current_state]) +
+                    log_probability(emission_probability[current_state][observations[position]])
+                )
+
+                if best_score is None or score > best_score:
+                    best_score = score
+                    best_previous_state = previous_state
+
+            column[current_state] = best_score
+            column_backpointer[current_state] = best_previous_state
+
+        dynamic_table.append(column)
+        backpointer.append(column_backpointer)
+
+    final_state = max(dynamic_table[-1], key=dynamic_table[-1].get)
+    best_path = [final_state]
+
+    for position in range(len(observations) - 1, 0, -1):
+        final_state = backpointer[position][final_state]
+        best_path.append(final_state)
+
+    best_path.reverse()
+    return best_path
+
+
+states = ["coding", "noncoding"]
+start_probability = {"coding": 0.5, "noncoding": 0.5}
+transition_probability = {
+    "coding": {"coding": 0.90, "noncoding": 0.10},
+    "noncoding": {"coding": 0.10, "noncoding": 0.90}
+}
+emission_probability = {
+    "coding": {"A": 0.20, "T": 0.20, "G": 0.30, "C": 0.30},
+    "noncoding": {"A": 0.30, "T": 0.30, "G": 0.20, "C": 0.20}
+}
+
+print(viterbi("ATGGCGC", states, start_probability, transition_probability, emission_probability))
+```
+:::
+
+
+
+# A Capstone Way to Think About Bioinformatics Algorithms
+
+This is a simple framework for thinking about genomics problems algorithmically. It is not a recipe, but it can help you reason about the problem before you start coding.
+
+```{mermaid}
+flowchart LR
+    A:::Bio
+    B:::Comp
+    C:::Input
+  classDef Bio fill:#f0f0f0,stroke:#333,stroke-width:4px
+  classDef Comp fill:#f0f0f0,stroke:#333,stroke-width:4px
+  classDef Input fill:#f0f0f0,stroke:#333,stroke-width:4px
+  A("`**Define the biological question:**
+    - Which species are present?
+    - Which reads map to this genome?
+    - Which genes are different between samples?
+    - Which contigs look contaminated? 
+    - Which variants are supported by the reads?`")
+  B("`**Translate it into a computational question:**
+    - classify each read or k-mer
+    - align reads to a reference
+    - compare counts or annotations across samples
+    - identify unusual coverage or taxonomic signal
+    - estimate the most likely genotype`")
+  C("`**Identify the input size:**
+    - How many sequences?
+    - How long are they?
+    - How many files?
+    - Can everything fit in memory?
+    - Is one exact answer required, or is a high-quality approximation acceptable?`")
+
+  A ==> B
+  B ==> C
+
+```
+
+
+**Then Next Choose an algorithmic pattern**
+
+| If the problem involves... | Consider... |
+|---|---|
+| comparing two sequences | dynamic programming |
+| searching many sequences quickly | indexing or seed-and-extend |
+| reconstructing sequence from reads | graph algorithms |
+| hidden biological states | HMMs |
+| uncertain observations | probabilistic inference |
+| huge numbers of similar objects | hashing, k-mers, sketches |
+
+
+**Write pseudocode**
+
+Pseudocode forces you to make the logic explicit before syntax gets in the way.
+
+```text
+Input:
+    FASTQ reads
+    Reference genome
+
+Goal:
+    Report likely mapping position for each read
+
+Algorithm:
+    Build an index of the reference genome
+    For each read:
+        Find seed matches in the index
+        Extend candidate matches
+        Score candidate alignments
+        If one match is clearly best:
+            Report the position
+        Else:
+            Mark the read as ambiguous
+```
+
+::: {.callout-important}
+## Exercise
+Design a workflow for this problem:
+
+**You receive paired-end bacterial sequencing reads from an unknown isolate. You want to identify the species, assemble the genome, and annotate likely genes.**
+
+Write:
+
+1. The biological question
+2. The computational tasks
+3. The likely inputs and outputs
+4. At least three algorithmic ideas that would appear in the workflow
+5. One edge case or failure mode for each major step
+
+:::
+
+# Summary
+
+Algorithmic thinking in genomics is the ability to move between biology, data, and computation. A mature bioinformatics workflow is not just a list of commands. It is a chain of algorithmic decisions.
+
+At small scale, a simple loop may be enough. At genomic scale, the same problem may require indexing, dynamic programming, graph traversal, probabilistic inference, or a carefully chosen heuristic. Understanding these ideas helps you use tools more intelligently, interpret outputs more critically, and design workflows that are both reproducible and biologically meaningful.
+
+# Additional Resources
+
+## Course and Textbook References
+
+- Rahmann, S. [Lecture "Algorithms for Sequence Analysis"](https://www.rahmannlab.de/lehre/alsa.html). Saarland University, Germany.
+- Artificial Intelligence Core Course. Planning example/course material. Saarland University, Germany.
+- Navarro, G. and Raffinot, M. *Flexible Pattern Matching in Strings*. Cambridge University Press.
+- Gusfield, D. *Algorithms on Strings, Trees, and Sequences*. Cambridge University Press.
+- Makinen, V., Belazzougui, D., Cunial, F. and Tomescu, A. I. *Genome-Scale Algorithm Design: Biological Sequence Analysis in the Era of High-Throughput Sequencing*. Cambridge University Press.
+
+## Algorithm and Tool References
+
+- Needleman, S. B. and Wunsch, C. D. (1970). [A general method applicable to the search for similarities in the amino acid sequence of two proteins](https://doi.org/10.1016/0022-2836(70)90057-4). *Journal of Molecular Biology*.
+- Smith, T. F. and Waterman, M. S. (1981). [Identification of common molecular subsequences](https://doi.org/10.1016/0022-2836(81)90087-5). *Journal of Molecular Biology*.
+- Altschul, S. F. et al. (1990). [Basic local alignment search tool](https://doi.org/10.1016/S0022-2836(05)80360-2). *Journal of Molecular Biology*.
+- Burrows, M. and Wheeler, D. J. (1994). [A block-sorting lossless data compression algorithm](https://www.hpl.hp.com/techreports/Compaq-DEC/SRC-RR-124.pdf). Digital Systems Research Center Research Report.
+- Ferragina, P. and Manzini, G. (2000). [Opportunistic data structures with applications](https://doi.org/10.1109/SFCS.2000.892127). *Proceedings of FOCS*.
+- Li, H. and Durbin, R. (2009). [Fast and accurate short read alignment with Burrows-Wheeler transform](https://doi.org/10.1093/bioinformatics/btp324). *Bioinformatics*.
+- Langmead, B. et al. (2009). [Ultrafast and memory-efficient alignment of short DNA sequences to the human genome](https://doi.org/10.1186/gb-2009-10-3-r25). *Genome Biology*.
+- Pevzner, P. A., Tang, H. and Waterman, M. S. (2001). [An Eulerian path approach to DNA fragment assembly](https://doi.org/10.1073/pnas.171285098). *Proceedings of the National Academy of Sciences*.
+- Bankevich, A. et al. (2012). [SPAdes: A new genome assembly algorithm and its applications to single-cell sequencing](https://doi.org/10.1089/cmb.2012.0021). *Journal of Computational Biology*.
+- Eddy, S. R. (1998). [Profile hidden Markov models](https://doi.org/10.1093/bioinformatics/14.9.755). *Bioinformatics*.
+- Eddy, S. R. (2011). [Accelerated profile HMM searches](https://doi.org/10.1371/journal.pcbi.1002195). *PLOS Computational Biology*.
+- McKenna, A. et al. (2010). [The Genome Analysis Toolkit: A MapReduce framework for analyzing next-generation DNA sequencing data](https://doi.org/10.1101/gr.107524.110). *Genome Research*.
+- Wood, D. E. and Salzberg, S. L. (2014). [Kraken: Ultrafast metagenomic sequence classification using exact alignments](https://doi.org/10.1186/gb-2014-15-3-r46). *Genome Biology*.
+- Ondov, B. D. et al. (2016). [Mash: Fast genome and metagenome distance estimation using MinHash](https://doi.org/10.1186/s13059-016-0997-x). *Genome Biology*.

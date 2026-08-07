@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tor Kling, Stuti Jain">
-<meta name="dcterms.date" content="2025-10-28">
+<meta name="dcterms.date" content="2026-08-07">
 
 <title>Practical 4: Scripts and Advanced Text Manipulation – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -69,15 +69,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b08f96deee0b642f6814feffc40ccbab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-21e2f2e7e0abe44a720331f65c0fadcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -117,8 +116,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">BIO511 Genomics - Practical Repository</span>
     </a>
@@ -130,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -162,16 +159,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Git/PRACTICAL_GIT_SESSION1.html">
- <span class="dropdown-text">Practical 1: Git Fundamentals: Session 1</span></a>
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+ <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Git/PRACTICAL_GIT_SESSION2.html">
- <span class="dropdown-text">Practical 2: Git Fundamentals: Session 2</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Git/PRACTICAL_BEST_CODING_PRACTISES.qmd">
- <span class="dropdown-text">Practical 3: Best Coding Practices</span></a>
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+ <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
   </li>
@@ -257,10 +250,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../../index.html" class="sidebar-logo-link">
-      </a>
-      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -315,20 +304,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Git/PRACTICAL_GIT_SESSION1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 1: Git Fundamentals: Session 1</span></a>
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 1: Git Fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Git/PRACTICAL_GIT_SESSION2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 2: Git Fundamentals: Session 2</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Git/PRACTICAL_BEST_CODING_PRACTISES.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 3: Best Coding Practices</span></a>
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 2: Algorithmic Thinking</span></a>
   </div>
 </li>
       </ul>
@@ -343,23 +326,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#advanced-text-manipulation" id="toc-advanced-text-manipulation" class="nav-link" data-scroll-target="#advanced-text-manipulation"><span class="header-section-number">2</span> Advanced Text Manipulation</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
   <ul class="collapse">
-  <li><a href="#download-data" id="toc-download-data" class="nav-link" data-scroll-target="#download-data"><span class="header-section-number">2.1</span> Download data</a></li>
-  <li><a href="#awk-pattern-scanning-and-processing-language" id="toc-awk-pattern-scanning-and-processing-language" class="nav-link" data-scroll-target="#awk-pattern-scanning-and-processing-language"><span class="header-section-number">2.2</span> awk: Pattern Scanning and Processing Language</a></li>
+  <li><a href="#download-data" id="toc-download-data" class="nav-link" data-scroll-target="#download-data"><span class="header-section-number">1.1</span> Download data</a></li>
+  </ul></li>
+  <li><a href="#text-manipulation-with-awk" id="toc-text-manipulation-with-awk" class="nav-link" data-scroll-target="#text-manipulation-with-awk"><span class="header-section-number">2</span> Text Manipulation with awk</a>
+  <ul class="collapse">
+  <li><a href="#awk-pattern-scanning-and-processing-language" id="toc-awk-pattern-scanning-and-processing-language" class="nav-link" data-scroll-target="#awk-pattern-scanning-and-processing-language"><span class="header-section-number">2.1</span> awk: Pattern Scanning and Processing Language</a></li>
   </ul></li>
   <li><a href="#scripting-101-in-bash" id="toc-scripting-101-in-bash" class="nav-link" data-scroll-target="#scripting-101-in-bash"><span class="header-section-number">3</span> Scripting 101 (in bash)</a>
   <ul class="collapse">
   <li><a href="#starting-a-bash-script" id="toc-starting-a-bash-script" class="nav-link" data-scroll-target="#starting-a-bash-script"><span class="header-section-number">3.1</span> Starting a bash script</a></li>
-  <li><a href="#variables-for-loops-and-ifelse-statements" id="toc-variables-for-loops-and-ifelse-statements" class="nav-link" data-scroll-target="#variables-for-loops-and-ifelse-statements"><span class="header-section-number">3.2</span> Variables, for loops and if/else statements</a></li>
   </ul></li>
-  <li><a href="#improving-your-scripts-adding-debugging-and-flexibility" id="toc-improving-your-scripts-adding-debugging-and-flexibility" class="nav-link" data-scroll-target="#improving-your-scripts-adding-debugging-and-flexibility"><span class="header-section-number">4</span> Improving your scripts: Adding debugging and flexibility</a>
+  <li><a href="#variables-for-loops-and-ifelse-statements" id="toc-variables-for-loops-and-ifelse-statements" class="nav-link" data-scroll-target="#variables-for-loops-and-ifelse-statements"><span class="header-section-number">4</span> Variables, for loops and if/else statements</a></li>
+  <li><a href="#adding-functionality-to-our-script" id="toc-adding-functionality-to-our-script" class="nav-link" data-scroll-target="#adding-functionality-to-our-script"><span class="header-section-number">5</span> Adding functionality to our script</a>
   <ul class="collapse">
-  <li><a href="#debugging-bash-scripts-when-things-go-wrong" id="toc-debugging-bash-scripts-when-things-go-wrong" class="nav-link" data-scroll-target="#debugging-bash-scripts-when-things-go-wrong"><span class="header-section-number">4.1</span> Debugging Bash Scripts: When Things Go Wrong</a></li>
-  <li><a href="#optargs---adding-flags-to-make-your-scripts-flexible-this-is-optional" id="toc-optargs---adding-flags-to-make-your-scripts-flexible-this-is-optional" class="nav-link" data-scroll-target="#optargs---adding-flags-to-make-your-scripts-flexible-this-is-optional"><span class="header-section-number">4.2</span> OPTARGS - Adding flags to make your scripts flexible (THIS IS OPTIONAL)</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables"><span class="header-section-number">5.1</span> Variables</a></li>
+  <li><a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops"><span class="header-section-number">5.2</span> For loops</a></li>
   </ul></li>
-  <li><a href="#additional-exercises" id="toc-additional-exercises" class="nav-link" data-scroll-target="#additional-exercises"><span class="header-section-number">5</span> Additional exercises</a></li>
+  <li><a href="#improving-your-scripts-adding-debugging-and-flexibility" id="toc-improving-your-scripts-adding-debugging-and-flexibility" class="nav-link" data-scroll-target="#improving-your-scripts-adding-debugging-and-flexibility"><span class="header-section-number">6</span> Improving your scripts: Adding debugging and flexibility</a>
+  <ul class="collapse">
+  <li><a href="#debugging-bash-scripts-when-things-go-wrong" id="toc-debugging-bash-scripts-when-things-go-wrong" class="nav-link" data-scroll-target="#debugging-bash-scripts-when-things-go-wrong"><span class="header-section-number">6.1</span> Debugging Bash Scripts: When Things Go Wrong</a></li>
+  <li><a href="#custom-error-messages-utilizing-ifelse-statements-for-debugging" id="toc-custom-error-messages-utilizing-ifelse-statements-for-debugging" class="nav-link" data-scroll-target="#custom-error-messages-utilizing-ifelse-statements-for-debugging"><span class="header-section-number">6.2</span> Custom error messages: Utilizing if/else statements for debugging</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -386,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 28, 2025</p>
+      <p class="date">August 7, 2026</p>
     </div>
   </div>
   
@@ -400,268 +389,339 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>Now that you’ve learned the basics of the command-line, its high time that we start working on making our coding structured and reproducible. While runnning pipes in our command line prompt can be quick and easy, writing our code in structured machine-readable text files called <em>scripts</em>, allows us to expand the possibilities of our programming. In genomics, you’ll pretty much always need to process massive datasets - think millions of sequences, GWAS data with millions of variants, or annotation files with complex formatting. Typically these files have a standardized structure, which the handling of we can automate by creating generalizable and well-formatted scripts.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>REMEMBER: CREATE A SEPARATE PROJECT FOLDER IN YOUR HOME DIRECTORY FOR THIS PRACTICAL
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/yourdir/practical_4</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/yourdir/practical_4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
+<p>Now that you’ve learned the basics of the command-line, its high time that we start working on making our computational work structured and reproducible. While runnning pipes in our command line is a good way to execute many steps at once, writing our code in structured machine-readable text files called <em>scripts</em> allows us to expand the automate steps in a much more reproducible and capable way. In genomics, you’ll pretty much always need to process massive datasets - think millions of sequences, GWAS data with millions of variants, or annotation files with complex formatting. Typically these files have a standardized structure, which the handling of we can automate by creating generalizable and well-formatted scripts.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Learning Objectives
+Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>By the end of this practical you should be able to:</p>
 <ul>
 <li>Use <code>awk</code> to execute short programs for text manipulation</li>
+<li>Convert pseudocode into bash scripts</li>
 <li>Write iterative bash scripts using for loops and if/else statements</li>
 <li>Debug your scripts using global set-options, traps and custom error messages</li>
 <li>Be able to write basic flexible shell scripts using OPTARGS</li>
 </ul>
 </div>
 </div>
+<section id="download-data" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="download-data"><span class="header-section-number">1.1</span> Download data</h2>
+<p>For this practical, we will work with actual data. This means that the files will be much larger than before and you will really need to apply what you’ve learned. The data-package contains annotation data for 5 <em>E. coli</em> genomes. You may either retrieve these from the canvas course page, or if you want, you can try to fetch them from the HPC group directory (if you have access).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the data from canvas</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># use scp (secure copy) to copy the data from the HPC group directory</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="op">&lt;</span>CIDusername<span class="op">&gt;</span>@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/practical4/DATAPRACTICAL4.tar.gz ~/CLI_intro/data/</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Unpack the data</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># You might need to use a different command depending on your OS</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># For Linux:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> ~/CLI_intro/data/DATAPRACTICAL4.tar.gz <span class="at">-C</span> ~/CLI_intro/data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
-<section id="advanced-text-manipulation" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Advanced Text Manipulation</h1>
-<section id="download-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="download-data"><span class="header-section-number">2.1</span> Download data</h2>
-<p>For this practical, we will work with a set of five <em>E. coli</em> genomes. You may either retrieve these from the canvas course page, or if you want, you can try to fetch them from the HPC group directory (if you have access).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the data from canvas</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># use scp (secure copy) to copy the data from the HPC group directory</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="op">&lt;</span>CIDusername<span class="op">&gt;</span>@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/practical4/DATAPRACTICAL4.tar.gz ~/CLI_intro/practical_4/data/</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Unpack the data</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> ~/CLI_intro/practical_4/data/DATAPRACTICAL4.tar.gz <span class="at">-C</span> ~/CLI_intro/practical_4/data/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="awk-pattern-scanning-and-processing-language" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="awk-pattern-scanning-and-processing-language"><span class="header-section-number">2.2</span> awk: Pattern Scanning and Processing Language</h2>
-<p>awk can do things that may at first glance remind us of other commands like <code>grep</code>, since we can similarly search for patterns in text files and output them into the stdout. However, <code>awk</code> is much more powerful text manipulation tool that allows us to do advanced language processing and data extraction not to dissimilar to a programming language. Using awk we can accomplish short programming tasks directly in the command line.</p>
+<section id="text-manipulation-with-awk" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Text Manipulation with awk</h1>
+<section id="awk-pattern-scanning-and-processing-language" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="awk-pattern-scanning-and-processing-language"><span class="header-section-number">2.1</span> awk: Pattern Scanning and Processing Language</h2>
+<p>Throughout these first three practicals, you have become familar with pattern searching and input/output streams and redirection. <code>awk</code> is a powerful text processing toolset that builds on these concepts, allowing for programming like operations on files and pipe input with great flexibility. While it is a full programming language, we will introduce it mostly as a tool to use when it cant be accomplished with simpler commands like <code>grep</code>, <code>sed</code>, <code>cut</code>, <code>sort</code>, and <code>uniq</code>. Additionally, for a lot of cases it is easier to just use a modern interpreted programming language like Python or R, but when <code>awk</code> is the most suitable it can do said job very well.</p>
 <ul>
 <li><code>awk</code> (Aho, Weinberger, and Kernighan): Allows for advanced text processing and file manipulation</li>
 </ul>
-<p>Some key commands:</p>
-<ul>
-<li><code>-F</code>: Specifies the input field separator (default is whitespace)</li>
-<li><code>BEGIN{}</code>: Block of programming that runs before processing any input lines (before text is put into $1, $2, etc)</li>
-<li><code>END{}</code>: Block that runs after processing all input lines (after all text has been processed)</li>
-<li><code>{}</code>: Block that runs for each input line (used for processing)</li>
-<li><code>$1, $2, ...</code>: Represents the first, second, etc. fields (eg. columns) in the current line</li>
-<li><code>OFS</code>: Output field separator (default is a space, can be set in BEGIN block)</li>
-</ul>
-<p><strong>Exercises</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># awk is great for quick column selection and simple filtering</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The syntax is 'awk option 'program' input-file' where program is a series of commands</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Print seqid and type columns of a gff file</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'BEGIN{OFS="\t"} {print $1,$3,$9}'</span> AF316.gff <span class="op">&gt;</span> seqid_type.tsv</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also filter rows based on conditions, to retain only specific features (similar to what we can accomplish with grep)</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we can filter for only CDS features</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'$3=="CDS"'</span> AF316.gff <span class="op">&gt;</span> cds_features.tsv</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Another thing is performing operations on the data in transit, similar to what would need a pipe and multiple commands otherwise</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we can calculate the length of each CDS feature and output it as a new column</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Consider which columns should be used to calculate the length</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'BEGIN{OFS="\t"} $3=="CDS"{print $1,$4,$5,$9,($5-$4+1)}'</span> AF316.gff <span class="op">&gt;</span> cds_features_length.tsv</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets operate some more on the feature length file</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the total number of CDS features and their average length</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'BEGIN{OFS="\t"} {total_length+=($5-$4+1); count++} END{print "Total_CDS",count,"Average_Length",total_length/count}'</span> cds_features_length.tsv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Would you like to know more?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Awk programs can get quite complex, and we will not cover all its features here. However, it is a very useful tool to have in your toolbox, and I encourage you to explore it further on your own. A good resource is the <a href="https://www.gnu.org/software/gawk/manual/gawk.html">GNU Awk User’s Guide</a>.</p>
+</div>
+</div>
+</div>
+<p>Some key segments of an <code>awk</code>statement::</p>
+<ul>
+<li><code>-F</code>: Specifies the input delimiter (default is whitespace)</li>
+<li><code>BEGIN{}</code>: Block of programming that runs before processing any input lines (before any text is processed)</li>
+<li><code>END{}</code>: Block that runs after processing all input lines (after all text has been processed)</li>
+<li><code>{}</code>: Block that runs for each input line (the middle block, where the main processing happens)</li>
+<li><code>$1, $2, ...</code>: Represents the first, second, etc. fields (eg. columns) in the current line</li>
+<li><code>OFS</code>: Output delimiter (default is a space, can be set in BEGIN block)</li>
+</ul>
+<p>What follows here are some examples of using awk. First off awk is great for quick column selection and simple filtering:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print seqid and type columns of a gff file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'BEGIN{OFS="\t"} {print $1,$3,$9}'</span> AF316.gff <span class="op">&gt;</span> seqid_type.tsv</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This was something we also could do with cut right?</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f1,3,9</span> AF316.gff <span class="op">&gt;</span> seqid_type_cut.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also filter rows based on conditions, to retain only specific features</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Here we can filter for only CDS features</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'$3=="CDS"'</span> AF316.gff <span class="op">&gt;</span> cds_features.tsv</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We can do something similar in grep here as well</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"CDS"</span> AF316.gff <span class="op">&gt;</span> cds_features_grep.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Another thing is performing operations on the data in transit</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we can calculate the length of each CDS feature and output it as a new column</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'BEGIN{OFS="\t"} $3=="CDS"{print $1,$4,$5,$9,($5-$4+1)}'</span> AF316.gff <span class="op">&gt;</span> cds_features_length.tsv</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets operate some more on the feature length file</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the total number of CDS features and their average length</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'BEGIN{OFS="\t"} {total_length+=($5-$4+1); count++} END{print "Total_CDS",count,"Average_Length",total_length/count}'</span> cds_features_length.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here is where doing something equivalent in bash would need far more steps, likely iteratiing over the file line by line and performing calculations in a loop. This is where <code>awk</code> shines, as it allows for concise and efficient processing of structured text data without the need for command flows that should be a script in the first place. If you find any good awk one liners, its a good idea to keep them around for quick lookups of output data when youre running bioinformatic pipelines.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise: Using awk
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Write an <code>awk</code> command to extract the <code>seqid</code>, <code>start</code>, and <code>end</code> columns from the <code>AF316.gff</code> file, but only for features of type <code>CDS</code>. Save the output to a new file called <code>genes.tsv</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>So the solution was sort of already given in the instructions, good job if you got it right!</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'BEGIN{OFS="\t"} $3=="CDS"{print $1,$4,$5}'</span> AF316.gff <span class="op">&gt;</span> genes.tsv</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Head should look something like this:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> genes.tsv</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  92  691</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  841 1539</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  1539    1868</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  1865    4426</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  4419    4853</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  4835    5257</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  5273    6013</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  6021    6416</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  6413    6991</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># contig_1  7003    7356</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <hr>
 </section>
 </section>
 <section id="scripting-101-in-bash" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Scripting 101 (in bash)</h1>
 <p>Now that we have learned a few more command-line tools, we can start writing our own scripts. A script is simply a text file containing a series of commands that can be executed in sequence. Scripts are useful for automating repetitive tasks, and for creating reproducible workflows.</p>
+<p>For this practical, we will write a script that processes the AF genome files and looks for genes of a certain type</p>
 <section id="starting-a-bash-script" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="starting-a-bash-script"><span class="header-section-number">3.1</span> Starting a bash script</h2>
-<p>We are already familiar with bash, one of the most common shell used in Linux and macOS, and is the default shell on most HPC systems. A bash script is simply a text file containing a series of bash commands that can be executed in sequence.</p>
-<p><strong>Exercises: Starting a script</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For this practical, we will write a script that processes the AF genome files and looks for genes of a certain type</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Start by creating a new file called process_AF_genome.sh</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># You can do this either by creating one manually in your vscode editor, or by using the touch command</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> process_AF_genome.sh</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the file in your editor and add the shebang line at the top</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># A shebang line tells the system which interpreter to use to run the script, an interpreter is the program that will read and execute the script</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add this line at the top of your script:</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Now change the file permissions to make it executable</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x process_AF_genome.sh</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># To run the script, simply run the filename in your terminal</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ex">./process_AF_genome.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We are already familiar with bash, one of the most common shell used in Linux and macOS, and is the default shell on most HPC systems. A bash script is simply a text file containing a series of bash commands that can be executed in sequence, and is interpreted by the bash interpreter. The first line of a bash script is typically a shebang line, which tells the system which interpreter to use to execute the script. The shebang line for a bash script is <code>#!/usr/bin/env bash</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start by creating a new file called process_AF_genome.sh</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> process_AF_genome.sh</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the file in your editor and add the shebang line at the top</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Now change the file permissions to make it executable</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x process_AF_genome.sh</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># To run the script, simply run the filename in your terminal</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">./process_AF_genome.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="variables-for-loops-and-ifelse-statements" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="variables-for-loops-and-ifelse-statements"><span class="header-section-number">3.2</span> Variables, for loops and if/else statements</h2>
-<p>Our next step is to add some functionality to our script. We will start by adding <strong>variables</strong> <code>${VAR_NAME}</code>, these variables can be used to store values that we can use later in the script. This is useful for storing file names, parameters, or any other values that we want to use multiple times in the script.</p>
-<p><strong>Exercises: Variables</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good variables to start with are input and output file names</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For these variables, we typically use the full path to the file, this makes it easier to run the script from any directory</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Swap the paths below with the correct paths to your files</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"path/to/data"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"path/to/output"</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also use variables to store parameters, such as the gene name pattern we want to look for in our ffn files</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="va">GENE_NAME_PATTERN</span><span class="op">=</span><span class="st">"gene_name"</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also Initialize variables to store intermediate values, such as the total number of genes matching the pattern found</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="va">TOTAL_GENES_FOR_PATTERN</span><span class="op">=</span>0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>But the ffn files we have contain a multitude of gene sequences and their headers, extracting these genes across multiple files will require repeated parsing setups. This is where <strong>for loops</strong> come in, they allow us to iterate over a list of items and execute a block of code for each item in the list. In our case, we can use a for loop to iterate over a list of input files and process each file in turn.</p>
+</section>
+<section id="variables-for-loops-and-ifelse-statements" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Variables, for loops and if/else statements</h1>
+<p>For scripts to be automated, reusable and flexible we need three core concepts: <strong>variables</strong>, <strong>for loops</strong> and <strong>if/else statements</strong>. These are core to many programming languages, and are essential for writing scripts that can handle different inputs and conditions.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>For loops</th>
+<th>If/else statements</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variables are used to store values that can be used later in the script.</td>
+<td>For loops are used to iterate over a list of items and execute a block of code for each item in the list.</td>
+<td>If/else statements are used to execute a block of code if a certain condition is met, and another block of code if the condition is not met.</td>
+</tr>
+<tr class="even">
+<td><code>GENE_NAME_PATTERN="gene_name"</code></td>
+<td><code>for ffn_file in ${INPUT_DIR}/*.ffn; do ... done</code></td>
+<td><code>if [ "${gene_count}" -gt 0 ]; then ... else ... fi</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="adding-functionality-to-our-script" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Adding functionality to our script</h1>
+<section id="variables" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="variables"><span class="header-section-number">5.1</span> Variables</h2>
+<p>Lets begin by adding some variables to our script, we will use these variables to store the input and output file names, as well as the gene name pattern we want to look for in our ffn files. We will also initialize a variable to store the total number of genes matching the pattern found across all files.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For these variables, we typically use the full path to the file, this makes it easier to run the script from any directory</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Swap the paths below with the correct paths to your files</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"path/to/data"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"path/to/output"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also use variables to store parameters, such as the gene name pattern we want to look for in our ffn files</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="va">GENE_NAME_PATTERN</span><span class="op">=</span><span class="st">"gene_name"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also Initialize variables to store intermediate values, such as the total number of genes matching the pattern found</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="va">TOTAL_GENES_FOR_PATTERN</span><span class="op">=</span>0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="for-loops" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="for-loops"><span class="header-section-number">5.2</span> For loops</h2>
+<p>Since the ffn files we have contain a multitude of gene sequences and their headers, extracting these genes across multiple files will require repeated parsing setups. This is where <strong>for loops</strong> come in, they allow us to iterate over a list of items and execute a block of code for each item in the list. In our case, we can use a for loop to iterate over a list of input files and process each file in turn.</p>
 <ul>
-<li><code>*</code> (wildcard): A character that can be used to match any string of characters in file names or patterns</li>
 <li><code>for</code>: A control flow statement that allows us to iterate over a list of items and execute a block of code for each item</li>
 <li><code>do</code> and <code>done</code>: Keywords used to define the start and end of a loop block</li>
-<li><code>basename</code>: A command that extracts the base name of a file (the file name without the path and extension)</li>
-<li><code>~</code>: represents the matching operator, used to check if a string matches a pattern</li>
+<li><code>basename</code>: A command that extracts the base name of a file (the file name without the path and extension), very useful for creating output file names based on input file names</li>
 </ul>
 <p><strong>Exercises: For loops</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Also add a creation of the counts file</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Genome\tGene_Count"</span> <span class="op">&gt;</span> <span class="va">${OUTPUT_DIR}</span>/gene_counts.tsv</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># In our INPUT_DIR we have multiple ffn files, a good way (if you have a good structured folder) to iterate over all ffn files is to use a for loop with a wildcard</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ffn_file <span class="kw">in</span> <span class="va">${INPUT_DIR}</span>/<span class="pp">*</span>.ffn<span class="kw">;</span> <span class="cf">do</span> </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># putting the wilcard alongside the file extension will match all files with that extension</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Inside the loop, we can use the variable ffn_file established in the loop to refer to the current file being processed</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract the base name of the file (without the path and extension) to use in the output file name</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">base_name</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${ffn_file}</span> .ffn<span class="va">)</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use awk to extract gene sequences matching the GENE_NAME_PATTERN and save them to an output file</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Since we are working on a fasta file, tab-separation is not needed and all data is in one column</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">awk</span> <span class="at">-v</span> pattern=<span class="st">"</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">"</span> <span class="st">'BEGIN{OFS="\t"} /^&gt;/{if($0 ~ pattern) {print $0; getline; print $0}}'</span> <span class="va">${ffn_file}</span> <span class="op">&gt;</span> <span class="va">${OUTPUT_DIR}</span>/<span class="va">${base_name}</span>_filtered.ffn</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Count the number of genes found and add it to the total</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="va">gene_count</span><span class="op">=</span><span class="va">$(</span><span class="fu">grep</span> <span class="at">-c</span> <span class="st">'^&gt;'</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${base_name}</span><span class="st">_filtered.ffn"</span> <span class="kw">||</span> <span class="fu">true</span><span class="va">)</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="va">TOTAL_GENES_FOR_PATTERN</span><span class="op">=</span><span class="va">$((TOTAL_GENES_FOR_PATTERN</span> <span class="op">+</span> <span class="va">gene_count))</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Also store the gene count for the current file in a new file for later use </span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="at">-e</span> <span class="st">"</span><span class="va">${base_name}</span><span class="st">\t</span><span class="va">${gene_count}</span><span class="st">"</span> <span class="op">&gt;&gt;</span> <span class="va">${OUTPUT_DIR}</span>/gene_counts.tsv</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Echo the number of genes found in the current file to you stdout, to report progress</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Processed </span><span class="va">${ffn_file}</span><span class="st">, found </span><span class="va">${gene_count}</span><span class="st"> genes matching pattern '</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">'"</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Lastly, we want to add some conditional logic to our script, so that we can handle different scenarios based on the input data. This is where <strong>if/else statements</strong> come in, they allow us to execute a block of code if a certain condition is met, and another block of code if the condition is not met. We’ll also introduce one additional loop to do iterative operation on the lines of a file.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Also add a creation of the counts file</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Genome\tGene_Count"</span> <span class="op">&gt;</span> <span class="va">${OUTPUT_DIR}</span>/gene_counts.tsv</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># In our INPUT_DIR we have multiple ffn files, a good way (if you have a good structured folder) to iterate over all ffn files is to use a for loop with a wildcard</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ffn_file <span class="kw">in</span> <span class="va">${INPUT_DIR}</span>/<span class="pp">*</span>.ffn<span class="kw">;</span> <span class="cf">do</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># putting the wilcard alongside the file extension will match all files with that extension</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Inside the loop, we can use the variable ffn_file established in the loop to refer to the current file being processed</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract the base name of the file (without the path and extension) to use in the output file name</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">base_name</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${ffn_file}</span> .ffn<span class="va">)</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use awk to extract gene sequences matching the GENE_NAME_PATTERN and save them to an output file</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Since we are working on a fasta file, tab-separation is not needed and all data is in one column</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grep</span> <span class="at">-A</span> 1 <span class="at">-E</span> <span class="st">"^&gt;</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">"</span> <span class="st">"</span><span class="va">${ffn_file}</span><span class="st">"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${base_name}</span><span class="st">_filtered.ffn"</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Count the number of genes found and add it to the total</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="va">gene_count</span><span class="op">=</span><span class="va">$(</span><span class="ex">[grep</span> <span class="at">-c</span> <span class="st">'^&gt;'</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${base_name}</span><span class="st">_filtered.ffn"</span> ] <span class="kw">||</span> <span class="fu">true</span><span class="va">)</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="va">TOTAL_GENES_FOR_PATTERN</span><span class="op">=</span><span class="va">$((TOTAL_GENES_FOR_PATTERN</span> <span class="op">+</span> <span class="va">gene_count))</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Also store the gene count for the current file in a new file for later use </span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="at">-e</span> <span class="st">"</span><span class="va">${base_name}</span><span class="st">\t</span><span class="va">${gene_count}</span><span class="st">"</span> <span class="op">&gt;&gt;</span> <span class="va">${OUTPUT_DIR}</span>/gene_counts.tsv</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Echo the number of genes found in the current file to you stdout, to report progress</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Processed </span><span class="va">${ffn_file}</span><span class="st">, found </span><span class="va">${gene_count}</span><span class="st"> genes matching pattern '</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">'"</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise: Missing code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are some missing pieces in the code above, indicated by [..N..].</p>
+</div>
+</div>
+</section>
+</section>
+<section id="improving-your-scripts-adding-debugging-and-flexibility" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Improving your scripts: Adding debugging and flexibility</h1>
+<p>Bash scripts differ a bit from some other languages you might have tried befoer (eg. R, python), in that they without configuration will continue running even if an error occurs. Finding and catching these errors is the other half of programming, we will now introduce a few tools that can help you debug your bash scripts.</p>
+<section id="debugging-bash-scripts-when-things-go-wrong" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="debugging-bash-scripts-when-things-go-wrong"><span class="header-section-number">6.1</span> Debugging Bash Scripts: When Things Go Wrong</h2>
+<p>Lets begin by setting the global options for our script, these are commands that define the general behaviour of our script. They will most likely always be in your scripts, and are a good starting point for debugging. A classic is the <code>set -euo</code> combination:</p>
+<ul>
+<li><code>set -e</code>: Exit immediately if a command exits with a non-zero status (i.e.&nbsp;as not expected)</li>
+<li><code>set -u</code>: Treat unset variables as an error when substituting (kills if you try to use a variable that has not been given a value)</li>
+<li><code>set -o pipefail</code>: Return the exit status of the last command in the pipe (if a command in a pipe fails, the whole pipe fails)</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-e</span>  </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-u</span>  </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-o</span> pipefail  </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># One additional setting is to add debugging output</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This will print each command before it is executed, which can be useful for debugging</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># But it can also be very verbose, and clog up your output/logs</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-x</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="custom-error-messages-utilizing-ifelse-statements-for-debugging" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="custom-error-messages-utilizing-ifelse-statements-for-debugging"><span class="header-section-number">6.2</span> Custom error messages: Utilizing if/else statements for debugging</h2>
+<p>However, they wont help with finding the exact spot where the error occurs. One way to debug your code easily, is to use echo and create custom error messages at different stages of your script. Another way is to use traps, however we will not cover that here.</p>
 <ul>
 <li><code>if</code>: A control flow statement that allows us to execute a block of code if a certain condition is met</li>
 <li><code>then</code>: A keyword used to define the start of an if block</li>
 <li><code>else</code>: A keyword used to define an alternative block of code if the condition is not met</li>
 <li><code>fi</code>: A keyword used to define the end of an if block</li>
-<li><code>while</code>: A control flow statement that allows us to execute a block of code repeatedly as long as a specified condition is true</li>
-<li><code>read</code>: A command that reads a line of input from a file or stdin</li>
-<li><code>-gt</code>: A comparison operator that means “greater than”</li>
 </ul>
-<p><strong>Exercises: If/else</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conditional logic can be used in multiple ways, we will focus on an example where label our genomes based on the outcome of the for loop </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To accomplish this, we will read the gene_counts.tsv file line by line and use an if/else statement to label the genomes based on the gene count</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create a new file to store the metadata with labels</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Genome\tGene_Count\tLabel"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/genomes_metadata_labeled.tsv"</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we can add some conditional logic to label our genomes</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">read</span> <span class="at">-r</span> <span class="va">line</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># skip the header line</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="kw">[[</span> <span class="st">"</span><span class="va">$line</span><span class="st">"</span> <span class="ot">==</span> Genome<span class="pp">*</span> <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">continue</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Read the genome name and gene count from the file</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="va">genome_name</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$line</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'{print $1}'</span><span class="va">)</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="va">gene_count</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$line</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span><span class="st">'\t'</span> <span class="st">'{print $2}'</span><span class="va">)</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use an if/else statement to label the genome based on the gene count</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">${gene_count}</span><span class="st">"</span> <span class="ot">-gt</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="va">label</span><span class="op">=</span><span class="st">"label1"</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="va">label</span><span class="op">=</span><span class="st">"label2"</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Append the label to the metadata file</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="at">-e</span> <span class="st">"</span><span class="va">${genome_name}</span><span class="st">\t</span><span class="va">${gene_count}</span><span class="st">\t</span><span class="va">${label}</span><span class="st">"</span> <span class="op">&gt;&gt;</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/genomes_metadata_labeled.tsv"</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/gene_counts.tsv"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-</section>
-</section>
-<section id="improving-your-scripts-adding-debugging-and-flexibility" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Improving your scripts: Adding debugging and flexibility</h1>
-<section id="debugging-bash-scripts-when-things-go-wrong" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="debugging-bash-scripts-when-things-go-wrong"><span class="header-section-number">4.1</span> Debugging Bash Scripts: When Things Go Wrong</h2>
-<p>Bash scripts differ a bit from other programming languages (or atleast in the context you learn it, think CLI vs Spyder), in that they without configuration will continue running even if an error occurs. This can be both a blessing and a curse, as it allows for scripts to continue running even if a minor error occurs, but it can also make it difficult to identify and fix errors when they do occur. Finding and catching these errors is the other half of programming, we will now introduce a few tools that can help you debug your bash scripts.</p>
-<p><strong>Exercises: Global script settings</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># At the top your script we typically add set commands to define general behaviour for our script</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># These commands will most likely always be in your scripts</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-e</span>  <span class="co"># Exit immediately if a command exits with a non-zero status</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-u</span>  <span class="co"># Treat unset variables as an error when substituting</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-o</span> pipefail  <span class="co"># Return the exit status of the last command in the pipe that failed</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># One additional setting is to add debugging output</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This will print each command before it is executed, which can be useful for debugging</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># But it can also be very verbose, and clog up your output/logs</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-x</span>  <span class="co"># Enable debugging output</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>These settings can be added at the top of your script, after the shebang line (<code>#!/usr/bin/env bash</code>) (also add the shebang line at the top!). However, they wont help with finding the exact spot where the error occurs. One way to debug your code easily, is to use echo and create custom error messages at different stages of your script. Another way is to use traps, however we will not cover that here.</p>
 <p><strong>Exercises: Error messages</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This a quite common use of if/else statements for bash scripts</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is an example of a custom error message</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$INPUT_FILE</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Input file </span><span class="va">$INPUT_FILE</span><span class="st"> does not exist."</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This a quite common use of if/else statements for bash scripts</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is an example of a custom error message</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$INPUT_FILE</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Input file </span><span class="va">$INPUT_FILE</span><span class="st"> does not exist."</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Go ahead and identify stages in the script from before where you think errors might occur, and add custom error messages where appropriate.</strong> <strong>Remember to test your script with both valid and invalid inputs to see how it behaves</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here are some suggestions for custom error messages: </span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You dont need to all of these if you dont want to, but if you do, make sure they are placed at the correct spots in the script</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if input and output directories exist</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$INPUT_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Input directory </span><span class="va">$INPUT_DIR</span><span class="st"> does not exist."</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># and </span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$OUTPUT_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Output directory </span><span class="va">$OUTPUT_DIR</span><span class="st"> does not exist."</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if a name pattern is provided</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$GENE_NAME_PATTERN</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Gene name pattern is not provided."</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the basename of the file being processed in the for loop</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># allows you to later check that all files were processed</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Processing file: </span><span class="va">${base_name}</span><span class="st">"</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if any genes were found in the current file</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">${gene_count}</span><span class="st">"</span> <span class="ot">-eq</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Warning: No genes matching pattern '</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">' found in </span><span class="va">${ffn_file}</span><span class="st">"</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co"># At the end of the script, print the total number of genes found</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Total genes matching pattern '</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">': </span><span class="va">${TOTAL_GENES_FOR_PATTERN}</span><span class="st">"</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co"># For the while loop, check if the gene_counts.tsv file is not empty before processing</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-s</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/gene_counts.tsv"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: gene_counts.tsv file is empty or does not exist."</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here are some suggestions for custom error messages: </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You dont need to all of these if you dont want to, but if you do, make sure they are placed at the correct spots in the script</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if input and output directories exist</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$INPUT_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Input directory </span><span class="va">$INPUT_DIR</span><span class="st"> does not exist."</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># and </span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$OUTPUT_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Output directory </span><span class="va">$OUTPUT_DIR</span><span class="st"> does not exist."</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if a name pattern is provided</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$GENE_NAME_PATTERN</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Gene name pattern is not provided."</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the basename of the file being processed in the for loop</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># allows you to later check that all files were processed</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Processing file: </span><span class="va">${base_name}</span><span class="st">"</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if any genes were found in the current file</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">${gene_count}</span><span class="st">"</span> <span class="ot">-eq</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Warning: No genes matching pattern '</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">' found in </span><span class="va">${ffn_file}</span><span class="st">"</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="co"># At the end of the script, print the total number of genes found</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Total genes matching pattern '</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">': </span><span class="va">${TOTAL_GENES_FOR_PATTERN}</span><span class="st">"</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="co"># For the while loop, check if the gene_counts.tsv file is not empty before processing</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-s</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/gene_counts.tsv"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: gene_counts.tsv file is empty or does not exist."</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
-</section>
-<section id="optargs---adding-flags-to-make-your-scripts-flexible-this-is-optional" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="optargs---adding-flags-to-make-your-scripts-flexible-this-is-optional"><span class="header-section-number">4.2</span> OPTARGS - Adding flags to make your scripts flexible (THIS IS OPTIONAL)</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+OPTARGS - Adding flags to make your scripts flexible (THIS IS OPTIONAL)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Up until now, our scripts have been quite rigid - they expect specific input files and parameters; an occasionally bad habit that coders refer to as “hardcoding”. However, in many scenarios, we often want our scripts to be more flexible and adaptable to different inputs and options. This is where OPTARGS comes in - a built-in bash tool that allows us to easily handle command-line options and arguments. You might recognize this from the command-line tools we’ve used so far, where we can add flags like <code>-h</code> for help or <code>-v</code> for verbose output. By using OPTARGS in our scripts, we can create flags for our own programs, making them more user-friendly and versatile.</p>
 <p>A few key commands that we will use in this section:</p>
 <ul>
@@ -669,42 +729,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>case</code> statement: A control flow statement that allows us to execute different blocks of code based on the value of a variable</li>
 </ul>
 <p><strong>Exercises</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To begin using OPTARGS, we need to add a while loop at the top of our script to handle the options</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the OPTARG variable will hold the value of whatever comes after the flag in the command line</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A while loop iterates over the options provided to the script, and sets option variables based with the read value from the command line</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">getopts</span> <span class="st">"i:o:p:h"</span> <span class="va">opt</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="va">$opt</span> <span class="kw">in</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">i</span><span class="kw">)</span> <span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$OPTARG</span><span class="st">"</span> <span class="cf">;;</span>  <span class="co"># -i flag for input directory</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">o</span><span class="kw">)</span> <span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$OPTARG</span><span class="st">"</span> <span class="cf">;;</span> <span class="co"># -o flag for output directory</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="ss">p</span><span class="kw">)</span> <span class="va">GENE_NAME_PATTERN</span><span class="op">=</span><span class="st">"</span><span class="va">$OPTARG</span><span class="st">"</span> <span class="cf">;;</span> <span class="co"># -p flag for gene name pattern</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="ss">h</span><span class="kw">)</span> <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> -i input_dir -o output_dir -p gene_name_pattern"</span>  <span class="co"># -h flag for help</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>       <span class="bu">exit</span> 0 <span class="cf">;;</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="kw">)</span> <span class="bu">echo</span> <span class="st">"Invalid option: -</span><span class="va">$OPTARG</span><span class="st">"</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>       <span class="bu">exit</span> 1 <span class="cf">;;</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">esac</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># We can add checks to ensure that the required options are provided</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$INPUT_DIR</span><span class="st">"</span> <span class="bu">]</span> <span class="kw">||</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$OUTPUT_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Input and output directories are required."</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> -i input_dir -o output_dir -p gene_name_pattern"</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Its also a good idea to set default values for optional parameters, you do this in the same way as when you set variables normally</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="va">GENE_NAME_PATTERN</span><span class="op">=</span><span class="st">"</span><span class="va">${GENE_NAME_PATTERN</span><span class="op">:-</span>gene_name<span class="va">}</span><span class="st">"</span>  <span class="co"># Default pattern if not provided</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co"># This sets GENE_NAME_PATTERN to the value provided by the -p flag, or to "gene_name" if no value is provided (as we did before)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To begin using OPTARGS, we need to add a while loop at the top of our script to handle the options</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the OPTARG variable will hold the value of whatever comes after the flag in the command line</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A while loop iterates over the options provided to the script, and sets option variables based with the read value from the command line</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">getopts</span> <span class="st">"i:o:p:h"</span> <span class="va">opt</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="va">$opt</span> <span class="kw">in</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">i</span><span class="kw">)</span> <span class="va">INPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$OPTARG</span><span class="st">"</span> <span class="cf">;;</span>  <span class="co"># -i flag for input directory</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">o</span><span class="kw">)</span> <span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$OPTARG</span><span class="st">"</span> <span class="cf">;;</span> <span class="co"># -o flag for output directory</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="ss">p</span><span class="kw">)</span> <span class="va">GENE_NAME_PATTERN</span><span class="op">=</span><span class="st">"</span><span class="va">$OPTARG</span><span class="st">"</span> <span class="cf">;;</span> <span class="co"># -p flag for gene name pattern</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="ss">h</span><span class="kw">)</span> <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> -i input_dir -o output_dir -p gene_name_pattern"</span>  <span class="co"># -h flag for help</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>       <span class="bu">exit</span> 0 <span class="cf">;;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="kw">)</span> <span class="bu">echo</span> <span class="st">"Invalid option: -</span><span class="va">$OPTARG</span><span class="st">"</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>       <span class="bu">exit</span> 1 <span class="cf">;;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">esac</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># We can add checks to ensure that the required options are provided</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$INPUT_DIR</span><span class="st">"</span> <span class="bu">]</span> <span class="kw">||</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$OUTPUT_DIR</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Error: Input and output directories are required."</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$0</span><span class="st"> -i input_dir -o output_dir -p gene_name_pattern"</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Its also a good idea to set default values for optional parameters, you do this in the same way as when you set variables normally</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="va">GENE_NAME_PATTERN</span><span class="op">=</span><span class="st">"</span><span class="va">${GENE_NAME_PATTERN</span><span class="op">:-</span>gene_name<span class="va">}</span><span class="st">"</span>  <span class="co"># Default pattern if not provided</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co"># This sets GENE_NAME_PATTERN to the value provided by the -p flag, or to "gene_name" if no value is provided (as we did before)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Now take the script you wrote before, and modify it to use OPTARGS for input and output files as well as a pattern selection</strong> <strong>OPTARGS should be placed at the top of your script, after the shebang line and global settings</strong> <strong>Remember to test your script with different combinations of options and arguments to ensure it behaves as expected</strong></p>
+</div>
+</div>
+</div>
 <hr>
-</section>
-</section>
-<section id="additional-exercises" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Additional exercises</h1>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise: Using your script to biological questions
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Now that you have a finished script, try to use it to answer the following questions:</p>
 <ol type="1">
 <li>How many genes in total across all three ffn files match the pattern “hypothetical protein”?</li>
-<li>How many genomes can be considered ESBL strains? (You may need to look up what characterizes an ESBL strain, what is the most prevalent ESBL gene?), you should also make sure that the hardcoded labels are suitable (ie change them from label1 and label2 to something more meaningful)</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre class="text"><code>AF316: </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <hr>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -712,7 +798,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Key Takeaways
+Key Takeaways
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -733,7 +819,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Pro Tips for Scripting
+Pro Tips for Scripting
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -748,6 +834,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -802,14 +889,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

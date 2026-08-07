@@ -1,35 +1,41 @@
 ---
 title: "Practical 3 — Workspace & Data Management"
-author: "Stuti Jain, Tor Kling"
+author: "Tor Kling, Vahid AtabaigielmiS"
 format: 
   html:
     toc: true
     toc-depth: 3
     number-sections: true
     code-fold: false
-    theme: cosmo
-execute:
-  echo: true
-  warning: false
-  message: false
+    theme: minty
 ---
 
 # Introduction
 
-The goal of this practical is to build **good workspace habits** on the command line so your projects are **organized, reproducible, and HPC-friendly**. You’ll practice:
+CLI workspaces are often **messy** if you don’t have a plan. This practical will help you **organize your project** and **build good habits** for working on the command line. It is as important to **organize your workspace** as it is to write good code. A messy workspace can lead to lost files, accidental overwrites or make it a hassle for other people to work with your project. In this practical we introduce concepts that allow us to protect our data, keep our project organized, and make it easier to work with others. We will also introduce some new commands that will help you **find files** and **summarize data**. Lastly we also cover how these habits map onto the HPC filesystem, which is important for when you start working on the cluster.
 
-- Project layouts that keep data, scripts, and results separate  
-- Using **symlinks** to reference large/shared data (don’t duplicate!)  
-- Finding/searching files efficiently  
-- Combining commands with **pipes** and **redirection**  
-- Managing basic **file permissions**  
-- Understanding how these habits translate to the **HPC filesystem**
+::: {.callout-note}
+## Learning Objectives
+By the end of this practical you should be able to:
 
-> **Important**  
-> We **reuse the dataset you created in Practical 1** — the FASTA, gene annotations, and expression data files. Here, we will reorganize them into a structured project layout. If some of them still have different names (such as an E_coli prefix), please rename them back to the original filenames for consistency with this practical.
+- Organize a project into a reproducible folder structure (data/refs/results/scripts/logs)
+- Use symlinks to reference shared or large data without duplicating it
+- Understand delimiters and newlines in files, and how to use `printf` to create a formatted files
+- Summarize file contents using `cut`, `sort`, `uniq`, and `wc`
+- Locate files with `find`
+- Set and interpret file permissions with `chmod`
+- Understand the differences between working on your local machine and the HPC cluster
 
-::: {.callout-note title="Did You Know?"}
-Most bioinformatics tools are tiny **LEGO bricks** on the CLI. You connect bricks with **pipes** `|` to build powerful, reproducible analyses.
+:::
+
+::: {.callout-important}
+## Reusing your data from Practical 1
+For this practical, you will **reuse the files you created in Practical 1**. If you have not completed Practical 1, please do so before starting this one. The files you will need are:
+
+- `sequences.fasta` (FASTA sequences)
+- `gene_annotations.csv` (gene annotations)
+- `expression_data.csv` (expression data)
+
 :::
 
 ---
@@ -62,117 +68,181 @@ CLI_intro/
 └── logs/         # logs from runs
 ```
 
-::: {.callout-tip title="Best Practice"}
-Keep **raw data** read-only and **never** write outputs into `data/`. Use `results/` for generated files and `logs/` for run logs.
+::: {.callout-tip}
+## Best Practice
+Once we start running scripts and programs, a lot of things typically happen within our project directories and its good to follow some good principles. **raw data**, meaning data that you did not generate yourself, should be kept **read-only** and **never** written to. This is to avoid accidental overwrites or loss of information. Instead, we will use the `results/` folder for any outputs we generate. Its also a good idea to redirect the information printed to the terminal when running long programs (eg. PROKKA) to a **log file** in the `logs/` folder. This way, if something goes wrong, we can check the logs to see what happened.
 :::
 
 ---
 
-# Symlinks: linking shared or large data
+## Symlinks: linking shared or large data
 
-A **symbolic link (symlink)** points to a file by **path** (like a shortcut). This avoids unnecessary copies and keeps one **source of truth**.
+Up until now, the paths we have used have been the real **physical paths** to files/directories. However, sometimes we want to **link** to a ex. database without copying it. This is especially useful for large files (like reference genomes) or shared files (like annotation databases). Instead of copying the file into your project, you can create a **symbolic link (symlink)** that points to the original file. This way, you avoid unnecessary copies and keep one source for files needed for many things.
 
 ```bash
 # Example: link a shared reference into your existing refs/ folder
-# (If your course provides a shared path on HPC, you'll link that path here.)
-cd ~/CLI_intro
-
-# Link target --> link name (re-using existing refs/ made above)
-ln -s /proj/course/shared_refs/genome.fa refs/genome.fa   # example path
-ls -l refs            # look for the arrow "genome.fa -> /proj/..."
+cd ~
+mkdir ref_db_test
+cd ~/CLI_intro/refs
+ln -s ~/ref_db_test ref_test_link   # create a symlink
+ls -l # you should see the symlink with an arrow pointing to the original file
 ```
 
-::: {.callout-note title="When to use symlinks"}
-- Large or shared files (reference genomes, annotation bundles)  
-- Data living in shared HPC locations (`/proj/...`)  
-- Multiple projects needing the **same** resource
-:::
+::: {.callout-important}
+### Exercise: What is the true path of the symlink?
+Often when we run commands, we need to provide the path to a file. However, in certain cases the symlink path will break and we instead need to provide the **true path** to the file. `cd` into the `refs/` directory and try to figure out a way to get the **true path** of the symlink you just created. Hint: `pwd` is useful here, but there are many ways that work.
 
-::: {.callout-warning title="Common Mistake"}
-Don’t create **another** `refs/` folder somewhere else. Reuse the **existing** `CLI_intro/refs/` to keep your project tidy.
+::: {.callout-tip collapse="true"}
+### Expected output (no peeking!)
+```text
+/home/<your_username>/ref_db_test
+```
+:::
 :::
 
 ---
 
-# Finding & Searching Files
+# More on files and where to find them
 
-## Locate by name/type/size with `find`
+In the first practical, we introduced several commands for working with files. Now we will try to expand our usage of these commands with some additional commands that are useful for **finding files** and **summarizing their contents**, some of them you might remember from the pipe examples in the first practical.
+
+## Field delimiters and newlines (`printf`)
+So by now you know quite well how to peek at files with `cat` and `less`, but we didnt talk a lot about what sits inbetween the columns in the files. Columns, or **fields**, are separated by a **delimiter** which can vary depending on the file type. You are probably familiar with .csv files, which are **comma-separated** and thus there is a `,` between each column. So to create a comma delimited file, we include a `,` between each column when we `echo` and redirect. Other examples of delimiters are: 
+
+  - **tab** (`\t`) 
+  - **space** (` `) 
+  - **pipe** (`|`)
+  
+To split a line into more rows its also good to know that the **newline** character (`\n`) is used to separate rows. In this segment we will create a small **tab-separated file** and use it to demonstrate some of the commands used to summarize data.
+
+We will now construct a toy metadata file with 5 samples, each with a country and tissue type. The file will be **tab-separated** and we will use `printf` to create it. `printf` is similar to `echo`, but it allows us to specify **formatting** for the output. In this case, we will use `\t` for tabs and `\n` for newlines.
 
 ```bash
 cd ~/CLI_intro
-find . -name "*.tsv"           # all TSV files
-find data -type f -size +1M    # files > 1 MB in data/
-find . -maxdepth 2 -type d     # directories up to depth 2
+
+# Create a small tab-separated file
+printf 'Sample_ID\tCountry\tTissue\nS1\tSE\tgut\nS2\tSE\tgut\nS3\tNO\tskin\nS4\tDK\tgut\nS5\tSE\tskin\n' > data/metadata.tsv
+
+# Check the file was created correctly
+head data/metadata.tsv
+
+# If you are unsure of the field delimiter, cat has a useful option to visualize it:
+cat -A data/metadata.tsv   # shows tab characters (^I), as well as other hidden characters
 ```
 
-## Peek safely with `head`, `tail`, `less`
+## Counts and quick summaries with `wc`, `sort`, `uniq` and `cut`
 
-We assume **`data/metadata.tsv`** exists, but otherwise create it.
+Four commands that are quite lovely in pipes are `wc`, `sort`, `uniq` and `cut`
 
-```bash
-# Show a small slice so it's visibly different from the full file:
-# If you need to create the metadata.tsv file: 
-cat > data/metadata.tsv << 'EOF'
-Sample_ID    Country Tissue
-S1   SE   gut
-S2   SE   gut
-S3   NO   skin
-S4   DK   gut
-S5   SE   skin
-EOF
+  - `wc` counts lines, words, or characters in a file 
+  - `sort` orders lines according to a specified criteria (alphabetically, numerically, etc.)
+  - `uniq` removes duplicates from a file, but only **adjacent** duplicates.
+  - `cut` extracts specific columns from a file, based on a delimiter.
 
-head -n 2 data/metadata.tsv
-tail -n 2 data/metadata.tsv
-less data/metadata.tsv   # press 'q' to quit
+These can be combined in a **pipeline** to quickly summarize data. For example, if we want to count how many samples are from each country in our metadata file or pull out all gene annotation names from a larger file, but drop all of the info beyond gene name and annotation. However remember to `sort` before using `uniq`: 
+
+```{mermaid}
+flowchart LR
+    title[Correct sort/uniq order]
+    In[Unsorted Data] --> A[sort: orders lines so duplicate aggregate] 
+    A --> B[uniq: removes duplicates that are adjacent] 
+    B --> C[File redirect or stdout]
+
+    In -.-> D[uniq: removes duplicates, but miss those that are not adjacent]
+    D -.-> E[Missed duplicates!]
+
+    classDef wrong fill:#f8d7da,stroke:#c0392b,color:#c0392b;
+    class D,E wrong;    
 ```
 
-::: {.callout-note title="Defaults"}
-By default, `head` and `tail` each print **10 lines** if you don’t specify `-n`.
-:::
-
-## Search inside files with `grep`
+Now lets try these commands on the metadata file we just created.
 
 ```bash
-# Case-insensitive search for the word "case" in metadata
-grep -i "case" data/metadata.tsv
+# Example: cut can be used to extract one specific column, or multiple columns
+cut -f2 data/metadata.tsv              # column 2 (e.g., country) from a TAB-separated file
+cut -f2,3 data/metadata.tsv            # columns 2 and 3 (e.g., country and tissue) from a TAB-separated file
 
-# Count the number of FASTA headers (if you have a FASTA in refs/)
-grep -c "^>" refs/sequences.fasta
-```
-
-::: {.callout-warning title="Common Mistake"}
-If the command says “No such file or directory”, ensure you’re in `~/CLI_intro` and the file really exists **there**. Use `pwd` and `ls` to verify.
-:::
-
-## Counts and quick summaries with `wc`, `sort`, `uniq`
-
-> Correct mental model:  
-> `sort` **orders** lines (alphabetically/numerically). `uniq` only removes **adjacent** duplicates — so you almost always **sort first** before `uniq`.
-
-```bash
-# How many rows (lines) are in the metadata?
+# wc is also very useful to get the lenght of a file, which is good to sanity check in case there is an unexpected number of rows
 wc -l data/metadata.tsv
 
-# STEP-BY-STEP (encouraged so you see each stage):
+# ----------------------------------------------------------------------------------------------------------------------------------
+
+# However these commands are at their most iconic together
+# Test them step by step here before combining into a single pipeline.
+# STEP-BY-STEP :
 cut -f2 data/metadata.tsv              # column 2 (e.g., country) from a TAB-separated file
 cut -f2 data/metadata.tsv | sort       # order values to cluster identical ones
 cut -f2 data/metadata.tsv | sort | uniq -c   # collapse adjacent duplicates and count
-```
 
-Now that you’ve seen each stage, try the **pipeline** form that saves the result:
+# Now that you’ve seen each stage, try the **pipeline** form that saves the result:
 
-```bash
 cut -f2 data/metadata.tsv | sort | uniq -c | sort -nr > results/country_counts.txt
 head results/country_counts.txt
 ```
 
-::: {.callout-note title="Delimiter tip"}
-`cut` defaults to **tab**. If your file is CSV, add `-d,` (comma) and adjust field numbers accordingly.
+::: {.callout-important}
+### Exercise: Summarizing data and changing delimiters
+Sometimes, certain programs might require data in a specific format. While we often can go back to Excel or likewise to export it in a different format, it is often more efficient to do this directly in the command line. We have now learned a bit about delimiters and how to select specific columns from a file, lets see if we can put it to good use with the commands we learned in the first practical.
+
+  - Use `cut` to extract columns "Gene_ID", "Chromosome" and "Product" from the `gene_annotations.csv` file, then use `sed` to change the delimiter from a comma to tab, then redirect the output to a new file called `gene_annotations.tsv` in the `data/` folder.
+
+::: {.callout-tip collapse="true"}
+### Example solution (Try to solve it yourself before checking!)
+```bash
+
+# Cuts default delimiter is tab, so we need to specify the delimiter as a comma with `-d,` and select the first three columns with `-f1,2,3`. Then we use `sed` to replace commas with tabs and redirect the output to a new file.
+cut -d, -f1,2,3 data/gene_annotations.csv | sed 's/,/\t/g' > data/gene_annotations.tsv
+
+# cat -A data/gene_annotations.tsv:
+Gene_ID^IChromosome^IProduct$
+lacZ^Iplasmid^Ibeta-galactosidase$
+rpoB^Ichr^IRNA_polymerase_beta_subunit$
+gyrA^Ichr^IDNA_gyrase_subunit_A$
+ompA^Ichr^Iouter_membrane_protein_A$
+gyrA^Ichr^IDNA_gyrase_subunit_A$
+
+```
 :::
+:::
+
+## Locate things with `find`
+
+It all happens to us eventually, we forget where we put a file or we want to find all files of a certain type. The `find` command is very useful for this. It can search for files based on name, type, size, and many other criteria. It is also quite useful in automated **scripts**, for bioinformatics it is especially useful in scripts meant for batch processing of many files. We will cover more on scripts in Practical 4, but for now lets see some examples of how to use `find` to locate files.
+
+::: {.callout-tip collapse="true"}
+### A note on regex and wildcards
+`find` and a lot of other commands benefit from expanded use with **regex** (regular expressions) and **wildcards**. For example, 
+
+  - `*` matches any number of characters, 
+  - `?` matches a single character, and 
+  - `[abc]` matches any one of the characters a, b, or c. 
+
+These can be combined to create powerful search patterns with `find`. For example, `*.tsv` will match all files that end with `.tsv`, while `data/*[0-9].csv` will match all CSV files in the data directory that end with a digit. Other commands like `grep` and `sed` also use regex and wildcards, so it is worth [learning more](https://computing.stat.berkeley.edu/tutorial-using-bash/regex.html) about them as you become more comfortable with the command line.
+:::
+
+```bash
+cd ~/CLI_intro
+
+# all TSV files, we use the `*` wildcard to match any characters before the `.tsv` extension
+find . -name "*.tsv"
+
+# We can also search for large files specifically, to not get crowded by small config files
+# Note that M = 1024*1024 bytes, so +1M means files larger than 1 MB, similarity G = 1024*1024*1024 bytes, so +1G means files larger than 1 GB
+find data -type f -size +1M    
+
+# Sometimes we want to limit depth as well, ex. if we only want a current directory and its subs
+find . -maxdepth 2 -type d   
+```
 
 ---
 
-# File Permissions (read/write/execute)
+# File Permissions (read/write/execute) (`chmod`)
+
+All files, directories and most anything created in a linux system has "rules" that govern who can use them and how. These rules are called **permissions** and they are set by the **owner** of the file or directory. Permissions are divided into three categories: **owner**, **group**, and **others**. Each category can have three types of permissions: **read (r)**, **write (w)**, and **execute (x)**. Most often on your own local machine, you are the owner of the files you create, and the group is usually your user group. Others are everyone else on the system. Permissions are important to understand because they can prevent accidental overwrites or deletions of important files, and they can also be used to share files with others in a controlled way. 
+
+Changing permissions is done with the `chmod` command, which stands for "change mode". The mode is a three-digit number that represents the permissions for owner, group, and others. Each digit is a sum of the values for read (4), write (2), and execute (1). For example, `chmod 644 file.txt` sets the permissions to read/write for the owner, and read-only for group and others. You can also use symbolic notation to change permissions, such as `chmod u+x file.sh` to add execute permission for the owner.
+
+  - `chmod` changes the permissions of a file or directory
 
 Inspect permissions:
 
@@ -189,17 +259,34 @@ chmod 644 results/country_counts.txt   # u=rw, g=r, o=r
 
 # Protect raw data (read-only for everyone)
 chmod 444 data/*.csv
+
+# Full permissions for a script (owner can read/write/execute, group and others can read/execute)
+touch scripts/test_script.sh
+chmod 755 scripts/*.sh
 ```
 
-::: {.callout-tip title="Quick troubleshooting"}
-- “Permission denied”? Check the directory’s permissions: `ls -ld .`  
-- Need to make a **tool** executable? (Used in later scripting practical.)
-  - You’ll use `chmod +x script.sh` **after** you create scripts in Practical 4.
+::: {.callout-important}
+### Exercise: Check permissions for a few targets on your system
+The linux system has a large hierarchy of files and directories, where some might have stricter persmissions than others. Using the `ls -l` command, check the permissions for the following files/directories on your system:
+
+  - `~` (your home directory)
+  - `~/CLI_intro` (your project directory)
+  - `/` (the root directory)
+  - `/etc/passwd` (a system file that contains user account information)
+  - `/tmp` (a temporary directory that is often used for storing temporary files)
+
+Then contemplate the following questions and discuss with your peers:
+
+  - Is there a pattern in the permissions for these files/directories?
+  - Why do you think some files/directories have stricter permissions than others?
+  - How do the permissions for your project directory compare to the system files/directories?
 :::
 
 ---
 
 # Local vs HPC 
+
+You have already been introduced to the HPC cluster in Practical 2, so here is mainly a little recap of how the things we covered so far map onto the HPC filesystem. The main difference is that on your local machine you have a lot more freedom to create and delete files, while on the HPC cluster you are more limited in your permissions. This means that you need to be more careful with how you organize your workspace and where you store data. The HPC cluster has a shared filesystem, which means that multiple users can access the same files. This is great for collaboration, but it also means that you need to be careful not to overwrite or delete files that other people are using.
 
 | Feature  | Laptop/Desktop | HPC Cluster |
 |---|---|---|
@@ -208,86 +295,42 @@ chmod 444 data/*.csv
 | Compute | 1–8 cores | Many nodes/cores via a batch scheduler |
 | Data | Small/local | Large/shared — link into your project via **symlinks** |
 
-::: {.callout-note title="Guideline on HPC paths"}
+::: {.callout-note}
+### Best Practices for HPC Workspace Management
 - Keep large references and reads in `/proj/<project>`  
 - **Symlink** them into `~/CLI_intro/refs/`  
 - Use `/scratch` for temporary I/O during jobs and clean up after
 :::
 
-::: {.callout-important title="Bonus (advanced / optional)"}
-Transferring between local and HPC:
-
+::: {.callout-tip}
+### Transferring items between local and HPC:
 ```bash
 # Copy a single file
-scp data/metadata.tsv your_cid@vera1.c3se.chalmers.se:/home/your_cid/CLI_intro/data/
+scp data/metadata.tsv your_cid@vera1.c3se.chalmers.se:/home/your_cid/project/data/
 
-# Sync a directory (only changes)
-rsync -avh results/ your_cid@vera1.c3se.chalmers.se:/proj/course/results/
-
-# Verify integrity on both sides (compare hashes)
-md5sum data/metadata.tsv
 ```
-
-This will be covered more deeply when we work **in-depth** with the HPC.
 :::
 
 ---
 
-# Guided Practice
+::: {.callout-note}
+## Key Takeaways
 
-1) **Confirm workspace & data are in the right place**
+- Organize your project, it will save you time and make it much easier to work with others
+- Use symlinks to reference shared or large data without duplicating it
+- Locate files with `find`, especially useful as project directories grow with output from programs
+- Summarize file contents using `cut`, `sort`, `uniq`, and `wc`; usefuel for quick summaries of data and sanity checks
+- Set and interpret file permissions with `chmod` to protect raw data and share scripts
+- On the HPC we are more limited in our permissions, so we need to be more careful with how we organize our workspace and where we store data
 
-```bash
-cd ~/CLI_intro
-pwd
-ls -1
-ls -1 data
-```
+:::
 
-2) **Link a shared reference** (if provided by the course/HPC)
 
-```bash
-# Adjust the /proj path to the correct course/project location
-ln -s /proj/course/shared_refs/genome.fa refs/genome.fa
-ls -l refs
-```
+::: {.callout-tip}
+## Additional Tips
 
-3) **Answer a question with a pipeline**
-
-> Q: *How many samples per country are in `data/metadata.tsv`?*
-
-```bash
-cut -f2 data/metadata.tsv | sort | uniq -c | sort -nr > results/country_counts.txt
-head results/country_counts.txt
-```
-
-4) **Permissions in context**
-
-```bash
-# Make results readable by all (typical for text reports)
-chmod 644 results/country_counts.txt
-
-# If you have raw data files, make them read-only to avoid accidents
-chmod 444 data/*.csv   # (skip if none exist)
-```
-
----
-
-# Self-Check (mini-quiz)
-
-1. In one sentence, why are **symlinks** preferred for references on HPC?  
-2. What’s the difference between `>` and `>>`? Between `>` and `|`?  
-3. Write a one-liner to count unique values in **column 2** of `data/metadata.tsv`.  
-4. Explain why `sort` usually comes **before** `uniq`.  
-5. Where should **raw data** live? Where should **generated results** be written?
-
----
-
-# Summary
-
-- Expand your **CLI_intro/** workspace from Practical 1 into a reproducible project structure.  
-- Use **symlinks** to avoid copying large/shared data; keep one source of truth.  
-- Build insight with **small steps** (`cut` → `sort` → `uniq`) and then combine with **pipes**.  
-- Use **redirection** to save outputs in `results/`, not over your inputs.  
-- Manage **permissions** to protect raw data and share read access to results.  
-- These habits **transfer directly** to the HPC filesystem.
+- Run `ls -l` after every `ln -s` to confirm the arrow points where you expect.
+- Use `pwd -P` to get the true path of a symlinked directory, `readlink` for files.
+- Before piping into a long chain, test each stage separately (as we did with `cut` → `sort` → `uniq`).
+- Set raw data to read-only (`chmod 444`) as soon as you're done creating it, so a stray script can't overwrite it.
+:::

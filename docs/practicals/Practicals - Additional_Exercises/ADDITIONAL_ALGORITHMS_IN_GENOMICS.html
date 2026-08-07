@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vahid Atabaigielmi, Tor Kling">
+<meta name="dcterms.date" content="2026-08-07">
+
+<title>Additional 1: Algorithmic Thinking in Genomics – BIO511 Genomics - Practical Repository</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-8e049031f30567c4281a40dcf0e5e98c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../pages/styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">BIO511 Genomics - Practical Repository</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-command-line-programming" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Command Line Programming</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-command-line-programming">    
+        <li class="dropdown-header">Intro to Command Line</li>
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.html">
+ <span class="dropdown-text">Practical 1: CLI Basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html">
+ <span class="dropdown-text">Practical 2: Setting up the HPC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_WORKSPACE_MANAGEMENT.html">
+ <span class="dropdown-text">Practical 3: Workspace Management and Data Management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.html">
+ <span class="dropdown-text">Practical 4: Scripting and Advanced Text Manipulation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html">
+ <span class="dropdown-text">Practical 5: Software &amp; Containers</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Coding Best Practices</li>
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+ <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+ <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-genomics-workflows" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Genomics Workflows</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-genomics-workflows">    
+        <li class="dropdown-header">Genome workflows - Whole Genome Sequencing (WGS)</li>
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - WGS/PRACTICAL_RAWDATA_AND_QC.html">
+ <span class="dropdown-text">Practical 1: Quality Control and Classification</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - WGS/PRACTICAL_ASSEMBLY_AND_MAPPING.html">
+ <span class="dropdown-text">Practical 2: Genome Assembly and Mapping</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - WGS/PRACTICAL_FUNCTIONAL_ANNOTATION.html">
+ <span class="dropdown-text">Practical 3: Genome Annotation</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Additional Genomics Resources</li>
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - WGS/ADDITIONAL_PREP_CURATED_PROTEINS.html">
+ <span class="dropdown-text">Preparing Curated Protein Databases</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-python-programming" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Python Programming</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-python-programming">    
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_SETUP.html">
+ <span class="dropdown-text">Practical 0: Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE.html">
+ <span class="dropdown-text">Practical 1: Python Data Types and If/Else Clauses</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_LOOPING.html">
+ <span class="dropdown-text">Practical 2: Python Loops</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_FUNCTIONS.html">
+ <span class="dropdown-text">Practical 3: Python Functions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_MODULES.html">
+ <span class="dropdown-text">Practical 4: Python Modules</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_FILES.html">
+ <span class="dropdown-text">Practical 5: Files</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_PLOTTING.html">
+ <span class="dropdown-text">Practical 6: Plotting</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#where-does-the-word-algorithm-come-from" id="toc-where-does-the-word-algorithm-come-from" class="nav-link" data-scroll-target="#where-does-the-word-algorithm-come-from"><span class="header-section-number">2</span> Where Does the Word Algorithm Come From?</a></li>
+  <li><a href="#warm-up-algorithmic-thinking-as-planning" id="toc-warm-up-algorithmic-thinking-as-planning" class="nav-link" data-scroll-target="#warm-up-algorithmic-thinking-as-planning"><span class="header-section-number">3</span> Warm-up: Algorithmic Thinking as Planning</a></li>
+  <li><a href="#why-genomics-needs-sophisticated-algorithms" id="toc-why-genomics-needs-sophisticated-algorithms" class="nav-link" data-scroll-target="#why-genomics-needs-sophisticated-algorithms"><span class="header-section-number">4</span> Why Genomics Needs Sophisticated Algorithms</a></li>
+  <li><a href="#algorithmic-vocabulary" id="toc-algorithmic-vocabulary" class="nav-link" data-scroll-target="#algorithmic-vocabulary"><span class="header-section-number">5</span> Algorithmic Vocabulary</a></li>
+  <li><a href="#example-1-exact-string-matching-and-k-mers" id="toc-example-1-exact-string-matching-and-k-mers" class="nav-link" data-scroll-target="#example-1-exact-string-matching-and-k-mers"><span class="header-section-number">6</span> Example 1: Exact String Matching and k-mers</a></li>
+  <li><a href="#example-2-dynamic-programming-for-sequence-alignment" id="toc-example-2-dynamic-programming-for-sequence-alignment" class="nav-link" data-scroll-target="#example-2-dynamic-programming-for-sequence-alignment"><span class="header-section-number">7</span> Example 2: Dynamic Programming for Sequence Alignment</a></li>
+  <li><a href="#example-3-blast-and-seed-and-extend" id="toc-example-3-blast-and-seed-and-extend" class="nav-link" data-scroll-target="#example-3-blast-and-seed-and-extend"><span class="header-section-number">8</span> Example 3: BLAST and Seed-and-Extend</a></li>
+  <li><a href="#example-4-read-mapping-with-indexes-bwt-and-fm-index" id="toc-example-4-read-mapping-with-indexes-bwt-and-fm-index" class="nav-link" data-scroll-target="#example-4-read-mapping-with-indexes-bwt-and-fm-index"><span class="header-section-number">9</span> Example 4: Read Mapping with Indexes, BWT, and FM-index</a></li>
+  <li><a href="#example-5-genome-assembly-with-de-bruijn-graphs" id="toc-example-5-genome-assembly-with-de-bruijn-graphs" class="nav-link" data-scroll-target="#example-5-genome-assembly-with-de-bruijn-graphs"><span class="header-section-number">10</span> Example 5: Genome Assembly with de Bruijn Graphs</a></li>
+  <li><a href="#example-6-hidden-markov-models-for-genes-and-proteins" id="toc-example-6-hidden-markov-models-for-genes-and-proteins" class="nav-link" data-scroll-target="#example-6-hidden-markov-models-for-genes-and-proteins"><span class="header-section-number">11</span> Example 6: Hidden Markov Models for Genes and Proteins</a></li>
+  <li><a href="#example-7-variant-calling-as-probabilistic-inference" id="toc-example-7-variant-calling-as-probabilistic-inference" class="nav-link" data-scroll-target="#example-7-variant-calling-as-probabilistic-inference"><span class="header-section-number">12</span> Example 7: Variant Calling as Probabilistic Inference</a></li>
+  <li><a href="#comparing-algorithms" id="toc-comparing-algorithms" class="nav-link" data-scroll-target="#comparing-algorithms"><span class="header-section-number">13</span> Comparing Algorithms</a></li>
+  <li><a href="#runnable-python-implementations" id="toc-runnable-python-implementations" class="nav-link" data-scroll-target="#runnable-python-implementations"><span class="header-section-number">14</span> Runnable Python Implementations</a>
+  <ul class="collapse">
+  <li><a href="#exact-matching-and-k-mer-counting" id="toc-exact-matching-and-k-mer-counting" class="nav-link" data-scroll-target="#exact-matching-and-k-mer-counting"><span class="header-section-number">14.1</span> Exact Matching and k-mer Counting</a></li>
+  <li><a href="#needleman-wunsch-global-alignment" id="toc-needleman-wunsch-global-alignment" class="nav-link" data-scroll-target="#needleman-wunsch-global-alignment"><span class="header-section-number">14.2</span> Needleman-Wunsch Global Alignment</a></li>
+  <li><a href="#smith-waterman-local-alignment" id="toc-smith-waterman-local-alignment" class="nav-link" data-scroll-target="#smith-waterman-local-alignment"><span class="header-section-number">14.3</span> Smith-Waterman Local Alignment</a></li>
+  <li><a href="#blast-like-seed-and-extend-search" id="toc-blast-like-seed-and-extend-search" class="nav-link" data-scroll-target="#blast-like-seed-and-extend-search"><span class="header-section-number">14.4</span> BLAST-like Seed-and-Extend Search</a></li>
+  <li><a href="#suffix-array-bwt-and-fm-index-style-exact-search" id="toc-suffix-array-bwt-and-fm-index-style-exact-search" class="nav-link" data-scroll-target="#suffix-array-bwt-and-fm-index-style-exact-search"><span class="header-section-number">14.5</span> Suffix Array, BWT, and FM-index-style Exact Search</a></li>
+  <li><a href="#de-bruijn-graph-assembly" id="toc-de-bruijn-graph-assembly" class="nav-link" data-scroll-target="#de-bruijn-graph-assembly"><span class="header-section-number">14.6</span> de Bruijn Graph Assembly</a></li>
+  <li><a href="#viterbi-algorithm-for-a-hidden-markov-model" id="toc-viterbi-algorithm-for-a-hidden-markov-model" class="nav-link" data-scroll-target="#viterbi-algorithm-for-a-hidden-markov-model"><span class="header-section-number">14.7</span> Viterbi Algorithm for a Hidden Markov Model</a></li>
+  <li><a href="#probabilistic-variant-calling" id="toc-probabilistic-variant-calling" class="nav-link" data-scroll-target="#probabilistic-variant-calling"><span class="header-section-number">14.8</span> Probabilistic Variant Calling</a></li>
+  <li><a href="#k-mer-lowest-common-ancestor-classification" id="toc-k-mer-lowest-common-ancestor-classification" class="nav-link" data-scroll-target="#k-mer-lowest-common-ancestor-classification"><span class="header-section-number">14.9</span> k-mer Lowest Common Ancestor Classification</a></li>
+  <li><a href="#minhash-sketching-for-genome-similarity" id="toc-minhash-sketching-for-genome-similarity" class="nav-link" data-scroll-target="#minhash-sketching-for-genome-similarity"><span class="header-section-number">14.10</span> MinHash Sketching for Genome Similarity</a></li>
+  </ul></li>
+  <li><a href="#a-capstone-way-to-think-about-bioinformatics-problems" id="toc-a-capstone-way-to-think-about-bioinformatics-problems" class="nav-link" data-scroll-target="#a-capstone-way-to-think-about-bioinformatics-problems"><span class="header-section-number">15</span> A Capstone Way to Think About Bioinformatics Problems</a>
+  <ul class="collapse">
+  <li><a href="#define-the-biological-question" id="toc-define-the-biological-question" class="nav-link" data-scroll-target="#define-the-biological-question"><span class="header-section-number">15.1</span> 1. Define the biological question</a></li>
+  <li><a href="#translate-it-into-a-computational-question" id="toc-translate-it-into-a-computational-question" class="nav-link" data-scroll-target="#translate-it-into-a-computational-question"><span class="header-section-number">15.2</span> 2. Translate it into a computational question</a></li>
+  <li><a href="#identify-the-input-size" id="toc-identify-the-input-size" class="nav-link" data-scroll-target="#identify-the-input-size"><span class="header-section-number">15.3</span> 3. Identify the input size</a></li>
+  <li><a href="#choose-an-algorithmic-pattern" id="toc-choose-an-algorithmic-pattern" class="nav-link" data-scroll-target="#choose-an-algorithmic-pattern"><span class="header-section-number">15.4</span> 4. Choose an algorithmic pattern</a></li>
+  <li><a href="#write-pseudocode" id="toc-write-pseudocode" class="nav-link" data-scroll-target="#write-pseudocode"><span class="header-section-number">15.5</span> 5. Write pseudocode</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">16</span> Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-from-naive-to-scalable" id="toc-exercise-1-from-naive-to-scalable" class="nav-link" data-scroll-target="#exercise-1-from-naive-to-scalable"><span class="header-section-number">16.1</span> Exercise 1: From Naive to Scalable</a></li>
+  <li><a href="#exercise-2-dynamic-programming-matrix" id="toc-exercise-2-dynamic-programming-matrix" class="nav-link" data-scroll-target="#exercise-2-dynamic-programming-matrix"><span class="header-section-number">16.2</span> Exercise 2: Dynamic Programming Matrix</a></li>
+  <li><a href="#exercise-3-k-mer-counter" id="toc-exercise-3-k-mer-counter" class="nav-link" data-scroll-target="#exercise-3-k-mer-counter"><span class="header-section-number">16.3</span> Exercise 3: k-mer Counter</a></li>
+  <li><a href="#exercise-4-build-a-tiny-de-bruijn-graph" id="toc-exercise-4-build-a-tiny-de-bruijn-graph" class="nav-link" data-scroll-target="#exercise-4-build-a-tiny-de-bruijn-graph"><span class="header-section-number">16.4</span> Exercise 4: Build a Tiny de Bruijn Graph</a></li>
+  <li><a href="#exercise-5-choose-the-algorithm" id="toc-exercise-5-choose-the-algorithm" class="nav-link" data-scroll-target="#exercise-5-choose-the-algorithm"><span class="header-section-number">16.5</span> Exercise 5: Choose the Algorithm</a></li>
+  <li><a href="#exercise-6-capstone-design" id="toc-exercise-6-capstone-design" class="nav-link" data-scroll-target="#exercise-6-capstone-design"><span class="header-section-number">16.6</span> Exercise 6: Capstone Design</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">17</span> Summary</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">18</span> References</a>
+  <ul class="collapse">
+  <li><a href="#course-and-textbook-references" id="toc-course-and-textbook-references" class="nav-link" data-scroll-target="#course-and-textbook-references"><span class="header-section-number">18.1</span> Course and Textbook References</a></li>
+  <li><a href="#algorithm-and-tool-references" id="toc-algorithm-and-tool-references" class="nav-link" data-scroll-target="#algorithm-and-tool-references"><span class="header-section-number">18.2</span> Algorithm and Tool References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Additional 1: Algorithmic Thinking in Genomics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vahid Atabaigielmi, Tor Kling </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 7, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>By this point in the course you have worked with the command line, Git, Python, files, functions, plotting, and genomics workflows. This practical is meant as a capstone. Instead of asking only “how do I write this loop?”, we now ask a deeper question:</p>
+<p><strong>What kind of problem is this, and what kind of algorithm is powerful enough to solve it at genomic scale?</strong></p>
+<p>Modern bioinformatics depends on a small number of recurring algorithmic ideas. Sequence alignment, read mapping, genome assembly, gene prediction, taxonomic classification, and variant calling all look different on the surface, but many of them reuse the same patterns:</p>
+<ul>
+<li>break a biological object into computable pieces</li>
+<li>score many possible explanations</li>
+<li>search efficiently through a huge space of possibilities</li>
+<li>use data structures that avoid scanning everything</li>
+<li>accept tradeoffs between exactness, speed, memory, and biological realism</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this additional exercise, you should be able to:</p>
+<ul>
+<li>Describe dynamic programming, seed-and-extend search, indexing, graph assembly, hidden Markov models, and probabilistic variant calling at a conceptual level</li>
+<li>Convert pseudocode descriptions of algorithms into runnable Python code</li>
+<li>Call that python code in simple efficient bash scripts</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="where-does-the-word-algorithm-come-from" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Where Does the Word Algorithm Come From?</h1>
+<p>The word <strong>algorithm</strong> comes from the name of the Persian mathematician <strong>Muhammad ibn Musa al-Khwarizmi</strong>, who lived around the 9th century. His name was later Latinized in Europe as <strong>Algoritmi</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/al-khwarizmi-statue.jpg" class="img-fluid figure-img" style="width:45.0%" alt="A modern statue of Muhammad ibn Musa al-Khwarizmi holding a book."></p>
+<figcaption>Modern statue of Muhammad ibn Musa al-Khwarizmi in Madrid. This is a later commemorative statue, not a historical portrait. Image source: Wikimedia Commons, CC0.</figcaption>
+</figure>
+</div>
+<p>One reason his name became so strongly connected with algorithmic thinking is that his mathematical works described <strong>general, repeatable procedures</strong> for solving problems. In his work on <strong>al-jabr</strong>, he gave systematic methods for solving linear and quadratic equations, which are polynomial equations of degree 1 and degree 2. The important idea was not just finding one answer, but describing a method that could be followed again and again for similar problems.</p>
+<p>Over time, this name became associated with step-by-step methods for doing calculations. That meaning eventually developed into the modern word <strong>algorithm</strong>: a precise set of instructions for solving a problem.</p>
+<p>In short:</p>
+<pre class="text"><code>al-Khwarizmi -&gt; Algoritmi -&gt; algorithm</code></pre>
+<p>The word <strong>algebra</strong> also comes from the title of one of his mathematical works, which included the Arabic word <strong>al-jabr</strong>.</p>
+</section>
+<section id="warm-up-algorithmic-thinking-as-planning" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Warm-up: Algorithmic Thinking as Planning</h1>
+<p>Before we look at genomics algorithms, let us start with a smaller planning problem. Planning is a useful way to think algorithmically because it forces us to define a <strong>starting state</strong>, a <strong>goal state</strong>, and the <strong>actions</strong> that can move us from one state to another.</p>
+<p>This warm-up is adapted from a planning example in the <strong>Artificial Intelligence Core Course</strong> at Saarland University, Germany.</p>
+<p>Imagine this toy problem:</p>
+<p><strong>Question:</strong> What is the shortest sequence of valid actions that gets us from the starting state to the goal state?</p>
+<p>Jane starts at home. A virus problem must be solved at location F. She can solve it in one of two ways:</p>
+<ul>
+<li>buy disinfectant and use it at location F</li>
+<li>buy both a mask and toilet paper, then use them at location F</li>
+</ul>
+<p>However, she first needs to withdraw money from the cash point before buying anything.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A["A: Home"]
+  B["B: Drug Store (toilet paper)"]
+  C["C: Cash Point"]
+  E["E: Mask Shop"]
+  F["F: Virus Location"]
+  G["G: Pharmacy (disinfectant)"]
+
+  E --- B
+  B --- A
+  A --- C
+  C --- G
+  C --- F
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>In planning language, we can describe the problem like this:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Planning concept</th>
+<th>Meaning in this example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Initial state</td>
+<td>Jane is at location A</td>
+</tr>
+<tr class="even">
+<td>Goal state</td>
+<td>The virus problem is solved</td>
+</tr>
+<tr class="odd">
+<td>Action</td>
+<td>Something Jane can do, such as <code>walk</code>, <code>withdrawMoney</code>, or <code>buyDisinfectant</code></td>
+</tr>
+<tr class="even">
+<td>Preconditions</td>
+<td>What must already be true before an action can happen</td>
+</tr>
+<tr class="odd">
+<td>Effects</td>
+<td>What changes after the action is performed</td>
+</tr>
+<tr class="even">
+<td>Plan</td>
+<td>A sequence of actions that reaches the goal</td>
+</tr>
+<tr class="odd">
+<td>Optimal plan</td>
+<td>A valid plan with the lowest cost, often the fewest actions</td>
+</tr>
+</tbody>
+</table>
+<p>For example, the action <code>buyDisinfectant</code> can be written as:</p>
+<pre class="text"><code>Action: buyDisinfectant
+Preconditions:
+    at(G)
+    hasMoney
+Effects:
+    hasDisinfectant
+    no longer hasMoney</code></pre>
+<p>One valid plan is:</p>
+<pre class="text"><code>walk(A, C)
+withdrawMoney
+walk(C, G)
+buyDisinfectant
+walk(G, C)
+walk(C, F)
+useDisinfectant</code></pre>
+<p>This is algorithmic thinking in a very direct form. We are not just listing commands randomly. We are reasoning about what must be true before each step, what each step changes, and whether the final goal has been reached.</p>
+<p>The same logic appears in bioinformatics workflows:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Planning idea</th>
+<th>Genomics workflow analogue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Initial state</td>
+<td>Raw sequencing reads</td>
+</tr>
+<tr class="even">
+<td>Goal state</td>
+<td>Interpretable biological result</td>
+</tr>
+<tr class="odd">
+<td>Action</td>
+<td>Run quality control, trim reads, map reads, assemble contigs, annotate genes</td>
+</tr>
+<tr class="even">
+<td>Preconditions</td>
+<td>Required input files, software, indexes, databases, or parameters</td>
+</tr>
+<tr class="odd">
+<td>Effects</td>
+<td>New output files, filtered reads, alignments, assemblies, variant calls</td>
+</tr>
+<tr class="even">
+<td>Plan</td>
+<td>The workflow connecting all steps</td>
+</tr>
+<tr class="odd">
+<td>Optimal plan</td>
+<td>A workflow that is accurate, reproducible, efficient, and appropriate for the question</td>
+</tr>
+</tbody>
+</table>
+<p>For example:</p>
+<pre class="text"><code>raw FASTQ files
+-&gt; quality control
+-&gt; trimming
+-&gt; read mapping or assembly
+-&gt; variant calling or annotation
+-&gt; biological interpretation</code></pre>
+<p>This is why algorithmic thinking matters. A workflow is not only a list of tools. It is a plan where every step has inputs, assumptions, outputs, and consequences.</p>
+</section>
+<section id="why-genomics-needs-sophisticated-algorithms" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Why Genomics Needs Sophisticated Algorithms</h1>
+<p>A small Python exercise might loop through four sequences. A real genomics dataset might contain:</p>
+<ul>
+<li>millions of short reads</li>
+<li>billions of reference genome positions</li>
+<li>sequencing errors</li>
+<li>repeated regions</li>
+<li>contamination</li>
+<li>uneven coverage</li>
+<li>uncertain biological signals</li>
+</ul>
+<p>A naive solution often looks reasonable until the dataset becomes real.</p>
+<p>For example, imagine mapping 10 million reads to a 5 million base pair bacterial genome by checking each read at every possible position.</p>
+<pre class="text"><code>For each read:
+    For each position in the genome:
+        Compare the read to the genome at that position</code></pre>
+<p>If the reads are 150 bp long, this can require trillions of character comparisons. The algorithm is simple, but not practical.</p>
+<p>Bioinformatics therefore depends on better strategies:</p>
+<ul>
+<li><strong>indexing</strong>: build a searchable representation of the genome</li>
+<li><strong>dynamic programming</strong>: reuse partial results instead of recomputing them</li>
+<li><strong>heuristics</strong>: quickly find likely answers when exact search is too expensive</li>
+<li><strong>graphs</strong>: represent relationships between k-mers, reads, genes, or genomes</li>
+<li><strong>probabilistic models</strong>: reason under uncertainty</li>
+</ul>
+</section>
+<section id="algorithmic-vocabulary" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Algorithmic Vocabulary</h1>
+<p>Before looking at genomics examples, it helps to name a few core ideas.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Meaning in practice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Input</td>
+<td>The data the algorithm starts with, such as reads, sequences, or tables</td>
+</tr>
+<tr class="even">
+<td>Output</td>
+<td>The result, such as an alignment, assembly, variant list, or classification</td>
+</tr>
+<tr class="odd">
+<td>State</td>
+<td>Information the algorithm remembers while running</td>
+</tr>
+<tr class="even">
+<td>Score</td>
+<td>A number used to compare possible answers</td>
+</tr>
+<tr class="odd">
+<td>Search space</td>
+<td>All possible solutions the algorithm could consider</td>
+</tr>
+<tr class="even">
+<td>Complexity</td>
+<td>How runtime or memory grows as input grows</td>
+</tr>
+<tr class="odd">
+<td>Exact algorithm</td>
+<td>Guaranteed to find the optimal answer under its model</td>
+</tr>
+<tr class="even">
+<td>Heuristic algorithm</td>
+<td>Faster strategy that may approximate or miss some answers</td>
+</tr>
+<tr class="odd">
+<td>Data structure</td>
+<td>A special organization of data that makes some operations efficient</td>
+</tr>
+</tbody>
+</table>
+<p>In genomics, the most important question is often not “can I solve this for one sequence?” but “can I solve this for millions of sequences before tomorrow morning?”</p>
+</section>
+<section id="example-1-exact-string-matching-and-k-mers" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Example 1: Exact String Matching and k-mers</h1>
+<p>One of the simplest genomics algorithms is exact string matching: finding where a DNA pattern occurs in a longer sequence.</p>
+<p><strong>Question:</strong> Where does the pattern <code>ATG</code> occur in a genome, and which short sequence words occur most often?</p>
+<p>Naive algorithm:</p>
+<pre class="text"><code>For each position in the genome:
+    Compare the pattern to the genome at that position
+    If all characters match:
+        Report the position</code></pre>
+<p>Python example:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>genome <span class="op">=</span> <span class="st">"TTGATGCCCATGAAATGA"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pattern <span class="op">=</span> <span class="st">"ATG"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>matches <span class="op">=</span> []</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(genome) <span class="op">-</span> <span class="bu">len</span>(pattern) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> genome[i:i <span class="op">+</span> <span class="bu">len</span>(pattern)] <span class="op">==</span> pattern:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        matches.append(i)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is fine for a small genome and a short pattern. But large-scale genomics often uses <strong>k-mers</strong>, fixed-length sequence words, to make matching faster.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">"ATGACCATGATTACGCCAAGCT"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>kmer_counts <span class="op">=</span> {}</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(sequence) <span class="op">-</span> k <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    kmer <span class="op">=</span> sequence[i:i <span class="op">+</span> k]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> kmer <span class="kw">not</span> <span class="kw">in</span> kmer_counts:</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        kmer_counts[kmer] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    kmer_counts[kmer] <span class="op">=</span> kmer_counts[kmer] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(kmer_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>k-mers are used in many genomics tools:</p>
+<ul>
+<li>read error correction</li>
+<li>genome assembly</li>
+<li>metagenomic classification</li>
+<li>contamination checks</li>
+<li>genome distance estimation</li>
+<li>fast pre-filtering before alignment</li>
+</ul>
+<p>The key idea is that long biological sequences can be represented as collections of shorter sequence words.</p>
+</section>
+<section id="example-2-dynamic-programming-for-sequence-alignment" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Example 2: Dynamic Programming for Sequence Alignment</h1>
+<p><strong>Question:</strong> How do we compare two sequences when they may contain substitutions, insertions, and deletions?</p>
+<p>For example:</p>
+<pre class="text"><code>Sequence A: A C G T A C
+Sequence B: A C - T G C</code></pre>
+<p>The challenge is that many alignments are possible. A brute-force search over all alignments becomes impossible as sequence length grows.</p>
+<p>Dynamic programming solves this by breaking the alignment into smaller subproblems and storing their scores in a matrix.</p>
+<p>Well known algorithms:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Algorithm</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Needleman-Wunsch</td>
+<td>Global alignment of two full sequences</td>
+</tr>
+<tr class="even">
+<td>Smith-Waterman</td>
+<td>Local alignment of best matching subsequences</td>
+</tr>
+<tr class="odd">
+<td>Viterbi</td>
+<td>Most likely path through a hidden Markov model</td>
+</tr>
+</tbody>
+</table>
+<p>For global alignment, define:</p>
+<pre class="text"><code>score[i][j] = best alignment score between the first i bases of sequence A
+              and the first j bases of sequence B</code></pre>
+<p>At each cell, the algorithm chooses among three possibilities:</p>
+<pre class="text"><code>diagonal: align A[i] with B[j]
+up:       align A[i] with a gap
+left:     align B[j] with a gap</code></pre>
+<p>Simplified recurrence:</p>
+<pre class="text"><code>score[i][j] = max(
+    score[i-1][j-1] + match_or_mismatch,
+    score[i-1][j]   + gap_penalty,
+    score[i][j-1]   + gap_penalty
+)</code></pre>
+<p>This is algorithmically sophisticated because the method does not try every full alignment independently. It reuses partial solutions. Runtime is still usually proportional to the product of sequence lengths, <code>O(nm)</code>, but that is far better than enumerating all possible alignments.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Biological Interpretation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The scoring system is a biological model. A high match score says matches are likely or valuable. A strong gap penalty says insertions/deletions are costly. Changing the scoring scheme changes what kind of alignment the algorithm prefers.</p>
+</div>
+</div>
+</section>
+<section id="example-3-blast-and-seed-and-extend" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Example 3: BLAST and Seed-and-Extend</h1>
+<p><strong>Question:</strong> How can we find sequences in a large database that are similar to a query sequence without doing a slow full dynamic-programming alignment against every database sequence?</p>
+<p>Smith-Waterman is sensitive, but too slow for searching a query against a huge database. BLAST uses a heuristic strategy called <strong>seed-and-extend</strong>.</p>
+<p>The basic idea:</p>
+<pre class="text"><code>Break the query into short words
+Find exact or high-scoring word matches in the database
+Use those matches as seeds
+Extend around each seed to build a longer local alignment
+Report alignments with sufficiently high scores</code></pre>
+<p>This is not guaranteed to find every possible optimal alignment, but it is fast and usually biologically useful.</p>
+<p>BLAST demonstrates an important principle:</p>
+<p><strong>A good bioinformatics algorithm is often not the mathematically perfect one. It is the one that makes a useful tradeoff for the biological question and dataset size.</strong></p>
+<p>Use BLAST-like thinking when:</p>
+<ul>
+<li>the database is large</li>
+<li>approximate matches are acceptable</li>
+<li>speed matters</li>
+<li>you need candidate homologs rather than a proof of optimality</li>
+</ul>
+</section>
+<section id="example-4-read-mapping-with-indexes-bwt-and-fm-index" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Example 4: Read Mapping with Indexes, BWT, and FM-index</h1>
+<p><strong>Question:</strong> Where did each sequencing read most likely come from in the reference genome?</p>
+<p>A naive mapper compares every read to every genome position. Modern mappers avoid this by building an index of the reference genome.</p>
+<p>Well known ideas and tools:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Idea</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>suffix arrays</td>
+<td>fast substring search</td>
+</tr>
+<tr class="even">
+<td>Burrows-Wheeler Transform (BWT)</td>
+<td>compressed representation that preserves searchable structure</td>
+</tr>
+<tr class="odd">
+<td>FM-index</td>
+<td>memory-efficient exact matching based on BWT</td>
+</tr>
+<tr class="even">
+<td>BWA and Bowtie</td>
+<td>widely used read mappers based on these ideas</td>
+</tr>
+</tbody>
+</table>
+<p>Conceptual algorithm:</p>
+<pre class="text"><code>Build an index of the reference genome
+For each read:
+    Search for exact seed matches using the index
+    Extend or refine candidate matches
+    Score candidate alignments
+    Report the best location or mark the read as ambiguous</code></pre>
+<p>The cleverness is in the index. Instead of storing every possible alignment, the algorithm stores the reference in a form that supports fast backward search.</p>
+<p>This is why read mapping can be feasible even when there are millions of reads. The expensive work is partly shifted into building an efficient reference index.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ambiguous Mapping
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Not every read has a unique best location. Repeats, conserved genes, paralogs, and low-complexity regions can all produce ambiguous mappings. A mapper must decide whether to report multiple locations, choose one, lower mapping quality, or discard the read.</p>
+</div>
+</div>
+</section>
+<section id="example-5-genome-assembly-with-de-bruijn-graphs" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Example 5: Genome Assembly with de Bruijn Graphs</h1>
+<p><strong>Question:</strong> Can we reconstruct a genome from many short sequencing reads without already knowing the reference?</p>
+<p>One classical approach is <strong>overlap-layout-consensus</strong>:</p>
+<pre class="text"><code>Find overlaps between reads
+Arrange reads into a layout
+Derive a consensus sequence</code></pre>
+<p>This works well conceptually, but all-vs-all read overlap can become expensive for large short-read datasets.</p>
+<p>Many short-read assemblers use <strong>de Bruijn graphs</strong> instead.</p>
+<p>The idea:</p>
+<ol type="1">
+<li>Break reads into k-mers</li>
+<li>Treat k-mers or k-1-mers as graph components</li>
+<li>Connect nodes when k-mers overlap</li>
+<li>Find paths through the graph that reconstruct sequence</li>
+</ol>
+<p>Example with k = 4:</p>
+<pre class="text"><code>Read: ATGAC
+k-mers: ATGA, TGAC
+
+ATGA connects ATG -&gt; TGA
+TGAC connects TGA -&gt; GAC</code></pre>
+<p>The graph represents sequence adjacency. Genome assembly becomes a graph traversal problem.</p>
+<p>Why this is powerful:</p>
+<ul>
+<li>repeated k-mers collapse repeated sequence into graph structures</li>
+<li>sequencing errors often appear as low-coverage tips or bubbles</li>
+<li>coverage can help distinguish real sequence from noise</li>
+</ul>
+<p>Why this is hard:</p>
+<ul>
+<li>repeats longer than the read length create ambiguity</li>
+<li>uneven coverage can break paths</li>
+<li>sequencing errors create extra graph branches</li>
+<li>plasmids, contamination, and strain mixtures complicate the graph</li>
+</ul>
+<p>Tools such as SPAdes use graph-based assembly ideas, combined with many practical improvements.</p>
+</section>
+<section id="example-6-hidden-markov-models-for-genes-and-proteins" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Example 6: Hidden Markov Models for Genes and Proteins</h1>
+<p><strong>Question:</strong> Given an observed DNA or protein sequence, what hidden biological states most likely generated it?</p>
+<p>A hidden Markov model, or HMM, is useful when the observed data are visible but the underlying biological state is hidden.</p>
+<p>Example:</p>
+<pre class="text"><code>Observed sequence: A T G G C A T A A ...
+Hidden state:      intergenic, start codon, coding region, stop codon, ...</code></pre>
+<p>An HMM includes:</p>
+<ul>
+<li>states, such as coding and non-coding</li>
+<li>transition probabilities between states</li>
+<li>emission probabilities for observed bases or amino acids</li>
+</ul>
+<p>The <strong>Viterbi algorithm</strong> finds the most likely sequence of hidden states.</p>
+<p>Conceptual pseudocode:</p>
+<pre class="text"><code>For each position in the sequence:
+    For each possible hidden state:
+        Calculate the best score for arriving at this state
+        Store where that best score came from
+Trace back from the best final state to recover the most likely path</code></pre>
+<p>HMMs appear in:</p>
+<ul>
+<li>gene prediction</li>
+<li>protein domain detection</li>
+<li>profile HMM searches, such as HMMER</li>
+<li>annotation of conserved protein families</li>
+</ul>
+<p>HMMs are powerful because they let us model biological uncertainty. Instead of saying “this position definitely is coding”, the algorithm asks which hidden explanation is most probable under the model.</p>
+</section>
+<section id="example-7-variant-calling-as-probabilistic-inference" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Example 7: Variant Calling as Probabilistic Inference</h1>
+<p><strong>Question:</strong> Given the reads observed at a genomic position, which genotype is most likely?</p>
+<p>For example, suppose the reference has <code>A</code>, but the reads show:</p>
+<pre class="text"><code>A A A G A G A A G A</code></pre>
+<p>Is this a real A/G variant, sequencing error, mapping error, or contamination?</p>
+<p>A simple rule might say:</p>
+<pre class="text"><code>If more than 20 percent of reads support G:
+    call a variant</code></pre>
+<p>That can work as a toy algorithm, but real variant callers use probabilistic models. They consider:</p>
+<ul>
+<li>base quality</li>
+<li>mapping quality</li>
+<li>read depth</li>
+<li>strand bias</li>
+<li>expected ploidy</li>
+<li>prior probability of variation</li>
+<li>likelihood of each possible genotype</li>
+</ul>
+<p>Conceptual algorithm:</p>
+<pre class="text"><code>For each genomic position:
+    Collect reads overlapping the position
+    For each possible genotype:
+        Calculate how likely the observed reads are under that genotype
+    Combine likelihoods with prior assumptions
+    Report the genotype with strongest support
+    Attach a confidence score</code></pre>
+<p>This is algorithmic thinking under uncertainty. The output is not only a base call, but also a confidence estimate.</p>
+</section>
+<section id="comparing-algorithms" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Comparing Algorithms</h1>
+<p>Different genomics tasks require different algorithmic strategies.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Common algorithmic idea</th>
+<th>Example tools or methods</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pairwise sequence alignment</td>
+<td>dynamic programming</td>
+<td>Needleman-Wunsch, Smith-Waterman</td>
+</tr>
+<tr class="even">
+<td>Database homology search</td>
+<td>seed-and-extend heuristic</td>
+<td>BLAST</td>
+</tr>
+<tr class="odd">
+<td>Short-read mapping</td>
+<td>indexing, BWT, FM-index</td>
+<td>BWA, Bowtie</td>
+</tr>
+<tr class="even">
+<td>Genome assembly</td>
+<td>graphs, k-mers</td>
+<td>de Bruijn graph assemblers, SPAdes</td>
+</tr>
+<tr class="odd">
+<td>Protein domain detection</td>
+<td>profile HMMs</td>
+<td>HMMER</td>
+</tr>
+<tr class="even">
+<td>Gene prediction</td>
+<td>HMMs and probabilistic models</td>
+<td>many prokaryotic/eukaryotic gene callers</td>
+</tr>
+<tr class="odd">
+<td>Variant calling</td>
+<td>genotype likelihoods, Bayesian reasoning</td>
+<td>bcftools, GATK-style models</td>
+</tr>
+<tr class="even">
+<td>Metagenomic classification</td>
+<td>k-mer indexes, lowest common ancestor</td>
+<td>Kraken-style classifiers</td>
+</tr>
+<tr class="odd">
+<td>Genome similarity</td>
+<td>sketches, MinHash</td>
+<td>Mash-style distance estimation</td>
+</tr>
+</tbody>
+</table>
+<p>No algorithm is best for every case. The right choice depends on the question, data type, genome size, error profile, and acceptable tradeoffs.</p>
+</section>
+<section id="runnable-python-implementations" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Runnable Python Implementations</h1>
+<p>The code below gives small, teaching-scale implementations of the algorithmic ideas introduced above. These examples are meant to be readable and runnable in plain Python. They are <strong>not</strong> replacements for production tools such as BLAST, BWA, Bowtie, SPAdes, HMMER, bcftools, or GATK.</p>
+<p>The value of writing these toy versions is that you can see the algorithmic structure directly.</p>
+<section id="exact-matching-and-k-mer-counting" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="exact-matching-and-k-mer-counting"><span class="header-section-number">14.1</span> Exact Matching and k-mer Counting</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exact_match_positions(genome, pattern):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return all zero-based positions where pattern occurs in genome."""</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    positions <span class="op">=</span> []</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(genome) <span class="op">-</span> <span class="bu">len</span>(pattern) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        window <span class="op">=</span> genome[i:i <span class="op">+</span> <span class="bu">len</span>(pattern)]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> window <span class="op">==</span> pattern:</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>            positions.append(i)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> positions</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_kmers(sequence, k):</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Count all k-mers in a sequence."""</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> {}</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="op">&lt;=</span> <span class="dv">0</span> <span class="kw">or</span> k <span class="op">&gt;</span> <span class="bu">len</span>(sequence):</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> counts</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(sequence) <span class="op">-</span> k <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        kmer <span class="op">=</span> sequence[i:i <span class="op">+</span> k]</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> kmer <span class="kw">not</span> <span class="kw">in</span> counts:</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>            counts[kmer] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        counts[kmer] <span class="op">=</span> counts[kmer] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> counts</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>genome <span class="op">=</span> <span class="st">"TTGATGCCCATGAAATGA"</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(exact_match_positions(genome, <span class="st">"ATG"</span>))</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count_kmers(<span class="st">"ATGACCATGATTACGCCAAGCT"</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="needleman-wunsch-global-alignment" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="needleman-wunsch-global-alignment"><span class="header-section-number">14.2</span> Needleman-Wunsch Global Alignment</h2>
+<p>This is a small implementation of global alignment. It aligns two full sequences from beginning to end.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> needleman_wunsch(seq_a, seq_b, match<span class="op">=</span><span class="dv">1</span>, mismatch<span class="op">=-</span><span class="dv">1</span>, gap<span class="op">=-</span><span class="dv">2</span>):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> <span class="bu">len</span>(seq_a) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    cols <span class="op">=</span> <span class="bu">len</span>(seq_b) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> [[<span class="dv">0</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(cols)] <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(rows)]</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    pointer <span class="op">=</span> [[<span class="st">""</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(cols)] <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(rows)]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, rows):</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        score[i][<span class="dv">0</span>] <span class="op">=</span> score[i <span class="op">-</span> <span class="dv">1</span>][<span class="dv">0</span>] <span class="op">+</span> gap</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>        pointer[i][<span class="dv">0</span>] <span class="op">=</span> <span class="st">"up"</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, cols):</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>        score[<span class="dv">0</span>][j] <span class="op">=</span> score[<span class="dv">0</span>][j <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> gap</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>        pointer[<span class="dv">0</span>][j] <span class="op">=</span> <span class="st">"left"</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, rows):</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, cols):</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> seq_a[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> seq_b[j <span class="op">-</span> <span class="dv">1</span>]:</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>                diagonal_score <span class="op">=</span> score[i <span class="op">-</span> <span class="dv">1</span>][j <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> match</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>                diagonal_score <span class="op">=</span> score[i <span class="op">-</span> <span class="dv">1</span>][j <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> mismatch</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>            up_score <span class="op">=</span> score[i <span class="op">-</span> <span class="dv">1</span>][j] <span class="op">+</span> gap</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>            left_score <span class="op">=</span> score[i][j <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> gap</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>            best_score <span class="op">=</span> <span class="bu">max</span>(diagonal_score, up_score, left_score)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>            score[i][j] <span class="op">=</span> best_score</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> best_score <span class="op">==</span> diagonal_score:</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>                pointer[i][j] <span class="op">=</span> <span class="st">"diagonal"</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> best_score <span class="op">==</span> up_score:</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>                pointer[i][j] <span class="op">=</span> <span class="st">"up"</span></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>                pointer[i][j] <span class="op">=</span> <span class="st">"left"</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>    aligned_a <span class="op">=</span> []</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    aligned_b <span class="op">=</span> []</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> <span class="bu">len</span>(seq_a)</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    j <span class="op">=</span> <span class="bu">len</span>(seq_b)</span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">or</span> j <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pointer[i][j] <span class="op">==</span> <span class="st">"diagonal"</span>:</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>            aligned_a.append(seq_a[i <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>            aligned_b.append(seq_b[j <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> i <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> pointer[i][j] <span class="op">==</span> <span class="st">"up"</span>:</span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>            aligned_a.append(seq_a[i <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>            aligned_b.append(<span class="st">"-"</span>)</span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> i <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>            aligned_a.append(<span class="st">"-"</span>)</span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>            aligned_b.append(seq_b[j <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> score[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>], <span class="st">""</span>.join(<span class="bu">reversed</span>(aligned_a)), <span class="st">""</span>.join(<span class="bu">reversed</span>(aligned_b))</span>
+<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a>alignment_score, aligned_a, aligned_b <span class="op">=</span> needleman_wunsch(<span class="st">"ATGC"</span>, <span class="st">"ATC"</span>)</span>
+<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(alignment_score)</span>
+<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aligned_a)</span>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aligned_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="smith-waterman-local-alignment" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="smith-waterman-local-alignment"><span class="header-section-number">14.3</span> Smith-Waterman Local Alignment</h2>
+<p>This version finds the best local matching region between two sequences.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> smith_waterman(seq_a, seq_b, match<span class="op">=</span><span class="dv">2</span>, mismatch<span class="op">=-</span><span class="dv">1</span>, gap<span class="op">=-</span><span class="dv">1</span>):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> <span class="bu">len</span>(seq_a) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    cols <span class="op">=</span> <span class="bu">len</span>(seq_b) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> [[<span class="dv">0</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(cols)] <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(rows)]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    pointer <span class="op">=</span> [[<span class="st">""</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(cols)] <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(rows)]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    best_score <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    best_position <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, rows):</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, cols):</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> seq_a[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> seq_b[j <span class="op">-</span> <span class="dv">1</span>]:</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                diagonal_score <span class="op">=</span> score[i <span class="op">-</span> <span class="dv">1</span>][j <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> match</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>                diagonal_score <span class="op">=</span> score[i <span class="op">-</span> <span class="dv">1</span>][j <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> mismatch</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>            up_score <span class="op">=</span> score[i <span class="op">-</span> <span class="dv">1</span>][j] <span class="op">+</span> gap</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>            left_score <span class="op">=</span> score[i][j <span class="op">-</span> <span class="dv">1</span>] <span class="op">+</span> gap</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>            best_cell_score <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, diagonal_score, up_score, left_score)</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>            score[i][j] <span class="op">=</span> best_cell_score</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> best_cell_score <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>                pointer[i][j] <span class="op">=</span> <span class="st">"stop"</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> best_cell_score <span class="op">==</span> diagonal_score:</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>                pointer[i][j] <span class="op">=</span> <span class="st">"diagonal"</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> best_cell_score <span class="op">==</span> up_score:</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>                pointer[i][j] <span class="op">=</span> <span class="st">"up"</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>                pointer[i][j] <span class="op">=</span> <span class="st">"left"</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> best_cell_score <span class="op">&gt;</span> best_score:</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>                best_score <span class="op">=</span> best_cell_score</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>                best_position <span class="op">=</span> (i, j)</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>    aligned_a <span class="op">=</span> []</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    aligned_b <span class="op">=</span> []</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    i, j <span class="op">=</span> best_position</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> pointer[i][j] <span class="op">!=</span> <span class="st">"stop"</span>:</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pointer[i][j] <span class="op">==</span> <span class="st">"diagonal"</span>:</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>            aligned_a.append(seq_a[i <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>            aligned_b.append(seq_b[j <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> i <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> pointer[i][j] <span class="op">==</span> <span class="st">"up"</span>:</span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>            aligned_a.append(seq_a[i <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>            aligned_b.append(<span class="st">"-"</span>)</span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> i <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>            aligned_a.append(<span class="st">"-"</span>)</span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>            aligned_b.append(seq_b[j <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_score, <span class="st">""</span>.join(<span class="bu">reversed</span>(aligned_a)), <span class="st">""</span>.join(<span class="bu">reversed</span>(aligned_b))</span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>local_score, local_a, local_b <span class="op">=</span> smith_waterman(<span class="st">"TTACGTAA"</span>, <span class="st">"GGACGTT"</span>)</span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(local_score)</span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(local_a)</span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(local_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="blast-like-seed-and-extend-search" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="blast-like-seed-and-extend-search"><span class="header-section-number">14.4</span> BLAST-like Seed-and-Extend Search</h2>
+<p>This is a simplified seed-and-extend search. Real BLAST uses richer scoring, word neighborhoods, statistical significance, and optimized indexes.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> seed_and_extend(query, database, k<span class="op">=</span><span class="dv">4</span>, max_mismatches<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Search a query against named target sequences using exact seeds."""</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    hits <span class="op">=</span> []</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    seen_hits <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> target_name, target <span class="kw">in</span> database.items():</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> query_start <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(query) <span class="op">-</span> k <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>            seed <span class="op">=</span> query[query_start:query_start <span class="op">+</span> k]</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>            target_start <span class="op">=</span> target.find(seed)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> target_start <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>                left_extension <span class="op">=</span> <span class="bu">min</span>(query_start, target_start)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                query_left <span class="op">=</span> query_start <span class="op">-</span> left_extension</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>                target_left <span class="op">=</span> target_start <span class="op">-</span> left_extension</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>                right_extension <span class="op">=</span> <span class="bu">min</span>(</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">len</span>(query) <span class="op">-</span> (query_start <span class="op">+</span> k),</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">len</span>(target) <span class="op">-</span> (target_start <span class="op">+</span> k)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>                query_right <span class="op">=</span> query_start <span class="op">+</span> k <span class="op">+</span> right_extension</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>                target_right <span class="op">=</span> target_start <span class="op">+</span> k <span class="op">+</span> right_extension</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>                query_alignment <span class="op">=</span> query[query_left:query_right]</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>                target_alignment <span class="op">=</span> target[target_left:target_right]</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>                mismatches <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> q_base, t_base <span class="kw">in</span> <span class="bu">zip</span>(query_alignment, target_alignment):</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> q_base <span class="op">!=</span> t_base:</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>                        mismatches <span class="op">=</span> mismatches <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>                hit_key <span class="op">=</span> (target_name, target_left, query_left, <span class="bu">len</span>(query_alignment), mismatches)</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> mismatches <span class="op">&lt;=</span> max_mismatches <span class="kw">and</span> hit_key <span class="kw">not</span> <span class="kw">in</span> seen_hits:</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>                    seen_hits.add(hit_key)</span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>                    hits.append({</span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"target"</span>: target_name,</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"target_start"</span>: target_left,</span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"query_start"</span>: query_left,</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"length"</span>: <span class="bu">len</span>(query_alignment),</span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"mismatches"</span>: mismatches,</span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"query_alignment"</span>: query_alignment,</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"target_alignment"</span>: target_alignment</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>                    })</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>                target_start <span class="op">=</span> target.find(seed, target_start <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(hits, key<span class="op">=</span><span class="kw">lambda</span> hit: (<span class="op">-</span>hit[<span class="st">"length"</span>], hit[<span class="st">"mismatches"</span>]))</span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a>database <span class="op">=</span> {</span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gene_A"</span>: <span class="st">"GGGATGACCATGATTACGCCAAGCTTT"</span>,</span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gene_B"</span>: <span class="st">"TTTCCCGGGAAATTTCCCGGG"</span></span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> hit <span class="kw">in</span> seed_and_extend(<span class="st">"ATGACCATGATT"</span>, database, k<span class="op">=</span><span class="dv">4</span>):</span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(hit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="suffix-array-bwt-and-fm-index-style-exact-search" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="suffix-array-bwt-and-fm-index-style-exact-search"><span class="header-section-number">14.5</span> Suffix Array, BWT, and FM-index-style Exact Search</h2>
+<p>This code shows the core idea behind BWT/FM-index searching. It builds a suffix array, creates a Burrows-Wheeler Transform, and uses backward search to find exact matches.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> suffix_array(text):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(<span class="bu">range</span>(<span class="bu">len</span>(text)), key<span class="op">=</span><span class="kw">lambda</span> position: text[position:])</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> burrows_wheeler_transform(text):</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> text.endswith(<span class="st">"$"</span>):</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> text <span class="op">+</span> <span class="st">"$"</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    sa <span class="op">=</span> suffix_array(text)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    bwt <span class="op">=</span> []</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> position <span class="kw">in</span> sa:</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> position <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>            bwt.append(text[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>            bwt.append(text[position <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">""</span>.join(bwt), sa, text</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_fm_index(bwt):</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    alphabet <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">set</span>(bwt))</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    running_counts <span class="op">=</span> {}</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> character <span class="kw">in</span> alphabet:</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>        running_counts[character] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    occ <span class="op">=</span> []</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> character <span class="kw">in</span> bwt:</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>        occ.append(running_counts.copy())</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>        running_counts[character] <span class="op">=</span> running_counts[character] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>    occ.append(running_counts.copy())</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>    first_column_start <span class="op">=</span> {}</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> character <span class="kw">in</span> alphabet:</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>        first_column_start[character] <span class="op">=</span> total</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>        total <span class="op">=</span> total <span class="op">+</span> running_counts[character]</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> first_column_start, occ</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fm_index_positions(pattern, bwt, suffix_array_values, first_column_start, occ):</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>    top <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>    bottom <span class="op">=</span> <span class="bu">len</span>(bwt)</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> character <span class="kw">in</span> <span class="bu">reversed</span>(pattern):</span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> character <span class="kw">not</span> <span class="kw">in</span> first_column_start:</span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> []</span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> first_column_start[character] <span class="op">+</span> occ[top][character]</span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>        bottom <span class="op">=</span> first_column_start[character] <span class="op">+</span> occ[bottom][character]</span>
+<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> top <span class="op">&gt;=</span> bottom:</span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> []</span>
+<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(suffix_array_values[top:bottom])</span>
+<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-60"><a href="#cb26-60" aria-hidden="true" tabindex="-1"></a>reference <span class="op">=</span> <span class="st">"GATTACAGATTACA"</span></span>
+<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a>bwt, sa, indexed_text <span class="op">=</span> burrows_wheeler_transform(reference)</span>
+<span id="cb26-62"><a href="#cb26-62" aria-hidden="true" tabindex="-1"></a>first_column_start, occ <span class="op">=</span> build_fm_index(bwt)</span>
+<span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(indexed_text)</span>
+<span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bwt)</span>
+<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fm_index_positions(<span class="st">"TACA"</span>, bwt, sa, first_column_start, occ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="de-bruijn-graph-assembly" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="de-bruijn-graph-assembly"><span class="header-section-number">14.6</span> de Bruijn Graph Assembly</h2>
+<p>This code builds a tiny de Bruijn graph from reads and reconstructs a simple non-branching path. Real assemblers must handle coverage, errors, repeats, paired-end links, and graph simplification.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_de_bruijn_graph(reads, k):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    graph <span class="op">=</span> {}</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> read <span class="kw">in</span> reads:</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(read) <span class="op">-</span> k <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>            kmer <span class="op">=</span> read[i:i <span class="op">+</span> k]</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>            prefix <span class="op">=</span> kmer[:<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>            suffix <span class="op">=</span> kmer[<span class="dv">1</span>:]</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> prefix <span class="kw">not</span> <span class="kw">in</span> graph:</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>                graph[prefix] <span class="op">=</span> []</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>            graph[prefix].append(suffix)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> suffix <span class="kw">not</span> <span class="kw">in</span> graph:</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>                graph[suffix] <span class="op">=</span> []</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> graph</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reconstruct_simple_path(graph, start_node):</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Follow the first available edge until the path stops."""</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    graph_copy <span class="op">=</span> {}</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> node, neighbors <span class="kw">in</span> graph.items():</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>        graph_copy[node] <span class="op">=</span> neighbors.copy()</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    contig <span class="op">=</span> start_node</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> start_node</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> current_node <span class="kw">in</span> graph_copy <span class="kw">and</span> <span class="bu">len</span>(graph_copy[current_node]) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>        next_node <span class="op">=</span> graph_copy[current_node].pop(<span class="dv">0</span>)</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>        contig <span class="op">=</span> contig <span class="op">+</span> next_node[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>        current_node <span class="op">=</span> next_node</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> contig</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>reads <span class="op">=</span> [<span class="st">"ATGAC"</span>, <span class="st">"TGACC"</span>, <span class="st">"GACCT"</span>]</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> build_de_bruijn_graph(reads, k<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(graph)</span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reconstruct_simple_path(graph, <span class="st">"ATG"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="viterbi-algorithm-for-a-hidden-markov-model" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="viterbi-algorithm-for-a-hidden-markov-model"><span class="header-section-number">14.7</span> Viterbi Algorithm for a Hidden Markov Model</h2>
+<p>This toy HMM has two hidden states: <code>coding</code> and <code>noncoding</code>. The observed data are DNA bases. The Viterbi algorithm finds the most likely hidden-state path.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_probability(value):</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> math.log(value)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> viterbi(observations, states, start_probability, transition_probability, emission_probability):</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    dynamic_table <span class="op">=</span> []</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    backpointer <span class="op">=</span> []</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    first_column <span class="op">=</span> {}</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    first_backpointer <span class="op">=</span> {}</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> state <span class="kw">in</span> states:</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        first_column[state] <span class="op">=</span> (</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>            log_probability(start_probability[state]) <span class="op">+</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>            log_probability(emission_probability[state][observations[<span class="dv">0</span>]])</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>        first_backpointer[state] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    dynamic_table.append(first_column)</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    backpointer.append(first_backpointer)</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> position <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(observations)):</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>        column <span class="op">=</span> {}</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>        column_backpointer <span class="op">=</span> {}</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> current_state <span class="kw">in</span> states:</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>            best_previous_state <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>            best_score <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> previous_state <span class="kw">in</span> states:</span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>                score <span class="op">=</span> (</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>                    dynamic_table[position <span class="op">-</span> <span class="dv">1</span>][previous_state] <span class="op">+</span></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>                    log_probability(transition_probability[previous_state][current_state]) <span class="op">+</span></span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>                    log_probability(emission_probability[current_state][observations[position]])</span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> best_score <span class="kw">is</span> <span class="va">None</span> <span class="kw">or</span> score <span class="op">&gt;</span> best_score:</span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>                    best_score <span class="op">=</span> score</span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>                    best_previous_state <span class="op">=</span> previous_state</span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>            column[current_state] <span class="op">=</span> best_score</span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>            column_backpointer[current_state] <span class="op">=</span> best_previous_state</span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>        dynamic_table.append(column)</span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>        backpointer.append(column_backpointer)</span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a>    final_state <span class="op">=</span> <span class="bu">max</span>(dynamic_table[<span class="op">-</span><span class="dv">1</span>], key<span class="op">=</span>dynamic_table[<span class="op">-</span><span class="dv">1</span>].get)</span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>    best_path <span class="op">=</span> [final_state]</span>
+<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> position <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(observations) <span class="op">-</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a>        final_state <span class="op">=</span> backpointer[position][final_state]</span>
+<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a>        best_path.append(final_state)</span>
+<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a>    best_path.reverse()</span>
+<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_path</span>
+<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a>states <span class="op">=</span> [<span class="st">"coding"</span>, <span class="st">"noncoding"</span>]</span>
+<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a>start_probability <span class="op">=</span> {<span class="st">"coding"</span>: <span class="fl">0.5</span>, <span class="st">"noncoding"</span>: <span class="fl">0.5</span>}</span>
+<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a>transition_probability <span class="op">=</span> {</span>
+<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coding"</span>: {<span class="st">"coding"</span>: <span class="fl">0.90</span>, <span class="st">"noncoding"</span>: <span class="fl">0.10</span>},</span>
+<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"noncoding"</span>: {<span class="st">"coding"</span>: <span class="fl">0.10</span>, <span class="st">"noncoding"</span>: <span class="fl">0.90</span>}</span>
+<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a>emission_probability <span class="op">=</span> {</span>
+<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coding"</span>: {<span class="st">"A"</span>: <span class="fl">0.20</span>, <span class="st">"T"</span>: <span class="fl">0.20</span>, <span class="st">"G"</span>: <span class="fl">0.30</span>, <span class="st">"C"</span>: <span class="fl">0.30</span>},</span>
+<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a>    <span class="st">"noncoding"</span>: {<span class="st">"A"</span>: <span class="fl">0.30</span>, <span class="st">"T"</span>: <span class="fl">0.30</span>, <span class="st">"G"</span>: <span class="fl">0.20</span>, <span class="st">"C"</span>: <span class="fl">0.20</span>}</span>
+<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(viterbi(<span class="st">"ATGGCGC"</span>, states, start_probability, transition_probability, emission_probability))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="probabilistic-variant-calling" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="probabilistic-variant-calling"><span class="header-section-number">14.8</span> Probabilistic Variant Calling</h2>
+<p>This is a simplified genotype-likelihood example for a diploid organism. It uses base quality values to compare possible genotypes.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phred_to_error_probability(quality_score):</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">10</span> <span class="op">**</span> (<span class="op">-</span>quality_score <span class="op">/</span> <span class="dv">10</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> probability_of_base_given_allele(observed_base, allele, quality_score):</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    error_probability <span class="op">=</span> phred_to_error_probability(quality_score)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> observed_base <span class="op">==</span> allele:</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> error_probability</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> error_probability <span class="op">/</span> <span class="dv">3</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> genotype_likelihood(read_bases, quality_scores, genotype):</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    alleles <span class="op">=</span> genotype.split(<span class="st">"/"</span>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    likelihood <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> observed_base, quality_score <span class="kw">in</span> <span class="bu">zip</span>(read_bases, quality_scores):</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>        allele_probabilities <span class="op">=</span> []</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> allele <span class="kw">in</span> alleles:</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>            probability <span class="op">=</span> probability_of_base_given_allele(</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>                observed_base,</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>                allele,</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>                quality_score</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>            allele_probabilities.append(probability)</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>        likelihood <span class="op">=</span> likelihood <span class="op">*</span> (<span class="bu">sum</span>(allele_probabilities) <span class="op">/</span> <span class="bu">len</span>(allele_probabilities))</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> likelihood</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> call_genotype(read_bases, quality_scores, candidate_genotypes):</span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>    likelihoods <span class="op">=</span> {}</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> genotype <span class="kw">in</span> candidate_genotypes:</span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>        likelihoods[genotype] <span class="op">=</span> genotype_likelihood(read_bases, quality_scores, genotype)</span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>    best_genotype <span class="op">=</span> <span class="bu">max</span>(likelihoods, key<span class="op">=</span>likelihoods.get)</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_genotype, likelihoods</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>read_bases <span class="op">=</span> [<span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"G"</span>, <span class="st">"A"</span>]</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>quality_scores <span class="op">=</span> [<span class="dv">30</span>, <span class="dv">31</span>, <span class="dv">29</span>, <span class="dv">30</span>, <span class="dv">32</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">31</span>, <span class="dv">30</span>, <span class="dv">29</span>]</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>candidate_genotypes <span class="op">=</span> [<span class="st">"A/A"</span>, <span class="st">"A/G"</span>, <span class="st">"G/G"</span>]</span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(call_genotype(read_bases, quality_scores, candidate_genotypes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="k-mer-lowest-common-ancestor-classification" class="level2" data-number="14.9">
+<h2 data-number="14.9" class="anchored" data-anchor-id="k-mer-lowest-common-ancestor-classification"><span class="header-section-number">14.9</span> k-mer Lowest Common Ancestor Classification</h2>
+<p>This is a small version of the idea used in k-mer based metagenomic classifiers. A read is broken into k-mers, each k-mer votes for a taxon, and ambiguous k-mers are assigned to the lowest common ancestor.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lineage(taxon, parent):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> []</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> taxon <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        path.append(taxon)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>        taxon <span class="op">=</span> parent[taxon]</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> path</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lowest_common_ancestor(taxa, parent):</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(taxa) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    taxon_list <span class="op">=</span> <span class="bu">list</span>(taxa)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    first_lineage <span class="op">=</span> lineage(taxon_list[<span class="dv">0</span>], parent)</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    other_lineages <span class="op">=</span> []</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> taxon <span class="kw">in</span> taxon_list[<span class="dv">1</span>:]:</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>        other_lineages.append(lineage(taxon, parent))</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ancestor <span class="kw">in</span> first_lineage:</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>        found_in_all <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> other_lineage <span class="kw">in</span> other_lineages:</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> ancestor <span class="kw">not</span> <span class="kw">in</span> other_lineage:</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>                found_in_all <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> found_in_all:</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> ancestor</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"root"</span></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_kmer_taxon_index(reference_sequences, k):</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> {}</span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> taxon, sequence <span class="kw">in</span> reference_sequences.items():</span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(sequence) <span class="op">-</span> k <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>            kmer <span class="op">=</span> sequence[i:i <span class="op">+</span> k]</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> kmer <span class="kw">not</span> <span class="kw">in</span> index:</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>                index[kmer] <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>            index[kmer].add(taxon)</span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> index</span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_read_lca(read, k, kmer_index, parent):</span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>    votes <span class="op">=</span> {}</span>
+<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(read) <span class="op">-</span> k <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>        kmer <span class="op">=</span> read[i:i <span class="op">+</span> k]</span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>        matching_taxa <span class="op">=</span> kmer_index.get(kmer, <span class="bu">set</span>())</span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(matching_taxa) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a>            taxon <span class="op">=</span> lowest_common_ancestor(matching_taxa, parent)</span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> taxon <span class="kw">not</span> <span class="kw">in</span> votes:</span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a>                votes[taxon] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a>            votes[taxon] <span class="op">=</span> votes[taxon] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(votes.items(), key<span class="op">=</span><span class="kw">lambda</span> item: <span class="op">-</span>item[<span class="dv">1</span>])</span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a>parent <span class="op">=</span> {</span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"root"</span>: <span class="va">None</span>,</span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bacteria"</span>: <span class="st">"root"</span>,</span>
+<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Escherichia"</span>: <span class="st">"Bacteria"</span>,</span>
+<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Salmonella"</span>: <span class="st">"Bacteria"</span>,</span>
+<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"E_coli"</span>: <span class="st">"Escherichia"</span>,</span>
+<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">"S_enterica"</span>: <span class="st">"Salmonella"</span></span>
+<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a>reference_sequences <span class="op">=</span> {</span>
+<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">"E_coli"</span>: <span class="st">"ATGACCATGATTACGCCAAGCT"</span>,</span>
+<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">"S_enterica"</span>: <span class="st">"TTTACCATGATTACTTTGGGCA"</span></span>
+<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>kmer_index <span class="op">=</span> build_kmer_taxon_index(reference_sequences, k<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classify_read_lca(<span class="st">"ACCATGATTA"</span>, <span class="dv">5</span>, kmer_index, parent))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="minhash-sketching-for-genome-similarity" class="level2" data-number="14.10">
+<h2 data-number="14.10" class="anchored" data-anchor-id="minhash-sketching-for-genome-similarity"><span class="header-section-number">14.10</span> MinHash Sketching for Genome Similarity</h2>
+<p>MinHash approximates similarity between large sets. In genomics, the set might be all k-mers from a genome. Tools such as Mash use related sketching ideas for fast genome distance estimation.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_kmer_set(sequence, k):</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    kmers <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(sequence) <span class="op">-</span> k <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>        kmers.add(sequence[i:i <span class="op">+</span> k])</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> kmers</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> stable_hash(text):</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Small deterministic hash for teaching. Python's built-in hash changes between runs."""</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    value <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> character <span class="kw">in</span> text:</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> (value <span class="op">*</span> <span class="dv">131</span> <span class="op">+</span> <span class="bu">ord</span>(character)) <span class="op">%</span> (<span class="dv">2</span> <span class="op">**</span> <span class="dv">32</span>)</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> value</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> minhash_sketch(sequence, k<span class="op">=</span><span class="dv">5</span>, sketch_size<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    hashed_kmers <span class="op">=</span> []</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> kmer <span class="kw">in</span> make_kmer_set(sequence, k):</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>        hashed_kmers.append(stable_hash(kmer))</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    hashed_kmers.sort()</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hashed_kmers[:sketch_size]</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sketch_similarity(sketch_a, sketch_b):</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    set_a <span class="op">=</span> <span class="bu">set</span>(sketch_a)</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>    set_b <span class="op">=</span> <span class="bu">set</span>(sketch_b)</span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(set_a <span class="op">|</span> set_b) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(set_a <span class="op">&amp;</span> set_b) <span class="op">/</span> <span class="bu">len</span>(set_a <span class="op">|</span> set_b)</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>genome_a <span class="op">=</span> <span class="st">"ATGACCATGATTACGCCAAGCT"</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>genome_b <span class="op">=</span> <span class="st">"ATGACCATGATTACTCCAAGCT"</span></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>genome_c <span class="op">=</span> <span class="st">"GGGGTTTACCCGGGTTTAAAA"</span></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>sketch_a <span class="op">=</span> minhash_sketch(genome_a)</span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>sketch_b <span class="op">=</span> minhash_sketch(genome_b)</span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>sketch_c <span class="op">=</span> minhash_sketch(genome_c)</span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sketch_similarity(sketch_a, sketch_b))</span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sketch_similarity(sketch_a, sketch_c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="a-capstone-way-to-think-about-bioinformatics-problems" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> A Capstone Way to Think About Bioinformatics Problems</h1>
+<p>When you meet a new bioinformatics problem, try this structure.</p>
+<section id="define-the-biological-question" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="define-the-biological-question"><span class="header-section-number">15.1</span> 1. Define the biological question</h2>
+<p>Examples:</p>
+<ul>
+<li>Which species are present?</li>
+<li>Which reads map to this genome?</li>
+<li>Which genes are different between samples?</li>
+<li>Which contigs look contaminated?</li>
+<li>Which variants are supported by the reads?</li>
+</ul>
+</section>
+<section id="translate-it-into-a-computational-question" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="translate-it-into-a-computational-question"><span class="header-section-number">15.2</span> 2. Translate it into a computational question</h2>
+<p>Examples:</p>
+<ul>
+<li>classify each read or k-mer</li>
+<li>align reads to a reference</li>
+<li>compare counts or annotations across samples</li>
+<li>identify unusual coverage or taxonomic signal</li>
+<li>estimate the most likely genotype</li>
+</ul>
+</section>
+<section id="identify-the-input-size" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="identify-the-input-size"><span class="header-section-number">15.3</span> 3. Identify the input size</h2>
+<p>Small data can tolerate simple loops. Large data often need indexing, streaming, or specialized tools.</p>
+<p>Ask:</p>
+<ul>
+<li>How many sequences?</li>
+<li>How long are they?</li>
+<li>How many files?</li>
+<li>Can everything fit in memory?</li>
+<li>Is one exact answer required, or is a high-quality approximation acceptable?</li>
+</ul>
+</section>
+<section id="choose-an-algorithmic-pattern" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="choose-an-algorithmic-pattern"><span class="header-section-number">15.4</span> 4. Choose an algorithmic pattern</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>If the problem involves…</th>
+<th>Consider…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>comparing two sequences</td>
+<td>dynamic programming</td>
+</tr>
+<tr class="even">
+<td>searching many sequences quickly</td>
+<td>indexing or seed-and-extend</td>
+</tr>
+<tr class="odd">
+<td>reconstructing sequence from reads</td>
+<td>graph algorithms</td>
+</tr>
+<tr class="even">
+<td>hidden biological states</td>
+<td>HMMs</td>
+</tr>
+<tr class="odd">
+<td>uncertain observations</td>
+<td>probabilistic inference</td>
+</tr>
+<tr class="even">
+<td>huge numbers of similar objects</td>
+<td>hashing, k-mers, sketches</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="write-pseudocode" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="write-pseudocode"><span class="header-section-number">15.5</span> 5. Write pseudocode</h2>
+<p>Pseudocode forces you to make the logic explicit before syntax gets in the way.</p>
+<pre class="text"><code>Input:
+    FASTQ reads
+    Reference genome
+
+Goal:
+    Report likely mapping position for each read
+
+Algorithm:
+    Build an index of the reference genome
+    For each read:
+        Find seed matches in the index
+        Extend candidate matches
+        Score candidate alignments
+        If one match is clearly best:
+            Report the position
+        Else:
+            Mark the read as ambiguous</code></pre>
+</section>
+</section>
+<section id="exercises" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Exercises</h1>
+<section id="exercise-1-from-naive-to-scalable" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="exercise-1-from-naive-to-scalable"><span class="header-section-number">16.1</span> Exercise 1: From Naive to Scalable</h2>
+<p>A student writes this algorithm for read mapping:</p>
+<pre class="text"><code>For each read:
+    For every position in the reference genome:
+        Count mismatches
+        Keep the position with the fewest mismatches</code></pre>
+<p>Answer:</p>
+<ol type="1">
+<li>Why is this algorithm too slow for large datasets?</li>
+<li>Which data structure or algorithmic idea could improve it?</li>
+<li>What biological situations could still make mapping difficult?</li>
+</ol>
+</section>
+<section id="exercise-2-dynamic-programming-matrix" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="exercise-2-dynamic-programming-matrix"><span class="header-section-number">16.2</span> Exercise 2: Dynamic Programming Matrix</h2>
+<p>Take two short sequences:</p>
+<pre class="text"><code>Sequence A: A T G C
+Sequence B: A T C</code></pre>
+<p>Sketch a small alignment matrix by hand. You do not need perfect scoring. Focus on the idea that each cell depends on neighboring cells.</p>
+<p>Then answer:</p>
+<ol type="1">
+<li>What does one cell in the matrix represent?</li>
+<li>Why does dynamic programming avoid recomputing the same subproblems?</li>
+<li>Why does the scoring scheme matter biologically?</li>
+</ol>
+</section>
+<section id="exercise-3-k-mer-counter" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="exercise-3-k-mer-counter"><span class="header-section-number">16.3</span> Exercise 3: k-mer Counter</h2>
+<p>Write Python code that counts all 4-mers in this sequence:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">"ATGACCATGATTACGCCAAGCT"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then answer:</p>
+<ol type="1">
+<li>Which 4-mer occurs most often?</li>
+<li>What would happen if <code>k</code> were very small?</li>
+<li>What would happen if <code>k</code> were larger than the read length?</li>
+</ol>
+</section>
+<section id="exercise-4-build-a-tiny-de-bruijn-graph" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="exercise-4-build-a-tiny-de-bruijn-graph"><span class="header-section-number">16.4</span> Exercise 4: Build a Tiny de Bruijn Graph</h2>
+<p>Use k = 4 and the reads:</p>
+<pre class="text"><code>ATGAC
+TGACC
+GACCT</code></pre>
+<p>List the k-mers and the k-1 overlaps.</p>
+<p>Then answer:</p>
+<ol type="1">
+<li>What are the nodes?</li>
+<li>What are the edges?</li>
+<li>What path reconstructs the sequence?</li>
+<li>How would a sequencing error change the graph?</li>
+</ol>
+</section>
+<section id="exercise-5-choose-the-algorithm" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="exercise-5-choose-the-algorithm"><span class="header-section-number">16.5</span> Exercise 5: Choose the Algorithm</h2>
+<p>For each task, choose one algorithmic idea from this practical and justify your choice.</p>
+<ol type="1">
+<li>Search a protein sequence against a large protein database</li>
+<li>Map 10 million bacterial reads to a reference genome</li>
+<li>Assemble short reads without a reference genome</li>
+<li>Identify conserved protein domains</li>
+<li>Call SNPs from aligned reads</li>
+<li>Estimate whether two genomes are very similar without aligning them fully</li>
+</ol>
+</section>
+<section id="exercise-6-capstone-design" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="exercise-6-capstone-design"><span class="header-section-number">16.6</span> Exercise 6: Capstone Design</h2>
+<p>Design a workflow for this problem:</p>
+<p><strong>You receive paired-end bacterial sequencing reads from an unknown isolate. You want to identify the species, assemble the genome, and annotate likely genes.</strong></p>
+<p>Write:</p>
+<ol type="1">
+<li>The biological question</li>
+<li>The computational tasks</li>
+<li>The likely inputs and outputs</li>
+<li>At least three algorithmic ideas that would appear in the workflow</li>
+<li>One edge case or failure mode for each major step</li>
+</ol>
+</section>
+</section>
+<section id="summary" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Summary</h1>
+<p>Algorithmic thinking in genomics is the ability to move between biology, data, and computation. A mature bioinformatics workflow is not just a list of commands. It is a chain of algorithmic decisions.</p>
+<p>At small scale, a simple loop may be enough. At genomic scale, the same problem may require indexing, dynamic programming, graph traversal, probabilistic inference, or a carefully chosen heuristic. Understanding these ideas helps you use tools more intelligently, interpret outputs more critically, and design workflows that are both reproducible and biologically meaningful.</p>
+</section>
+<section id="references" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> References</h1>
+<section id="course-and-textbook-references" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="course-and-textbook-references"><span class="header-section-number">18.1</span> Course and Textbook References</h2>
+<ul>
+<li>Rahmann, S. <a href="https://www.rahmannlab.de/lehre/alsa.html">Lecture “Algorithms for Sequence Analysis”</a>. Saarland University, Germany.</li>
+<li>Artificial Intelligence Core Course. Planning example/course material. Saarland University, Germany.</li>
+<li>Navarro, G. and Raffinot, M. <em>Flexible Pattern Matching in Strings</em>. Cambridge University Press.</li>
+<li>Gusfield, D. <em>Algorithms on Strings, Trees, and Sequences</em>. Cambridge University Press.</li>
+<li>Makinen, V., Belazzougui, D., Cunial, F. and Tomescu, A. I. <em>Genome-Scale Algorithm Design: Biological Sequence Analysis in the Era of High-Throughput Sequencing</em>. Cambridge University Press.</li>
+</ul>
+</section>
+<section id="algorithm-and-tool-references" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="algorithm-and-tool-references"><span class="header-section-number">18.2</span> Algorithm and Tool References</h2>
+<ul>
+<li>Needleman, S. B. and Wunsch, C. D. (1970). <a href="https://doi.org/10.1016/0022-2836(70)90057-4">A general method applicable to the search for similarities in the amino acid sequence of two proteins</a>. <em>Journal of Molecular Biology</em>.</li>
+<li>Smith, T. F. and Waterman, M. S. (1981). <a href="https://doi.org/10.1016/0022-2836(81)90087-5">Identification of common molecular subsequences</a>. <em>Journal of Molecular Biology</em>.</li>
+<li>Altschul, S. F. et al.&nbsp;(1990). <a href="https://doi.org/10.1016/S0022-2836(05)80360-2">Basic local alignment search tool</a>. <em>Journal of Molecular Biology</em>.</li>
+<li>Burrows, M. and Wheeler, D. J. (1994). <a href="https://www.hpl.hp.com/techreports/Compaq-DEC/SRC-RR-124.pdf">A block-sorting lossless data compression algorithm</a>. Digital Systems Research Center Research Report.</li>
+<li>Ferragina, P. and Manzini, G. (2000). <a href="https://doi.org/10.1109/SFCS.2000.892127">Opportunistic data structures with applications</a>. <em>Proceedings of FOCS</em>.</li>
+<li>Li, H. and Durbin, R. (2009). <a href="https://doi.org/10.1093/bioinformatics/btp324">Fast and accurate short read alignment with Burrows-Wheeler transform</a>. <em>Bioinformatics</em>.</li>
+<li>Langmead, B. et al.&nbsp;(2009). <a href="https://doi.org/10.1186/gb-2009-10-3-r25">Ultrafast and memory-efficient alignment of short DNA sequences to the human genome</a>. <em>Genome Biology</em>.</li>
+<li>Pevzner, P. A., Tang, H. and Waterman, M. S. (2001). <a href="https://doi.org/10.1073/pnas.171285098">An Eulerian path approach to DNA fragment assembly</a>. <em>Proceedings of the National Academy of Sciences</em>.</li>
+<li>Bankevich, A. et al.&nbsp;(2012). <a href="https://doi.org/10.1089/cmb.2012.0021">SPAdes: A new genome assembly algorithm and its applications to single-cell sequencing</a>. <em>Journal of Computational Biology</em>.</li>
+<li>Eddy, S. R. (1998). <a href="https://doi.org/10.1093/bioinformatics/14.9.755">Profile hidden Markov models</a>. <em>Bioinformatics</em>.</li>
+<li>Eddy, S. R. (2011). <a href="https://doi.org/10.1371/journal.pcbi.1002195">Accelerated profile HMM searches</a>. <em>PLOS Computational Biology</em>.</li>
+<li>McKenna, A. et al.&nbsp;(2010). <a href="https://doi.org/10.1101/gr.107524.110">The Genome Analysis Toolkit: A MapReduce framework for analyzing next-generation DNA sequencing data</a>. <em>Genome Research</em>.</li>
+<li>Wood, D. E. and Salzberg, S. L. (2014). <a href="https://doi.org/10.1186/gb-2014-15-3-r46">Kraken: Ultrafast metagenomic sequence classification using exact alignments</a>. <em>Genome Biology</em>.</li>
+<li>Ondov, B. D. et al.&nbsp;(2016). <a href="https://doi.org/10.1186/s13059-016-0997-x">Mash: Fast genome and metagenome distance estimation using MinHash</a>. <em>Genome Biology</em>.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

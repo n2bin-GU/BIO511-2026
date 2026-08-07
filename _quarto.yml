@@ -35,12 +35,10 @@ website:
           text: "Practical 5: Software & Containers"
       - section: "Coding Best Practices"
         contents:
-        - href: "practicals/Practicals - Git/PRACTICAL_GIT_SESSION1.qmd"
-          text: "Practical 1: Git Fundamentals: Session 1"
-        - href: "practicals/Practicals - Git/PRACTICAL_GIT_SESSION2.qmd"
-          text: "Practical 2: Git Fundamentals: Session 2"
-        - href: "practicals/Practicals - Git/PRACTICAL_BEST_CODING_PRACTISES.qmd"
-          text: "Practical 3: Best Coding Practices"
+        - href: "practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd"
+          text: "Practical 1: Git Fundamentals"
+        - href: "practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd"
+          text: "Practical 2: Algorithmic Thinking"
 
     - id: gwf
       title: "Genomics Workflows"
@@ -82,7 +80,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: minty
     toc: true
     toc-depth: 3
     number-sections: true

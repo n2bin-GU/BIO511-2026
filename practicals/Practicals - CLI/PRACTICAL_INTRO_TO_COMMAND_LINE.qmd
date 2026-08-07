@@ -1,7 +1,7 @@
 ---
 title: "Practical 1: Introduction to Command Line Interface"
 subtitle: "BIO511 Genomics - Command Line Basics"
-author: "Tor Kling, Stuti Jain"
+author: "Tor Kling, Vahid Atabaigielmi"
 date: today
 format: 
   html:
@@ -9,27 +9,29 @@ format:
     toc-depth: 3
     number-sections: true
     code-fold: false
-    theme: cosmo
+    theme: minty
 ---
 
 # Introduction
 
-Doing bioinformatics often necessitates the handling of very large files, with complex structure and dense matrices. This makes them often unwieldy to pretty much impossible to handle in traditional GUI-based analysis tools (such as Excel), and as such we rely on original and lightweight file handling systems such as bash-based command line enviroments that allow us to interact with our computer on a more fundamental level. 
+Doing bioinformatics often necessitates the handling of very large files, with complex structure and dense matrices. This makes them often unwieldy to pretty much impossible to handle in traditional GUI-based analysis tools (such as Excel), and as such we rely on more rudimental and lightweight file handling systems such as bash-based command line enviroments that allow us to interact with our computer on a more fundamental level. 
 
 Typically the first thing you encounter on opening a new terminal instance is: 
+
 ```bash
 user@computer:~$
 ```
+
 This is the terminal prompt where you'll be able to issue commands to the computer, with the *syntax* ("grammar" of the code) of your command prompts often using the following structure: 
+
 ```bash
 user@computer:-$ command -option my_object
 
 # or you may have more advanced command prompts
-
 user@computer:-$ command -threads 2 -output $My_Directory_Variable/ -prefix New_file_ -accessoryfile Additional_file my_object | nextcommand -cvfz New_file_my_object.tar.gz
 
 ```
-Imagination (and resources, time complexity, optimization...) sets the limit of what you can do in the CLI
+Imagination (and resources, complexity, optimization...) sets the limit of what you can do in the CLI
 
 If you're further curious on the [history](https://www.freecodecamp.org/news/the-command-line-1fdbc692b3bf/) of shell and the command line.
 
@@ -44,7 +46,9 @@ By the end of this practical, you should be able to:
 - View file contents using `cat`, `head`, and `tail`
 - Search within files using `grep`
 - Display text using `echo`
-- Tie these commands together using `pipes`  
+- Edit text using `sed`
+- Tie these commands together using `pipes`
+- Plan your computational workflow using **pseudocode**  
 :::
 
 ---
@@ -56,6 +60,7 @@ Before we start creating new things in our directory its a good idea to get a gr
 
 - `pwd`: Print working directory - shows your current location
 - `ls`: List contents of directories
+- `command --help`: Show help-documentation for a command, very useful for lookups when we need a command to do something specific
 
 **Find your current location and explore the directory**
 ```bash
@@ -63,19 +68,41 @@ Before we start creating new things in our directory its a good idea to get a gr
 pwd
 
 # Run ls
-ls 
+ls
 
-# Run the ls help command, then find the option to let you
-# display the directory contents as a list with more details
-ls --help
+# Setting the -l flag for ls will give you a more detailed view of the contents of the directory
+ls -l
 
-# Then run that command
-ls -la
+# Run with the help flag to get the documentation for the command
+pwd --help
 
 ```
 
+You can also use the `man` command to get a more detailed manual for a command, which is especially useful for more complex commands with many options. For example, you can run `man ls` to see the manual for the `ls` command. If you have an internet connection, it is also possible to search for command documentation online, for example by searching for "ls command linux" in your preferred search engine.
+
+::: {.callout-important}
+### Exercise: Hidden Files and Directories
+
+Some programs make "hidden" directories and files in you directories that fulfill important functions for the program, these are usually denoted by a `.` in front of the name. To list these hidden files and directories we need a special option flag for the `ls`command.
+
+  - Use the --help flag and look through the documentation to find the right flag for `ls` to show hidden files and folders.
+
+::: {.callout-tip collapse="true"}
+### Expected output (no peeking!)
+
+The flag for `ls` to show hidden files and directories is `-a`. You can use it like this:
+```bash
+ls -a
+
+# or as a list
+ls -la
+```
+:::
+:::
+
 ## Making and Changing Directories (`mkdir` and `cd`)
-Since the command line interface (CLI) can quickly become cluttered, we organize our work into directories. Let's create a simple directory structure.
+
+Since the command line interface (CLI) can quickly become cluttered, we organize our work into **directories**. Similar to the folders on windows or macOS, directories act as containers that create a hierarchy of files and subdirectories. This is especially important in bioinformatics, where we often deal with large datasets and multiple analysis steps that need to be organized for reproducibility and clarity.
 
 - `mkdir`: Create new directories
 - `cd`: Change directory
@@ -83,7 +110,7 @@ Since the command line interface (CLI) can quickly become cluttered, we organize
 
 **Create and navigate a genomics project structure**
 ```bash
-# Create a main directory
+# Create a main directory for this exercise
 mkdir CLI_intro
 
 # Navigate into it
@@ -104,17 +131,29 @@ cd ~        # Go home
 cd ..        # Go back to previous directory
 ```
 
+:::{.callout-tip collapse="true"}
+### Additional Command: `tree` [Optional]
+There is another very useful command for visualising directories called `tree`, which will print the directory structure in a tree-like format. This is especially useful for visualizing complex project structures. If you don't have it installed, you can usually install it via your package manager (e.g., `sudo apt install tree` on Ubuntu/WSL2 or `brew install tree` for MacOS).
+
+  - Try running `tree` in your current directory to see the structure of your project. You can also use `tree -L 2` to limit the depth of the tree displayed.
+  - Sometimes we only want to see the directory structure without all the files, if you have time then look for the flag that allows you to do this in the `tree` documentation.
+
+Tree is very useful for visualizing complex project structures, but it is not always installed by default and we might also not always need the amount of information it provides. Sometimes a simple `ls` command is enough to get a good overview of the directory structure.
+:::
+ 
 ---
 
 # File Creation and Manipulation 
 
 Now that we have an introduction to navigating our workspace, let's learn how to create and manage files. In bioinformatics, you'll constantly be creating, copying, moving, and organizing data files - from raw sequencing data to analysis results. While in a typical file explorer, you may drag and drop files as you please, in CLI, these operations require deliberate commands.
 
-## Text manipulation (`echo`, `touch`)
-Before we start with file manipulation, we'll first introduce text files the old school way via `echo` and `touch`
+## Text manipulation (`echo`, `touch`, `less`, `cat`)
+Before we start with file manipulation, we'll first introduce text files the old school way via `echo` and `touch`, as well as some commands to view the contents of files.
 
 - `touch`: Create empty files
 - `echo`: Print text provided in the prompts
+- `less`: View file contents in a scrollable format
+- `cat`: Concatenate and display file contents
 
 **Handling text in CLI**
 ```bash
@@ -128,11 +167,18 @@ touch test_file
 # Then add some text to the file 
 echo "Some_text" > test_file
 
+# You can view the contents of the file using `cat` or `less`
+cat test_file # Prints to the terminal
+less test_file # Opens a scrollable instance of the file
+# To exit less, press `q` on your keyboard
+
 # Now add some more text to the next line in the file
 # To add to a file you simply extend the > operator to >> 
 echo "Some_more_text" >> test_file
 
-# Now lastly, try to wipe the file with some new text 
+# Now lastly, try to wipe the file with some new text
+# This removes all the previous text and replaces it with the new text, but we will see that 
+# In the next section.
 echo "New_text" > test_file
 ```
 
@@ -148,71 +194,104 @@ Now let's create some mock files that we will use downstream in the analysis, an
 # Create some more directories to store everything in 
 mkdir -p raw_data backups
 
-# Create some empty mock files for different data types that we'll use later 
-touch sequences.fasta
-touch expression_data.csv
-touch gene_annotations.csv
-
-# Add some mock sequence data 
-echo ">lacZ_beta-galactosidase" > sequences.fasta
-echo "ATGACCATGATTACGCCAAGCT" >> sequences.fasta
-echo ">rpoB_RNA_polymerase_beta" >> sequences.fasta
-echo "ATGGTGACGACGACGACGATGCT" >> sequences.fasta
-echo ">gyrA_DNA_gyrase_subunit_A" >> sequences.fasta
-echo "ATGGCTGCTGATCGATCGATGCTA" >> sequences.fasta
-echo ">ompA_outer_membrane_protein" >> sequences.fasta
-echo "ATGCTGATCGATCGGCTAGCTAGC" >> sequences.fasta
-
-# Add data to the gene annotation file 
-echo "Gene_ID,Chromosome,Start,End,Strand,Product" > gene_annotations.csv
-echo "lacZ,plasmid,1000,2500,+,beta-galactosidase" >> gene_annotations.csv
-echo "rpoB,chr,3000,4200,+,RNA polymerase beta subunit" >> gene_annotations.csv
-echo "gyrA,chr,500,1800,-,DNA gyrase subunit A" >> gene_annotations.csv
-echo "ompA,chr,2000,3500,+,outer membrane protein A" >> gene_annotations.csv
-echo "LacY,plasmid,5000,6200,+,Lactose_permease" >> gene_annotations.csv
-echo "tolC,chr,100,800,+,outer membrane channel protein" >> gene_annotations.csv
-
-# Add some gene expression data
-echo "Gene_ID,Condition_A,Condition_B,Function" > expression_data.csv
-echo "lacZ,150,200,beta-galactosidase" >> expression_data.csv
-echo "rpoB,89,95,RNA_polymerase" >> expression_data.csv
-echo "gyrA,175,180,DNA_gyrase" >> expression_data.csv
-echo "LacY,165,210,Lactose_permease" >> expression_data.csv
-echo "ompA,45,52,outer_membrane_protein" >> expression_data.csv
+# Make a test file to work with
+echo "This is a test file for practicing file manipulation." > test_file.txt
+echo "It contains some sample text for testing purposes." >> test_file.txt
 
 # Copy files (backup your data!)
-cp sequences.fasta sequences_backup.fasta
+cp test_file.txt raw_data/
+cp test_file.txt test_file_backup.txt
 
 # Move files to organize your project
-mv sequences_backup.fasta backups/
-
-# mv can also be used to rename files, similar to the syntax of cp 
-# You just remembered that these files were E.coli, rename them and think of good informative names
-mv raw_data/gene_annotation.csv raw_data/E_coli_gene_annotations.csv
+mv test_file_backup.txt backups/
 
 # remove files (be careful, no undo!)
-rm sequences_backup.fasta
+rm test_file.txt
+
 # rm can also be used with flags to remove directories and their contents
 rm -r backups/
 
-# Lastly lets sort a bit in your directories
-# Copy the entire raw_data directory with contents (find the right flag!)
-cp -r raw_data/ Escherichia/coli/
 ```
-**Note: After this section is done, remember that you renamed the data files to include the species name (E.coli), rename them back for the subsequent sections if you want. Otherwise, make sure the change doesnt confuse you**
+
+::: {.callout-important}
+### Exercise: Mock genomics data
+
+We now know hos to create text files, and add lines of text to them. Each echo written to a file with `>>` will create a new line in the file, while an echo written with `>` will overwrite it. Below are three mock genomics files that need to be created, with the first line being the header. Write these lines to the files using the commands you just learned. 
+
+```text
+**File 1: `sequences.fasta`**
+">lacZ_beta-galactosidase"
+"ATGACCATGATTACGCCAAGCT"
+">rpoB_RNA_polymerase_beta"
+"ATGGTGACGACGACGACGATGCT"
+">gyrA_DNA_gyrase_subunit_A"
+"ATGGCTGCTGATCGATCGATGCTA"
+
+**File 2: `gene_annotations.csv`**
+"Gene_ID,Chromosome,Start,End,Strand,Product"
+"lacZ,plasmid,1000,2500,+,beta-galactosidase"
+"rpoB,chr,3000,4200,+,RNA_polymerase_beta_subunit"
+"gyrA,chr,500,1800,-,DNA_gyrase_subunit_A"
+"ompA,chr,2000,3500,+,outer_membrane_protein_A"
+"gyrA,chr,5000,6299,-,DNA_gyrase_subunit_A"
+
+**File 3: `expression_data.csv`**
+"Gene_ID,Condition_A,Condition_B,Function"
+"lacZ,Cont,200,beta-galactosidase"
+"rpoB,Cont,100,RNA_polymerase"
+"gyrA,Cont,70,DNA_gyrase"
+"ompA,Cont,100,outer_membrane_protein"
+```
+
+Now that you have created these files, check that they look right and then move them into the `raw_data` directory for organization.
+
+::: {.callout-tip collapse="true"}
+### Expected output (no peeking!)
+
+The final files should look like this:
+
+```text
+# sequences.fasta:
+
+>lacZ_beta-galactosidase
+ATGACCATGATTACGCCAAGCT
+>rpoB_RNA_polymerase_beta
+ATGGTGACGACGACGACGATGCT
+>gyrA_DNA_gyrase_subunit_A
+ATGGCTGCTGATCGATCGATGCTA
+
+# gene_annotations.csv:
+
+Gene_ID,Chromosome,Start,End,Strand,Product
+lacZ,plasmid,1000,2500,+,beta-galactosidase
+rpoB,chr,3000,4200,+,RNA_polymerase_beta_subunit
+gyrA,chr,500,1800,-,DNA_gyrase_subunit_A
+ompA,chr,2000,3500,+,outer_membrane_protein_A
+gyrA,chr,5000,6299,-,DNA_gyrase_subunit_A
+
+# expression_data.csv:
+
+Gene_ID,Condition_A,Condition_B,Function
+lacZ,Cont,200,beta-galactosidase
+rpoB,Cont,100,RNA_polymerase
+gyrA,Cont,70,DNA_gyrase
+ompA,Cont,100,outer_membrane_protein 
+```
+
+:::
+:::
 
 ---
 
-# Viewing and Searching File Contents (`cat`, `head`, `tail`, `grep`)
+# Viewing and Searching File Contents (`head`, `tail`, `grep`)
 
-One of the most powerful aspects of the command line is being able to quickly peek into files without opening them in a text editor. This is especially useful when working with large genomics files where you only need to see a portion of the content or search for specific patterns.
+One of the most powerful aspects of the command line is being able to quickly peek into files without opening them in a text editor. You already know `less` and `cat` by now, but often we dont need to view the entire file.This is especially useful when working with large genomics files where you only need to see a portion of the content or search for specific patterns. The `cat`'s constiuent parts (its `head` and `tail`) are very useful for quick overviews of file contents, while `grep` is a powerful tool for searching through files for specific patterns.
 
-- `cat`: Display entire file contents
 - `head`: Show first lines of a file  
 - `tail`: Show last lines of a file
 - `grep`: Search for patterns within files
 
-Now let's work with file contents using some mock genomics data.
+Now let's work with file contents using the mock genomics data you just created.
 
 **Create sample genomics files and explore them**
 ```bash
@@ -230,37 +309,106 @@ tail -n 2 expression_data.csv
 grep "lacZ" sequences.fasta
 grep "^>" sequences.fasta  # Find all sequence headers
 
-# Count how many sequences we have (find the counting flag!)
+# Count how many sequences we have
 grep -c ">" sequences.fasta
 
-# Search expression data case-insensitively (what flag makes it ignore case?)
+# A very useful flag is the -A or -B flag, which allows you to show lines after or before a match. 
+# For example, if we want to see the sequence for lacZ, we can use the -A flag to show the line after the match:
+grep -A 1 "lacZ" sequences.fasta
+
+# Search expression data case-insensitively
 grep -i "PROTEIN" expression_data.csv
 
-# Show line numbers with matches (which flag shows line numbers?)
+# Show line numbers with matches
 grep -n ">" sequences.fasta
 
-# Find all lines that DON'T contain "lacZ", which rows are they on? 
-# (which flag inverts the match? How do you combine flags?)
-grep -v "lacZ" expression_data.csv
 ```
+
+::: {.callout-important}
+### Exercise: Searching for Genes
+Using the `grep` command, answer the following questions:
+
+1. Which genes in the `gene_annotations.csv` file are located on the chromosome (`chr`) and which are on the plasmid? Use `grep` to find this information (cat or head might work now, but not if the file is very large).
+2. For the expression data, if a gene had same expression as the control condition A in condition B, it would get a value of **100**. Use `grep` to find all genes that did have a change in expression (i.e., condition_B is not equal to 100). How many genes are there with a change in expression? (*Hint*: You can invert the match and count the lines using a combination of flags in a single command).
+
+::: {.callout-tip collapse="true"}
+### Expected output (no peeking!)
+**1.** 
+
+The genes located on the chromosome (`chr`) are:
+
+```text
+rpoB
+gyrA
+ompA
+gyrA
+```
+
+The gene located on the plasmid is:
+
+```text
+lacZ
+```
+
+**2.** 
+
+Correctly writing the command to find all genes with a change in expression (condition_B not equal to 100) should yield the following output:
+
+```text
+3
+```
+
+This is misleading however, as the header will also qualify for the grep search if we do a simple inverted search. For an accurate estimate, we could make a temp file without the header and then run the grep command on that file, or we could use a more complex regex to exclude the header from the search. Ex.
+
+```bash
+# Create a temp file without the header
+tail -n +2 expression_data.csv > temp_expression_data.csv
+# Now run the grep command on the temp file
+grep -vc "100" temp_expression_data.csv
+```
+
+:::
+:::
 
 ---
 
-# sed: Stream Editor for Quick Text Edits
-sed is a powerful command-line utility that allows us to perform basic text transformations on an input stream (a file or input from a pipeline). It is commonly used for tasks such as searching, find-and-replacing, inserting, or deleting text in files. It is especially useful for batch processing large files or automating repetitive text editing tasks (such as when there is a repetetive error in a large file that needs to be fixed).
+# Processes, Input and Output
+When we perform computational tasks, a simplified pipeline can can be broken down into three main components: **input**, **process**, and **output**. Understanding these components is crucial for effectively using command line languages, and forms the basis for future workflows where we integrate scripts and proper programming languages (C, Python, R, etc.) into our analysis pipelines. For command line operations, we can think of input as the data we provide to a command, the process as the command itself that manipulates or analyzes the data, and the output as the result produced by the command.
+
+```{mermaid}
+flowchart LR
+    A["`**Input**
+      Data provided to a command 
+      *ex: sequences.fasta*`"]
+    B["`**Process**
+      The command that manipulates or analyzes the data 
+      *ex: grep, sed, script.sh*`"]
+    C["`**Output**
+      The result produced by the command 
+      *ex: [Text in CLI] or
+      filtered_sequences.fasta 
+      (if written)*`"]
+
+    A --> B
+    B --> C
+```
+
+## Text Editing with `sed` (Stream Editor)
+
+If we want to make edits to lines or whole files, without having to rewrite whole files, we can use the `sed` command. `sed` sees input as a stream of text, and allows us to perform operations on it, such as find-and-replace, deletion, or insertion of text while the program reads the input line by line. This is especially useful for large files where opening them in a text editor would be impractical. The output of `sed` is printed to the terminal by default, but it can also be redirected to a new file with `>` or edited inplace with the `-i` flag.
 
   - `sed` (stream editor): Allows for edits of existing text and replacing/modifying it with new text 
 
 **Use sed for find-and-replace operations**
 ```bash
-# sed is most commonly used for find-and-replace operations
-# The syntax is 's/old-text/new-text/g' where 's' stands for substitute and 'g' for global (all instances)
-# Now run sed to replace all instances of 'old-text' with 'new-text'
+# Create a sample file for sed operations
 echo "This is some old-text that needs to be replaced." > input_sed.txt
+
+# Now run sed to replace all instances of 'old-text' with 'new-text'
 sed 's/old-text/new-text/g' input_sed.txt > output_sed.txt
 cat output_sed.txt
 
-# Note that sed does not modify the original file unless you use the -i flag (in-place)
+# Note that sed does not write to the original file unless you use the -i flag (in-place)
 sed -i 's/old-text/new-text/g' input_sed.txt
 cat input_sed.txt
 
@@ -270,9 +418,31 @@ cat chromosomal_only.csv
 
 ```
 
+::: {.callout-tip collapse="true"}
+### When to use `sed` and when to use an editor (`nano`, `vim`, etc.) (Optional)
+
+While you've probably used text editors like "Notes" on you computer or more advanced word processors like Word, command line environments are typically not adequate for heavy **GUI (Graphical User Interface)** based
+applications. Instead we often use more scaled down, but still powerful, editors like `nano` or `vim` that work well in the command line environment. These editors allow for more complex text manipulation and editing, but they require a bit of a learning curve to use effectively. In this course we focus on using **IDEs (Integrated Development Environments)** for writing scripts and code, but for quick edits on the HPC for example, text editors like `nano` and stream editors like `sed` are very useful to learn.
+
+Examples of when to use `sed` vs a text editor:
+
+| Use Case | `sed` | Text Editor |
+|----------|-------|-------------|
+| Quick find-and-replace in a file | Yes | No |
+| Delete lines containing a specific pattern | Yes | No |
+| Edit a single line in a file | Yes | Yes |
+| Correct variables or parameters in a script | Yes (but more work) | Yes |
+| Write a new script or program | No | Yes |
+
+:::
+
+::: {.callout-note}
+`sed` is one of the more dynamic tools used in the command line, and they way we have introduced it here is quite simple, as a tool for small find and replace operations. For a more in depth look at `sed` and its capabilities, check out some other resources like [this](https://www.grymoire.com/Unix/Sed.html#uh-0). It is also, technically, a [programming language](https://catonmat.net/proof-that-sed-is-turing-complete)
+:::
+
 ---
 
-# Putting it all together with pipes (`|`)
+## Putting it all together with pipes (`|`)
 
 Here's where the command line really starts to shine! Pipes allow you to chain commands together, passing the output of one command as input to another. This creates powerful, flexible operations that can process data in more advanced ways with just a single line of code. It also saves us time by not having to run multiple executions before we get our desired output.
 
@@ -282,28 +452,187 @@ Chaining commands together will be key later in this course section, when we sta
 
 **Create files and use pipes for complex operations**
 ```bash
-# Use pipes to filter and analyze data
-cat gene_annotations.csv | grep "beta-galactosidase"
-
 # Skip the header and show only first 2 data rows
-cat gene_annotations.csv | grep -v "Gene_ID" | head -n 2
-
-# Extract only chromosomal genes, count them
-cat gene_annotations.csv | grep "chr" | wc -l
+grep -v "Gene_ID" gene_annotations.csv | head -n 2
 
 # We can combine commands to edit specific lines as well 
 # Use it to remove all the underscores from the sequence headers in sequences.fasta
-grep '^>' sequences.fasta | sed 's/_//g'
+grep '^>' sequences.fasta | sed 's/_/ /g'
+
+# Classic examples of pipes use some additional commands we havent introduced yet
+# For example, we can use cut, sort and uniq to find unique gene names in the gene_annotations.csv file
+cut -d',' -f1 gene_annotations.csv | sort | uniq
+
+# One thing to keep in mind is that pipes need a "stream" of input/output.
+# To understand this, test and see what happens when we direct output to file in the middle of a pipe chain
+cut -d',' -f1 gene_annotations.csv | sort > sorted_genes.txt | uniq
+```
+
+::: {.callout-important}
+### Exercise: Pipes and edits
+
+Using the mock genomics data you created earlier, perform the following tasks using pipes and `sed`:
+
+1. Extract all entries from `gene_annotations.csv` and remove the underscores from the gene names using `sed`. Save the output to a new file called `cleaned_gene_ids.txt`.
+2. Count how many genes are located on the chromosome (`chr`) in the first 2 lines of `gene_annotations.csv`, excluding the header. Use pipes to combine commands and output the count to the terminal.
+
+::: {.callout-tip collapse="true"}
+### Expected output (no peeking!)
+
+**1.** 
+
+The `cleaned_gene_ids.txt` file should contain the following lines:
+```text
+lacZ,plasmid,1000,2500,+,beta-galactosidase
+rpoB,chr,3000,4200,+,RNA polymerase beta
+gyrA,chr,500,1800,-,DNA gyrase subunit A
+ompA,chr,2000,3500,+,outer membrane protein A
+gyrA,chr,5000,6299,-,DNA gyrase subunit A
+```
+**2.**
+
+The count of genes located on the chromosome (`chr`) in the first 2 lines of `gene_annotations.csv`, excluding the header, should be:
+```text
+1
+```
+:::
+:::
+
+---
+
+# Pseudocode and Thinking in Processes
+
+In this introduction to command line we've learned how to navigate the filesystem, create and manipulate files, and use pipes to combine commands. Now let's take a step back and introduce how we can plan our computational workflows using **pseudocode**. Pseudocode is a way to outline your coding and analysis in plain language (mixed with some correct code-formulations) before translating them into actual commands or scripts. This helps you organize your thoughts and sketch out the logic of your analysis without getting bogged down in syntax.
+
+We can plan pipes in pseudocode for example like this:
+```text
+Pseudocode for a change of a gene name in a file:
+[Read file | Find gene name & Replace with new name | Write to new file]
+
+A bad way to write this pseudocode would be to write it like this:
+[Read the file and find the gene name and replace it with the new name and write to a new file]
+
+A less good way, but at this point you might as well write the actual command, would be to write it like this:
+[cat gene_file.csv | sed 's/old_gene_name/new_gene_name/g' > updated_gene_file.csv]
+```
+
+which in bash would be implemented like this:
+```bash
+cat gene_annotations.csv | sed 's/RNA_polymerase_beta_subunit/RNA_polymerase_B/g' > updated_gene_annotations.csv
+```
+
+## Pseudocode for Scripts
+
+But this becomes all the more important as we start to write scripts and programs, where we need to think about the flow of data and the sequence of operations. By writing pseudocode first, we can ensure that our analysis is well-structured and that the logic is sound before we start coding. For this the format of the pseudocode is a bit subjective, but it should clearly outline the steps of the analysis, including the input data, the processing steps, and the expected output. It should also be easy to read and understand, and make sense in the context of the target language syntax.
+
+
+Pseudocode for the overarching parts of a script to analyze some genomics data
+```text
+Input: 
+  sequences.fasta
+  reference_genome.fasta
+
+Steps:
+  read files
+  align sequences to reference genome
+  filter alignments based on quality
+  count number of aligned sequences
+  write results to output file
+
+Output:
+  alignment_results.txt
+```
+
+Its also a good idea to outline pseudocode for the key steps of the analysis, such as the main function used to align sequences, or the function used to filter alignments. This helps to ensure that each step of the analysis is well-defined and that the code is organized in a logical manner. Simple pseudocode for the "count number of aligned sequences" step could look like this:
+
+```text
+for each aligned sequence:
+  if alignment quality is above threshold:
+    count as valid alignment
+    valid_alignments += 1
+  else:
+    discard alignment
+    Print text to terminal: "Alignment discarded due to low quality"
+
+Print text to terminal: "Total valid alignments: " + valid_alignments
 
 ```
+
+::: {.callout-important}
+### Exercise: Pseudocode for some simple operations
+Translate the following sets of operations into pseudocode. Try to keep it simple and clear, and think about the input, process, and output for each operation.
+
+**Operation 1:**
+```bash
+mkdir project1
+touch data.txt
+echo "Sample data" > data.txt
+mv data.txt project1/
+echo genome_1 200 >> project1/data.txt
+sed 's/genome_1/genome_A/g' project1/data.txt > project1/updated_data.txt
+head -n 1 project1/updated_data.txt
+```
+
+**Operation 2:**
+```bash
+grep "chr" annotated_data.csv > chromosomal_genes.csv
+sed -i '/*_transposase/d' chromosomal_genes.csv
+cut -d',' -f1 chromosomal_genes.cdv | sort | uniq > unique_chromosomal_genes.csvS
+```
+
+::: {.callout-tip collapse="true"}
+### Example output (no peeking!)
+
+**Operation 1:**
+```text
+Input:
+  None
+
+Process:
+  Create a project directory 
+  Create a data file 
+  print out header then redirect and overwrite to data file
+  Move data file into project directory
+  print out a line of data then redirect and append to projectdir/datafile
+  Find and replace "genome_1" to "genome_A" in data file and redirect to new data file 
+  Display the first line of updated data file
+
+Output:
+  First line of update data file to stdout (terminal)
+```
+
+**Operation 2:**
+```text
+Input:
+  annotated_data.csv
+
+Process:
+  Search for lines containing "chr" and redirect and overwrite to chromosomal_genes.csv
+  Remove in-place lines containing "*_transposase" from chromosomal_genes.csv
+  Extract the first column (gene names) from chromosomal_genes.csv, 
+    sort column
+     save unique names to unique_chromosomal_genes.csv
+
+  (Writing as a pipe is also okay)
+  (Extract the first column (gene names) from chromosomal_genes.csv | sort | save unique names to unique_chromosomal_genes.csv)
+
+Output:
+  chromosomal_genes.csv
+  unique_chromosomal_genes.csv
+```
+:::
+:::
+
 ---
 
 ::: {.callout-note}
 ## Key Takeaways
 - Organization matters, good directory structure keeps your files findable, we'll learn more about this in the next practical!
-- Pipes are powerful, chain commands to create complex operations, making your work more efficient   
+- Pipes are powerful, chain commands to create complex operations, making your work more efficient  
+- Use `sed` for quick edits, but know when to use a text editor instead 
 - Always check your work, use `ls`, `cat`, `head` to verify operations
 - Be cautious with `rm`, no undo in command line!
+- Utilize pseudocode to plan your analysis, it helps to clarify your thoughts and structure your code logic
 :::
 
 ::: {.callout-tip}
