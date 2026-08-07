@@ -2,12 +2,12 @@
 title: "Practical 3: Python Functions"
 subtitle: "BIO511 Genomics -  Python Functions (and more looping)"
 author: "Alvar Almstedt, Emma Västerviga"
-date: today
+date: Aufust 2026
 format: 
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: cosmo
 ---

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alvar Almstedt, Emma Västerviga">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 2: Python Loops – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -159,11 +159,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -304,18 +304,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links"><span class="header-section-number">2</span> Useful links</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3</span> Exercises</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful links</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#simple-loops" id="toc-simple-loops" class="nav-link" data-scroll-target="#simple-loops"><span class="header-section-number">3.1</span> Simple loops</a></li>
-  <li><a href="#nested-loops" id="toc-nested-loops" class="nav-link" data-scroll-target="#nested-loops"><span class="header-section-number">3.2</span> Nested loops</a>
+  <li><a href="#simple-loops" id="toc-simple-loops" class="nav-link" data-scroll-target="#simple-loops">Simple loops</a></li>
+  <li><a href="#nested-loops" id="toc-nested-loops" class="nav-link" data-scroll-target="#nested-loops">Nested loops</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">3.2.1</span> </a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">3.2.2</span> </a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">3.2.3</span> </a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">3.2.4</span> </a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">3.2.5</span> </a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -356,17 +356,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>Looping over different types of sequences is key in most programming languages and python is no different. Today the exercises will involve creating some simple loops followed by some more involved loop constructs where you will combine looping with the if clauses we learned yesterday.</p>
 </section>
-<section id="useful-links" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Useful links</h1>
+<section id="useful-links" class="level1">
+<h1>Useful links</h1>
 <p><a href="https://www.dataquest.io/blog/python-for-loop-tutorial/">Loops (text)</a></p>
 <p><a href="https://www.youtube.com/watch?v=ZPSES_gtm5U">Loops (video)</a></p>
 </section>
-<section id="exercises" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Exercises</h1>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example code</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a list</span></span>
@@ -379,16 +379,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># print the first item in your list</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>prit(thislist[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="simple-loops" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="simple-loops"><span class="header-section-number">3.1</span> Simple loops</h2>
+<section id="simple-loops" class="level2">
+<h2 class="anchored" data-anchor-id="simple-loops">Simple loops</h2>
 <ol type="1">
 <li>Create a list of 7 items. Loop over the list printing each item of the list.</li>
 <li>For each iteration, print the loop number (index). E.g. on the third loop (iteration) its supposed to print a “3”.</li>
 <li>Add an If-statement to make the loop stop after printing its 5th item.</li>
 </ol>
 </section>
-<section id="nested-loops" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="nested-loops"><span class="header-section-number">3.2</span> Nested loops</h2>
+<section id="nested-loops" class="level2">
+<h2 class="anchored" data-anchor-id="nested-loops">Nested loops</h2>
 <p>Example code: Here’s a simple nested loop, looking for codons in sequences</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sequences <span class="op">=</span> [<span class="st">'ATCTGAGTCCACACATG'</span>, <span class="st">'GCGTCGTGCGATGTTCACGTTGAT'</span>, <span class="st">'CAGTAGTACTCAGT'</span>, <span class="st">'GGTATGCTAGACGAGATCTAATA'</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>codons <span class="op">=</span> [<span class="st">'CCA'</span>, <span class="st">'TGT'</span>, <span class="st">'GTA'</span>, <span class="st">'TAG'</span>]</span>
@@ -398,12 +398,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(codon <span class="op">+</span> <span class="st">" is in "</span> <span class="op">+</span> sequence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>See if you can follow every line and work out how this example code works.</p>
 <p>When working with loops within loops it can get a bit tricky to keep track of things. A tip is to write the steps down in plain text before writing the actual code.</p>
-<section id="section" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="section"><span class="header-section-number">3.2.1</span> </h3>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
 <p>Create a nested for loop as in the example which looks for start and stop codons in the <code>sequences</code> list from the example above. Which sequences have both a start and a stop codon?</p>
 </section>
-<section id="section-1" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">3.2.2</span> </h3>
+<section id="section-1" class="level3">
+<h3 class="anchored" data-anchor-id="section-1"></h3>
 <p>Try to find a way to make sure that the start codon is before the stop codon in a sequence. Which sequence(s) have a start codon before a stop codon? We can loop through a dictionary by defining two variables: both the key and value.</p>
 <p>Example: Build a simple dict with the keys <code>pat_001</code>, <code>pat_002</code> and <code>pat_003</code> that has a value each. Here, the values are list:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="bu">dict</span>({<span class="st">'pat_001'</span>: [<span class="st">'bacZZt98'</span>, <span class="st">'bac889Ytd'</span>], <span class="st">'pat_002'</span>: [<span class="st">'bac0GFrr'</span>], <span class="st">'pat_003'</span>: [<span class="st">'bac889Ytd'</span>, <span class="st">'bacFq55Hj'</span>, <span class="st">'bacZZt98'</span>]})</span>
@@ -421,16 +421,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(value_bact_list)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">'bac889Ytd'</span> <span class="kw">in</span> value_bact_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section-2" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="section-2"><span class="header-section-number">3.2.3</span> </h3>
+<section id="section-2" class="level3">
+<h3 class="anchored" data-anchor-id="section-2"></h3>
 <p>Make a loop going through the dictionary saved as <code>data</code>, given in the example. Use the loop to create a list of all the unique bacteria. Start by creating an empty list. Then create a for-loop where, for each iteration, you add the current bacteria to the list. Next, introduce an if-statement. Before adding each bacteria, use the if-statement to check whether the bacteria is or is not already in the list. If it’s not in the list, add it (Hint: use the <code>append()</code> command). Otherwise, continue to the next bacteria. See if you can use a search engine (like google) to figure out how to append items to a list.</p>
 </section>
-<section id="section-3" class="level3" data-number="3.2.4">
-<h3 data-number="3.2.4" class="anchored" data-anchor-id="section-3"><span class="header-section-number">3.2.4</span> </h3>
+<section id="section-3" class="level3">
+<h3 class="anchored" data-anchor-id="section-3"></h3>
 <p>Lets do the same thing but instead add each unique bacteria as a key in a dictionary. The values can be empty lists. Start by making an empty dictionary. Hint: Search online for how to list the keys in a dict, in order to compare each bacteria to the dict you’re building.</p>
 </section>
-<section id="section-4" class="level3" data-number="3.2.5">
-<h3 data-number="3.2.5" class="anchored" data-anchor-id="section-4"><span class="header-section-number">3.2.5</span> </h3>
+<section id="section-4" class="level3">
+<h3 class="anchored" data-anchor-id="section-4"></h3>
 <p>Now let’s append the patients to the lists of each key. The final dict should look like this: ``<code>python {'bacZZt98': ['pat_001', 'pat_003'], 'bac889Ytd': ['pat_001', 'pat_003'], 'bac0GFrr': ['pat_002'], 'bacFq55Hj': ['pat_003']}</code></p>
 
 

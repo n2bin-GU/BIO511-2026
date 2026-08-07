@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tor Kling">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 3: Functional Annotation of Whole Genomes – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -159,11 +159,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -308,19 +308,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#prokka-annotation" id="toc-prokka-annotation" class="nav-link" data-scroll-target="#prokka-annotation"><span class="header-section-number">2</span> Prokka Annotation</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#prokka-annotation" id="toc-prokka-annotation" class="nav-link" data-scroll-target="#prokka-annotation">Prokka Annotation</a>
   <ul class="collapse">
-  <li><a href="#basicagnostic-prokka-annotation" id="toc-basicagnostic-prokka-annotation" class="nav-link" data-scroll-target="#basicagnostic-prokka-annotation"><span class="header-section-number">2.1</span> Basic/agnostic Prokka annotation</a></li>
-  <li><a href="#prokka-with-curated-proteins" id="toc-prokka-with-curated-proteins" class="nav-link" data-scroll-target="#prokka-with-curated-proteins"><span class="header-section-number">2.2</span> Prokka with curated proteins</a></li>
+  <li><a href="#basicagnostic-prokka-annotation" id="toc-basicagnostic-prokka-annotation" class="nav-link" data-scroll-target="#basicagnostic-prokka-annotation">Basic/agnostic Prokka annotation</a></li>
+  <li><a href="#prokka-with-curated-proteins" id="toc-prokka-with-curated-proteins" class="nav-link" data-scroll-target="#prokka-with-curated-proteins">Prokka with curated proteins</a></li>
   </ul></li>
-  <li><a href="#inspecting-outputs" id="toc-inspecting-outputs" class="nav-link" data-scroll-target="#inspecting-outputs"><span class="header-section-number">3</span> Inspecting outputs</a>
+  <li><a href="#inspecting-outputs" id="toc-inspecting-outputs" class="nav-link" data-scroll-target="#inspecting-outputs">Inspecting outputs</a>
   <ul class="collapse">
-  <li><a href="#prepare-inputs-for-multiqc" id="toc-prepare-inputs-for-multiqc" class="nav-link" data-scroll-target="#prepare-inputs-for-multiqc"><span class="header-section-number">3.1</span> Prepare inputs for MultiQC</a></li>
-  <li><a href="#run-multiqc" id="toc-run-multiqc" class="nav-link" data-scroll-target="#run-multiqc"><span class="header-section-number">3.2</span> Run MultiQC</a></li>
-  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"><span class="header-section-number">3.3</span> Review Questions</a></li>
+  <li><a href="#prepare-inputs-for-multiqc" id="toc-prepare-inputs-for-multiqc" class="nav-link" data-scroll-target="#prepare-inputs-for-multiqc">Prepare inputs for MultiQC</a></li>
+  <li><a href="#run-multiqc" id="toc-run-multiqc" class="nav-link" data-scroll-target="#run-multiqc">Run MultiQC</a></li>
+  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions">Review Questions</a></li>
   </ul></li>
-  <li><a href="#optional-prepare-for-downstream-tools" id="toc-optional-prepare-for-downstream-tools" class="nav-link" data-scroll-target="#optional-prepare-for-downstream-tools"><span class="header-section-number">4</span> Optional: Prepare for downstream tools</a></li>
+  <li><a href="#optional-prepare-for-downstream-tools" id="toc-optional-prepare-for-downstream-tools" class="nav-link" data-scroll-target="#optional-prepare-for-downstream-tools">Optional: Prepare for downstream tools</a></li>
   </ul>
 </nav>
     </div>
@@ -347,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -359,8 +359,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>Annotation is the process of taking assembled genome sequences (or in some cases unassembled sequences) and identifying genomic features such as genes, coding sequences (CDS), tRNAs, rRNAs, and other functional elements. This is a critical step in guiding deeper analysis, as the annotated genes become guidemarks for functional identification and characterizing phenotypes. It is also typically the first step before more advanced downstream analysis after we’ve finished assembly and polishing. With annotated genomes, we can perform comparative genomics, functional profiling, and pangenome analyses.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -405,11 +405,11 @@ Learning Objectives
 </div>
 <hr>
 </section>
-<section id="prokka-annotation" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Prokka Annotation</h1>
+<section id="prokka-annotation" class="level1">
+<h1>Prokka Annotation</h1>
 <p>While BAKTA might be a more preferred option for many nowadays, Prokka remains a widely used and well-established tool for prokaryotic genome annotation. It is useful for its speed, ease of use, and ability to produce standardized output formats that are compatible with many downstream analysis tools. Prokka is also a bit more streamlined that BAKTA, with a lighter database, making it suitable for more custom annotation workflows.</p>
-<section id="basicagnostic-prokka-annotation" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="basicagnostic-prokka-annotation"><span class="header-section-number">2.1</span> Basic/agnostic Prokka annotation</h2>
+<section id="basicagnostic-prokka-annotation" class="level2">
+<h2 class="anchored" data-anchor-id="basicagnostic-prokka-annotation">Basic/agnostic Prokka annotation</h2>
 <p>For the first run, we’ll perform a basic annotation using Prokka’s default settings. This will give us a general overview of the genome’s features using the built-in databases.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A C3SE408-25-2 </span></span>
@@ -452,8 +452,8 @@ Learning Objectives
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Baseline Prokka annotation completed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
-<section id="prokka-with-curated-proteins" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="prokka-with-curated-proteins"><span class="header-section-number">2.2</span> Prokka with curated proteins</h2>
+<section id="prokka-with-curated-proteins" class="level2">
+<h2 class="anchored" data-anchor-id="prokka-with-curated-proteins">Prokka with curated proteins</h2>
 <p>For the second run, we’ll enhance the annotation by providing Prokka with a curated set of reference proteins. This can help improve the accuracy of gene predictions and functional annotations, The curated proteins used for this ref are a collection of reference genomes for <em>E. coli</em> from NCBI RefSeq, which have been manually reviewed and merged. Using these curated proteins can help reduce the number of hypothetical proteins and improve the functional annotations of genes in our genome.</p>
 <p>Strains:</p>
 <ul>
@@ -509,11 +509,11 @@ Learning Objectives
 <hr>
 </section>
 </section>
-<section id="inspecting-outputs" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Inspecting outputs</h1>
+<section id="inspecting-outputs" class="level1">
+<h1>Inspecting outputs</h1>
 <p>By now you guys are multiQC pros, so let’s use MultiQC to aggregate and compare the outputs from both Prokka runs. First download the data from the HPC and set up a local project folder for the MultiQC analysis.</p>
-<section id="prepare-inputs-for-multiqc" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="prepare-inputs-for-multiqc"><span class="header-section-number">3.1</span> Prepare inputs for MultiQC</h2>
+<section id="prepare-inputs-for-multiqc" class="level2">
+<h2 class="anchored" data-anchor-id="prepare-inputs-for-multiqc">Prepare inputs for MultiQC</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a directory to collect Prokka outputs</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multiqc_analysis/prokka</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -521,8 +521,8 @@ Learning Objectives
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3/annotation/prokka_baseline ./multiqc_analysis/prokka/</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3/annotation/prokka_curated ./multiqc_analysis/prokka/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="run-multiqc" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="run-multiqc"><span class="header-section-number">3.2</span> Run MultiQC</h2>
+<section id="run-multiqc" class="level2">
+<h2 class="anchored" data-anchor-id="run-multiqc">Run MultiQC</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multiqc_analysis</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> . <span class="dt">\</span></span>
@@ -532,8 +532,8 @@ Learning Objectives
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--dirs-depth</span> 2 <span class="dt">\</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--force</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="review-questions" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="review-questions"><span class="header-section-number">3.3</span> Review Questions</h2>
+<section id="review-questions" class="level2">
+<h2 class="anchored" data-anchor-id="review-questions">Review Questions</h2>
 <p>Open the HTML report and review the Prokka section comparing baseline vs curated. Use this report, manual data observation and any other relevant methods to answer the questions below:</p>
 <ol type="1">
 <li>How many CDS, tRNA, and rRNA features were called in each run? Why dont we see a difference?</li>
@@ -544,8 +544,8 @@ Learning Objectives
 <hr>
 </section>
 </section>
-<section id="optional-prepare-for-downstream-tools" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Optional: Prepare for downstream tools</h1>
+<section id="optional-prepare-for-downstream-tools" class="level1">
+<h1>Optional: Prepare for downstream tools</h1>
 <p>As we mentioned in the beginning, annotated genomes are often used as inputs for various downstream analyses. Depending on your research goals, you might want to prepare the Prokka outputs in gathered structures, here is an example script to organize the outputs into separate folders based on file type.</p>
 <p>Common follow-ups analyses include these file types:</p>
 <ul>

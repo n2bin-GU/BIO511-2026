@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tor Kling, Stuti Jain">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 5: Software Installation and Containers – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-8e049031f30567c4281a40dcf0e5e98c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-21e2f2e7e0abe44a720331f65c0fadcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -159,11 +159,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -304,13 +304,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html" class="sidebar-item-text sidebar-link">
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practical 1: Git Fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practical 2: Algorithmic Thinking</span></a>
   </div>
 </li>
@@ -326,26 +326,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#finding-software-package-managers-and-repositories" id="toc-finding-software-package-managers-and-repositories" class="nav-link" data-scroll-target="#finding-software-package-managers-and-repositories"><span class="header-section-number">2</span> Finding software: package managers and repositories</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#finding-software-package-managers-and-repositories" id="toc-finding-software-package-managers-and-repositories" class="nav-link" data-scroll-target="#finding-software-package-managers-and-repositories">Finding software: package managers and repositories</a>
   <ul class="collapse">
-  <li><a href="#exercises-discover-tools" id="toc-exercises-discover-tools" class="nav-link" data-scroll-target="#exercises-discover-tools"><span class="header-section-number">2.1</span> Exercises: Discover tools</a></li>
+  <li><a href="#exercises-discover-tools" id="toc-exercises-discover-tools" class="nav-link" data-scroll-target="#exercises-discover-tools">Exercises: Discover tools</a></li>
   </ul></li>
-  <li><a href="#local-installation-and-packageenviroment-management" id="toc-local-installation-and-packageenviroment-management" class="nav-link" data-scroll-target="#local-installation-and-packageenviroment-management"><span class="header-section-number">3</span> Local installation and package/enviroment management</a>
+  <li><a href="#local-installation-and-packageenviroment-management" id="toc-local-installation-and-packageenviroment-management" class="nav-link" data-scroll-target="#local-installation-and-packageenviroment-management">Local installation and package/enviroment management</a>
   <ul class="collapse">
-  <li><a href="#setting-up-conda" id="toc-setting-up-conda" class="nav-link" data-scroll-target="#setting-up-conda"><span class="header-section-number">3.1</span> Setting up Conda</a></li>
-  <li><a href="#install-fastp-locally-via-apt" id="toc-install-fastp-locally-via-apt" class="nav-link" data-scroll-target="#install-fastp-locally-via-apt"><span class="header-section-number">3.2</span> Install fastp locally via apt</a></li>
-  <li><a href="#use-conda-to-install-multiqc-locally" id="toc-use-conda-to-install-multiqc-locally" class="nav-link" data-scroll-target="#use-conda-to-install-multiqc-locally"><span class="header-section-number">3.3</span> Use Conda to install MultiQC locally</a></li>
+  <li><a href="#setting-up-conda" id="toc-setting-up-conda" class="nav-link" data-scroll-target="#setting-up-conda">Setting up Conda</a></li>
+  <li><a href="#install-fastp-locally-via-apt" id="toc-install-fastp-locally-via-apt" class="nav-link" data-scroll-target="#install-fastp-locally-via-apt">Install fastp locally via apt</a></li>
+  <li><a href="#use-conda-to-install-multiqc-locally" id="toc-use-conda-to-install-multiqc-locally" class="nav-link" data-scroll-target="#use-conda-to-install-multiqc-locally">Use Conda to install MultiQC locally</a></li>
   </ul></li>
-  <li><a href="#moving-your-software-to-other-computers-and-getting-it-to-run-on-hpcs" id="toc-moving-your-software-to-other-computers-and-getting-it-to-run-on-hpcs" class="nav-link" data-scroll-target="#moving-your-software-to-other-computers-and-getting-it-to-run-on-hpcs"><span class="header-section-number">4</span> Moving your software to other computers and getting it to run on HPCs</a>
+  <li><a href="#moving-your-software-to-other-computers-and-getting-it-to-run-on-hpcs" id="toc-moving-your-software-to-other-computers-and-getting-it-to-run-on-hpcs" class="nav-link" data-scroll-target="#moving-your-software-to-other-computers-and-getting-it-to-run-on-hpcs">Moving your software to other computers and getting it to run on HPCs</a>
   <ul class="collapse">
-  <li><a href="#containerization-with-singularity" id="toc-containerization-with-singularity" class="nav-link" data-scroll-target="#containerization-with-singularity"><span class="header-section-number">4.1</span> Containerization with Singularity</a></li>
-  <li><a href="#a-minimal-kraken2-singularity-definition-file" id="toc-a-minimal-kraken2-singularity-definition-file" class="nav-link" data-scroll-target="#a-minimal-kraken2-singularity-definition-file"><span class="header-section-number">4.2</span> A minimal kraken2 Singularity definition file</a></li>
-  <li><a href="#build-test-and-run-locally" id="toc-build-test-and-run-locally" class="nav-link" data-scroll-target="#build-test-and-run-locally"><span class="header-section-number">4.3</span> Build, test, and run locally</a></li>
+  <li><a href="#containerization-with-singularity" id="toc-containerization-with-singularity" class="nav-link" data-scroll-target="#containerization-with-singularity">Containerization with Singularity</a></li>
+  <li><a href="#a-minimal-kraken2-singularity-definition-file" id="toc-a-minimal-kraken2-singularity-definition-file" class="nav-link" data-scroll-target="#a-minimal-kraken2-singularity-definition-file">A minimal kraken2 Singularity definition file</a></li>
+  <li><a href="#build-test-and-run-locally" id="toc-build-test-and-run-locally" class="nav-link" data-scroll-target="#build-test-and-run-locally">Build, test, and run locally</a></li>
   </ul></li>
-  <li><a href="#transferring-to-the-hpc-and-running-containers-under-slurm" id="toc-transferring-to-the-hpc-and-running-containers-under-slurm" class="nav-link" data-scroll-target="#transferring-to-the-hpc-and-running-containers-under-slurm"><span class="header-section-number">5</span> Transferring to the HPC and running containers under SLURM</a>
+  <li><a href="#transferring-to-the-hpc-and-running-containers-under-slurm" id="toc-transferring-to-the-hpc-and-running-containers-under-slurm" class="nav-link" data-scroll-target="#transferring-to-the-hpc-and-running-containers-under-slurm">Transferring to the HPC and running containers under SLURM</a>
   <ul class="collapse">
-  <li><a href="#slurm-job-script-to-invoke-singularity-container-based-software" id="toc-slurm-job-script-to-invoke-singularity-container-based-software" class="nav-link" data-scroll-target="#slurm-job-script-to-invoke-singularity-container-based-software"><span class="header-section-number">5.1</span> SLURM job script to invoke singularity container based software</a></li>
+  <li><a href="#slurm-job-script-to-invoke-singularity-container-based-software" id="toc-slurm-job-script-to-invoke-singularity-container-based-software" class="nav-link" data-scroll-target="#slurm-job-script-to-invoke-singularity-container-based-software">SLURM job script to invoke singularity container based software</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -373,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -385,8 +385,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>Up until now youve had to make everything by yourself (sort of, at least using base programs that come with your unix distro). This approach, while flexible, defeats one of they key benefits of modern bioinformatics; Open source and collaborative solutions to large data handling. Thanks to a lot of effort, there are countless of free, open-source tools available in various repositiories on the internet.</p>
 <p>However these tools, while saving us a lot of time, may be tricky to find and set up correctly. Different tools require different dependencies, versions, or system libraries. This often leads to complex webs of libraries and packages that act as the backbone of your code, which can be difficult to manage and reproduce on other systems. In this practical, you’ll learn where to find tools, various ways of installing an managing them (conda, apt), cloning repos from GitHub, and—most importantly—how to package tools in a Singularity/Apptainer containers that you can copy to, and run, anywhere (including HPC environments).</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -427,11 +427,11 @@ REMEMBER: Create a separate project folder
 </div>
 <hr>
 </section>
-<section id="finding-software-package-managers-and-repositories" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Finding software: package managers and repositories</h1>
+<section id="finding-software-package-managers-and-repositories" class="level1">
+<h1>Finding software: package managers and repositories</h1>
 <p>While paid licensed software are often hosted on their own websites, and are delivered via installers, open source software are often hosted on public repositories, such as GitHub, CRAN (R language), PyPI (Python language). Downloading and installing software from these sources can in many cases be harder, as you sometimes need to manually resolve <em>dependencies</em> (other software or libraries that the tool relies on) and ensure compatibility with your operating system.</p>
-<section id="exercises-discover-tools" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="exercises-discover-tools"><span class="header-section-number">2.1</span> Exercises: Discover tools</h2>
+<section id="exercises-discover-tools" class="level2">
+<h2 class="anchored" data-anchor-id="exercises-discover-tools">Exercises: Discover tools</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore apt </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Find which apt subcommand lists packages for the following queries:</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">apt</span> search kraken2</span>
@@ -448,8 +448,8 @@ REMEMBER: Create a separate project folder
 <hr>
 </section>
 </section>
-<section id="local-installation-and-packageenviroment-management" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Local installation and package/enviroment management</h1>
+<section id="local-installation-and-packageenviroment-management" class="level1">
+<h1>Local installation and package/enviroment management</h1>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -464,8 +464,8 @@ On the use of sudo
 </div>
 </div>
 <p>Local installation means setting up software on your own computer, as opposed to remote servers or HPC clusters. This is often done for development, testing, or when working with smaller datasets that do not require the resources of a cluster. Local installation can be more straightforward, as you have full control over the environment and can easily access files and tools. However, if done incorrectly, it can lead to conflicts between software versions and dependencies, and broken registries that interfere with system stability.</p>
-<section id="setting-up-conda" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="setting-up-conda"><span class="header-section-number">3.1</span> Setting up Conda</h2>
+<section id="setting-up-conda" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-conda">Setting up Conda</h2>
 <p>To begin with, we will install Miniconda, a minimal installer for Conda. Conda is an open-source package management system and environment management system that runs on Windows, macOS, and Linux. It quickly installs, runs, and updates packages and their dependencies. Conda also creates, saves, loads, and switches between environments on your local computer. This is particularly useful in bioinformatics, where different projects may require different versions of software and libraries.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Miniconda</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For this we need to fetch files from the internet via wget </span></span>
@@ -484,8 +484,8 @@ On the use of sudo
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
-<section id="install-fastp-locally-via-apt" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="install-fastp-locally-via-apt"><span class="header-section-number">3.2</span> Install fastp locally via apt</h2>
+<section id="install-fastp-locally-via-apt" class="level2">
+<h2 class="anchored" data-anchor-id="install-fastp-locally-via-apt">Install fastp locally via apt</h2>
 <p>Next up, we will install <code>fastp</code> locally using apt, the default package manager for Debian-based Linux distributions. You will encounter fastp later in the genomics workflow praticals, its a tool inteded for quality control and preprocessing of FASTQ read files.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before we install anything via apt, its always a good idea to update the package lists</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This ensures you get the latest versions available in the repositories</span></span>
@@ -500,8 +500,8 @@ On the use of sudo
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify installation</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="use-conda-to-install-multiqc-locally" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="use-conda-to-install-multiqc-locally"><span class="header-section-number">3.3</span> Use Conda to install MultiQC locally</h2>
+<section id="use-conda-to-install-multiqc-locally" class="level2">
+<h2 class="anchored" data-anchor-id="use-conda-to-install-multiqc-locally">Use Conda to install MultiQC locally</h2>
 <p>For this segment we will install MultiQC, a tool that aggregates results from bioinformatics analyses across many samples into a single report. This is particularly useful for summarizing the output of tools like FastQC. Our install will be done in a conda enviroment, installing the version hosted on bioconda.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new conda environment named MultiQC with python 3.9</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> MultiQC python=3.9</span>
@@ -517,16 +517,16 @@ On the use of sudo
 <hr>
 </section>
 </section>
-<section id="moving-your-software-to-other-computers-and-getting-it-to-run-on-hpcs" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Moving your software to other computers and getting it to run on HPCs</h1>
+<section id="moving-your-software-to-other-computers-and-getting-it-to-run-on-hpcs" class="level1">
+<h1>Moving your software to other computers and getting it to run on HPCs</h1>
 <p>When working on different computers, especially in collaborative environments or on HPC clusters, it’s crucial to ensure that your software and its dependencies are consistent across all systems. This is where environment management and containerization come into play.</p>
-<section id="containerization-with-singularity" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="containerization-with-singularity"><span class="header-section-number">4.1</span> Containerization with Singularity</h2>
+<section id="containerization-with-singularity" class="level2">
+<h2 class="anchored" data-anchor-id="containerization-with-singularity">Containerization with Singularity</h2>
 <p>Containers are a way to package software and its dependencies into a single, portable unit that can run consistently across different computing environments. Unlike virtual machines, containers share the host system’s kernel, making them more lightweight and efficient. This is particularly useful in bioinformatics, where software often has complex dependencies and needs to run on various systems, including high-performance computing (HPC) clusters.</p>
 <p>On HPC you usually cannot sudo and may not be allowed to build images on the login/compute nodes. Best practice is then: - Build the image locally (or via a remote builder). - Copy the .sif to the HPC. - Bind-mount data and databases at runtime.</p>
 </section>
-<section id="a-minimal-kraken2-singularity-definition-file" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="a-minimal-kraken2-singularity-definition-file"><span class="header-section-number">4.2</span> A minimal kraken2 Singularity definition file</h2>
+<section id="a-minimal-kraken2-singularity-definition-file" class="level2">
+<h2 class="anchored" data-anchor-id="a-minimal-kraken2-singularity-definition-file">A minimal kraken2 Singularity definition file</h2>
 <p>The first step to creating a singularity container is to write a definition file. This file describes the base image, metadata, and the steps needed to install and configure the software inside the container. In many cases it will be simple, if an already hosted image exists (e.g.&nbsp;on BioContainers), luckily kraken2 is one of those cases. if you want to learn more about writing definition files, check out the <a href="https://sylabs.io/guides/3.0/user-guide/definition_files.html">Singularity documentation</a>.</p>
 <p>Create a file named kraken2.def with the contents below. It uses the BioContainers kraken2 image as a base.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># kraken2.def</span></span>
@@ -562,8 +562,8 @@ On the use of sudo
 <span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here is where you would usually set environment variables.</span></span>
 <span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># However, the BioContainers image already has kraken2 in PATH. so nothing needed here.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="build-test-and-run-locally" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="build-test-and-run-locally"><span class="header-section-number">4.3</span> Build, test, and run locally</h2>
+<section id="build-test-and-run-locally" class="level2">
+<h2 class="anchored" data-anchor-id="build-test-and-run-locally">Build, test, and run locally</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a read-only image from the def file (locally)</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> build kraken2.sif kraken2.def</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -576,8 +576,8 @@ On the use of sudo
 <hr>
 </section>
 </section>
-<section id="transferring-to-the-hpc-and-running-containers-under-slurm" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Transferring to the HPC and running containers under SLURM</h1>
+<section id="transferring-to-the-hpc-and-running-containers-under-slurm" class="level1">
+<h1>Transferring to the HPC and running containers under SLURM</h1>
 <p>Now that we have a working kraken2 container, we can transfer it to the HPC and run it there. Actually running kraken2 is something we’ll do in the next practical, so here we will just focus on getting the container to the HPC and making sure it works.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transfer the image (from local to HPC)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> kraken2.sif user@vera2.c3se.chalmers.se:/home/user/containers/</span>
@@ -588,8 +588,8 @@ On the use of sudo
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick interactive test</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> exec /home/user/containers/kraken2.sif kraken2 <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="slurm-job-script-to-invoke-singularity-container-based-software" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="slurm-job-script-to-invoke-singularity-container-based-software"><span class="header-section-number">5.1</span> SLURM job script to invoke singularity container based software</h2>
+<section id="slurm-job-script-to-invoke-singularity-container-based-software" class="level2">
+<h2 class="anchored" data-anchor-id="slurm-job-script-to-invoke-singularity-container-based-software">SLURM job script to invoke singularity container based software</h2>
 <p>As you already know, running software in the login node of an HPC is frowned upon. Instead, you should submit jobs to the scheduler (SLURM in this case), which allows you to take up space on one of the production nodes in the cluster. Below is a example of a SLURM job script that i (Tor) have used to run a Roary pangenome analysis on another cluster. <strong>Se if you can configure it to run kraken2 instead</strong>. All HPCs are different, so make sure to adjust paths, partitions, memory, time, etc to fit your HPC. The manual for Vera can be found <a href="https://www.c3se.chalmers.se/documentation/submitting_jobs/running_jobs/#writing-a-job-script">here</a>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A nbin2-gu               # Project ID</span></span>

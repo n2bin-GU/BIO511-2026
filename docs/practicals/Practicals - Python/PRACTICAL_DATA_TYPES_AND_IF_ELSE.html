@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alvar Almstedt, Emma Västerviga">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 1: Python Data Types and If/Else Clauses – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -159,11 +159,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -304,18 +304,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#some-links-that-you-may-find-helpful" id="toc-some-links-that-you-may-find-helpful" class="nav-link" data-scroll-target="#some-links-that-you-may-find-helpful"><span class="header-section-number">1.1</span> Some links that you may find helpful</a></li>
+  <li><a href="#some-links-that-you-may-find-helpful" id="toc-some-links-that-you-may-find-helpful" class="nav-link" data-scroll-target="#some-links-that-you-may-find-helpful">Some links that you may find helpful</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2</span> Exercises</a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#data-type-usage" id="toc-data-type-usage" class="nav-link" data-scroll-target="#data-type-usage"><span class="header-section-number">2.1</span> Data type usage</a></li>
-  <li><a href="#if-elif-else-on-your-data-types" id="toc-if-elif-else-on-your-data-types" class="nav-link" data-scroll-target="#if-elif-else-on-your-data-types"><span class="header-section-number">2.2</span> If / Elif / Else on your data types</a>
+  <li><a href="#data-type-usage" id="toc-data-type-usage" class="nav-link" data-scroll-target="#data-type-usage">Data type usage</a></li>
+  <li><a href="#if-elif-else-on-your-data-types" id="toc-if-elif-else-on-your-data-types" class="nav-link" data-scroll-target="#if-elif-else-on-your-data-types">If / Elif / Else on your data types</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">2.2.1</span> </a></li>
-  <li><a href="#multi-way-ifelifelse-clause" id="toc-multi-way-ifelifelse-clause" class="nav-link" data-scroll-target="#multi-way-ifelifelse-clause"><span class="header-section-number">2.2.2</span> Multi-way (If/elif/else clause)</a></li>
-  <li><a href="#type-gate-nested-classification-nested-ifelifelse" id="toc-type-gate-nested-classification-nested-ifelifelse" class="nav-link" data-scroll-target="#type-gate-nested-classification-nested-ifelifelse"><span class="header-section-number">2.2.3</span> Type gate + nested classification (Nested If/elif/else)</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#multi-way-ifelifelse-clause" id="toc-multi-way-ifelifelse-clause" class="nav-link" data-scroll-target="#multi-way-ifelifelse-clause">Multi-way (If/elif/else clause)</a></li>
+  <li><a href="#type-gate-nested-classification-nested-ifelifelse" id="toc-type-gate-nested-classification-nested-ifelifelse" class="nav-link" data-scroll-target="#type-gate-nested-classification-nested-ifelifelse">Type gate + nested classification (Nested If/elif/else)</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -356,13 +356,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>Now we are finally getting into the bread and butter of python syntax! Today you will do some very simple exercises with some of the most commonly used python data types as well as starting with boolean logic using if/else clauses.</p>
 <p>You can copy the code blocks containing comments below and work on the tasks from within your IDE (Integrated Developer Environment)/text editor or a jupyter notebook. Remember, comments are the lines that start with <code>#</code> and will be ignored when you run your code</p>
 <p>Remember to refer back to todays presentations for help or ask the teachers - It’s what we are here for :)</p>
-<section id="some-links-that-you-may-find-helpful" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="some-links-that-you-may-find-helpful"><span class="header-section-number">1.1</span> Some links that you may find helpful</h2>
+<section id="some-links-that-you-may-find-helpful" class="level2">
+<h2 class="anchored" data-anchor-id="some-links-that-you-may-find-helpful">Some links that you may find helpful</h2>
 <p>They may even contain information that the teachers missed or didn’t explain well enough!</p>
 <p><a href="https://www.w3schools.com/python/python_datatypes.asp">Data types (written help)</a></p>
 <p><a href="https://www.youtube.com/watch?v=ppsCxnNm-JI">Data types (Video guide)</a></p>
@@ -370,10 +370,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://www.youtube.com/watch?v=FvMPfrgGeKs">If/else (video guide, easy)</a></p>
 </section>
 </section>
-<section id="exercises" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Exercises</h1>
-<section id="data-type-usage" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="data-type-usage"><span class="header-section-number">2.1</span> Data type usage</h2>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<section id="data-type-usage" class="level2">
+<h2 class="anchored" data-anchor-id="data-type-usage">Data type usage</h2>
 <p>Here’s some example code of how to save the number 4, which is interpreted as an integer by python, to a variable that we choose to call <code>my_int</code>. Then we print the variable.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_int <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -381,8 +381,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Create a python script (<code>.py file</code>) where you save one value of each data type to its own variable. Afterwards, print all the variables and their type using the commands <code>print()</code> and <code>type()</code>.</p>
 <p>Data types to include: integer, floating point, string, boolean, nonetype, list, dictionary, tuple, set, range.</p>
 </section>
-<section id="if-elif-else-on-your-data-types" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="if-elif-else-on-your-data-types"><span class="header-section-number">2.2</span> If / Elif / Else on your data types</h2>
+<section id="if-elif-else-on-your-data-types" class="level2">
+<h2 class="anchored" data-anchor-id="if-elif-else-on-your-data-types">If / Elif / Else on your data types</h2>
 <p>For this part you can reuse the variables you created in the previous task or recreate them with new values.</p>
 <p>The variables need to be created in the same script that you use to solve the following tasks. That way, python will still “remember” what the variables are supposed to be.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -398,8 +398,8 @@ Hint
 <p>Double check what type a variable is with <code>type(variablename)</code>, to deremine which variable to use.</p>
 </div>
 </div>
-<section id="section" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="section"><span class="header-section-number">2.2.1</span> </h3>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
 <p>Let’s start with strings! Below is an example code block of how to determine the length of a string:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save a string to a variable</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_string <span class="op">=</span> <span class="st">"variablestuesday"</span></span>
@@ -409,8 +409,8 @@ Hint
 <p>Pick a STRING you created. Then create an if/else-statement to determine if the string is empty or not. If the string is empty, the length should be zero.</p>
 <p>If it’s empty, print “empty”, else print “non-empty”.</p>
 </section>
-<section id="multi-way-ifelifelse-clause" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="multi-way-ifelifelse-clause"><span class="header-section-number">2.2.2</span> Multi-way (If/elif/else clause)</h3>
+<section id="multi-way-ifelifelse-clause" class="level3">
+<h3 class="anchored" data-anchor-id="multi-way-ifelifelse-clause">Multi-way (If/elif/else clause)</h3>
 <p>Pick an INTEGER you created. Write an if-statement with 3 scenarios:</p>
 <ul>
 <li><p>The integer could be positive</p></li>
@@ -432,8 +432,8 @@ Hint
 </div>
 </div>
 </section>
-<section id="type-gate-nested-classification-nested-ifelifelse" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="type-gate-nested-classification-nested-ifelifelse"><span class="header-section-number">2.2.3</span> Type gate + nested classification (Nested If/elif/else)</h3>
+<section id="type-gate-nested-classification-nested-ifelifelse" class="level3">
+<h3 class="anchored" data-anchor-id="type-gate-nested-classification-nested-ifelifelse">Type gate + nested classification (Nested If/elif/else)</h3>
 <p>Pick a SEQUENCE you created (list, tuple or range). Here, we want you to cerate a nested loop.</p>
 <p>In the outer if-statement, check if your choice of variable matches any of the data types list <strong>or</strong> tuple <strong>or</strong> range. Use <code>or</code> to allow the variable to match any of them. If the variable is not a match, print “wrong type for this task”.</p>
 <p>The inner if-statement should be used IF the variable was a match. Here, you need to check for 3 different scenarios:</p>

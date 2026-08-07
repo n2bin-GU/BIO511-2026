@@ -6,7 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tor Kling, Vahid AtabaigielmiS">
+<meta name="author" content="Tor Kling">
+<meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 3 — Workspace &amp; Data Management – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -161,11 +162,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -306,13 +307,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html" class="sidebar-item-text sidebar-link">
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practical 1: Git Fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practical 2: Algorithmic Thinking</span></a>
   </div>
 </li>
@@ -328,19 +329,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#workspace-setup" id="toc-workspace-setup" class="nav-link" data-scroll-target="#workspace-setup"><span class="header-section-number">2</span> Workspace Setup</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#workspace-setup" id="toc-workspace-setup" class="nav-link" data-scroll-target="#workspace-setup">Workspace Setup</a>
   <ul class="collapse">
-  <li><a href="#symlinks-linking-shared-or-large-data" id="toc-symlinks-linking-shared-or-large-data" class="nav-link" data-scroll-target="#symlinks-linking-shared-or-large-data"><span class="header-section-number">2.1</span> Symlinks: linking shared or large data</a></li>
+  <li><a href="#symlinks-linking-shared-or-large-data" id="toc-symlinks-linking-shared-or-large-data" class="nav-link" data-scroll-target="#symlinks-linking-shared-or-large-data">Symlinks: linking shared or large data</a></li>
   </ul></li>
-  <li><a href="#more-on-files-and-where-to-find-them" id="toc-more-on-files-and-where-to-find-them" class="nav-link" data-scroll-target="#more-on-files-and-where-to-find-them"><span class="header-section-number">3</span> More on files and where to find them</a>
+  <li><a href="#more-on-files-and-where-to-find-them" id="toc-more-on-files-and-where-to-find-them" class="nav-link" data-scroll-target="#more-on-files-and-where-to-find-them">More on files and where to find them</a>
   <ul class="collapse">
-  <li><a href="#field-delimiters-and-newlines-printf" id="toc-field-delimiters-and-newlines-printf" class="nav-link" data-scroll-target="#field-delimiters-and-newlines-printf"><span class="header-section-number">3.1</span> Field delimiters and newlines (<code>printf</code>)</a></li>
-  <li><a href="#counts-and-quick-summaries-with-wc-sort-uniq-and-cut" id="toc-counts-and-quick-summaries-with-wc-sort-uniq-and-cut" class="nav-link" data-scroll-target="#counts-and-quick-summaries-with-wc-sort-uniq-and-cut"><span class="header-section-number">3.2</span> Counts and quick summaries with <code>wc</code>, <code>sort</code>, <code>uniq</code> and <code>cut</code></a></li>
-  <li><a href="#locate-things-with-find" id="toc-locate-things-with-find" class="nav-link" data-scroll-target="#locate-things-with-find"><span class="header-section-number">3.3</span> Locate things with <code>find</code></a></li>
+  <li><a href="#field-delimiters-and-newlines" id="toc-field-delimiters-and-newlines" class="nav-link" data-scroll-target="#field-delimiters-and-newlines">Field delimiters and newlines</a></li>
+  <li><a href="#counts-and-quick-summaries-with-wc-sort-uniq-and-cut" id="toc-counts-and-quick-summaries-with-wc-sort-uniq-and-cut" class="nav-link" data-scroll-target="#counts-and-quick-summaries-with-wc-sort-uniq-and-cut">Counts and quick summaries with <code>wc</code>, <code>sort</code>, <code>uniq</code> and <code>cut</code></a></li>
+  <li><a href="#locate-things-with-find" id="toc-locate-things-with-find" class="nav-link" data-scroll-target="#locate-things-with-find">Locate things with <code>find</code></a></li>
   </ul></li>
-  <li><a href="#file-permissions-readwriteexecute-chmod" id="toc-file-permissions-readwriteexecute-chmod" class="nav-link" data-scroll-target="#file-permissions-readwriteexecute-chmod"><span class="header-section-number">4</span> File Permissions (read/write/execute) (<code>chmod</code>)</a></li>
-  <li><a href="#local-vs-hpc" id="toc-local-vs-hpc" class="nav-link" data-scroll-target="#local-vs-hpc"><span class="header-section-number">5</span> Local vs HPC</a></li>
+  <li><a href="#file-permissions-readwriteexecute-chmod" id="toc-file-permissions-readwriteexecute-chmod" class="nav-link" data-scroll-target="#file-permissions-readwriteexecute-chmod">File Permissions (read/write/execute) (<code>chmod</code>)</a></li>
+  <li><a href="#local-vs-hpc" id="toc-local-vs-hpc" class="nav-link" data-scroll-target="#local-vs-hpc">Local vs HPC</a></li>
   </ul>
 </nav>
     </div>
@@ -359,10 +360,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Tor Kling, Vahid AtabaigielmiS </p>
+             <p>Tor Kling </p>
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 1, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -372,8 +379,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>CLI workspaces are often <strong>messy</strong> if you don’t have a plan. This practical will help you <strong>organize your project</strong> and <strong>build good habits</strong> for working on the command line. It is as important to <strong>organize your workspace</strong> as it is to write good code. A messy workspace can lead to lost files, accidental overwrites or make it a hassle for other people to work with your project. In this practical we introduce concepts that allow us to protect our data, keep our project organized, and make it easier to work with others. We will also introduce some new commands that will help you <strong>find files</strong> and <strong>summarize data</strong>. Lastly we also cover how these habits map onto the HPC filesystem, which is important for when you start working on the cluster.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -389,7 +396,7 @@ Learning Objectives
 <ul>
 <li>Organize a project into a reproducible folder structure (data/refs/results/scripts/logs)</li>
 <li>Use symlinks to reference shared or large data without duplicating it</li>
-<li>Understand delimiters and newlines in files, and how to use <code>printf</code> to create a formatted files</li>
+<li>Understand delimiters and newlines in files</li>
 <li>Summarize file contents using <code>cut</code>, <code>sort</code>, <code>uniq</code>, and <code>wc</code></li>
 <li>Locate files with <code>find</code></li>
 <li>Set and interpret file permissions with <code>chmod</code></li>
@@ -417,8 +424,8 @@ Reusing your data from Practical 1
 </div>
 <hr>
 </section>
-<section id="workspace-setup" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Workspace Setup</h1>
+<section id="workspace-setup" class="level1">
+<h1>Workspace Setup</h1>
 <p>In Practical 1 you created a folder called <strong>CLI_intro/</strong> and placed some mock files there (FASTA sequences, annotations, expression data).<br>
 Now we will <strong>expand this folder into a proper project structure</strong> so that it’s easier to keep track of data, scripts, and results.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro</span>
@@ -451,8 +458,8 @@ Best Practice
 </div>
 </div>
 <hr>
-<section id="symlinks-linking-shared-or-large-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="symlinks-linking-shared-or-large-data"><span class="header-section-number">2.1</span> Symlinks: linking shared or large data</h2>
+<section id="symlinks-linking-shared-or-large-data" class="level2">
+<h2 class="anchored" data-anchor-id="symlinks-linking-shared-or-large-data">Symlinks: linking shared or large data</h2>
 <p>Up until now, the paths we have used have been the real <strong>physical paths</strong> to files/directories. However, sometimes we want to <strong>link</strong> to a ex. database without copying it. This is especially useful for large files (like reference genomes) or shared files (like annotation databases). Instead of copying the file into your project, you can create a <strong>symbolic link (symlink)</strong> that points to the original file. This way, you avoid unnecessary copies and keep one source for files needed for many things.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: link a shared reference into your existing refs/ folder</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
@@ -492,11 +499,11 @@ Expected output (no peeking!)
 <hr>
 </section>
 </section>
-<section id="more-on-files-and-where-to-find-them" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> More on files and where to find them</h1>
+<section id="more-on-files-and-where-to-find-them" class="level1">
+<h1>More on files and where to find them</h1>
 <p>In the first practical, we introduced several commands for working with files. Now we will try to expand our usage of these commands with some additional commands that are useful for <strong>finding files</strong> and <strong>summarizing their contents</strong>, some of them you might remember from the pipe examples in the first practical.</p>
-<section id="field-delimiters-and-newlines-printf" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="field-delimiters-and-newlines-printf"><span class="header-section-number">3.1</span> Field delimiters and newlines (<code>printf</code>)</h2>
+<section id="field-delimiters-and-newlines" class="level2">
+<h2 class="anchored" data-anchor-id="field-delimiters-and-newlines">Field delimiters and newlines</h2>
 <p>So by now you know quite well how to peek at files with <code>cat</code> and <code>less</code>, but we didnt talk a lot about what sits inbetween the columns in the files. Columns, or <strong>fields</strong>, are separated by a <strong>delimiter</strong> which can vary depending on the file type. You are probably familiar with .csv files, which are <strong>comma-separated</strong> and thus there is a <code>,</code> between each column. So to create a comma delimited file, we include a <code>,</code> between each column when we <code>echo</code> and redirect. Other examples of delimiters are:</p>
 <ul>
 <li><strong>tab</strong> (<code>\t</code>)</li>
@@ -504,11 +511,11 @@ Expected output (no peeking!)
 <li><strong>pipe</strong> (<code>|</code>)</li>
 </ul>
 <p>To split a line into more rows its also good to know that the <strong>newline</strong> character (<code>\n</code>) is used to separate rows. In this segment we will create a small <strong>tab-separated file</strong> and use it to demonstrate some of the commands used to summarize data.</p>
-<p>We will now construct a toy metadata file with 5 samples, each with a country and tissue type. The file will be <strong>tab-separated</strong> and we will use <code>printf</code> to create it. <code>printf</code> is similar to <code>echo</code>, but it allows us to specify <strong>formatting</strong> for the output. In this case, we will use <code>\t</code> for tabs and <code>\n</code> for newlines.</p>
+<p>We will now construct a toy metadata file with 5 samples, each with a country and tissue type. The file will be <strong>tab-separated</strong> and we will use an extended <code>echo</code> command to create it. The <code>-e</code> flag expands the code to interpret <code>\</code>-characters like <code>\t</code> for tab and <code>\n</code> for newline. We will also use the <code>head</code> command to check that the file was created correctly.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/CLI_intro</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a small tab-separated file</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'Sample_ID\tCountry\tTissue\nS1\tSE\tgut\nS2\tSE\tgut\nS3\tNO\tskin\nS4\tDK\tgut\nS5\tSE\tskin\n'</span> <span class="op">&gt;</span> data/metadata.tsv</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">'Sample_ID\tCountry\tTissue\nS1\tSE\tgut\nS2\tSE\tgut\nS3\tNO\tskin\nS4\tDK\tgut\nS5\tSE\tskin\n'</span> <span class="op">&gt;</span> data/metadata.tsv</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the file was created correctly</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> data/metadata.tsv</span>
@@ -516,8 +523,8 @@ Expected output (no peeking!)
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># If you are unsure of the field delimiter, cat has a useful option to visualize it:</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-A</span> data/metadata.tsv   <span class="co"># shows tab characters (^I), as well as other hidden characters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="counts-and-quick-summaries-with-wc-sort-uniq-and-cut" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="counts-and-quick-summaries-with-wc-sort-uniq-and-cut"><span class="header-section-number">3.2</span> Counts and quick summaries with <code>wc</code>, <code>sort</code>, <code>uniq</code> and <code>cut</code></h2>
+<section id="counts-and-quick-summaries-with-wc-sort-uniq-and-cut" class="level2">
+<h2 class="anchored" data-anchor-id="counts-and-quick-summaries-with-wc-sort-uniq-and-cut">Counts and quick summaries with <code>wc</code>, <code>sort</code>, <code>uniq</code> and <code>cut</code></h2>
 <p>Four commands that are quite lovely in pipes are <code>wc</code>, <code>sort</code>, <code>uniq</code> and <code>cut</code></p>
 <ul>
 <li><code>wc</code> counts lines, words, or characters in a file</li>
@@ -532,13 +539,16 @@ Expected output (no peeking!)
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-    title[Correct sort/uniq order]
-    In[Unsorted Data] --&gt; A[sort: orders lines so duplicate aggregate] 
-    A --&gt; B[uniq: removes duplicates that are adjacent] 
-    B --&gt; C[File redirect or stdout]
-
-    In -.-&gt; D[uniq: removes duplicates, but miss those that are not adjacent]
-    D -.-&gt; E[Missed duplicates!]
+    title["Correct sort/uniq order"]
+    In["Unsorted Data"] --&gt; A["sort: orders lines so duplicate aggregate"] 
+    B["uniq: removes duplicates that are adjacent"] 
+    C["File redirect or stdout"]
+    D["uniq: removes duplicates, but miss those that are not adjacent"]
+    E["Missed duplicates!"]
+    A --&gt; B
+    B --&gt; C
+    In -.-&gt; D
+    D -.-&gt; E
 
     classDef wrong fill:#f8d7da,stroke:#c0392b,color:#c0392b;
     class D,E wrong;    
@@ -612,8 +622,8 @@ Example solution (Try to solve it yourself before checking!)
 </div>
 </div>
 </section>
-<section id="locate-things-with-find" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="locate-things-with-find"><span class="header-section-number">3.3</span> Locate things with <code>find</code></h2>
+<section id="locate-things-with-find" class="level2">
+<h2 class="anchored" data-anchor-id="locate-things-with-find">Locate things with <code>find</code></h2>
 <p>It all happens to us eventually, we forget where we put a file or we want to find all files of a certain type. The <code>find</code> command is very useful for this. It can search for files based on name, type, size, and many other criteria. It is also quite useful in automated <strong>scripts</strong>, for bioinformatics it is especially useful in scripts meant for batch processing of many files. We will cover more on scripts in Practical 4, but for now lets see some examples of how to use <code>find</code> to locate files.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
@@ -651,8 +661,8 @@ A note on regex and wildcards
 <hr>
 </section>
 </section>
-<section id="file-permissions-readwriteexecute-chmod" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> File Permissions (read/write/execute) (<code>chmod</code>)</h1>
+<section id="file-permissions-readwriteexecute-chmod" class="level1">
+<h1>File Permissions (read/write/execute) (<code>chmod</code>)</h1>
 <p>All files, directories and most anything created in a linux system has “rules” that govern who can use them and how. These rules are called <strong>permissions</strong> and they are set by the <strong>owner</strong> of the file or directory. Permissions are divided into three categories: <strong>owner</strong>, <strong>group</strong>, and <strong>others</strong>. Each category can have three types of permissions: <strong>read (r)</strong>, <strong>write (w)</strong>, and <strong>execute (x)</strong>. Most often on your own local machine, you are the owner of the files you create, and the group is usually your user group. Others are everyone else on the system. Permissions are important to understand because they can prevent accidental overwrites or deletions of important files, and they can also be used to share files with others in a controlled way.</p>
 <p>Changing permissions is done with the <code>chmod</code> command, which stands for “change mode”. The mode is a three-digit number that represents the permissions for owner, group, and others. Each digit is a sum of the values for read (4), write (2), and execute (1). For example, <code>chmod 644 file.txt</code> sets the permissions to read/write for the owner, and read-only for group and others. You can also use symbolic notation to change permissions, such as <code>chmod u+x file.sh</code> to add execute permission for the owner.</p>
 <ul>
@@ -699,8 +709,8 @@ Exercise: Check permissions for a few targets on your system
 </div>
 <hr>
 </section>
-<section id="local-vs-hpc" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Local vs HPC</h1>
+<section id="local-vs-hpc" class="level1">
+<h1>Local vs HPC</h1>
 <p>You have already been introduced to the HPC cluster in Practical 2, so here is mainly a little recap of how the things we covered so far map onto the HPC filesystem. The main difference is that on your local machine you have a lot more freedom to create and delete files, while on the HPC cluster you are more limited in your permissions. This means that you need to be more careful with how you organize your workspace and where you store data. The HPC cluster has a shared filesystem, which means that multiple users can access the same files. This is great for collaboration, but it also means that you need to be careful not to overwrite or delete files that other people are using.</p>
 <table class="caption-top table">
 <colgroup>

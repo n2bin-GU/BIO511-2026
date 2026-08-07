@@ -1,12 +1,12 @@
 ---
-title: "Additional 1: Algorithmic Thinking in Genomics"
-author: "Vahid Atabaigielmi, Tor Kling"
-date: today
+title: "Practical 7: Algorithmic Thinking in Genomics"
+author: "Vahid Atabaigielmi"
+date: August 2026
 format: 
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: cosmo
 ---
@@ -28,19 +28,20 @@ Modern bioinformatics depends on a small number of recurring algorithmic ideas. 
 ::: {.callout-note}
 ## Learning Objectives
 
-By the end of this additional exercise, you should be able to:
+By the end of this practical, you should be able to:
 
+- Explain why naive algorithms often fail on genomic-scale data
+- Recognize common genomics algorithms and the problems they solve
 - Describe dynamic programming, seed-and-extend search, indexing, graph assembly, hidden Markov models, and probabilistic variant calling at a conceptual level
-- Convert pseudocode descriptions of algorithms into runnable Python code
-- Call that python code in simple efficient bash scripts 
-
+- Compare algorithmic tradeoffs: exact vs heuristic, fast vs sensitive, memory-efficient vs simple
+- Design pseudocode for a realistic genomics problem before writing code
 :::
 
 # Where Does the Word Algorithm Come From?
 
 The word **algorithm** comes from the name of the Persian mathematician **Muhammad ibn Musa al-Khwarizmi**, who lived around the 9th century. His name was later Latinized in Europe as **Algoritmi**.
 
-![Modern statue of Muhammad ibn Musa al-Khwarizmi in Madrid. This is a later commemorative statue, not a historical portrait. Image source: Wikimedia Commons, CC0.](images/al-khwarizmi-statue.jpg){fig-alt="A modern statue of Muhammad ibn Musa al-Khwarizmi holding a book." width="45%"}
+![Modern statue of Muhammad ibn Musa al-Khwarizmi in Madrid. This is a later commemorative statue, not a historical portrait. Image source: Wikimedia Commons, CC0.](/pages/images/al-khwarizmi-statue.jpg){fig-alt="A modern statue of Muhammad ibn Musa al-Khwarizmi holding a book." width="45%"}
 
 One reason his name became so strongly connected with algorithmic thinking is that his mathematical works described **general, repeatable procedures** for solving problems. In his work on **al-jabr**, he gave systematic methods for solving linear and quadratic equations, which are polynomial equations of degree 1 and degree 2. The important idea was not just finding one answer, but describing a method that could be followed again and again for similar problems.
 

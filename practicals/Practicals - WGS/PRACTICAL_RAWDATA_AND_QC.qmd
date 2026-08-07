@@ -1,13 +1,13 @@
 ---
 title: "Practical 1: Raw Read Data and Quality Control"
 subtitle: "BIO511 Genomics - Command Line QC and Classification"
-author: "Tor Kling"
-date: today
+author: "Tor Kling, Kaisa Thorell"
+date: August 2026
 format:
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: cosmo
 ---

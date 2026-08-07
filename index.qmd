@@ -2,12 +2,12 @@
 title: "BIO511 Genomics - Practical Repository"
 subtitle: "Welcome to the practical exercises for the BIO511 Genomics course"
 author: "Tor Kling"
-date: today
+date: August 2026
 format: 
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: minty
     css: pages/styles.css
@@ -17,41 +17,41 @@ format:
 
 This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.
 
-### (⌐ ͡■ ͜ʖ ͡■) Command Line Programming
+### 🖥️ Command Line Programming
 Here are the practical exercises related to command line programming section of the course:
 
 #### Introduction to Command Line Programming
-- **[Practical 1: CLI Basics](practicals/Practicals%20-%20CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.qmd)**
-- **[Practical 2: Setting up the HPC](practicals/Practicals%20-%20CLI/PRACTICAL_SETTING_UP_THE_HPC.qmd)**
-- **[Practical 3: Workspace Management and Data Management](practicals/Practicals%20-%20CLI/PRACTICAL_WORKSPACE_MANAGEMENT.qmd)**
-- **[Practical 4: Scripting and Advanced Text Manipulation](practicals/Practicals%20-%20CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.qmd)**
-- **[Practical 5: Software & Containers](practicals/Practicals%20-%20CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.qmd)**
+- **[Practical 1: CLI Basics 🔒](practicals/Practicals%20-%20CLI/PRACTICAL_INTRO_TO_COMMAND_LINE_.qmd)**
+- **[Practical 2: Setting up the HPC 🔒](practicals/Practicals%20-%20CLI/PRACTICAL_SETTING_UP_THE_HPC_.qmd)**
+- **[Practical 3: Workspace Management and Data Management 🔒](practicals/Practicals%20-%20CLI/PRACTICAL_WORKSPACE_MANAGEMENT_.qmd)**
+- **[Practical 4: Scripting and Advanced Text Manipulation 🔒](practicals/Practicals%20-%20CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION_.qmd)**
+- **[Practical 5: Software & Containers 🔒](practicals/Practicals%20-%20CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS_.qmd)**
 
 #### Coding Best Practices
-- **[Practical 1: Git Fundamentals](practicals/Practicals%20-%20Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd)**
-- **[Practical 2: Algorithmic Thinking](practicals/Practicals%20-%20Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd)**
+- **[Practical 1: Best practices 🔒](practicals/Practicals%20-%20Best_practices/PRACTICAL_BEST_PRACTICES_.qmd)**
 
 ### 🧬 Genomics Workflows
 The following practical exercises focus on genomics workflows:
 
 #### Genome workflows - Whole Genome Sequencing (WGS)
-- **[Practical 1: Quality Control and Classification](practicals/Practicals%20-%20WGS/PRACTICAL_RAWDATA_AND_QC.qmd)**
-- **[Practical 2: Genome Assembly and Mapping](practicals/Practicals%20-%20WGS/PRACTICAL_ASSEMBLY_AND_MAPPING.qmd)**
-- **[Practical 3: Genome Annotation](practicals/Practicals%20-%20WGS/PRACTICAL_FUNCTIONAL_ANNOTATION.qmd)**
+- **[Practical 1: Quality Control and Classification 🔒](practicals/Practicals%20-%20WGS/PRACTICAL_RAWDATA_AND_QC_.qmd)**
+- **[Practical 2: Genome Assembly and Mapping 🔒](practicals/Practicals%20-%20WGS/PRACTICAL_ASSEMBLY_AND_MAPPING_.qmd)**
+- **[Practical 3: Genome Annotation 🔒](practicals/Practicals%20-%20WGS/PRACTICAL_FUNCTIONAL_ANNOTATION_.qmd)**
 
 #### Additional WGS Resources 
-- **[Additional: Build curated reference files](practicals/Practicals%20-%20WGS/ADDITIONAL_PREP_CURATED_PROTEINS.qmd)**
+- **[Additional: Build curated reference files 🔒](practicals/Practicals%20-%20WGS/ADDITIONAL_PREP_CURATED_PROTEINS_.qmd)**
 
 ### 🐍 Python Programming
 Lastly, we cover Python programming with these practical exercises:
 
-- **[Practical 0: Introduction](practicals/Practicals%20-%20Python/PRACTICAL_SETUP.qmd)**
-- **[Practical 1: Python Data Types and If/Else Clauses](practicals/Practicals%20-%20Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE.qmd)**
-- **[Practical 2: Python Loops](practicals/Practicals%20-%20Python/PRACTICAL_LOOPING.qmd)**
-- **[Practical 3: Python Functions](practicals/Practicals%20-%20Python/PRACTICAL_FUNCTIONS.qmd)**
-- **[Practical 4: Python Modules](practicals/Practicals%20-%20Python/PRACTICAL_MODULES.qmd)**
-- **[Practical 5: Files](practicals/Practicals%20-%20Python/PRACTICAL_FILES.qmd)**
-- **[Practical 6: Plotting](practicals/Practicals%20-%20Python/PRACTICAL_PLOTTING.qmd)**
+- **[Practical 0: Introduction 🔒](practicals/Practicals%20-%20Python/PRACTICAL_SETUP_.qmd)**
+- **[Practical 1: Python Data Types and If/Else Clauses 🔒](practicals/Practicals%20-%20Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE_.qmd)**
+- **[Practical 2: Python Loops 🔒](practicals/Practicals%20-%20Python/PRACTICAL_LOOPING_.qmd)**
+- **[Practical 3: Python Functions 🔒](practicals/Practicals%20-%20Python/PRACTICAL_FUNCTIONS_.qmd)**
+- **[Practical 4: Python Modules 🔒](practicals/Practicals%20-%20Python/PRACTICAL_MODULES_.qmd)**
+- **[Practical 5: Files 🔒](practicals/Practicals%20-%20Python/PRACTICAL_FILES_.qmd)**
+- **[Practical 6: Plotting 🔒](practicals/Practicals%20-%20Python/PRACTICAL_PLOTTING_.qmd)**
+- **[Practical 7: Algorithmic Thinking 🔒](practicals/Practicals%20-%20Best_practices/PRACTICAL_ALGORITHMIC_THINKING_.qmd)**
 
 ---
 

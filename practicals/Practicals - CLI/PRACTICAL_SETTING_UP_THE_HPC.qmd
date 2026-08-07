@@ -1,84 +1,665 @@
 ---
-title: "Practical 2: Connecting to the HPC"
-subtitle: "BIO511 Genomics - The c3se High Performance Computing Cluster"
-author: "Kaisa Thorell, Tor Kling"
-date: today
-format: 
+title: "Practical 2: High performance computing clusters - intro"
+subtitle: "BIO511 Genomics - understanding Vera before logging in"
+author: "Vahid Atabaigielmi"
+date: August 2026
+format:
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
-    theme: cosmo
+    theme: minty
 ---
 
-# Introduction
+# Why this lecture?
 
-This tutorial is to take you through the final steps of setting up and accessing the [c3se](https://www.c3se.chalmers.se/) 
-High Performance Computing infrastructure. The specific cluster we will use is called Vera. You will be introduced to this 
-cluster in the lecture and [here](https://www.c3se.chalmers.se/about/Vera/) you can find more information about it, including 
-what resources that are available, how to run jobs and other documentation. 
+In this course you will use the command line and the Vera high performance computing cluster for bioinformatics work. Before setting up accounts, VPN, SSH, and VSCode, it helps to understand what kind of system Vera is and how work is expected to run on it.
 
-We will walk you through step by step in this tutorial so that we (hopefully) can assist if there are any problems.
-
+This lecture is based on the C3SE introduction to Vera and the C3SE Vera system overview. It is written for master's students in chemistry and molecular biology who may be new to shared computing systems.
 
 ::: {.callout-note}
-## Pre-course setup
-To be able to follow these steps you first have to have followed the steps of the **Pre-course Setup** 
-including registration at SUPR and application to the course HPC project.
+## Learning objectives
+
+By the end of this lecture, you should be able to:
+
+- Explain what an HPC cluster is in plain language.
+- Describe the difference between a login node and a compute node.
+- Explain why jobs are submitted to a scheduler instead of run directly.
+- Recognize the most important resources: CPU cores, RAM, storage, time, GPUs, and VRAM.
+- Understand the basic workflow for running work on Vera.
+- Know where the later "Setting up the HPC" practical fits into the bigger picture.
 :::
 
 ---
 
-# Adding Vera/c3se at SUPR
-- Log in to [SUPR](https://supr.naiss.se/)
-- Click "Accounts" in the left side menu
-- Request access to Vera/c3se
+# Why do chemists and molecular biologists use HPC?
+
+Many questions in chemistry, molecular biology, and genomics create data or calculations that are too large for a laptop. A laptop is excellent for writing code, reading small files, and testing ideas. It is not always suitable for large analyses.
+
+Examples where HPC can help:
+
+- Comparing millions of sequencing reads against a reference genome.
+- Assembling bacterial genomes from raw sequencing data.
+- Running the same analysis over many samples.
+- Predicting or comparing protein structures.
+- Running molecular simulations.
+- Training or using larger machine learning models.
+- Processing large image or microscopy datasets.
+
+The key idea is not only that the cluster is "faster". The key idea is that an HPC cluster lets many users request controlled amounts of shared computing power for work that would otherwise be slow, unstable, or impossible on a personal computer.
 
 ---
 
-# Setting up a Chalmers ID
+# What is a high performance computing cluster?
 
-- Navigate to [https://myaccount.chalmers.se/](https://myaccount.chalmers.se/). 
-- Log in with your GU account.
-- Choose "Activate CID" and follow the instructions to activate your account
+An HPC cluster is a collection of many connected Linux computers. These computers are called **nodes**. The nodes share storage systems and are connected by fast networks. Users do not normally choose a physical machine by hand. Instead, they ask the cluster for resources and the scheduler decides where the work can run.
 
-::: {.callout-note}
-## Remember your password!
-The CID username and password are the ones you will use to log in to the cluster
+When we say that nodes "share storage systems", we mean that files are not only stored on the individual compute node. Vera has network-connected storage that many nodes can access. This is why you can log in, submit a job, and later find the output files even if the job ran on a different compute node.
+
+Different kinds of storage and memory have different jobs:
+
+| Component | Simple meaning | What it is used for |
+|---|---|---|
+| RAM | Short-term working memory for the CPU | Data currently being processed by a CPU |
+| VRAM | Short-term working memory on a GPU card | Data currently being processed by a GPU |
+| Local disk | Storage physically attached to one computer or node | Temporary files, operating system files, fast scratch work |
+| Network/shared storage | Storage reached over the cluster network | Home directories, project data, shared inputs, final outputs |
+| Backup storage | Separate storage used to recover files after problems | Protection against hardware failure or accidental loss |
+
+RAM and VRAM disappear when a program stops or a node is rebooted. Disk and network storage are persistent, which means files remain there after the program finishes, unless they are deleted or cleaned by policy.
+
+```{mermaid}
+flowchart LR
+  A[Your laptop or VSCode] --> B[Login node]
+  B --> C[Scheduler]
+  C --> D[Compute node 1]
+  C --> E[Compute node 2]
+  C --> F[GPU node]
+  D --> G[Shared storage]
+  E --> G
+  F --> G
+```
+
+Think of it like a shared research facility. You do not walk into a room and take over any instrument you want. You log in, prepare your work, book the resources you need, wait for your turn, and then collect your results.
+
+---
+
+# CPU, GPU, RAM, and VRAM
+
+Before talking about Vera hardware, it helps to separate four common words.
+
+## CPU
+
+The **CPU** is the general-purpose processor in a computer. It is good at running the operating system, scripts, command line tools, and most standard bioinformatics programs. When a SLURM job asks for "cores", it is asking for CPU cores.
+
+Examples of CPU-heavy work:
+
+- Running `bwa`, `samtools`, `blast`, `fastqc`, or many Python/R scripts.
+- Sorting large tables.
+- Running many independent sample analyses in parallel.
+
+## GPU
+
+The **GPU** is a specialised accelerator originally designed for graphics, but now also used for many scientific and machine learning tasks. A GPU can do some kinds of numerical work very quickly, especially when the software has been written to use the GPU.
+
+Examples of GPU-aware work:
+
+- Some deep learning programs using PyTorch or TensorFlow with CUDA.
+- Some molecular dynamics or molecular modelling software configured for GPUs.
+- Some image analysis workflows.
+
+Many ordinary command line tools do **not** use a GPU. If the program cannot use a GPU, requesting one will not make the job faster.
+
+## RAM
+
+**RAM** is the short-term memory used by the CPU while a program is running. If a genome assembly needs to keep a large graph in memory, or a Python script loads a large matrix, that memory is RAM.
+
+If a job runs out of RAM, it may crash or be killed by the scheduler.
+
+## VRAM
+
+**VRAM** is the memory built into a GPU card. GPU programs must fit the data they process on the GPU into VRAM. This is why GPU cards are often described by both model and memory size, for example A40 with 48 GB VRAM or H100 with 96 GB VRAM.
+
+---
+
+# Vera in one page
+
+Vera is the C3SE HPC cluster that this course uses. C3SE is part of Chalmers e-Commons and manages HPC resources at Chalmers. The C3SE introduction also explains that C3SE participates in the Swedish national HPC ecosystem through NAISS, but Vera itself is a local C3SE resource.
+
+From the C3SE Vera pages, the important student-level picture is:
+
+- Vera is a Linux-based cluster.
+- Vera has many CPU compute nodes.
+- Vera also has GPU nodes with NVIDIA A40, A100, and H100 GPUs.
+- The main partition, or queue, is called `vera`.
+- Jobs are charged to a project allocation, usually in core-hours.
+- GPU jobs cost more allocation than CPU-only jobs, so GPUs should only be requested when the program can actually use them.
+- Login nodes are shared entry points and must not be used for heavy analyses.
+- The Department for Chemistry & Molecular Biology at the University of Gothenburg is listed on the Vera allocation page through Richard Neutze, C3SE 408/22-1.
+
+Here, **software** means the program, script, library, or workflow you run. Examples include `samtools`, `blast`, GROMACS, MATLAB, R packages, Python packages, TensorFlow, PyTorch, or your own Python script. Some software can use GPUs. Some software only uses CPUs.
+
+When C3SE says that GPU jobs "cost more", this usually does **not** mean that you personally pay money for one command. It means the job consumes more of the project allocation. A project allocation is like a shared budget of compute time. GPU cards are scarce and powerful, so Vera accounts for them with an extra cost in core-hour equivalents.
+
+The exact hardware can change. You do not need to memorize node counts or CPU model names for this course. What matters is that you understand how to request suitable resources and use the system politely.
+
+## Simplified Vera hardware
+
+The Vera documentation currently describes two main CPU generations:
+
+| Node type | CPU hardware | Simple meaning |
+|---|---|---|
+| Zen4 | 2 AMD EPYC 9354 CPUs per node, 32 cores per CPU | 64 CPU cores per full node; currently the default if you do not request a specific CPU type |
+| Icelake | 2 Intel Xeon Gold 6338 CPUs per node, 32 cores per CPU | 64 CPU cores per full node; can be requested when needed |
+
+Standard Zen4 Vera nodes commonly have 768 GB RAM per node. Icelake nodes commonly have 512 GB RAM per node. Some nodes have more memory, such as 1024 or 1536 GB RAM, and some larger-memory nodes may be private or limited to specific projects.
+
+The seminar slides describe Vera in terms of CPU generations and accelerator cards. The live Vera hardware page gives the exact current node counts. You do not need to memorize the numbers. The useful student-level summary is:
+
+- Most normal jobs run on 64-core CPU nodes.
+- Many standard nodes have hundreds of GB of RAM, far more than a laptop.
+- Some nodes have larger RAM for memory-hungry jobs.
+- A small number of nodes have GPUs, so GPU jobs are a special request.
+- You can inspect current node information on Vera with `sinfo`.
+
+Vera also has GPU nodes:
+
+| GPU type | Approximate total on main partition | Where it is used | VRAM per GPU | Beginner-level interpretation |
+|---|---|---|---|---|
+| A40 | 16 GPUs | Icelake GPU nodes | about 45-48 GB | Useful for some GPU workloads, often graphics/AI-oriented |
+| A100 | 12 GPUs | Icelake GPU nodes | 40 GB | Strong scientific/AI GPU |
+| H100 | 8 GPUs | Zen4 GPU nodes | about 94-96 GB | Very powerful newer GPU |
+
+The C3SE slides also list theoretical floating-point performance for A40, A100, and H100 GPUs. These numbers can be useful for specialists, but for this course the important message is simpler:
+
+- CPU nodes are the normal choice for most command line and bioinformatics jobs.
+- Large-memory nodes are useful when a program needs a lot of RAM.
+- GPU nodes are useful only when the software is GPU-aware.
+- You should not request special hardware unless you know why your job needs it.
+
+Example GPU accounting from the C3SE slides:
+
+| GPU | Extra allocation cost | What this means |
+|---|---|---|
+| A40 | 16 extra core-hour equivalents per GPU-hour | Lower extra cost |
+| A100 | 48 extra core-hour equivalents per GPU-hour | Higher extra cost |
+| H100 | 160 extra core-hour equivalents per GPU-hour | Highest extra cost |
+
+For example, if a job uses part of a CPU node plus one A100 for 10 hours, the project is charged for the CPU cores plus the extra GPU cost. This is why GPU requests should be intentional.
+
+## Vera, Alvis, Cephyr, and Mimer
+
+The C3SE slides mention several systems. They are related, but they are not the same thing.
+
+| Name | What it is | How it relates to Vera |
+|---|---|---|
+| Vera | The HPC compute cluster used in this course | Where your CPU/GPU jobs run |
+| Alvis | A NAISS system for AI/ML research | A different compute system; it is retiring and being replaced by Arrhenius |
+| Cephyr | A C3SE storage system based on CephFS | Provides storage areas used by C3SE systems, including Vera project/home storage |
+| Mimer | A high-performance storage system based on WekaIO | Mainly intended for Alvis-style high-I/O workloads, but can also be available for data staging from other systems |
+
+In short: **Vera computes; Cephyr and Mimer store data; Alvis is another compute system.**
+
+---
+
+# Your laptop versus Vera
+
+| Feature | Your laptop | Vera HPC cluster |
+|---|---|---|
+| Users | Usually just you | Many users at the same time |
+| Operating system | macOS, Windows, or Linux | Linux, specifically a cluster-managed environment |
+| Administrator access | You may be admin | You do not have `sudo` access |
+| Software installation | You can often install system packages | You usually use modules, containers, or local installs |
+| Heavy calculations | Can overheat, freeze, or take too long | Should run as scheduled jobs |
+| Resource sharing | Mostly personal | Shared through projects and queues |
+
+This difference explains many HPC rules. Vera is powerful because it is shared, but being shared also means that every user must ask for resources in a controlled way.
+
+---
+
+# Login nodes and compute nodes
+
+The most important HPC distinction is between **login nodes** and **compute nodes**.
+
+## Login nodes
+
+Login nodes are the front doors of the cluster. You use them to:
+
+- Connect to Vera.
+- Navigate files.
+- Edit scripts.
+- Transfer small files.
+- Prepare job scripts.
+- Submit jobs to the scheduler.
+- Check job status.
+
+Login nodes are shared by many users. They are not for large calculations.
+
+## Compute nodes
+
+Compute nodes are where heavy work runs. You use them indirectly by submitting a job. The scheduler starts your script on one or more compute nodes when the requested resources are available.
+
+Use compute nodes for:
+
+- Genome assembly.
+- Mapping reads.
+- Large BLAST or database searches.
+- Long-running Python or R analyses.
+- Molecular simulations.
+- GPU-enabled workloads.
+
+::: {.callout-important}
+## Main rule
+
+Do not run big or long jobs on the login node. Prepare your work on the login node, then submit it to the scheduler so it can run on compute nodes.
 :::
 
 ---
 
-# Setting up Chalmers VPN
+# The scheduler: why jobs wait in a queue
 
-To be able to access c3se from other networks than in GU or Chalmers, you will need a Chalmers VPN
+Vera uses a scheduler called **SLURM**. A scheduler is a traffic controller for the cluster. It answers questions like:
 
-- Navigate to [https://chalmers.topdesk.net/tas/public/ssp/content/detail/knowledgeitem?unid=07e6154089a648d09711ccc42a42fc88](https://chalmers.topdesk.net/tas/public/ssp/content/detail/knowledgeitem?unid=07e6154089a648d09711ccc42a42fc88)
-- Follow the instructions to set up the Chalmers VPN
+- Who is allowed to run jobs?
+- Which project should pay for the job?
+- How many CPU cores does the job need?
+- How much time does the job need?
+- Does it need a GPU?
+- Are enough resources free right now?
+- Which queued job has priority?
+
+When you submit a job, it may not start immediately. This is normal. Your job waits until the requested resources are available and the scheduler decides it is your turn.
+
+```{mermaid}
+flowchart LR
+  A[Write job script] --> B[Submit with sbatch]
+  B --> C[Wait in queue]
+  C --> D[Run on compute node]
+  D --> E[Write output and log files]
+  E --> F[Check results]
+```
 
 ---
 
-# Connecting to the HPC using ssh in VSCode
+# What resources do you request?
 
-To be able to connect to the HPC in a manner that will let you use the full suite of tools available (or most of them at least) in VSCode, you will need to install the Remote - SSH extension.
+When you submit work to Vera, you describe what the job needs. Asking for too little may make the job fail. Asking for far too much may make the job wait longer and waste shared allocation.
 
-- Open VSCode
-- Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window or by pressing `Ctrl+Shift+X`
-- Search for "Remote - SSH" and install the extension by Microsoft (if youre unsure how install extensions, see [here](https://code.visualstudio.com/docs/getstarted/extensions))
-- After installation, you will see a new icon in the Activity Bar on the side of the window. Click on it to open the Remote Explorer view.
-  - If the SSH Targets are not visible, click on the drop down to expand the view
-- Click on the `+` ("New Remote") icon next to SSH header to add a new SSH host
-- In the input box that appears, enter the SSH connection string for Vera: `<your_chalmers_id>@vera1.c3se.chalmers.se` (replace `<your_chalmers_id>` with your actual Chalmers ID)
-- Press Enter to confirm
-- You will be prompted to select the SSH configuration file to update. Choose the default option (usually `~/.ssh/config`)
+| Resource | What it means | Simple example |
+|---|---|---|
+| Project account | Which allocation pays for the work | A course or PI project |
+| Partition | Which queue to use | `vera` |
+| Time | Maximum wall-clock runtime | `00:30:00` or `2-00:00:00` |
+| CPU cores | How many CPU workers the job can use | 1, 4, 8, 32, 64 |
+| Memory | How much RAM the job needs | Important for assembly and large matrices |
+| GPU | Specialized accelerator | Useful only for GPU-aware programs |
+| VRAM | Memory on the GPU | Important for GPU programs and large AI models |
+| Temporary disk | Fast local scratch space | Useful for heavy file input/output |
 
-Once you have added the SSH host, you can connect to Vera:
+For beginner bioinformatics work, most jobs are CPU jobs. Do not request a GPU unless the program documentation says it can use one.
 
-- In the Remote Explorer view, find the Vera entry under SSH Targets (or by clicking on the blue "remote window" icon in the bottom left corner of VSCode)
-  -  Click on the "Connect to Host" icon (an arrow if you want the same window, square if you want a new one) next to the Vera entry
-  - If you clicked on the blue "remote window" icon, select "Remote-SSH: Connect to Host..." and then select the Vera entry
-- A new VSCode window will open, and you will be prompted to enter your Chalmers ID password
-- After entering your password, you should be connected to Vera, and you can start working on the HPC cluster directly from VSCode. Make sure that you open your home folder on Vera to open up a workspace.
-- You can verify that you are connected to Vera by opening a new terminal in VSCode (Terminal > New Terminal) and checking the hostname in the terminal prompt. It should show something like `your_chalmers_id@vera:~$`
+---
+
+# Core-hours and fair sharing
+
+Vera projects have allocations. A simple way to understand allocation is **core-hours**:
+
+```text
+core-hours = number of CPU cores * number of hours
+```
+
+For example:
+
+- 1 core for 10 hours = 10 core-hours.
+- 8 cores for 10 hours = 80 core-hours.
+- 64 cores for 2 hours = 128 core-hours.
+
+GPU jobs have extra cost because GPUs are expensive shared resources. The C3SE pages describe Vera GPU costs as additional CPU-equivalent costs. The practical message is simple: request GPUs only when they are useful for your program and your analysis.
+
+---
+
+# Files and storage
+
+An HPC cluster has several kinds of storage. You do not need every detail on day one, but you should know the main idea.
+
+| Storage idea | What to remember |
+|---|---|
+| Home directory | Good for scripts and small personal files. It has quota limits. |
+| Project or group storage | Good for shared course or research data. |
+| `$TMPDIR` | Temporary fast space available during a job. It is deleted when the job ends. |
+| Output directory | Where final results and logs should be copied back. |
+
+Use `$TMPDIR` when a job reads and writes many temporary files. Always copy important output back to persistent storage before the job ends.
+
+Also remember that many tiny files can be inefficient on shared filesystems. When possible, use organized directories, compressed archives, or structured formats such as HDF5 or SQLite.
+
+On Vera, you may see paths such as:
+
+```bash
+/cephyr/users/<CID>/Vera
+/cephyr/NOBACKUP/groups/<project_or_group_name>/
+/mimer/...
+```
+
+These are not random folder names. They indicate which storage system is being used. For beginners, the safest habit is:
+
+- Keep scripts and small notes in your home directory.
+- Keep larger shared course or project data in the project/group area recommended by the instructors.
+- Use `$TMPDIR` for heavy temporary work inside jobs.
+- Copy final results back from `$TMPDIR` before the job finishes.
+- Check quota if file writing suddenly fails.
+
+---
+
+# Connecting to Vera
+
+The C3SE introduction describes three main ways to access Vera:
+
+- SSH from a terminal or from VSCode Remote SSH.
+- Open OnDemand through a web portal.
+- RDP for graphical desktop access.
+
+From outside Chalmers or GU networks, users need Chalmers VPN access. Users also need the correct account and project access through SUPR and C3SE. The next practical, "Setting up the HPC", walks through those setup steps.
+
+For now, remember the order:
+
+1. Get access through the right project.
+2. Activate the account needed for Vera.
+3. Connect to Vera.
+4. Prepare files and job scripts.
+5. Submit work through SLURM.
+6. Monitor jobs and collect results.
+
+---
+
+# Software on Vera
+
+Vera is not Ubuntu, and students do not have administrator rights. This means:
+
+- You cannot use `sudo`.
+- You cannot install system software with `apt-get`.
+- You should not expect software to be available until the right environment is loaded.
+
+HPC systems commonly provide software through a **module system**. Loading a module changes your environment so that a program becomes available.
+
+Typical module commands:
+
+```bash
+module avail          # show available modules
+module spider NAME    # search for a module
+module load NAME      # load software
+module list           # show loaded modules
+module purge          # unload currently loaded modules
+```
+
+For reproducible work, load modules inside the job script instead of relying on hidden changes in your shell startup files.
+
+Containers, such as Apptainer/Singularity images, are another common way to run software on HPC systems. You will meet this idea later in the course when software installation and containers are discussed.
+
+---
+
+# A very small SLURM example
+
+This is not the setup practical yet. The point here is to see what a job script looks like.
+
+```bash
+#!/bin/bash
+#SBATCH -A replace_with_your_project_account
+#SBATCH -p vera
+#SBATCH -n 4
+#SBATCH -t 00:30:00
+#SBATCH -J bio511_test
+
+module purge
+
+echo "This job is running on:"
+hostname
+
+echo "The job started in:"
+pwd
+```
+
+The lines beginning with `#SBATCH` are instructions to the scheduler. They describe the requested account, queue, CPU cores, time, and job name. The remaining lines are the commands that run after the job starts on a compute node.
+
+Common SLURM commands:
+
+```bash
+sbatch job_script.sh       # submit a batch job
+squeue -u $USER            # check your queued and running jobs
+scancel JOBID              # cancel a job
+sacct                      # inspect previous jobs
+```
+---
+
+# How to choose resources as a beginner
+
+Start small, then scale up.
+
+For a new analysis:
+
+1. Test the command on a tiny input file.
+2. Submit a short job with modest resources.
+3. Check the log file.
+4. Check whether the job used the resources you requested.
+5. Increase input size or resources only when the small version works.
+
+Good habits:
+
+- Request only the time you reasonably need.
+- Request GPUs only for GPU-enabled programs.
+- Keep job scripts self-contained.
+- Write results to a clear output directory.
+- Save job IDs when asking for help.
+- Read error messages before resubmitting.
+
+---
+
+# Common beginner misunderstandings
+
+## "I am logged in, so I can run my analysis here" {-}
+
+Not quite. You are usually on a login node. Use it to prepare and submit work, not to run heavy analyses.
+
+## "More cores always makes my job faster" {-}
+
+Only if the software can use multiple cores efficiently. Some programs are single-core. Giving them 32 cores will not make them 32 times faster.
+
+## "A GPU is always better"
+
+Only GPU-aware software benefits from a GPU. Many standard command line and bioinformatics programs are CPU-based. If your program documentation does not mention CUDA, GPU acceleration, NVIDIA GPUs, or a GPU-specific option, assume it is probably CPU-based.
+
+## "If my job waits, something is wrong"
+
+Not necessarily. Queuing is normal on shared systems. Your job may be waiting for priority, enough free resources, or a suitable node.
+
+## "The cluster will keep all temporary files"
+
+No. Temporary job storage such as `$TMPDIR` is cleaned when the job ends. Copy final results back to persistent storage.
+
+---
+
+# Mini-check before the setup practical
+
+Try to answer these before moving on:
+
+1. What should you use a login node for?
+2. Where should heavy analyses run?
+3. What does SLURM do?
+4. Why should you avoid requesting a GPU unless you know you need one?
+5. What happens to files left only in `$TMPDIR` after the job ends?
+6. Why might a job wait in the queue?
+7. What is the difference between RAM and storage?
+8. Do you need `tmux` to safely close your laptop after submitting an `sbatch` job?
+
+<details>
+<summary>Suggested answers</summary>
+
+1. Connecting, editing files, preparing scripts, transferring small files, and submitting or checking jobs.
+2. On compute nodes, through scheduled jobs.
+3. SLURM schedules jobs, allocates resources, starts jobs on compute nodes, and tracks job status.
+4. GPUs are shared, cost more allocation, and only help software designed to use them.
+5. They are deleted when the job finishes or fails.
+6. The requested resources may not be free, other jobs may have higher priority, or the project allocation/usage may affect scheduling.
+7. RAM is temporary working memory used while a program runs. Storage is where files are kept more persistently.
+8. No. Batch jobs submitted with `sbatch` keep running under SLURM after you disconnect. `tmux` is useful for terminal convenience, not for running long analyses on login nodes.
+
+</details>
+
+---
+
+# Take-home message
+
+An HPC cluster is a shared scientific computing environment. Vera is not just "a bigger laptop"; it is a managed system with login nodes, compute nodes, shared storage, software modules, project allocations, and a job scheduler.
+
+The next practical will show how to get connected. This lecture gives the mental model for why the setup steps and cluster rules exist.
+
+---
+
+# Sources
+
+- C3SE. [Introduction to Vera at e-Commons/C3SE](https://www.c3se.chalmers.se/documentation/first_time_users/intro-vera/presentation.html), accessed 2026-07-15.
+- C3SE. [Vera system overview](https://www.c3se.chalmers.se/about/Vera/), accessed 2026-07-15.
+- C3SE. [Cephyr storage system](https://www.c3se.chalmers.se/about/Cephyr/), accessed 2026-07-15.
+- C3SE. [Mimer storage system](https://www.c3se.chalmers.se/about/Mimer/), accessed 2026-07-15.
+- C3SE. [Python environments](https://www.c3se.chalmers.se/documentation/module_system/python/), accessed 2026-07-15.
+
+---
+
+::: {.callout-note}
+## Extra information — not part of the lecture {-}
+
+The information below is provided for those of you who are curious about how to create a Conda environment on Vera.
+:::
+
+## E1: Can I make my own Conda environment? {-}
+
+Usually, yes, but on Vera it is **not the first recommended option**. C3SE recommends this order:
+
+1. Prefer centrally installed modules when they already contain what you need.
+2. For Python packages, prefer a Python `virtualenv` built on top of loaded modules.
+3. For complex Conda environments, prefer building an Apptainer/Singularity container.
+4. Use a direct Conda environment only when you have a clear reason and understand that it can create many files and use quota quickly.
+
+The reason is practical: Conda environments often contain thousands of small files. On a shared network filesystem this can be slow and can use up your file quota. Containers turn the environment into one portable `.sif` file, which is easier for the storage system.
+
+## E2: Recommended simple Python environment with `virtualenv` {-}
+
+Use this when your script needs extra Python packages.
+
+Create the environment once:
+
+```bash
+# 1. Search for suitable modules
+module spider Python
+module spider SciPy-bundle
+module spider virtualenv
+
+# 2. Load Python-related modules from a compatible toolchain
+# The exact versions may change; use versions available on Vera.
+module load virtualenv/20.26.2-GCCcore-13.3.0
+module load SciPy-bundle/2024.05-gfbf-2024a
+
+# 3. Create an environment in a project or course storage area if possible
+mkdir -p /cephyr/NOBACKUP/groups/replace_with_project/my_envs
+cd /cephyr/NOBACKUP/groups/replace_with_project/my_envs
+virtualenv --system-site-packages bio511_env
+
+# 4. Activate it
+source bio511_env/bin/activate
+
+# 5. Install only the extra packages you need
+pip install package_name
+```
+
+Use the environment in a job script:
+
+```bash
+#!/bin/bash
+#SBATCH -A replace_with_project_account
+#SBATCH -p vera
+#SBATCH -n 4
+#SBATCH -t 01:00:00
+#SBATCH -J bio511_python
+
+module purge
+module load virtualenv/20.26.2-GCCcore-13.3.0
+module load SciPy-bundle/2024.05-gfbf-2024a
+
+source /cephyr/NOBACKUP/groups/replace_with_project/my_envs/bio511_env/bin/activate
+
+python my_script.py
+```
+
+::: {.callout-warning}
+## Avoid `pip install --user` {-}
+
+Do not install Python packages directly into `~/.local` with `pip install --user`. Packages installed there can interfere with other environments and can quickly use up your home quota.
+:::
+
+## E3: If you really need Conda {-}
+
+C3SE notes that Miniforge modules are available, but recommends using Conda inside a container for most cases. If a course instructor specifically asks you to create a Conda environment directly on Vera, the basic idea is:
+
+```bash
+# 1. Search for available Miniforge or Conda modules
+module spider Miniforge
+module spider conda
+
+# 2. Load the available module shown by Vera.
+# Replace <version> with the exact module version shown by `module spider`.
+module load Miniforge3/<version>
+
+# 3. Create the environment in project storage, not in your small home quota
+mkdir -p /cephyr/NOBACKUP/groups/replace_with_project/conda_envs
+conda create -p /cephyr/NOBACKUP/groups/replace_with_project/conda_envs/bio511_conda \
+  -c conda-forge python=3.11 package_name
+
+# 4. Activate it
+conda activate /cephyr/NOBACKUP/groups/replace_with_project/conda_envs/bio511_conda
+
+# 5. Test your script
+python my_script.py
+```
+
+Use it in a job script by loading the same module and activating the same path before running the script.
+
+## E4: Container alternative for Conda dependencies {-}
+
+For a complex Conda environment, a container is often better. A container recipe can install packages from an `environment.yml`, and the finished `.sif` file can be run in a job:
+
+```bash
+apptainer exec my_environment.sif python my_script.py
+```
+
+For GPU containers, the command usually needs `--nv` so the container can see NVIDIA GPUs:
+
+```bash
+apptainer exec --nv my_gpu_environment.sif python gpu_script.py
+```
+
+You do not need to master containers in this first HPC introduction, but you should know that they are often the cleaner alternative to large Conda environments on a shared cluster.
+
+---
+
+## E4: Do I need `tmux`? {-}
+
+Usually, no. For normal HPC work you should submit long-running analyses with `sbatch`. Once the job is submitted, it belongs to the scheduler, not to your laptop connection. You can close your computer, disconnect from VPN, or lose Wi-Fi, and the batch job should continue running.
+
+Use this safe pattern:
+
+```bash
+sbatch job_script.sh
+squeue -u $USER
+```
+
+Then you can log out. Later, log in again and check the output files and SLURM log.
+
+`tmux` can still be useful for:
+
+- Editing files during a long login session.
+- Keeping a terminal layout open while you prepare scripts.
+- Running short monitoring commands.
+
+But `tmux` is **not** a replacement for SLURM. Do not start a long analysis inside `tmux` on the login node. If you need an interactive compute session for debugging, use an interactive SLURM job or the Open OnDemand portal, and keep it short.
 

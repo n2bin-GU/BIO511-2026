@@ -2,14 +2,14 @@
 title: "Practical 5: Software Installation and Containers"
 subtitle: "BIO511 Genomics - Package managers, Conda locally, and Singularity on HPC"
 author: "Tor Kling, Stuti Jain"
-date: today
+date: August 2026
 format:
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
-    theme: cosmo
+    theme: minty
 ---
 # Introduction
 

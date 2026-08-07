@@ -2,12 +2,12 @@
 title: "Practical 2: De novo Assembly and Mapping"
 subtitle: "BIO511 Genomics - De Novo Assembly using long reads"
 author: "Tor Kling"
-date: today
+date: August 2026
 format:
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: cosmo
 ---

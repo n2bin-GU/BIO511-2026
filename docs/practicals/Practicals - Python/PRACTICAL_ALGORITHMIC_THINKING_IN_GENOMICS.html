@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Vahid Atabaigielmi, Tor Kling">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="author" content="Vahid Atabaigielmi">
+<meta name="dcterms.date" content="2026-08-01">
 
-<title>Additional 1: Algorithmic Thinking in Genomics – BIO511 Genomics - Practical Repository</title>
+<title>Practical 7: Algorithmic Thinking in Genomics – BIO511 Genomics - Practical Repository</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -162,11 +162,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -248,54 +248,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#where-does-the-word-algorithm-come-from" id="toc-where-does-the-word-algorithm-come-from" class="nav-link" data-scroll-target="#where-does-the-word-algorithm-come-from"><span class="header-section-number">2</span> Where Does the Word Algorithm Come From?</a></li>
-  <li><a href="#warm-up-algorithmic-thinking-as-planning" id="toc-warm-up-algorithmic-thinking-as-planning" class="nav-link" data-scroll-target="#warm-up-algorithmic-thinking-as-planning"><span class="header-section-number">3</span> Warm-up: Algorithmic Thinking as Planning</a></li>
-  <li><a href="#why-genomics-needs-sophisticated-algorithms" id="toc-why-genomics-needs-sophisticated-algorithms" class="nav-link" data-scroll-target="#why-genomics-needs-sophisticated-algorithms"><span class="header-section-number">4</span> Why Genomics Needs Sophisticated Algorithms</a></li>
-  <li><a href="#algorithmic-vocabulary" id="toc-algorithmic-vocabulary" class="nav-link" data-scroll-target="#algorithmic-vocabulary"><span class="header-section-number">5</span> Algorithmic Vocabulary</a></li>
-  <li><a href="#example-1-exact-string-matching-and-k-mers" id="toc-example-1-exact-string-matching-and-k-mers" class="nav-link" data-scroll-target="#example-1-exact-string-matching-and-k-mers"><span class="header-section-number">6</span> Example 1: Exact String Matching and k-mers</a></li>
-  <li><a href="#example-2-dynamic-programming-for-sequence-alignment" id="toc-example-2-dynamic-programming-for-sequence-alignment" class="nav-link" data-scroll-target="#example-2-dynamic-programming-for-sequence-alignment"><span class="header-section-number">7</span> Example 2: Dynamic Programming for Sequence Alignment</a></li>
-  <li><a href="#example-3-blast-and-seed-and-extend" id="toc-example-3-blast-and-seed-and-extend" class="nav-link" data-scroll-target="#example-3-blast-and-seed-and-extend"><span class="header-section-number">8</span> Example 3: BLAST and Seed-and-Extend</a></li>
-  <li><a href="#example-4-read-mapping-with-indexes-bwt-and-fm-index" id="toc-example-4-read-mapping-with-indexes-bwt-and-fm-index" class="nav-link" data-scroll-target="#example-4-read-mapping-with-indexes-bwt-and-fm-index"><span class="header-section-number">9</span> Example 4: Read Mapping with Indexes, BWT, and FM-index</a></li>
-  <li><a href="#example-5-genome-assembly-with-de-bruijn-graphs" id="toc-example-5-genome-assembly-with-de-bruijn-graphs" class="nav-link" data-scroll-target="#example-5-genome-assembly-with-de-bruijn-graphs"><span class="header-section-number">10</span> Example 5: Genome Assembly with de Bruijn Graphs</a></li>
-  <li><a href="#example-6-hidden-markov-models-for-genes-and-proteins" id="toc-example-6-hidden-markov-models-for-genes-and-proteins" class="nav-link" data-scroll-target="#example-6-hidden-markov-models-for-genes-and-proteins"><span class="header-section-number">11</span> Example 6: Hidden Markov Models for Genes and Proteins</a></li>
-  <li><a href="#example-7-variant-calling-as-probabilistic-inference" id="toc-example-7-variant-calling-as-probabilistic-inference" class="nav-link" data-scroll-target="#example-7-variant-calling-as-probabilistic-inference"><span class="header-section-number">12</span> Example 7: Variant Calling as Probabilistic Inference</a></li>
-  <li><a href="#comparing-algorithms" id="toc-comparing-algorithms" class="nav-link" data-scroll-target="#comparing-algorithms"><span class="header-section-number">13</span> Comparing Algorithms</a></li>
-  <li><a href="#runnable-python-implementations" id="toc-runnable-python-implementations" class="nav-link" data-scroll-target="#runnable-python-implementations"><span class="header-section-number">14</span> Runnable Python Implementations</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#where-does-the-word-algorithm-come-from" id="toc-where-does-the-word-algorithm-come-from" class="nav-link" data-scroll-target="#where-does-the-word-algorithm-come-from">Where Does the Word Algorithm Come From?</a></li>
+  <li><a href="#warm-up-algorithmic-thinking-as-planning" id="toc-warm-up-algorithmic-thinking-as-planning" class="nav-link" data-scroll-target="#warm-up-algorithmic-thinking-as-planning">Warm-up: Algorithmic Thinking as Planning</a></li>
+  <li><a href="#why-genomics-needs-sophisticated-algorithms" id="toc-why-genomics-needs-sophisticated-algorithms" class="nav-link" data-scroll-target="#why-genomics-needs-sophisticated-algorithms">Why Genomics Needs Sophisticated Algorithms</a></li>
+  <li><a href="#algorithmic-vocabulary" id="toc-algorithmic-vocabulary" class="nav-link" data-scroll-target="#algorithmic-vocabulary">Algorithmic Vocabulary</a></li>
+  <li><a href="#example-1-exact-string-matching-and-k-mers" id="toc-example-1-exact-string-matching-and-k-mers" class="nav-link" data-scroll-target="#example-1-exact-string-matching-and-k-mers">Example 1: Exact String Matching and k-mers</a></li>
+  <li><a href="#example-2-dynamic-programming-for-sequence-alignment" id="toc-example-2-dynamic-programming-for-sequence-alignment" class="nav-link" data-scroll-target="#example-2-dynamic-programming-for-sequence-alignment">Example 2: Dynamic Programming for Sequence Alignment</a></li>
+  <li><a href="#example-3-blast-and-seed-and-extend" id="toc-example-3-blast-and-seed-and-extend" class="nav-link" data-scroll-target="#example-3-blast-and-seed-and-extend">Example 3: BLAST and Seed-and-Extend</a></li>
+  <li><a href="#example-4-read-mapping-with-indexes-bwt-and-fm-index" id="toc-example-4-read-mapping-with-indexes-bwt-and-fm-index" class="nav-link" data-scroll-target="#example-4-read-mapping-with-indexes-bwt-and-fm-index">Example 4: Read Mapping with Indexes, BWT, and FM-index</a></li>
+  <li><a href="#example-5-genome-assembly-with-de-bruijn-graphs" id="toc-example-5-genome-assembly-with-de-bruijn-graphs" class="nav-link" data-scroll-target="#example-5-genome-assembly-with-de-bruijn-graphs">Example 5: Genome Assembly with de Bruijn Graphs</a></li>
+  <li><a href="#example-6-hidden-markov-models-for-genes-and-proteins" id="toc-example-6-hidden-markov-models-for-genes-and-proteins" class="nav-link" data-scroll-target="#example-6-hidden-markov-models-for-genes-and-proteins">Example 6: Hidden Markov Models for Genes and Proteins</a></li>
+  <li><a href="#example-7-variant-calling-as-probabilistic-inference" id="toc-example-7-variant-calling-as-probabilistic-inference" class="nav-link" data-scroll-target="#example-7-variant-calling-as-probabilistic-inference">Example 7: Variant Calling as Probabilistic Inference</a></li>
+  <li><a href="#comparing-algorithms" id="toc-comparing-algorithms" class="nav-link" data-scroll-target="#comparing-algorithms">Comparing Algorithms</a></li>
+  <li><a href="#runnable-python-implementations" id="toc-runnable-python-implementations" class="nav-link" data-scroll-target="#runnable-python-implementations">Runnable Python Implementations</a>
   <ul class="collapse">
-  <li><a href="#exact-matching-and-k-mer-counting" id="toc-exact-matching-and-k-mer-counting" class="nav-link" data-scroll-target="#exact-matching-and-k-mer-counting"><span class="header-section-number">14.1</span> Exact Matching and k-mer Counting</a></li>
-  <li><a href="#needleman-wunsch-global-alignment" id="toc-needleman-wunsch-global-alignment" class="nav-link" data-scroll-target="#needleman-wunsch-global-alignment"><span class="header-section-number">14.2</span> Needleman-Wunsch Global Alignment</a></li>
-  <li><a href="#smith-waterman-local-alignment" id="toc-smith-waterman-local-alignment" class="nav-link" data-scroll-target="#smith-waterman-local-alignment"><span class="header-section-number">14.3</span> Smith-Waterman Local Alignment</a></li>
-  <li><a href="#blast-like-seed-and-extend-search" id="toc-blast-like-seed-and-extend-search" class="nav-link" data-scroll-target="#blast-like-seed-and-extend-search"><span class="header-section-number">14.4</span> BLAST-like Seed-and-Extend Search</a></li>
-  <li><a href="#suffix-array-bwt-and-fm-index-style-exact-search" id="toc-suffix-array-bwt-and-fm-index-style-exact-search" class="nav-link" data-scroll-target="#suffix-array-bwt-and-fm-index-style-exact-search"><span class="header-section-number">14.5</span> Suffix Array, BWT, and FM-index-style Exact Search</a></li>
-  <li><a href="#de-bruijn-graph-assembly" id="toc-de-bruijn-graph-assembly" class="nav-link" data-scroll-target="#de-bruijn-graph-assembly"><span class="header-section-number">14.6</span> de Bruijn Graph Assembly</a></li>
-  <li><a href="#viterbi-algorithm-for-a-hidden-markov-model" id="toc-viterbi-algorithm-for-a-hidden-markov-model" class="nav-link" data-scroll-target="#viterbi-algorithm-for-a-hidden-markov-model"><span class="header-section-number">14.7</span> Viterbi Algorithm for a Hidden Markov Model</a></li>
-  <li><a href="#probabilistic-variant-calling" id="toc-probabilistic-variant-calling" class="nav-link" data-scroll-target="#probabilistic-variant-calling"><span class="header-section-number">14.8</span> Probabilistic Variant Calling</a></li>
-  <li><a href="#k-mer-lowest-common-ancestor-classification" id="toc-k-mer-lowest-common-ancestor-classification" class="nav-link" data-scroll-target="#k-mer-lowest-common-ancestor-classification"><span class="header-section-number">14.9</span> k-mer Lowest Common Ancestor Classification</a></li>
-  <li><a href="#minhash-sketching-for-genome-similarity" id="toc-minhash-sketching-for-genome-similarity" class="nav-link" data-scroll-target="#minhash-sketching-for-genome-similarity"><span class="header-section-number">14.10</span> MinHash Sketching for Genome Similarity</a></li>
+  <li><a href="#exact-matching-and-k-mer-counting" id="toc-exact-matching-and-k-mer-counting" class="nav-link" data-scroll-target="#exact-matching-and-k-mer-counting">Exact Matching and k-mer Counting</a></li>
+  <li><a href="#needleman-wunsch-global-alignment" id="toc-needleman-wunsch-global-alignment" class="nav-link" data-scroll-target="#needleman-wunsch-global-alignment">Needleman-Wunsch Global Alignment</a></li>
+  <li><a href="#smith-waterman-local-alignment" id="toc-smith-waterman-local-alignment" class="nav-link" data-scroll-target="#smith-waterman-local-alignment">Smith-Waterman Local Alignment</a></li>
+  <li><a href="#blast-like-seed-and-extend-search" id="toc-blast-like-seed-and-extend-search" class="nav-link" data-scroll-target="#blast-like-seed-and-extend-search">BLAST-like Seed-and-Extend Search</a></li>
+  <li><a href="#suffix-array-bwt-and-fm-index-style-exact-search" id="toc-suffix-array-bwt-and-fm-index-style-exact-search" class="nav-link" data-scroll-target="#suffix-array-bwt-and-fm-index-style-exact-search">Suffix Array, BWT, and FM-index-style Exact Search</a></li>
+  <li><a href="#de-bruijn-graph-assembly" id="toc-de-bruijn-graph-assembly" class="nav-link" data-scroll-target="#de-bruijn-graph-assembly">de Bruijn Graph Assembly</a></li>
+  <li><a href="#viterbi-algorithm-for-a-hidden-markov-model" id="toc-viterbi-algorithm-for-a-hidden-markov-model" class="nav-link" data-scroll-target="#viterbi-algorithm-for-a-hidden-markov-model">Viterbi Algorithm for a Hidden Markov Model</a></li>
+  <li><a href="#probabilistic-variant-calling" id="toc-probabilistic-variant-calling" class="nav-link" data-scroll-target="#probabilistic-variant-calling">Probabilistic Variant Calling</a></li>
+  <li><a href="#k-mer-lowest-common-ancestor-classification" id="toc-k-mer-lowest-common-ancestor-classification" class="nav-link" data-scroll-target="#k-mer-lowest-common-ancestor-classification">k-mer Lowest Common Ancestor Classification</a></li>
+  <li><a href="#minhash-sketching-for-genome-similarity" id="toc-minhash-sketching-for-genome-similarity" class="nav-link" data-scroll-target="#minhash-sketching-for-genome-similarity">MinHash Sketching for Genome Similarity</a></li>
   </ul></li>
-  <li><a href="#a-capstone-way-to-think-about-bioinformatics-problems" id="toc-a-capstone-way-to-think-about-bioinformatics-problems" class="nav-link" data-scroll-target="#a-capstone-way-to-think-about-bioinformatics-problems"><span class="header-section-number">15</span> A Capstone Way to Think About Bioinformatics Problems</a>
+  <li><a href="#a-capstone-way-to-think-about-bioinformatics-problems" id="toc-a-capstone-way-to-think-about-bioinformatics-problems" class="nav-link" data-scroll-target="#a-capstone-way-to-think-about-bioinformatics-problems">A Capstone Way to Think About Bioinformatics Problems</a>
   <ul class="collapse">
-  <li><a href="#define-the-biological-question" id="toc-define-the-biological-question" class="nav-link" data-scroll-target="#define-the-biological-question"><span class="header-section-number">15.1</span> 1. Define the biological question</a></li>
-  <li><a href="#translate-it-into-a-computational-question" id="toc-translate-it-into-a-computational-question" class="nav-link" data-scroll-target="#translate-it-into-a-computational-question"><span class="header-section-number">15.2</span> 2. Translate it into a computational question</a></li>
-  <li><a href="#identify-the-input-size" id="toc-identify-the-input-size" class="nav-link" data-scroll-target="#identify-the-input-size"><span class="header-section-number">15.3</span> 3. Identify the input size</a></li>
-  <li><a href="#choose-an-algorithmic-pattern" id="toc-choose-an-algorithmic-pattern" class="nav-link" data-scroll-target="#choose-an-algorithmic-pattern"><span class="header-section-number">15.4</span> 4. Choose an algorithmic pattern</a></li>
-  <li><a href="#write-pseudocode" id="toc-write-pseudocode" class="nav-link" data-scroll-target="#write-pseudocode"><span class="header-section-number">15.5</span> 5. Write pseudocode</a></li>
+  <li><a href="#define-the-biological-question" id="toc-define-the-biological-question" class="nav-link" data-scroll-target="#define-the-biological-question">1. Define the biological question</a></li>
+  <li><a href="#translate-it-into-a-computational-question" id="toc-translate-it-into-a-computational-question" class="nav-link" data-scroll-target="#translate-it-into-a-computational-question">2. Translate it into a computational question</a></li>
+  <li><a href="#identify-the-input-size" id="toc-identify-the-input-size" class="nav-link" data-scroll-target="#identify-the-input-size">3. Identify the input size</a></li>
+  <li><a href="#choose-an-algorithmic-pattern" id="toc-choose-an-algorithmic-pattern" class="nav-link" data-scroll-target="#choose-an-algorithmic-pattern">4. Choose an algorithmic pattern</a></li>
+  <li><a href="#write-pseudocode" id="toc-write-pseudocode" class="nav-link" data-scroll-target="#write-pseudocode">5. Write pseudocode</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">16</span> Exercises</a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#exercise-1-from-naive-to-scalable" id="toc-exercise-1-from-naive-to-scalable" class="nav-link" data-scroll-target="#exercise-1-from-naive-to-scalable"><span class="header-section-number">16.1</span> Exercise 1: From Naive to Scalable</a></li>
-  <li><a href="#exercise-2-dynamic-programming-matrix" id="toc-exercise-2-dynamic-programming-matrix" class="nav-link" data-scroll-target="#exercise-2-dynamic-programming-matrix"><span class="header-section-number">16.2</span> Exercise 2: Dynamic Programming Matrix</a></li>
-  <li><a href="#exercise-3-k-mer-counter" id="toc-exercise-3-k-mer-counter" class="nav-link" data-scroll-target="#exercise-3-k-mer-counter"><span class="header-section-number">16.3</span> Exercise 3: k-mer Counter</a></li>
-  <li><a href="#exercise-4-build-a-tiny-de-bruijn-graph" id="toc-exercise-4-build-a-tiny-de-bruijn-graph" class="nav-link" data-scroll-target="#exercise-4-build-a-tiny-de-bruijn-graph"><span class="header-section-number">16.4</span> Exercise 4: Build a Tiny de Bruijn Graph</a></li>
-  <li><a href="#exercise-5-choose-the-algorithm" id="toc-exercise-5-choose-the-algorithm" class="nav-link" data-scroll-target="#exercise-5-choose-the-algorithm"><span class="header-section-number">16.5</span> Exercise 5: Choose the Algorithm</a></li>
-  <li><a href="#exercise-6-capstone-design" id="toc-exercise-6-capstone-design" class="nav-link" data-scroll-target="#exercise-6-capstone-design"><span class="header-section-number">16.6</span> Exercise 6: Capstone Design</a></li>
+  <li><a href="#exercise-1-from-naive-to-scalable" id="toc-exercise-1-from-naive-to-scalable" class="nav-link" data-scroll-target="#exercise-1-from-naive-to-scalable">Exercise 1: From Naive to Scalable</a></li>
+  <li><a href="#exercise-2-dynamic-programming-matrix" id="toc-exercise-2-dynamic-programming-matrix" class="nav-link" data-scroll-target="#exercise-2-dynamic-programming-matrix">Exercise 2: Dynamic Programming Matrix</a></li>
+  <li><a href="#exercise-3-k-mer-counter" id="toc-exercise-3-k-mer-counter" class="nav-link" data-scroll-target="#exercise-3-k-mer-counter">Exercise 3: k-mer Counter</a></li>
+  <li><a href="#exercise-4-build-a-tiny-de-bruijn-graph" id="toc-exercise-4-build-a-tiny-de-bruijn-graph" class="nav-link" data-scroll-target="#exercise-4-build-a-tiny-de-bruijn-graph">Exercise 4: Build a Tiny de Bruijn Graph</a></li>
+  <li><a href="#exercise-5-choose-the-algorithm" id="toc-exercise-5-choose-the-algorithm" class="nav-link" data-scroll-target="#exercise-5-choose-the-algorithm">Exercise 5: Choose the Algorithm</a></li>
+  <li><a href="#exercise-6-capstone-design" id="toc-exercise-6-capstone-design" class="nav-link" data-scroll-target="#exercise-6-capstone-design">Exercise 6: Capstone Design</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">17</span> Summary</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">18</span> References</a>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a>
   <ul class="collapse">
-  <li><a href="#course-and-textbook-references" id="toc-course-and-textbook-references" class="nav-link" data-scroll-target="#course-and-textbook-references"><span class="header-section-number">18.1</span> Course and Textbook References</a></li>
-  <li><a href="#algorithm-and-tool-references" id="toc-algorithm-and-tool-references" class="nav-link" data-scroll-target="#algorithm-and-tool-references"><span class="header-section-number">18.2</span> Algorithm and Tool References</a></li>
+  <li><a href="#course-and-textbook-references" id="toc-course-and-textbook-references" class="nav-link" data-scroll-target="#course-and-textbook-references">Course and Textbook References</a></li>
+  <li><a href="#algorithm-and-tool-references" id="toc-algorithm-and-tool-references" class="nav-link" data-scroll-target="#algorithm-and-tool-references">Algorithm and Tool References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -305,7 +305,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Additional 1: Algorithmic Thinking in Genomics</h1>
+<h1 class="title">Practical 7: Algorithmic Thinking in Genomics</h1>
 </div>
 
 
@@ -315,14 +315,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Vahid Atabaigielmi, Tor Kling </p>
+             <p>Vahid Atabaigielmi </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -334,8 +334,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>By this point in the course you have worked with the command line, Git, Python, files, functions, plotting, and genomics workflows. This practical is meant as a capstone. Instead of asking only “how do I write this loop?”, we now ask a deeper question:</p>
 <p><strong>What kind of problem is this, and what kind of algorithm is powerful enough to solve it at genomic scale?</strong></p>
 <p>Modern bioinformatics depends on a small number of recurring algorithmic ideas. Sequence alignment, read mapping, genome assembly, gene prediction, taxonomic classification, and variant calling all look different on the surface, but many of them reuse the same patterns:</p>
@@ -356,21 +356,23 @@ Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>By the end of this additional exercise, you should be able to:</p>
+<p>By the end of this practical, you should be able to:</p>
 <ul>
+<li>Explain why naive algorithms often fail on genomic-scale data</li>
+<li>Recognize common genomics algorithms and the problems they solve</li>
 <li>Describe dynamic programming, seed-and-extend search, indexing, graph assembly, hidden Markov models, and probabilistic variant calling at a conceptual level</li>
-<li>Convert pseudocode descriptions of algorithms into runnable Python code</li>
-<li>Call that python code in simple efficient bash scripts</li>
+<li>Compare algorithmic tradeoffs: exact vs heuristic, fast vs sensitive, memory-efficient vs simple</li>
+<li>Design pseudocode for a realistic genomics problem before writing code</li>
 </ul>
 </div>
 </div>
 </section>
-<section id="where-does-the-word-algorithm-come-from" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Where Does the Word Algorithm Come From?</h1>
+<section id="where-does-the-word-algorithm-come-from" class="level1">
+<h1>Where Does the Word Algorithm Come From?</h1>
 <p>The word <strong>algorithm</strong> comes from the name of the Persian mathematician <strong>Muhammad ibn Musa al-Khwarizmi</strong>, who lived around the 9th century. His name was later Latinized in Europe as <strong>Algoritmi</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/al-khwarizmi-statue.jpg" class="img-fluid figure-img" style="width:45.0%" alt="A modern statue of Muhammad ibn Musa al-Khwarizmi holding a book."></p>
+<p><img src="../../pages/images/al-khwarizmi-statue.jpg" class="img-fluid figure-img" style="width:45.0%" alt="A modern statue of Muhammad ibn Musa al-Khwarizmi holding a book."></p>
 <figcaption>Modern statue of Muhammad ibn Musa al-Khwarizmi in Madrid. This is a later commemorative statue, not a historical portrait. Image source: Wikimedia Commons, CC0.</figcaption>
 </figure>
 </div>
@@ -380,8 +382,8 @@ Learning Objectives
 <pre class="text"><code>al-Khwarizmi -&gt; Algoritmi -&gt; algorithm</code></pre>
 <p>The word <strong>algebra</strong> also comes from the title of one of his mathematical works, which included the Arabic word <strong>al-jabr</strong>.</p>
 </section>
-<section id="warm-up-algorithmic-thinking-as-planning" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Warm-up: Algorithmic Thinking as Planning</h1>
+<section id="warm-up-algorithmic-thinking-as-planning" class="level1">
+<h1>Warm-up: Algorithmic Thinking as Planning</h1>
 <p>Before we look at genomics algorithms, let us start with a smaller planning problem. Planning is a useful way to think algorithmically because it forces us to define a <strong>starting state</strong>, a <strong>goal state</strong>, and the <strong>actions</strong> that can move us from one state to another.</p>
 <p>This warm-up is adapted from a planning example in the <strong>Artificial Intelligence Core Course</strong> at Saarland University, Germany.</p>
 <p>Imagine this toy problem:</p>
@@ -528,8 +530,8 @@ useDisinfectant</code></pre>
 -&gt; biological interpretation</code></pre>
 <p>This is why algorithmic thinking matters. A workflow is not only a list of tools. It is a plan where every step has inputs, assumptions, outputs, and consequences.</p>
 </section>
-<section id="why-genomics-needs-sophisticated-algorithms" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Why Genomics Needs Sophisticated Algorithms</h1>
+<section id="why-genomics-needs-sophisticated-algorithms" class="level1">
+<h1>Why Genomics Needs Sophisticated Algorithms</h1>
 <p>A small Python exercise might loop through four sequences. A real genomics dataset might contain:</p>
 <ul>
 <li>millions of short reads</li>
@@ -555,8 +557,8 @@ useDisinfectant</code></pre>
 <li><strong>probabilistic models</strong>: reason under uncertainty</li>
 </ul>
 </section>
-<section id="algorithmic-vocabulary" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Algorithmic Vocabulary</h1>
+<section id="algorithmic-vocabulary" class="level1">
+<h1>Algorithmic Vocabulary</h1>
 <p>Before looking at genomics examples, it helps to name a few core ideas.</p>
 <table class="caption-top table">
 <colgroup>
@@ -610,8 +612,8 @@ useDisinfectant</code></pre>
 </table>
 <p>In genomics, the most important question is often not “can I solve this for one sequence?” but “can I solve this for millions of sequences before tomorrow morning?”</p>
 </section>
-<section id="example-1-exact-string-matching-and-k-mers" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Example 1: Exact String Matching and k-mers</h1>
+<section id="example-1-exact-string-matching-and-k-mers" class="level1">
+<h1>Example 1: Exact String Matching and k-mers</h1>
 <p>One of the simplest genomics algorithms is exact string matching: finding where a DNA pattern occurs in a longer sequence.</p>
 <p><strong>Question:</strong> Where does the pattern <code>ATG</code> occur in a genome, and which short sequence words occur most often?</p>
 <p>Naive algorithm:</p>
@@ -654,8 +656,8 @@ useDisinfectant</code></pre>
 </ul>
 <p>The key idea is that long biological sequences can be represented as collections of shorter sequence words.</p>
 </section>
-<section id="example-2-dynamic-programming-for-sequence-alignment" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Example 2: Dynamic Programming for Sequence Alignment</h1>
+<section id="example-2-dynamic-programming-for-sequence-alignment" class="level1">
+<h1>Example 2: Dynamic Programming for Sequence Alignment</h1>
 <p><strong>Question:</strong> How do we compare two sequences when they may contain substitutions, insertions, and deletions?</p>
 <p>For example:</p>
 <pre class="text"><code>Sequence A: A C G T A C
@@ -713,8 +715,8 @@ Biological Interpretation
 </div>
 </div>
 </section>
-<section id="example-3-blast-and-seed-and-extend" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Example 3: BLAST and Seed-and-Extend</h1>
+<section id="example-3-blast-and-seed-and-extend" class="level1">
+<h1>Example 3: BLAST and Seed-and-Extend</h1>
 <p><strong>Question:</strong> How can we find sequences in a large database that are similar to a query sequence without doing a slow full dynamic-programming alignment against every database sequence?</p>
 <p>Smith-Waterman is sensitive, but too slow for searching a query against a huge database. BLAST uses a heuristic strategy called <strong>seed-and-extend</strong>.</p>
 <p>The basic idea:</p>
@@ -734,8 +736,8 @@ Report alignments with sufficiently high scores</code></pre>
 <li>you need candidate homologs rather than a proof of optimality</li>
 </ul>
 </section>
-<section id="example-4-read-mapping-with-indexes-bwt-and-fm-index" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Example 4: Read Mapping with Indexes, BWT, and FM-index</h1>
+<section id="example-4-read-mapping-with-indexes-bwt-and-fm-index" class="level1">
+<h1>Example 4: Read Mapping with Indexes, BWT, and FM-index</h1>
 <p><strong>Question:</strong> Where did each sequencing read most likely come from in the reference genome?</p>
 <p>A naive mapper compares every read to every genome position. Modern mappers avoid this by building an index of the reference genome.</p>
 <p>Well known ideas and tools:</p>
@@ -792,8 +794,8 @@ Ambiguous Mapping
 </div>
 </div>
 </section>
-<section id="example-5-genome-assembly-with-de-bruijn-graphs" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Example 5: Genome Assembly with de Bruijn Graphs</h1>
+<section id="example-5-genome-assembly-with-de-bruijn-graphs" class="level1">
+<h1>Example 5: Genome Assembly with de Bruijn Graphs</h1>
 <p><strong>Question:</strong> Can we reconstruct a genome from many short sequencing reads without already knowing the reference?</p>
 <p>One classical approach is <strong>overlap-layout-consensus</strong>:</p>
 <pre class="text"><code>Find overlaps between reads
@@ -830,8 +832,8 @@ TGAC connects TGA -&gt; GAC</code></pre>
 </ul>
 <p>Tools such as SPAdes use graph-based assembly ideas, combined with many practical improvements.</p>
 </section>
-<section id="example-6-hidden-markov-models-for-genes-and-proteins" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Example 6: Hidden Markov Models for Genes and Proteins</h1>
+<section id="example-6-hidden-markov-models-for-genes-and-proteins" class="level1">
+<h1>Example 6: Hidden Markov Models for Genes and Proteins</h1>
 <p><strong>Question:</strong> Given an observed DNA or protein sequence, what hidden biological states most likely generated it?</p>
 <p>A hidden Markov model, or HMM, is useful when the observed data are visible but the underlying biological state is hidden.</p>
 <p>Example:</p>
@@ -859,8 +861,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 </ul>
 <p>HMMs are powerful because they let us model biological uncertainty. Instead of saying “this position definitely is coding”, the algorithm asks which hidden explanation is most probable under the model.</p>
 </section>
-<section id="example-7-variant-calling-as-probabilistic-inference" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Example 7: Variant Calling as Probabilistic Inference</h1>
+<section id="example-7-variant-calling-as-probabilistic-inference" class="level1">
+<h1>Example 7: Variant Calling as Probabilistic Inference</h1>
 <p><strong>Question:</strong> Given the reads observed at a genomic position, which genotype is most likely?</p>
 <p>For example, suppose the reference has <code>A</code>, but the reads show:</p>
 <pre class="text"><code>A A A G A G A A G A</code></pre>
@@ -888,8 +890,8 @@ Trace back from the best final state to recover the most likely path</code></pre
     Attach a confidence score</code></pre>
 <p>This is algorithmic thinking under uncertainty. The output is not only a base call, but also a confidence estimate.</p>
 </section>
-<section id="comparing-algorithms" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Comparing Algorithms</h1>
+<section id="comparing-algorithms" class="level1">
+<h1>Comparing Algorithms</h1>
 <p>Different genomics tasks require different algorithmic strategies.</p>
 <table class="caption-top table">
 <colgroup>
@@ -954,12 +956,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 </table>
 <p>No algorithm is best for every case. The right choice depends on the question, data type, genome size, error profile, and acceptable tradeoffs.</p>
 </section>
-<section id="runnable-python-implementations" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> Runnable Python Implementations</h1>
+<section id="runnable-python-implementations" class="level1">
+<h1>Runnable Python Implementations</h1>
 <p>The code below gives small, teaching-scale implementations of the algorithmic ideas introduced above. These examples are meant to be readable and runnable in plain Python. They are <strong>not</strong> replacements for production tools such as BLAST, BWA, Bowtie, SPAdes, HMMER, bcftools, or GATK.</p>
 <p>The value of writing these toy versions is that you can see the algorithmic structure directly.</p>
-<section id="exact-matching-and-k-mer-counting" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="exact-matching-and-k-mer-counting"><span class="header-section-number">14.1</span> Exact Matching and k-mer Counting</h2>
+<section id="exact-matching-and-k-mer-counting" class="level2">
+<h2 class="anchored" data-anchor-id="exact-matching-and-k-mer-counting">Exact Matching and k-mer Counting</h2>
 <div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exact_match_positions(genome, pattern):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return all zero-based positions where pattern occurs in genome."""</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    positions <span class="op">=</span> []</span>
@@ -992,8 +994,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(exact_match_positions(genome, <span class="st">"ATG"</span>))</span>
 <span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count_kmers(<span class="st">"ATGACCATGATTACGCCAAGCT"</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="needleman-wunsch-global-alignment" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="needleman-wunsch-global-alignment"><span class="header-section-number">14.2</span> Needleman-Wunsch Global Alignment</h2>
+<section id="needleman-wunsch-global-alignment" class="level2">
+<h2 class="anchored" data-anchor-id="needleman-wunsch-global-alignment">Needleman-Wunsch Global Alignment</h2>
 <p>This is a small implementation of global alignment. It aligns two full sequences from beginning to end.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> needleman_wunsch(seq_a, seq_b, match<span class="op">=</span><span class="dv">1</span>, mismatch<span class="op">=-</span><span class="dv">1</span>, gap<span class="op">=-</span><span class="dv">2</span>):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> <span class="bu">len</span>(seq_a) <span class="op">+</span> <span class="dv">1</span></span>
@@ -1058,8 +1060,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aligned_a)</span>
 <span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aligned_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="smith-waterman-local-alignment" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="smith-waterman-local-alignment"><span class="header-section-number">14.3</span> Smith-Waterman Local Alignment</h2>
+<section id="smith-waterman-local-alignment" class="level2">
+<h2 class="anchored" data-anchor-id="smith-waterman-local-alignment">Smith-Waterman Local Alignment</h2>
 <p>This version finds the best local matching region between two sequences.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> smith_waterman(seq_a, seq_b, match<span class="op">=</span><span class="dv">2</span>, mismatch<span class="op">=-</span><span class="dv">1</span>, gap<span class="op">=-</span><span class="dv">1</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> <span class="bu">len</span>(seq_a) <span class="op">+</span> <span class="dv">1</span></span>
@@ -1124,8 +1126,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(local_a)</span>
 <span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(local_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="blast-like-seed-and-extend-search" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="blast-like-seed-and-extend-search"><span class="header-section-number">14.4</span> BLAST-like Seed-and-Extend Search</h2>
+<section id="blast-like-seed-and-extend-search" class="level2">
+<h2 class="anchored" data-anchor-id="blast-like-seed-and-extend-search">BLAST-like Seed-and-Extend Search</h2>
 <p>This is a simplified seed-and-extend search. Real BLAST uses richer scoring, word neighborhoods, statistical significance, and optimized indexes.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> seed_and_extend(query, database, k<span class="op">=</span><span class="dv">4</span>, max_mismatches<span class="op">=</span><span class="dv">2</span>):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Search a query against named target sequences using exact seeds."""</span></span>
@@ -1184,8 +1186,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> hit <span class="kw">in</span> seed_and_extend(<span class="st">"ATGACCATGATT"</span>, database, k<span class="op">=</span><span class="dv">4</span>):</span>
 <span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(hit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="suffix-array-bwt-and-fm-index-style-exact-search" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="suffix-array-bwt-and-fm-index-style-exact-search"><span class="header-section-number">14.5</span> Suffix Array, BWT, and FM-index-style Exact Search</h2>
+<section id="suffix-array-bwt-and-fm-index-style-exact-search" class="level2">
+<h2 class="anchored" data-anchor-id="suffix-array-bwt-and-fm-index-style-exact-search">Suffix Array, BWT, and FM-index-style Exact Search</h2>
 <p>This code shows the core idea behind BWT/FM-index searching. It builds a suffix array, creates a Burrows-Wheeler Transform, and uses backward search to find exact matches.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> suffix_array(text):</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(<span class="bu">range</span>(<span class="bu">len</span>(text)), key<span class="op">=</span><span class="kw">lambda</span> position: text[position:])</span>
@@ -1254,8 +1256,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bwt)</span>
 <span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fm_index_positions(<span class="st">"TACA"</span>, bwt, sa, first_column_start, occ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="de-bruijn-graph-assembly" class="level2" data-number="14.6">
-<h2 data-number="14.6" class="anchored" data-anchor-id="de-bruijn-graph-assembly"><span class="header-section-number">14.6</span> de Bruijn Graph Assembly</h2>
+<section id="de-bruijn-graph-assembly" class="level2">
+<h2 class="anchored" data-anchor-id="de-bruijn-graph-assembly">de Bruijn Graph Assembly</h2>
 <p>This code builds a tiny de Bruijn graph from reads and reconstructs a simple non-branching path. Real assemblers must handle coverage, errors, repeats, paired-end links, and graph simplification.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_de_bruijn_graph(reads, k):</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    graph <span class="op">=</span> {}</span>
@@ -1298,8 +1300,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(graph)</span>
 <span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reconstruct_simple_path(graph, <span class="st">"ATG"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="viterbi-algorithm-for-a-hidden-markov-model" class="level2" data-number="14.7">
-<h2 data-number="14.7" class="anchored" data-anchor-id="viterbi-algorithm-for-a-hidden-markov-model"><span class="header-section-number">14.7</span> Viterbi Algorithm for a Hidden Markov Model</h2>
+<section id="viterbi-algorithm-for-a-hidden-markov-model" class="level2">
+<h2 class="anchored" data-anchor-id="viterbi-algorithm-for-a-hidden-markov-model">Viterbi Algorithm for a Hidden Markov Model</h2>
 <p>This toy HMM has two hidden states: <code>coding</code> and <code>noncoding</code>. The observed data are DNA bases. The Viterbi algorithm finds the most likely hidden-state path.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1374,8 +1376,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(viterbi(<span class="st">"ATGGCGC"</span>, states, start_probability, transition_probability, emission_probability))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="probabilistic-variant-calling" class="level2" data-number="14.8">
-<h2 data-number="14.8" class="anchored" data-anchor-id="probabilistic-variant-calling"><span class="header-section-number">14.8</span> Probabilistic Variant Calling</h2>
+<section id="probabilistic-variant-calling" class="level2">
+<h2 class="anchored" data-anchor-id="probabilistic-variant-calling">Probabilistic Variant Calling</h2>
 <p>This is a simplified genotype-likelihood example for a diploid organism. It uses base quality values to compare possible genotypes.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phred_to_error_probability(quality_score):</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">10</span> <span class="op">**</span> (<span class="op">-</span>quality_score <span class="op">/</span> <span class="dv">10</span>)</span>
@@ -1426,8 +1428,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(call_genotype(read_bases, quality_scores, candidate_genotypes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="k-mer-lowest-common-ancestor-classification" class="level2" data-number="14.9">
-<h2 data-number="14.9" class="anchored" data-anchor-id="k-mer-lowest-common-ancestor-classification"><span class="header-section-number">14.9</span> k-mer Lowest Common Ancestor Classification</h2>
+<section id="k-mer-lowest-common-ancestor-classification" class="level2">
+<h2 class="anchored" data-anchor-id="k-mer-lowest-common-ancestor-classification">k-mer Lowest Common Ancestor Classification</h2>
 <p>This is a small version of the idea used in k-mer based metagenomic classifiers. A read is broken into k-mers, each k-mer votes for a taxon, and ambiguous k-mers are assigned to the lowest common ancestor.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lineage(taxon, parent):</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> []</span>
@@ -1507,8 +1509,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>kmer_index <span class="op">=</span> build_kmer_taxon_index(reference_sequences, k<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classify_read_lca(<span class="st">"ACCATGATTA"</span>, <span class="dv">5</span>, kmer_index, parent))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="minhash-sketching-for-genome-similarity" class="level2" data-number="14.10">
-<h2 data-number="14.10" class="anchored" data-anchor-id="minhash-sketching-for-genome-similarity"><span class="header-section-number">14.10</span> MinHash Sketching for Genome Similarity</h2>
+<section id="minhash-sketching-for-genome-similarity" class="level2">
+<h2 class="anchored" data-anchor-id="minhash-sketching-for-genome-similarity">MinHash Sketching for Genome Similarity</h2>
 <p>MinHash approximates similarity between large sets. In genomics, the set might be all k-mers from a genome. Tools such as Mash use related sketching ideas for fast genome distance estimation.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_kmer_set(sequence, k):</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    kmers <span class="op">=</span> <span class="bu">set</span>()</span>
@@ -1561,11 +1563,11 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sketch_similarity(sketch_a, sketch_c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="a-capstone-way-to-think-about-bioinformatics-problems" class="level1" data-number="15">
-<h1 data-number="15"><span class="header-section-number">15</span> A Capstone Way to Think About Bioinformatics Problems</h1>
+<section id="a-capstone-way-to-think-about-bioinformatics-problems" class="level1">
+<h1>A Capstone Way to Think About Bioinformatics Problems</h1>
 <p>When you meet a new bioinformatics problem, try this structure.</p>
-<section id="define-the-biological-question" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="define-the-biological-question"><span class="header-section-number">15.1</span> 1. Define the biological question</h2>
+<section id="define-the-biological-question" class="level2">
+<h2 class="anchored" data-anchor-id="define-the-biological-question">1. Define the biological question</h2>
 <p>Examples:</p>
 <ul>
 <li>Which species are present?</li>
@@ -1575,8 +1577,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <li>Which variants are supported by the reads?</li>
 </ul>
 </section>
-<section id="translate-it-into-a-computational-question" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="translate-it-into-a-computational-question"><span class="header-section-number">15.2</span> 2. Translate it into a computational question</h2>
+<section id="translate-it-into-a-computational-question" class="level2">
+<h2 class="anchored" data-anchor-id="translate-it-into-a-computational-question">2. Translate it into a computational question</h2>
 <p>Examples:</p>
 <ul>
 <li>classify each read or k-mer</li>
@@ -1586,8 +1588,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <li>estimate the most likely genotype</li>
 </ul>
 </section>
-<section id="identify-the-input-size" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="identify-the-input-size"><span class="header-section-number">15.3</span> 3. Identify the input size</h2>
+<section id="identify-the-input-size" class="level2">
+<h2 class="anchored" data-anchor-id="identify-the-input-size">3. Identify the input size</h2>
 <p>Small data can tolerate simple loops. Large data often need indexing, streaming, or specialized tools.</p>
 <p>Ask:</p>
 <ul>
@@ -1598,8 +1600,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 <li>Is one exact answer required, or is a high-quality approximation acceptable?</li>
 </ul>
 </section>
-<section id="choose-an-algorithmic-pattern" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="choose-an-algorithmic-pattern"><span class="header-section-number">15.4</span> 4. Choose an algorithmic pattern</h2>
+<section id="choose-an-algorithmic-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="choose-an-algorithmic-pattern">4. Choose an algorithmic pattern</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1635,8 +1637,8 @@ Trace back from the best final state to recover the most likely path</code></pre
 </tbody>
 </table>
 </section>
-<section id="write-pseudocode" class="level2" data-number="15.5">
-<h2 data-number="15.5" class="anchored" data-anchor-id="write-pseudocode"><span class="header-section-number">15.5</span> 5. Write pseudocode</h2>
+<section id="write-pseudocode" class="level2">
+<h2 class="anchored" data-anchor-id="write-pseudocode">5. Write pseudocode</h2>
 <p>Pseudocode forces you to make the logic explicit before syntax gets in the way.</p>
 <pre class="text"><code>Input:
     FASTQ reads
@@ -1657,10 +1659,10 @@ Algorithm:
             Mark the read as ambiguous</code></pre>
 </section>
 </section>
-<section id="exercises" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Exercises</h1>
-<section id="exercise-1-from-naive-to-scalable" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="exercise-1-from-naive-to-scalable"><span class="header-section-number">16.1</span> Exercise 1: From Naive to Scalable</h2>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<section id="exercise-1-from-naive-to-scalable" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-from-naive-to-scalable">Exercise 1: From Naive to Scalable</h2>
 <p>A student writes this algorithm for read mapping:</p>
 <pre class="text"><code>For each read:
     For every position in the reference genome:
@@ -1673,8 +1675,8 @@ Algorithm:
 <li>What biological situations could still make mapping difficult?</li>
 </ol>
 </section>
-<section id="exercise-2-dynamic-programming-matrix" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="exercise-2-dynamic-programming-matrix"><span class="header-section-number">16.2</span> Exercise 2: Dynamic Programming Matrix</h2>
+<section id="exercise-2-dynamic-programming-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-dynamic-programming-matrix">Exercise 2: Dynamic Programming Matrix</h2>
 <p>Take two short sequences:</p>
 <pre class="text"><code>Sequence A: A T G C
 Sequence B: A T C</code></pre>
@@ -1686,8 +1688,8 @@ Sequence B: A T C</code></pre>
 <li>Why does the scoring scheme matter biologically?</li>
 </ol>
 </section>
-<section id="exercise-3-k-mer-counter" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="exercise-3-k-mer-counter"><span class="header-section-number">16.3</span> Exercise 3: k-mer Counter</h2>
+<section id="exercise-3-k-mer-counter" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-k-mer-counter">Exercise 3: k-mer Counter</h2>
 <p>Write Python code that counts all 4-mers in this sequence:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">"ATGACCATGATTACGCCAAGCT"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then answer:</p>
@@ -1697,8 +1699,8 @@ Sequence B: A T C</code></pre>
 <li>What would happen if <code>k</code> were larger than the read length?</li>
 </ol>
 </section>
-<section id="exercise-4-build-a-tiny-de-bruijn-graph" class="level2" data-number="16.4">
-<h2 data-number="16.4" class="anchored" data-anchor-id="exercise-4-build-a-tiny-de-bruijn-graph"><span class="header-section-number">16.4</span> Exercise 4: Build a Tiny de Bruijn Graph</h2>
+<section id="exercise-4-build-a-tiny-de-bruijn-graph" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-build-a-tiny-de-bruijn-graph">Exercise 4: Build a Tiny de Bruijn Graph</h2>
 <p>Use k = 4 and the reads:</p>
 <pre class="text"><code>ATGAC
 TGACC
@@ -1712,8 +1714,8 @@ GACCT</code></pre>
 <li>How would a sequencing error change the graph?</li>
 </ol>
 </section>
-<section id="exercise-5-choose-the-algorithm" class="level2" data-number="16.5">
-<h2 data-number="16.5" class="anchored" data-anchor-id="exercise-5-choose-the-algorithm"><span class="header-section-number">16.5</span> Exercise 5: Choose the Algorithm</h2>
+<section id="exercise-5-choose-the-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5-choose-the-algorithm">Exercise 5: Choose the Algorithm</h2>
 <p>For each task, choose one algorithmic idea from this practical and justify your choice.</p>
 <ol type="1">
 <li>Search a protein sequence against a large protein database</li>
@@ -1724,8 +1726,8 @@ GACCT</code></pre>
 <li>Estimate whether two genomes are very similar without aligning them fully</li>
 </ol>
 </section>
-<section id="exercise-6-capstone-design" class="level2" data-number="16.6">
-<h2 data-number="16.6" class="anchored" data-anchor-id="exercise-6-capstone-design"><span class="header-section-number">16.6</span> Exercise 6: Capstone Design</h2>
+<section id="exercise-6-capstone-design" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6-capstone-design">Exercise 6: Capstone Design</h2>
 <p>Design a workflow for this problem:</p>
 <p><strong>You receive paired-end bacterial sequencing reads from an unknown isolate. You want to identify the species, assemble the genome, and annotate likely genes.</strong></p>
 <p>Write:</p>
@@ -1738,15 +1740,15 @@ GACCT</code></pre>
 </ol>
 </section>
 </section>
-<section id="summary" class="level1" data-number="17">
-<h1 data-number="17"><span class="header-section-number">17</span> Summary</h1>
+<section id="summary" class="level1">
+<h1>Summary</h1>
 <p>Algorithmic thinking in genomics is the ability to move between biology, data, and computation. A mature bioinformatics workflow is not just a list of commands. It is a chain of algorithmic decisions.</p>
 <p>At small scale, a simple loop may be enough. At genomic scale, the same problem may require indexing, dynamic programming, graph traversal, probabilistic inference, or a carefully chosen heuristic. Understanding these ideas helps you use tools more intelligently, interpret outputs more critically, and design workflows that are both reproducible and biologically meaningful.</p>
 </section>
-<section id="references" class="level1" data-number="18">
-<h1 data-number="18"><span class="header-section-number">18</span> References</h1>
-<section id="course-and-textbook-references" class="level2" data-number="18.1">
-<h2 data-number="18.1" class="anchored" data-anchor-id="course-and-textbook-references"><span class="header-section-number">18.1</span> Course and Textbook References</h2>
+<section id="references" class="level1">
+<h1>References</h1>
+<section id="course-and-textbook-references" class="level2">
+<h2 class="anchored" data-anchor-id="course-and-textbook-references">Course and Textbook References</h2>
 <ul>
 <li>Rahmann, S. <a href="https://www.rahmannlab.de/lehre/alsa.html">Lecture “Algorithms for Sequence Analysis”</a>. Saarland University, Germany.</li>
 <li>Artificial Intelligence Core Course. Planning example/course material. Saarland University, Germany.</li>
@@ -1755,8 +1757,8 @@ GACCT</code></pre>
 <li>Makinen, V., Belazzougui, D., Cunial, F. and Tomescu, A. I. <em>Genome-Scale Algorithm Design: Biological Sequence Analysis in the Era of High-Throughput Sequencing</em>. Cambridge University Press.</li>
 </ul>
 </section>
-<section id="algorithm-and-tool-references" class="level2" data-number="18.2">
-<h2 data-number="18.2" class="anchored" data-anchor-id="algorithm-and-tool-references"><span class="header-section-number">18.2</span> Algorithm and Tool References</h2>
+<section id="algorithm-and-tool-references" class="level2">
+<h2 class="anchored" data-anchor-id="algorithm-and-tool-references">Algorithm and Tool References</h2>
 <ul>
 <li>Needleman, S. B. and Wunsch, C. D. (1970). <a href="https://doi.org/10.1016/0022-2836(70)90057-4">A general method applicable to the search for similarities in the amino acid sequence of two proteins</a>. <em>Journal of Molecular Biology</em>.</li>
 <li>Smith, T. F. and Waterman, M. S. (1981). <a href="https://doi.org/10.1016/0022-2836(81)90087-5">Identification of common molecular subsequences</a>. <em>Journal of Molecular Biology</em>.</li>

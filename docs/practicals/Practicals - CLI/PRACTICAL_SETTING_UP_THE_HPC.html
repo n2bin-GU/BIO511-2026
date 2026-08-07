@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Kaisa Thorell, Tor Kling">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="author" content="Vahid Atabaigielmi">
+<meta name="dcterms.date" content="2026-08-01">
 
-<title>Practical 2: Connecting to the HPC – BIO511 Genomics - Practical Repository</title>
+<title>Practical 2: High performance computing clusters - intro – BIO511 Genomics - Practical Repository</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -41,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-8e049031f30567c4281a40dcf0e5e98c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-21e2f2e7e0abe44a720331f65c0fadcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +104,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../pages/styles.css">
@@ -124,11 +162,11 @@ ul.task-list li input[type="checkbox"] {
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -269,13 +307,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html" class="sidebar-item-text sidebar-link">
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practical 1: Git Fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practical 2: Algorithmic Thinking</span></a>
   </div>
 </li>
@@ -291,11 +329,53 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#adding-verac3se-at-supr" id="toc-adding-verac3se-at-supr" class="nav-link" data-scroll-target="#adding-verac3se-at-supr"><span class="header-section-number">2</span> Adding Vera/c3se at SUPR</a></li>
-  <li><a href="#setting-up-a-chalmers-id" id="toc-setting-up-a-chalmers-id" class="nav-link" data-scroll-target="#setting-up-a-chalmers-id"><span class="header-section-number">3</span> Setting up a Chalmers ID</a></li>
-  <li><a href="#setting-up-chalmers-vpn" id="toc-setting-up-chalmers-vpn" class="nav-link" data-scroll-target="#setting-up-chalmers-vpn"><span class="header-section-number">4</span> Setting up Chalmers VPN</a></li>
-  <li><a href="#connecting-to-the-hpc-using-ssh-in-vscode" id="toc-connecting-to-the-hpc-using-ssh-in-vscode" class="nav-link" data-scroll-target="#connecting-to-the-hpc-using-ssh-in-vscode"><span class="header-section-number">5</span> Connecting to the HPC using ssh in VSCode</a></li>
+  <li><a href="#why-this-lecture" id="toc-why-this-lecture" class="nav-link active" data-scroll-target="#why-this-lecture">Why this lecture?</a></li>
+  <li><a href="#why-do-chemists-and-molecular-biologists-use-hpc" id="toc-why-do-chemists-and-molecular-biologists-use-hpc" class="nav-link" data-scroll-target="#why-do-chemists-and-molecular-biologists-use-hpc">Why do chemists and molecular biologists use HPC?</a></li>
+  <li><a href="#what-is-a-high-performance-computing-cluster" id="toc-what-is-a-high-performance-computing-cluster" class="nav-link" data-scroll-target="#what-is-a-high-performance-computing-cluster">What is a high performance computing cluster?</a></li>
+  <li><a href="#cpu-gpu-ram-and-vram" id="toc-cpu-gpu-ram-and-vram" class="nav-link" data-scroll-target="#cpu-gpu-ram-and-vram">CPU, GPU, RAM, and VRAM</a>
+  <ul class="collapse">
+  <li><a href="#cpu" id="toc-cpu" class="nav-link" data-scroll-target="#cpu">CPU</a></li>
+  <li><a href="#gpu" id="toc-gpu" class="nav-link" data-scroll-target="#gpu">GPU</a></li>
+  <li><a href="#ram" id="toc-ram" class="nav-link" data-scroll-target="#ram">RAM</a></li>
+  <li><a href="#vram" id="toc-vram" class="nav-link" data-scroll-target="#vram">VRAM</a></li>
+  </ul></li>
+  <li><a href="#vera-in-one-page" id="toc-vera-in-one-page" class="nav-link" data-scroll-target="#vera-in-one-page">Vera in one page</a>
+  <ul class="collapse">
+  <li><a href="#simplified-vera-hardware" id="toc-simplified-vera-hardware" class="nav-link" data-scroll-target="#simplified-vera-hardware">Simplified Vera hardware</a></li>
+  <li><a href="#vera-alvis-cephyr-and-mimer" id="toc-vera-alvis-cephyr-and-mimer" class="nav-link" data-scroll-target="#vera-alvis-cephyr-and-mimer">Vera, Alvis, Cephyr, and Mimer</a></li>
+  </ul></li>
+  <li><a href="#your-laptop-versus-vera" id="toc-your-laptop-versus-vera" class="nav-link" data-scroll-target="#your-laptop-versus-vera">Your laptop versus Vera</a></li>
+  <li><a href="#login-nodes-and-compute-nodes" id="toc-login-nodes-and-compute-nodes" class="nav-link" data-scroll-target="#login-nodes-and-compute-nodes">Login nodes and compute nodes</a>
+  <ul class="collapse">
+  <li><a href="#login-nodes" id="toc-login-nodes" class="nav-link" data-scroll-target="#login-nodes">Login nodes</a></li>
+  <li><a href="#compute-nodes" id="toc-compute-nodes" class="nav-link" data-scroll-target="#compute-nodes">Compute nodes</a></li>
+  </ul></li>
+  <li><a href="#the-scheduler-why-jobs-wait-in-a-queue" id="toc-the-scheduler-why-jobs-wait-in-a-queue" class="nav-link" data-scroll-target="#the-scheduler-why-jobs-wait-in-a-queue">The scheduler: why jobs wait in a queue</a></li>
+  <li><a href="#what-resources-do-you-request" id="toc-what-resources-do-you-request" class="nav-link" data-scroll-target="#what-resources-do-you-request">What resources do you request?</a></li>
+  <li><a href="#core-hours-and-fair-sharing" id="toc-core-hours-and-fair-sharing" class="nav-link" data-scroll-target="#core-hours-and-fair-sharing">Core-hours and fair sharing</a></li>
+  <li><a href="#files-and-storage" id="toc-files-and-storage" class="nav-link" data-scroll-target="#files-and-storage">Files and storage</a></li>
+  <li><a href="#connecting-to-vera" id="toc-connecting-to-vera" class="nav-link" data-scroll-target="#connecting-to-vera">Connecting to Vera</a></li>
+  <li><a href="#software-on-vera" id="toc-software-on-vera" class="nav-link" data-scroll-target="#software-on-vera">Software on Vera</a></li>
+  <li><a href="#a-very-small-slurm-example" id="toc-a-very-small-slurm-example" class="nav-link" data-scroll-target="#a-very-small-slurm-example">A very small SLURM example</a></li>
+  <li><a href="#how-to-choose-resources-as-a-beginner" id="toc-how-to-choose-resources-as-a-beginner" class="nav-link" data-scroll-target="#how-to-choose-resources-as-a-beginner">How to choose resources as a beginner</a></li>
+  <li><a href="#common-beginner-misunderstandings" id="toc-common-beginner-misunderstandings" class="nav-link" data-scroll-target="#common-beginner-misunderstandings">Common beginner misunderstandings</a>
+  <ul class="collapse">
+  <li><a href="#i-am-logged-in-so-i-can-run-my-analysis-here" id="toc-i-am-logged-in-so-i-can-run-my-analysis-here" class="nav-link" data-scroll-target="#i-am-logged-in-so-i-can-run-my-analysis-here">“I am logged in, so I can run my analysis here”</a></li>
+  <li><a href="#more-cores-always-makes-my-job-faster" id="toc-more-cores-always-makes-my-job-faster" class="nav-link" data-scroll-target="#more-cores-always-makes-my-job-faster">“More cores always makes my job faster”</a></li>
+  <li><a href="#a-gpu-is-always-better" id="toc-a-gpu-is-always-better" class="nav-link" data-scroll-target="#a-gpu-is-always-better">“A GPU is always better”</a></li>
+  <li><a href="#if-my-job-waits-something-is-wrong" id="toc-if-my-job-waits-something-is-wrong" class="nav-link" data-scroll-target="#if-my-job-waits-something-is-wrong">“If my job waits, something is wrong”</a></li>
+  <li><a href="#the-cluster-will-keep-all-temporary-files" id="toc-the-cluster-will-keep-all-temporary-files" class="nav-link" data-scroll-target="#the-cluster-will-keep-all-temporary-files">“The cluster will keep all temporary files”</a></li>
+  </ul></li>
+  <li><a href="#mini-check-before-the-setup-practical" id="toc-mini-check-before-the-setup-practical" class="nav-link" data-scroll-target="#mini-check-before-the-setup-practical">Mini-check before the setup practical</a></li>
+  <li><a href="#take-home-message" id="toc-take-home-message" class="nav-link" data-scroll-target="#take-home-message">Take-home message</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a>
+  <ul class="collapse">
+  <li><a href="#e1-can-i-make-my-own-conda-environment" id="toc-e1-can-i-make-my-own-conda-environment" class="nav-link" data-scroll-target="#e1-can-i-make-my-own-conda-environment">E1: Can I make my own Conda environment?</a></li>
+  <li><a href="#e2-recommended-simple-python-environment-with-virtualenv" id="toc-e2-recommended-simple-python-environment-with-virtualenv" class="nav-link" data-scroll-target="#e2-recommended-simple-python-environment-with-virtualenv">E2: Recommended simple Python environment with <code>virtualenv</code></a></li>
+  <li><a href="#e3-if-you-really-need-conda" id="toc-e3-if-you-really-need-conda" class="nav-link" data-scroll-target="#e3-if-you-really-need-conda">E3: If you really need Conda</a></li>
+  <li><a href="#e4-container-alternative-for-conda-dependencies" id="toc-e4-container-alternative-for-conda-dependencies" class="nav-link" data-scroll-target="#e4-container-alternative-for-conda-dependencies">E4: Container alternative for Conda dependencies</a></li>
+  <li><a href="#e4-do-i-need-tmux" id="toc-e4-do-i-need-tmux" class="nav-link" data-scroll-target="#e4-do-i-need-tmux">E4: Do I need <code>tmux</code>?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -304,8 +384,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.html">Intro to Command Line</a></li><li class="breadcrumb-item"><a href="../../practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html">Practical 2: Setting up the HPC</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Practical 2: Connecting to the HPC</h1>
-<p class="subtitle lead">BIO511 Genomics - The c3se High Performance Computing Cluster</p>
+<h1 class="title">Practical 2: High performance computing clusters - intro</h1>
+<p class="subtitle lead">BIO511 Genomics - understanding Vera before logging in</p>
 </div>
 
 
@@ -315,14 +395,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Kaisa Thorell, Tor Kling </p>
+             <p>Vahid Atabaigielmi </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -334,94 +414,869 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>This tutorial is to take you through the final steps of setting up and accessing the <a href="https://www.c3se.chalmers.se/">c3se</a> High Performance Computing infrastructure. The specific cluster we will use is called Vera. You will be introduced to this cluster in the lecture and <a href="https://www.c3se.chalmers.se/about/Vera/">here</a> you can find more information about it, including what resources that are available, how to run jobs and other documentation.</p>
-<p>We will walk you through step by step in this tutorial so that we (hopefully) can assist if there are any problems.</p>
+<section id="why-this-lecture" class="level1">
+<h1>Why this lecture?</h1>
+<p>In this course you will use the command line and the Vera high performance computing cluster for bioinformatics work. Before setting up accounts, VPN, SSH, and VSCode, it helps to understand what kind of system Vera is and how work is expected to run on it.</p>
+<p>This lecture is based on the C3SE introduction to Vera and the C3SE Vera system overview. It is written for master’s students in chemistry and molecular biology who may be new to shared computing systems.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Pre-course setup
+Learning objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>To be able to follow these steps you first have to have followed the steps of the <strong>Pre-course Setup</strong> including registration at SUPR and application to the course HPC project.</p>
+<p>By the end of this lecture, you should be able to:</p>
+<ul>
+<li>Explain what an HPC cluster is in plain language.</li>
+<li>Describe the difference between a login node and a compute node.</li>
+<li>Explain why jobs are submitted to a scheduler instead of run directly.</li>
+<li>Recognize the most important resources: CPU cores, RAM, storage, time, GPUs, and VRAM.</li>
+<li>Understand the basic workflow for running work on Vera.</li>
+<li>Know where the later “Setting up the HPC” practical fits into the bigger picture.</li>
+</ul>
 </div>
 </div>
 <hr>
 </section>
-<section id="adding-verac3se-at-supr" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Adding Vera/c3se at SUPR</h1>
+<section id="why-do-chemists-and-molecular-biologists-use-hpc" class="level1">
+<h1>Why do chemists and molecular biologists use HPC?</h1>
+<p>Many questions in chemistry, molecular biology, and genomics create data or calculations that are too large for a laptop. A laptop is excellent for writing code, reading small files, and testing ideas. It is not always suitable for large analyses.</p>
+<p>Examples where HPC can help:</p>
 <ul>
-<li>Log in to <a href="https://supr.naiss.se/">SUPR</a></li>
-<li>Click “Accounts” in the left side menu</li>
-<li>Request access to Vera/c3se</li>
+<li>Comparing millions of sequencing reads against a reference genome.</li>
+<li>Assembling bacterial genomes from raw sequencing data.</li>
+<li>Running the same analysis over many samples.</li>
+<li>Predicting or comparing protein structures.</li>
+<li>Running molecular simulations.</li>
+<li>Training or using larger machine learning models.</li>
+<li>Processing large image or microscopy datasets.</li>
+</ul>
+<p>The key idea is not only that the cluster is “faster”. The key idea is that an HPC cluster lets many users request controlled amounts of shared computing power for work that would otherwise be slow, unstable, or impossible on a personal computer.</p>
+<hr>
+</section>
+<section id="what-is-a-high-performance-computing-cluster" class="level1">
+<h1>What is a high performance computing cluster?</h1>
+<p>An HPC cluster is a collection of many connected Linux computers. These computers are called <strong>nodes</strong>. The nodes share storage systems and are connected by fast networks. Users do not normally choose a physical machine by hand. Instead, they ask the cluster for resources and the scheduler decides where the work can run.</p>
+<p>When we say that nodes “share storage systems”, we mean that files are not only stored on the individual compute node. Vera has network-connected storage that many nodes can access. This is why you can log in, submit a job, and later find the output files even if the job ran on a different compute node.</p>
+<p>Different kinds of storage and memory have different jobs:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Simple meaning</th>
+<th>What it is used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RAM</td>
+<td>Short-term working memory for the CPU</td>
+<td>Data currently being processed by a CPU</td>
+</tr>
+<tr class="even">
+<td>VRAM</td>
+<td>Short-term working memory on a GPU card</td>
+<td>Data currently being processed by a GPU</td>
+</tr>
+<tr class="odd">
+<td>Local disk</td>
+<td>Storage physically attached to one computer or node</td>
+<td>Temporary files, operating system files, fast scratch work</td>
+</tr>
+<tr class="even">
+<td>Network/shared storage</td>
+<td>Storage reached over the cluster network</td>
+<td>Home directories, project data, shared inputs, final outputs</td>
+</tr>
+<tr class="odd">
+<td>Backup storage</td>
+<td>Separate storage used to recover files after problems</td>
+<td>Protection against hardware failure or accidental loss</td>
+</tr>
+</tbody>
+</table>
+<p>RAM and VRAM disappear when a program stops or a node is rebooted. Disk and network storage are persistent, which means files remain there after the program finishes, unless they are deleted or cleaned by policy.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Your laptop or VSCode] --&gt; B[Login node]
+  B --&gt; C[Scheduler]
+  C --&gt; D[Compute node 1]
+  C --&gt; E[Compute node 2]
+  C --&gt; F[GPU node]
+  D --&gt; G[Shared storage]
+  E --&gt; G
+  F --&gt; G
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Think of it like a shared research facility. You do not walk into a room and take over any instrument you want. You log in, prepare your work, book the resources you need, wait for your turn, and then collect your results.</p>
+<hr>
+</section>
+<section id="cpu-gpu-ram-and-vram" class="level1">
+<h1>CPU, GPU, RAM, and VRAM</h1>
+<p>Before talking about Vera hardware, it helps to separate four common words.</p>
+<section id="cpu" class="level2">
+<h2 class="anchored" data-anchor-id="cpu">CPU</h2>
+<p>The <strong>CPU</strong> is the general-purpose processor in a computer. It is good at running the operating system, scripts, command line tools, and most standard bioinformatics programs. When a SLURM job asks for “cores”, it is asking for CPU cores.</p>
+<p>Examples of CPU-heavy work:</p>
+<ul>
+<li>Running <code>bwa</code>, <code>samtools</code>, <code>blast</code>, <code>fastqc</code>, or many Python/R scripts.</li>
+<li>Sorting large tables.</li>
+<li>Running many independent sample analyses in parallel.</li>
+</ul>
+</section>
+<section id="gpu" class="level2">
+<h2 class="anchored" data-anchor-id="gpu">GPU</h2>
+<p>The <strong>GPU</strong> is a specialised accelerator originally designed for graphics, but now also used for many scientific and machine learning tasks. A GPU can do some kinds of numerical work very quickly, especially when the software has been written to use the GPU.</p>
+<p>Examples of GPU-aware work:</p>
+<ul>
+<li>Some deep learning programs using PyTorch or TensorFlow with CUDA.</li>
+<li>Some molecular dynamics or molecular modelling software configured for GPUs.</li>
+<li>Some image analysis workflows.</li>
+</ul>
+<p>Many ordinary command line tools do <strong>not</strong> use a GPU. If the program cannot use a GPU, requesting one will not make the job faster.</p>
+</section>
+<section id="ram" class="level2">
+<h2 class="anchored" data-anchor-id="ram">RAM</h2>
+<p><strong>RAM</strong> is the short-term memory used by the CPU while a program is running. If a genome assembly needs to keep a large graph in memory, or a Python script loads a large matrix, that memory is RAM.</p>
+<p>If a job runs out of RAM, it may crash or be killed by the scheduler.</p>
+</section>
+<section id="vram" class="level2">
+<h2 class="anchored" data-anchor-id="vram">VRAM</h2>
+<p><strong>VRAM</strong> is the memory built into a GPU card. GPU programs must fit the data they process on the GPU into VRAM. This is why GPU cards are often described by both model and memory size, for example A40 with 48 GB VRAM or H100 with 96 GB VRAM.</p>
+<hr>
+</section>
+</section>
+<section id="vera-in-one-page" class="level1">
+<h1>Vera in one page</h1>
+<p>Vera is the C3SE HPC cluster that this course uses. C3SE is part of Chalmers e-Commons and manages HPC resources at Chalmers. The C3SE introduction also explains that C3SE participates in the Swedish national HPC ecosystem through NAISS, but Vera itself is a local C3SE resource.</p>
+<p>From the C3SE Vera pages, the important student-level picture is:</p>
+<ul>
+<li>Vera is a Linux-based cluster.</li>
+<li>Vera has many CPU compute nodes.</li>
+<li>Vera also has GPU nodes with NVIDIA A40, A100, and H100 GPUs.</li>
+<li>The main partition, or queue, is called <code>vera</code>.</li>
+<li>Jobs are charged to a project allocation, usually in core-hours.</li>
+<li>GPU jobs cost more allocation than CPU-only jobs, so GPUs should only be requested when the program can actually use them.</li>
+<li>Login nodes are shared entry points and must not be used for heavy analyses.</li>
+<li>The Department for Chemistry &amp; Molecular Biology at the University of Gothenburg is listed on the Vera allocation page through Richard Neutze, C3SE 408/22-1.</li>
+</ul>
+<p>Here, <strong>software</strong> means the program, script, library, or workflow you run. Examples include <code>samtools</code>, <code>blast</code>, GROMACS, MATLAB, R packages, Python packages, TensorFlow, PyTorch, or your own Python script. Some software can use GPUs. Some software only uses CPUs.</p>
+<p>When C3SE says that GPU jobs “cost more”, this usually does <strong>not</strong> mean that you personally pay money for one command. It means the job consumes more of the project allocation. A project allocation is like a shared budget of compute time. GPU cards are scarce and powerful, so Vera accounts for them with an extra cost in core-hour equivalents.</p>
+<p>The exact hardware can change. You do not need to memorize node counts or CPU model names for this course. What matters is that you understand how to request suitable resources and use the system politely.</p>
+<section id="simplified-vera-hardware" class="level2">
+<h2 class="anchored" data-anchor-id="simplified-vera-hardware">Simplified Vera hardware</h2>
+<p>The Vera documentation currently describes two main CPU generations:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Node type</th>
+<th>CPU hardware</th>
+<th>Simple meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Zen4</td>
+<td>2 AMD EPYC 9354 CPUs per node, 32 cores per CPU</td>
+<td>64 CPU cores per full node; currently the default if you do not request a specific CPU type</td>
+</tr>
+<tr class="even">
+<td>Icelake</td>
+<td>2 Intel Xeon Gold 6338 CPUs per node, 32 cores per CPU</td>
+<td>64 CPU cores per full node; can be requested when needed</td>
+</tr>
+</tbody>
+</table>
+<p>Standard Zen4 Vera nodes commonly have 768 GB RAM per node. Icelake nodes commonly have 512 GB RAM per node. Some nodes have more memory, such as 1024 or 1536 GB RAM, and some larger-memory nodes may be private or limited to specific projects.</p>
+<p>The seminar slides describe Vera in terms of CPU generations and accelerator cards. The live Vera hardware page gives the exact current node counts. You do not need to memorize the numbers. The useful student-level summary is:</p>
+<ul>
+<li>Most normal jobs run on 64-core CPU nodes.</li>
+<li>Many standard nodes have hundreds of GB of RAM, far more than a laptop.</li>
+<li>Some nodes have larger RAM for memory-hungry jobs.</li>
+<li>A small number of nodes have GPUs, so GPU jobs are a special request.</li>
+<li>You can inspect current node information on Vera with <code>sinfo</code>.</li>
+</ul>
+<p>Vera also has GPU nodes:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>GPU type</th>
+<th>Approximate total on main partition</th>
+<th>Where it is used</th>
+<th>VRAM per GPU</th>
+<th>Beginner-level interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A40</td>
+<td>16 GPUs</td>
+<td>Icelake GPU nodes</td>
+<td>about 45-48 GB</td>
+<td>Useful for some GPU workloads, often graphics/AI-oriented</td>
+</tr>
+<tr class="even">
+<td>A100</td>
+<td>12 GPUs</td>
+<td>Icelake GPU nodes</td>
+<td>40 GB</td>
+<td>Strong scientific/AI GPU</td>
+</tr>
+<tr class="odd">
+<td>H100</td>
+<td>8 GPUs</td>
+<td>Zen4 GPU nodes</td>
+<td>about 94-96 GB</td>
+<td>Very powerful newer GPU</td>
+</tr>
+</tbody>
+</table>
+<p>The C3SE slides also list theoretical floating-point performance for A40, A100, and H100 GPUs. These numbers can be useful for specialists, but for this course the important message is simpler:</p>
+<ul>
+<li>CPU nodes are the normal choice for most command line and bioinformatics jobs.</li>
+<li>Large-memory nodes are useful when a program needs a lot of RAM.</li>
+<li>GPU nodes are useful only when the software is GPU-aware.</li>
+<li>You should not request special hardware unless you know why your job needs it.</li>
+</ul>
+<p>Example GPU accounting from the C3SE slides:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>GPU</th>
+<th>Extra allocation cost</th>
+<th>What this means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A40</td>
+<td>16 extra core-hour equivalents per GPU-hour</td>
+<td>Lower extra cost</td>
+</tr>
+<tr class="even">
+<td>A100</td>
+<td>48 extra core-hour equivalents per GPU-hour</td>
+<td>Higher extra cost</td>
+</tr>
+<tr class="odd">
+<td>H100</td>
+<td>160 extra core-hour equivalents per GPU-hour</td>
+<td>Highest extra cost</td>
+</tr>
+</tbody>
+</table>
+<p>For example, if a job uses part of a CPU node plus one A100 for 10 hours, the project is charged for the CPU cores plus the extra GPU cost. This is why GPU requests should be intentional.</p>
+</section>
+<section id="vera-alvis-cephyr-and-mimer" class="level2">
+<h2 class="anchored" data-anchor-id="vera-alvis-cephyr-and-mimer">Vera, Alvis, Cephyr, and Mimer</h2>
+<p>The C3SE slides mention several systems. They are related, but they are not the same thing.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>What it is</th>
+<th>How it relates to Vera</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vera</td>
+<td>The HPC compute cluster used in this course</td>
+<td>Where your CPU/GPU jobs run</td>
+</tr>
+<tr class="even">
+<td>Alvis</td>
+<td>A NAISS system for AI/ML research</td>
+<td>A different compute system; it is retiring and being replaced by Arrhenius</td>
+</tr>
+<tr class="odd">
+<td>Cephyr</td>
+<td>A C3SE storage system based on CephFS</td>
+<td>Provides storage areas used by C3SE systems, including Vera project/home storage</td>
+</tr>
+<tr class="even">
+<td>Mimer</td>
+<td>A high-performance storage system based on WekaIO</td>
+<td>Mainly intended for Alvis-style high-I/O workloads, but can also be available for data staging from other systems</td>
+</tr>
+</tbody>
+</table>
+<p>In short: <strong>Vera computes; Cephyr and Mimer store data; Alvis is another compute system.</strong></p>
+<hr>
+</section>
+</section>
+<section id="your-laptop-versus-vera" class="level1">
+<h1>Your laptop versus Vera</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Your laptop</th>
+<th>Vera HPC cluster</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Users</td>
+<td>Usually just you</td>
+<td>Many users at the same time</td>
+</tr>
+<tr class="even">
+<td>Operating system</td>
+<td>macOS, Windows, or Linux</td>
+<td>Linux, specifically a cluster-managed environment</td>
+</tr>
+<tr class="odd">
+<td>Administrator access</td>
+<td>You may be admin</td>
+<td>You do not have <code>sudo</code> access</td>
+</tr>
+<tr class="even">
+<td>Software installation</td>
+<td>You can often install system packages</td>
+<td>You usually use modules, containers, or local installs</td>
+</tr>
+<tr class="odd">
+<td>Heavy calculations</td>
+<td>Can overheat, freeze, or take too long</td>
+<td>Should run as scheduled jobs</td>
+</tr>
+<tr class="even">
+<td>Resource sharing</td>
+<td>Mostly personal</td>
+<td>Shared through projects and queues</td>
+</tr>
+</tbody>
+</table>
+<p>This difference explains many HPC rules. Vera is powerful because it is shared, but being shared also means that every user must ask for resources in a controlled way.</p>
+<hr>
+</section>
+<section id="login-nodes-and-compute-nodes" class="level1">
+<h1>Login nodes and compute nodes</h1>
+<p>The most important HPC distinction is between <strong>login nodes</strong> and <strong>compute nodes</strong>.</p>
+<section id="login-nodes" class="level2">
+<h2 class="anchored" data-anchor-id="login-nodes">Login nodes</h2>
+<p>Login nodes are the front doors of the cluster. You use them to:</p>
+<ul>
+<li>Connect to Vera.</li>
+<li>Navigate files.</li>
+<li>Edit scripts.</li>
+<li>Transfer small files.</li>
+<li>Prepare job scripts.</li>
+<li>Submit jobs to the scheduler.</li>
+<li>Check job status.</li>
+</ul>
+<p>Login nodes are shared by many users. They are not for large calculations.</p>
+</section>
+<section id="compute-nodes" class="level2">
+<h2 class="anchored" data-anchor-id="compute-nodes">Compute nodes</h2>
+<p>Compute nodes are where heavy work runs. You use them indirectly by submitting a job. The scheduler starts your script on one or more compute nodes when the requested resources are available.</p>
+<p>Use compute nodes for:</p>
+<ul>
+<li>Genome assembly.</li>
+<li>Mapping reads.</li>
+<li>Large BLAST or database searches.</li>
+<li>Long-running Python or R analyses.</li>
+<li>Molecular simulations.</li>
+<li>GPU-enabled workloads.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Main rule
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not run big or long jobs on the login node. Prepare your work on the login node, then submit it to the scheduler so it can run on compute nodes.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="the-scheduler-why-jobs-wait-in-a-queue" class="level1">
+<h1>The scheduler: why jobs wait in a queue</h1>
+<p>Vera uses a scheduler called <strong>SLURM</strong>. A scheduler is a traffic controller for the cluster. It answers questions like:</p>
+<ul>
+<li>Who is allowed to run jobs?</li>
+<li>Which project should pay for the job?</li>
+<li>How many CPU cores does the job need?</li>
+<li>How much time does the job need?</li>
+<li>Does it need a GPU?</li>
+<li>Are enough resources free right now?</li>
+<li>Which queued job has priority?</li>
+</ul>
+<p>When you submit a job, it may not start immediately. This is normal. Your job waits until the requested resources are available and the scheduler decides it is your turn.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Write job script] --&gt; B[Submit with sbatch]
+  B --&gt; C[Wait in queue]
+  C --&gt; D[Run on compute node]
+  D --&gt; E[Write output and log files]
+  E --&gt; F[Check results]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="what-resources-do-you-request" class="level1">
+<h1>What resources do you request?</h1>
+<p>When you submit work to Vera, you describe what the job needs. Asking for too little may make the job fail. Asking for far too much may make the job wait longer and waste shared allocation.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Resource</th>
+<th>What it means</th>
+<th>Simple example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Project account</td>
+<td>Which allocation pays for the work</td>
+<td>A course or PI project</td>
+</tr>
+<tr class="even">
+<td>Partition</td>
+<td>Which queue to use</td>
+<td><code>vera</code></td>
+</tr>
+<tr class="odd">
+<td>Time</td>
+<td>Maximum wall-clock runtime</td>
+<td><code>00:30:00</code> or <code>2-00:00:00</code></td>
+</tr>
+<tr class="even">
+<td>CPU cores</td>
+<td>How many CPU workers the job can use</td>
+<td>1, 4, 8, 32, 64</td>
+</tr>
+<tr class="odd">
+<td>Memory</td>
+<td>How much RAM the job needs</td>
+<td>Important for assembly and large matrices</td>
+</tr>
+<tr class="even">
+<td>GPU</td>
+<td>Specialized accelerator</td>
+<td>Useful only for GPU-aware programs</td>
+</tr>
+<tr class="odd">
+<td>VRAM</td>
+<td>Memory on the GPU</td>
+<td>Important for GPU programs and large AI models</td>
+</tr>
+<tr class="even">
+<td>Temporary disk</td>
+<td>Fast local scratch space</td>
+<td>Useful for heavy file input/output</td>
+</tr>
+</tbody>
+</table>
+<p>For beginner bioinformatics work, most jobs are CPU jobs. Do not request a GPU unless the program documentation says it can use one.</p>
+<hr>
+</section>
+<section id="core-hours-and-fair-sharing" class="level1">
+<h1>Core-hours and fair sharing</h1>
+<p>Vera projects have allocations. A simple way to understand allocation is <strong>core-hours</strong>:</p>
+<pre class="text"><code>core-hours = number of CPU cores * number of hours</code></pre>
+<p>For example:</p>
+<ul>
+<li>1 core for 10 hours = 10 core-hours.</li>
+<li>8 cores for 10 hours = 80 core-hours.</li>
+<li>64 cores for 2 hours = 128 core-hours.</li>
+</ul>
+<p>GPU jobs have extra cost because GPUs are expensive shared resources. The C3SE pages describe Vera GPU costs as additional CPU-equivalent costs. The practical message is simple: request GPUs only when they are useful for your program and your analysis.</p>
+<hr>
+</section>
+<section id="files-and-storage" class="level1">
+<h1>Files and storage</h1>
+<p>An HPC cluster has several kinds of storage. You do not need every detail on day one, but you should know the main idea.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Storage idea</th>
+<th>What to remember</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Home directory</td>
+<td>Good for scripts and small personal files. It has quota limits.</td>
+</tr>
+<tr class="even">
+<td>Project or group storage</td>
+<td>Good for shared course or research data.</td>
+</tr>
+<tr class="odd">
+<td><code>$TMPDIR</code></td>
+<td>Temporary fast space available during a job. It is deleted when the job ends.</td>
+</tr>
+<tr class="even">
+<td>Output directory</td>
+<td>Where final results and logs should be copied back.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>$TMPDIR</code> when a job reads and writes many temporary files. Always copy important output back to persistent storage before the job ends.</p>
+<p>Also remember that many tiny files can be inefficient on shared filesystems. When possible, use organized directories, compressed archives, or structured formats such as HDF5 or SQLite.</p>
+<p>On Vera, you may see paths such as:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/cephyr/users/</span><span class="op">&lt;</span>CID<span class="op">&gt;</span>/Vera</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/cephyr/NOBACKUP/groups/</span><span class="op">&lt;</span>project_or_group_name<span class="op">&gt;</span>/</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">/mimer/...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These are not random folder names. They indicate which storage system is being used. For beginners, the safest habit is:</p>
+<ul>
+<li>Keep scripts and small notes in your home directory.</li>
+<li>Keep larger shared course or project data in the project/group area recommended by the instructors.</li>
+<li>Use <code>$TMPDIR</code> for heavy temporary work inside jobs.</li>
+<li>Copy final results back from <code>$TMPDIR</code> before the job finishes.</li>
+<li>Check quota if file writing suddenly fails.</li>
 </ul>
 <hr>
 </section>
-<section id="setting-up-a-chalmers-id" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Setting up a Chalmers ID</h1>
+<section id="connecting-to-vera" class="level1">
+<h1>Connecting to Vera</h1>
+<p>The C3SE introduction describes three main ways to access Vera:</p>
 <ul>
-<li>Navigate to <a href="https://myaccount.chalmers.se/">https://myaccount.chalmers.se/</a>.</li>
-<li>Log in with your GU account.</li>
-<li>Choose “Activate CID” and follow the instructions to activate your account</li>
+<li>SSH from a terminal or from VSCode Remote SSH.</li>
+<li>Open OnDemand through a web portal.</li>
+<li>RDP for graphical desktop access.</li>
 </ul>
+<p>From outside Chalmers or GU networks, users need Chalmers VPN access. Users also need the correct account and project access through SUPR and C3SE. The next practical, “Setting up the HPC”, walks through those setup steps.</p>
+<p>For now, remember the order:</p>
+<ol type="1">
+<li>Get access through the right project.</li>
+<li>Activate the account needed for Vera.</li>
+<li>Connect to Vera.</li>
+<li>Prepare files and job scripts.</li>
+<li>Submit work through SLURM.</li>
+<li>Monitor jobs and collect results.</li>
+</ol>
+<hr>
+</section>
+<section id="software-on-vera" class="level1">
+<h1>Software on Vera</h1>
+<p>Vera is not Ubuntu, and students do not have administrator rights. This means:</p>
+<ul>
+<li>You cannot use <code>sudo</code>.</li>
+<li>You cannot install system software with <code>apt-get</code>.</li>
+<li>You should not expect software to be available until the right environment is loaded.</li>
+</ul>
+<p>HPC systems commonly provide software through a <strong>module system</strong>. Loading a module changes your environment so that a program becomes available.</p>
+<p>Typical module commands:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> avail          <span class="co"># show available modules</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> spider NAME    <span class="co"># search for a module</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load NAME      <span class="co"># load software</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> list           <span class="co"># show loaded modules</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge          <span class="co"># unload currently loaded modules</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For reproducible work, load modules inside the job script instead of relying on hidden changes in your shell startup files.</p>
+<p>Containers, such as Apptainer/Singularity images, are another common way to run software on HPC systems. You will meet this idea later in the course when software installation and containers are discussed.</p>
+<hr>
+</section>
+<section id="a-very-small-slurm-example" class="level1">
+<h1>A very small SLURM example</h1>
+<p>This is not the setup practical yet. The point here is to see what a job script looks like.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A replace_with_your_project_account</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p vera</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -n 4</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 00:30:00</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -J bio511_test</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"This job is running on:"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"The job started in:"</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The lines beginning with <code>#SBATCH</code> are instructions to the scheduler. They describe the requested account, queue, CPU cores, time, and job name. The remaining lines are the commands that run after the job starts on a compute node.</p>
+<p>Common SLURM commands:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> job_script.sh       <span class="co"># submit a batch job</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span>            <span class="co"># check your queued and running jobs</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> JOBID              <span class="co"># cancel a job</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sacct</span>                      <span class="co"># inspect previous jobs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="how-to-choose-resources-as-a-beginner" class="level1">
+<h1>How to choose resources as a beginner</h1>
+<p>Start small, then scale up.</p>
+<p>For a new analysis:</p>
+<ol type="1">
+<li>Test the command on a tiny input file.</li>
+<li>Submit a short job with modest resources.</li>
+<li>Check the log file.</li>
+<li>Check whether the job used the resources you requested.</li>
+<li>Increase input size or resources only when the small version works.</li>
+</ol>
+<p>Good habits:</p>
+<ul>
+<li>Request only the time you reasonably need.</li>
+<li>Request GPUs only for GPU-enabled programs.</li>
+<li>Keep job scripts self-contained.</li>
+<li>Write results to a clear output directory.</li>
+<li>Save job IDs when asking for help.</li>
+<li>Read error messages before resubmitting.</li>
+</ul>
+<hr>
+</section>
+<section id="common-beginner-misunderstandings" class="level1">
+<h1>Common beginner misunderstandings</h1>
+<section id="i-am-logged-in-so-i-can-run-my-analysis-here" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="i-am-logged-in-so-i-can-run-my-analysis-here">“I am logged in, so I can run my analysis here”</h2>
+<p>Not quite. You are usually on a login node. Use it to prepare and submit work, not to run heavy analyses.</p>
+</section>
+<section id="more-cores-always-makes-my-job-faster" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="more-cores-always-makes-my-job-faster">“More cores always makes my job faster”</h2>
+<p>Only if the software can use multiple cores efficiently. Some programs are single-core. Giving them 32 cores will not make them 32 times faster.</p>
+</section>
+<section id="a-gpu-is-always-better" class="level2">
+<h2 class="anchored" data-anchor-id="a-gpu-is-always-better">“A GPU is always better”</h2>
+<p>Only GPU-aware software benefits from a GPU. Many standard command line and bioinformatics programs are CPU-based. If your program documentation does not mention CUDA, GPU acceleration, NVIDIA GPUs, or a GPU-specific option, assume it is probably CPU-based.</p>
+</section>
+<section id="if-my-job-waits-something-is-wrong" class="level2">
+<h2 class="anchored" data-anchor-id="if-my-job-waits-something-is-wrong">“If my job waits, something is wrong”</h2>
+<p>Not necessarily. Queuing is normal on shared systems. Your job may be waiting for priority, enough free resources, or a suitable node.</p>
+</section>
+<section id="the-cluster-will-keep-all-temporary-files" class="level2">
+<h2 class="anchored" data-anchor-id="the-cluster-will-keep-all-temporary-files">“The cluster will keep all temporary files”</h2>
+<p>No.&nbsp;Temporary job storage such as <code>$TMPDIR</code> is cleaned when the job ends. Copy final results back to persistent storage.</p>
+<hr>
+</section>
+</section>
+<section id="mini-check-before-the-setup-practical" class="level1">
+<h1>Mini-check before the setup practical</h1>
+<p>Try to answer these before moving on:</p>
+<ol type="1">
+<li>What should you use a login node for?</li>
+<li>Where should heavy analyses run?</li>
+<li>What does SLURM do?</li>
+<li>Why should you avoid requesting a GPU unless you know you need one?</li>
+<li>What happens to files left only in <code>$TMPDIR</code> after the job ends?</li>
+<li>Why might a job wait in the queue?</li>
+<li>What is the difference between RAM and storage?</li>
+<li>Do you need <code>tmux</code> to safely close your laptop after submitting an <code>sbatch</code> job?</li>
+</ol>
+<details>
+<summary>
+Suggested answers
+</summary>
+<ol type="1">
+<li>Connecting, editing files, preparing scripts, transferring small files, and submitting or checking jobs.</li>
+<li>On compute nodes, through scheduled jobs.</li>
+<li>SLURM schedules jobs, allocates resources, starts jobs on compute nodes, and tracks job status.</li>
+<li>GPUs are shared, cost more allocation, and only help software designed to use them.</li>
+<li>They are deleted when the job finishes or fails.</li>
+<li>The requested resources may not be free, other jobs may have higher priority, or the project allocation/usage may affect scheduling.</li>
+<li>RAM is temporary working memory used while a program runs. Storage is where files are kept more persistently.</li>
+<li>No.&nbsp;Batch jobs submitted with <code>sbatch</code> keep running under SLURM after you disconnect. <code>tmux</code> is useful for terminal convenience, not for running long analyses on login nodes.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="take-home-message" class="level1">
+<h1>Take-home message</h1>
+<p>An HPC cluster is a shared scientific computing environment. Vera is not just “a bigger laptop”; it is a managed system with login nodes, compute nodes, shared storage, software modules, project allocations, and a job scheduler.</p>
+<p>The next practical will show how to get connected. This lecture gives the mental model for why the setup steps and cluster rules exist.</p>
+<hr>
+</section>
+<section id="sources" class="level1">
+<h1>Sources</h1>
+<ul>
+<li>C3SE. <a href="https://www.c3se.chalmers.se/documentation/first_time_users/intro-vera/presentation.html">Introduction to Vera at e-Commons/C3SE</a>, accessed 2026-07-15.</li>
+<li>C3SE. <a href="https://www.c3se.chalmers.se/about/Vera/">Vera system overview</a>, accessed 2026-07-15.</li>
+<li>C3SE. <a href="https://www.c3se.chalmers.se/about/Cephyr/">Cephyr storage system</a>, accessed 2026-07-15.</li>
+<li>C3SE. <a href="https://www.c3se.chalmers.se/about/Mimer/">Mimer storage system</a>, accessed 2026-07-15.</li>
+<li>C3SE. <a href="https://www.c3se.chalmers.se/documentation/module_system/python/">Python environments</a>, accessed 2026-07-15.</li>
+</ul>
+<hr>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remember your password!
+Extra information — not part of the lecture
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The CID username and password are the ones you will use to log in to the cluster</p>
+<p>The information below is provided for those of you who are curious about how to create a Conda environment on Vera.</p>
 </div>
 </div>
+<section id="e1-can-i-make-my-own-conda-environment" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="e1-can-i-make-my-own-conda-environment">E1: Can I make my own Conda environment?</h2>
+<p>Usually, yes, but on Vera it is <strong>not the first recommended option</strong>. C3SE recommends this order:</p>
+<ol type="1">
+<li>Prefer centrally installed modules when they already contain what you need.</li>
+<li>For Python packages, prefer a Python <code>virtualenv</code> built on top of loaded modules.</li>
+<li>For complex Conda environments, prefer building an Apptainer/Singularity container.</li>
+<li>Use a direct Conda environment only when you have a clear reason and understand that it can create many files and use quota quickly.</li>
+</ol>
+<p>The reason is practical: Conda environments often contain thousands of small files. On a shared network filesystem this can be slow and can use up your file quota. Containers turn the environment into one portable <code>.sif</code> file, which is easier for the storage system.</p>
+</section>
+<section id="e2-recommended-simple-python-environment-with-virtualenv" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="e2-recommended-simple-python-environment-with-virtualenv">E2: Recommended simple Python environment with <code>virtualenv</code></h2>
+<p>Use this when your script needs extra Python packages.</p>
+<p>Create the environment once:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Search for suitable modules</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> spider Python</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> spider SciPy-bundle</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> spider virtualenv</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load Python-related modules from a compatible toolchain</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The exact versions may change; use versions available on Vera.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load virtualenv/20.26.2-GCCcore-13.3.0</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load SciPy-bundle/2024.05-gfbf-2024a</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create an environment in a project or course storage area if possible</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /cephyr/NOBACKUP/groups/replace_with_project/my_envs</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /cephyr/NOBACKUP/groups/replace_with_project/my_envs</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ex">virtualenv</span> <span class="at">--system-site-packages</span> bio511_env</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Activate it</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> bio511_env/bin/activate</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Install only the extra packages you need</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install package_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use the environment in a job script:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A replace_with_project_account</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p vera</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -n 4</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 01:00:00</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -J bio511_python</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load virtualenv/20.26.2-GCCcore-13.3.0</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load SciPy-bundle/2024.05-gfbf-2024a</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /cephyr/NOBACKUP/groups/replace_with_project/my_envs/bio511_env/bin/activate</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> my_script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Avoid <code>pip install --user</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not install Python packages directly into <code>~/.local</code> with <code>pip install --user</code>. Packages installed there can interfere with other environments and can quickly use up your home quota.</p>
+</div>
+</div>
+</section>
+<section id="e3-if-you-really-need-conda" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="e3-if-you-really-need-conda">E3: If you really need Conda</h2>
+<p>C3SE notes that Miniforge modules are available, but recommends using Conda inside a container for most cases. If a course instructor specifically asks you to create a Conda environment directly on Vera, the basic idea is:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Search for available Miniforge or Conda modules</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> spider Miniforge</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> spider conda</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Load the available module shown by Vera.</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace &lt;version&gt; with the exact module version shown by `module spider`.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load Miniforge3/<span class="op">&lt;</span>version<span class="op">&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Create the environment in project storage, not in your small home quota</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /cephyr/NOBACKUP/groups/replace_with_project/conda_envs</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-p</span> /cephyr/NOBACKUP/groups/replace_with_project/conda_envs/bio511_conda <span class="dt">\</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-c</span> conda-forge python=3.11 package_name</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Activate it</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate /cephyr/NOBACKUP/groups/replace_with_project/conda_envs/bio511_conda</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Test your script</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> my_script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use it in a job script by loading the same module and activating the same path before running the script.</p>
+</section>
+<section id="e4-container-alternative-for-conda-dependencies" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="e4-container-alternative-for-conda-dependencies">E4: Container alternative for Conda dependencies</h2>
+<p>For a complex Conda environment, a container is often better. A container recipe can install packages from an <code>environment.yml</code>, and the finished <code>.sif</code> file can be run in a job:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> exec my_environment.sif python my_script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For GPU containers, the command usually needs <code>--nv</code> so the container can see NVIDIA GPUs:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> exec <span class="at">--nv</span> my_gpu_environment.sif python gpu_script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You do not need to master containers in this first HPC introduction, but you should know that they are often the cleaner alternative to large Conda environments on a shared cluster.</p>
 <hr>
 </section>
-<section id="setting-up-chalmers-vpn" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Setting up Chalmers VPN</h1>
-<p>To be able to access c3se from other networks than in GU or Chalmers, you will need a Chalmers VPN</p>
+<section id="e4-do-i-need-tmux" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="e4-do-i-need-tmux">E4: Do I need <code>tmux</code>?</h2>
+<p>Usually, no. For normal HPC work you should submit long-running analyses with <code>sbatch</code>. Once the job is submitted, it belongs to the scheduler, not to your laptop connection. You can close your computer, disconnect from VPN, or lose Wi-Fi, and the batch job should continue running.</p>
+<p>Use this safe pattern:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> job_script.sh</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then you can log out. Later, log in again and check the output files and SLURM log.</p>
+<p><code>tmux</code> can still be useful for:</p>
 <ul>
-<li>Navigate to <a href="https://chalmers.topdesk.net/tas/public/ssp/content/detail/knowledgeitem?unid=07e6154089a648d09711ccc42a42fc88">https://chalmers.topdesk.net/tas/public/ssp/content/detail/knowledgeitem?unid=07e6154089a648d09711ccc42a42fc88</a></li>
-<li>Follow the instructions to set up the Chalmers VPN</li>
+<li>Editing files during a long login session.</li>
+<li>Keeping a terminal layout open while you prepare scripts.</li>
+<li>Running short monitoring commands.</li>
 </ul>
-<hr>
+<p>But <code>tmux</code> is <strong>not</strong> a replacement for SLURM. Do not start a long analysis inside <code>tmux</code> on the login node. If you need an interactive compute session for debugging, use an interactive SLURM job or the Open OnDemand portal, and keep it short.</p>
+
+
 </section>
-<section id="connecting-to-the-hpc-using-ssh-in-vscode" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Connecting to the HPC using ssh in VSCode</h1>
-<p>To be able to connect to the HPC in a manner that will let you use the full suite of tools available (or most of them at least) in VSCode, you will need to install the Remote - SSH extension.</p>
-<ul>
-<li>Open VSCode</li>
-<li>Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window or by pressing <code>Ctrl+Shift+X</code></li>
-<li>Search for “Remote - SSH” and install the extension by Microsoft (if youre unsure how install extensions, see <a href="https://code.visualstudio.com/docs/getstarted/extensions">here</a>)</li>
-<li>After installation, you will see a new icon in the Activity Bar on the side of the window. Click on it to open the Remote Explorer view.
-<ul>
-<li>If the SSH Targets are not visible, click on the drop down to expand the view</li>
-</ul></li>
-<li>Click on the <code>+</code> (“New Remote”) icon next to SSH header to add a new SSH host</li>
-<li>In the input box that appears, enter the SSH connection string for Vera: <code>&lt;your_chalmers_id&gt;@vera1.c3se.chalmers.se</code> (replace <code>&lt;your_chalmers_id&gt;</code> with your actual Chalmers ID)</li>
-<li>Press Enter to confirm</li>
-<li>You will be prompted to select the SSH configuration file to update. Choose the default option (usually <code>~/.ssh/config</code>)</li>
-</ul>
-<p>Once you have added the SSH host, you can connect to Vera:</p>
-<ul>
-<li>In the Remote Explorer view, find the Vera entry under SSH Targets (or by clicking on the blue “remote window” icon in the bottom left corner of VSCode)
-<ul>
-<li>Click on the “Connect to Host” icon (an arrow if you want the same window, square if you want a new one) next to the Vera entry</li>
-<li>If you clicked on the blue “remote window” icon, select “Remote-SSH: Connect to Host…” and then select the Vera entry</li>
-</ul></li>
-<li>A new VSCode window will open, and you will be prompted to enter your Chalmers ID password</li>
-<li>After entering your password, you should be connected to Vera, and you can start working on the HPC cluster directly from VSCode. Make sure that you open your home folder on Vera to open up a workspace.</li>
-<li>You can verify that you are connected to Vera by opening a new terminal in VSCode (Terminal &gt; New Terminal) and checking the hostname in the terminal prompt. It should show something like <code>your_chalmers_id@vera:~$</code></li>
-</ul>
-
-
 </section>
 
 </main> <!-- /main -->

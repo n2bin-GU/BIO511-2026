@@ -2,12 +2,12 @@
 title: "Additional: Build curated reference proteins"
 subtitle: "BIO511 Genomics — Manual preparation of curated proteins for Prokka"
 author: "Tor Kling"
-date: today
+date: August 2026
 format:
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: cosmo
 ---

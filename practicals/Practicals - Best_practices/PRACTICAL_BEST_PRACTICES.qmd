@@ -6,7 +6,7 @@ format:
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: minty
 ---
@@ -321,7 +321,6 @@ Tools:
 - Kraken2
 - Mash
 - GEMMA
-
 :::
 
 Not all bioinformaticians get into tool development, so in this course we focus on programming for analysis, for that we use interpreted language far more than compiled languages. The most popular language for this at the moment is Python, which you will be introduced to later in the course. In the following examples, we will show algorithms in pseudocode and in Python, as you learn python, you can go back to these examples and see if you understand them better.

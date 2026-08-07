@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alvar Almstedt, Emma Västerviga">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="dcterms.date" content="2026-01-01">
 
 <title>Practical 3: Python Functions – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -159,11 +159,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -304,18 +304,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links"><span class="header-section-number">2</span> Useful links</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">3</span> Example</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful links</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a>
   <ul class="collapse">
-  <li><a href="#defining-a-function" id="toc-defining-a-function" class="nav-link" data-scroll-target="#defining-a-function"><span class="header-section-number">3.1</span> Defining a function</a></li>
-  <li><a href="#calling-the-function" id="toc-calling-the-function" class="nav-link" data-scroll-target="#calling-the-function"><span class="header-section-number">3.2</span> Calling the function</a></li>
+  <li><a href="#defining-a-function" id="toc-defining-a-function" class="nav-link" data-scroll-target="#defining-a-function">Defining a function</a></li>
+  <li><a href="#calling-the-function" id="toc-calling-the-function" class="nav-link" data-scroll-target="#calling-the-function">Calling the function</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4</span> Exercises</a>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">4.1</span> </a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">4.2</span> </a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">4.3</span> </a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -343,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">January 1, 2026</p>
     </div>
   </div>
   
@@ -355,8 +355,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>Functions are everywhere in python and its time for you to start using them to take you to the next level!</p>
 <p>If there are any built-in python functions you have not seen or heard about before (like for example <code>isdigit()</code>, <code>max()</code> etc.), search online for the documentation. The official page <code>python.docs.org</code> has information on the built-in functionality that comes with the standard python installation.</p>
 <ul>
@@ -364,28 +364,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Also do not forget that the function has its own namespace, meaning code outside the funtion can not access the variables that only exist inside the function. The function is meant to be sectioned off. The data you want to access outside the function needs to be <code>return</code>ed</li>
 </ul>
 </section>
-<section id="useful-links" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Useful links</h1>
+<section id="useful-links" class="level1">
+<h1>Useful links</h1>
 <p><a href="">Python functions (text)</a></p>
 <p><a href="https://www.youtube.com/watch?v=9Os0o3wzS_I">Python functions (video)</a></p>
 </section>
-<section id="example" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Example</h1>
-<section id="defining-a-function" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="defining-a-function"><span class="header-section-number">3.1</span> Defining a function</h2>
+<section id="example" class="level1">
+<h1>Example</h1>
+<section id="defining-a-function" class="level2">
+<h2 class="anchored" data-anchor-id="defining-a-function">Defining a function</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_two_numbers(num_one, num_two):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    number_to_return <span class="op">=</span> num_one <span class="op">+</span> num_two</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> number_to_return</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="calling-the-function" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="calling-the-function"><span class="header-section-number">3.2</span> Calling the function</h2>
+<section id="calling-the-function" class="level2">
+<h2 class="anchored" data-anchor-id="calling-the-function">Calling the function</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_added_numbers <span class="op">=</span> add_two_numbers(<span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_added_numbers) <span class="co"># will print 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="exercises" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Exercises</h1>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
 <p>You can copy the text blocks describing the tasks in comments below into your IDE to avoid having to refer back to this page.</p>
 <p>Use the exact variables defined in this block and set them on the global namespace (outside any function). Then write the functions and function calls we ask for in the tasks yourself.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provided inputs (use these)</span></span>
@@ -397,8 +397,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">999</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> <span class="st">"unset"</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="st">"unset"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="section" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="section"><span class="header-section-number">4.1</span> </h2>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count-above  (uses nums, limit, count)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Goal: make a small function called whatever you want and then call(run) it.</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -418,8 +418,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code below</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section-1" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">4.2</span> </h2>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Text summary  (uses text, summary)</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Goal: classify characters with an if/elif/else chain and return a clear result.</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -443,8 +443,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code below</span></span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section-2" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="section-2"><span class="header-section-number">4.3</span> </h2>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#C) Aggregate with mode  (uses nums, limit, result)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Goal: nested decisions based on a mode string. Return one final value.</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>

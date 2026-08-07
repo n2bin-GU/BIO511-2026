@@ -1,13 +1,13 @@
 ---
 title: "Practical 4: Scripts and Advanced Text Manipulation"
 subtitle: "BIO511 Genomics - Scripting in bash"
-author: "Tor Kling, Stuti Jain"
-date: "today"
+author: "Tor Kling"
+date: August 2026
 format:
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: minty
 ---
@@ -186,30 +186,22 @@ Since the ffn files we have contain a multitude of gene sequences and their head
 - `do` and `done`: Keywords used to define the start and end of a loop block
 - `basename`: A command that extracts the base name of a file (the file name without the path and extension), very useful for creating output file names based on input file names
 
-**Exercises: For loops**
 ```bash
-# Also add a creation of the counts file
-echo -e "Genome\tGene_Count" > ${OUTPUT_DIR}/gene_counts.tsv
+# Initiate the gene_counts.tsv file with a header
+[..1..] > ${OUTPUT_DIR}/gene_counts.tsv
 
 # In our INPUT_DIR we have multiple ffn files, a good way (if you have a good structured folder) to iterate over all ffn files is to use a for loop with a wildcard
 for ffn_file in ${INPUT_DIR}/*.ffn; do 
-  # putting the wilcard alongside the file extension will match all files with that extension
-  # Inside the loop, we can use the variable ffn_file established in the loop to refer to the current file being processed
-  # Extract the base name of the file (without the path and extension) to use in the output file name
+
   base_name=$(basename ${ffn_file} .ffn)
   
-  # Use awk to extract gene sequences matching the GENE_NAME_PATTERN and save them to an output file
-  # Since we are working on a fasta file, tab-separation is not needed and all data is in one column
   grep -A 1 -E "^>${GENE_NAME_PATTERN}" "${ffn_file}" > "${OUTPUT_DIR}/${base_name}_filtered.ffn"
 
-  # Count the number of genes found and add it to the total
-  gene_count=$([grep -c '^>' "${OUTPUT_DIR}/${base_name}_filtered.ffn" ] || true)
+  gene_count=$([..2..] || true)
   TOTAL_GENES_FOR_PATTERN=$((TOTAL_GENES_FOR_PATTERN + gene_count))
 
-  # Also store the gene count for the current file in a new file for later use 
   echo -e "${base_name}\t${gene_count}" >> ${OUTPUT_DIR}/gene_counts.tsv
-  
-  # Echo the number of genes found in the current file to you stdout, to report progress
+
   echo "Processed ${ffn_file}, found ${gene_count} genes matching pattern '${GENE_NAME_PATTERN}'"
 done
 
@@ -217,15 +209,33 @@ done
 
 ::: {.callout-important}
 ### Exercise: Missing code 
-There are some missing pieces in the code above, indicated by [..N..].
+There are some missing pieces in the code above, indicated by [..N..]. They are single command replacements, and should be filled in with the correct command to make the script work as intended.
 
+  1. The first missing piece is the command to create the `gene_counts.tsv` file with a header. This should be a command that creates a new file and writes the header line to it. The header line should be "File\tGene_Count" and needs to be printed to the file `${OUTPUT_DIR}/gene_counts.tsv`.
+  2. The second missing piece is the command to count the number of genes found in the filtered ffn file. This should be a command that counts the number of lines in the file `${OUTPUT_DIR}/${base_name}_filtered.ffn` that start with `>`, which indicates a gene header line. The result should be stored in the variable `gene_count`.
+
+
+:::{.callout-tip collapse="true"}
+### Solution:
+```bash
+
+# 1
+# Create the gene_counts.tsv file with a header
+echo -e "File\tGene_Count" > ${OUTPUT_DIR}/gene_counts.tsv
+
+# 2
+# Count the number of genes found and add it to the total
+grep -c '^>' "${OUTPUT_DIR}/${base_name}_filtered.ffn
+
+```
+:::
 :::
 
 # Improving your scripts: Adding debugging and flexibility
 
 Bash scripts differ a bit from some other languages you might have tried befoer (eg. R, python), in that they without configuration will continue running even if an error occurs. Finding and catching these errors is the other half of programming, we will now introduce a few tools that can help you debug your bash scripts.
 
-## Debugging Bash Scripts: When Things Go Wrong
+## Global set-options for debugging
 
 Lets begin by setting the global options for our script, these are commands that define the general behaviour of our script. They will most likely always be in your scripts, and are a good starting point for debugging. A classic is the `set -euo` combination:
 
@@ -252,9 +262,7 @@ However, they wont help with finding the exact spot where the error occurs. One 
   - `else`: A keyword used to define an alternative block of code if the condition is not met
   - `fi`: A keyword used to define the end of an if block
 
-**Exercises: Error messages**
 ```bash
-# This a quite common use of if/else statements for bash scripts
 # Here is an example of a custom error message
 if [ ! -f "$INPUT_FILE" ]; then
   echo "Error: Input file $INPUT_FILE does not exist."
@@ -262,12 +270,34 @@ if [ ! -f "$INPUT_FILE" ]; then
 fi
 ```
 
-**Go ahead and identify stages in the script from before where you think errors might occur, and add custom error messages where appropriate.**
-**Remember to test your script with both valid and invalid inputs to see how it behaves**
+The placement of error messages also need to make sense, for example if you are checking for the existence of a file, it should be placed before you try to read the file. If you are checking for the number of genes found in a file, it should be placed after you have processed the file. 
+
 ```bash
-# Here are some suggestions for custom error messages: 
-# You dont need to all of these if you dont want to, but if you do, make sure they are placed at the correct spots in the script
-# Check if input and output directories exist
+# The previous example makes sense to place after we assign the variable INPUT_FILE, but before we try to read the file.
+# ex.
+INPUT_FILE="${INPUT_DIR}/some_file.ffn"
+
+if [ ! -f "$INPUT_FILE" ]; then
+  echo "Error: Input file $INPUT_FILE does not exist."
+  exit 1
+fi
+```
+
+If we placed the conditional block before we defined INPUT_FILE, it would not make sense, as the script would fail every time. Same thing would happen if we placed it after we tried to read the file, as the script would have already failed before reaching the conditional block if the file did not exist. 
+
+::: {.callout-important}
+### Exercise: Custom error messages
+Add custom error messages to your script to check for the following conditions:
+
+1. Check if the input and output directories exist
+2. Check if a name pattern is provided
+3. Print the basename of the file being processed in the for loop
+4. Check if any genes names matching the pattern were found in the current file
+
+::: {.callout-tip collapse="true"}
+### Solution:
+Below are some suggestions for the custom error messages:
+```bash
 if [ ! -d "$INPUT_DIR" ]; then
   echo "Error: Input directory $INPUT_DIR does not exist."
   exit 1
@@ -278,36 +308,20 @@ if [ ! -d "$OUTPUT_DIR" ]; then
   exit 1
 fi
 
-# Check if a name pattern is provided
-if [ -z "$GENE_NAME_PATTERN" ]; then
-  echo "Error: Gene name pattern is not provided."
-  exit 1
-fi
-
-# Print the basename of the file being processed in the for loop
-# allows you to later check that all files were processed
 echo "Processing file: ${base_name}"
 
-# Check if any genes were found in the current file
 if [ "${gene_count}" -eq 0 ]; then
   echo "Warning: No genes matching pattern '${GENE_NAME_PATTERN}' found in ${ffn_file}"
 fi
-
-# At the end of the script, print the total number of genes found
-echo "Total genes matching pattern '${GENE_NAME_PATTERN}': ${TOTAL_GENES_FOR_PATTERN}"
-
-# For the while loop, check if the gene_counts.tsv file is not empty before processing
-if [ ! -s "${OUTPUT_DIR}/gene_counts.tsv" ]; then
-  echo "Error: gene_counts.tsv file is empty or does not exist."
-  exit 1
-fi
 ```
+:::
+:::
 
 ---
 
 ::: {.callout-tip collapse="true"}
 ## OPTARGS - Adding flags to make your scripts flexible (THIS IS OPTIONAL)
-Up until now, our scripts have been quite rigid - they expect specific input files and parameters; an occasionally bad habit that coders refer to as "hardcoding". However, in many scenarios, we often want our scripts to be more flexible and adaptable to different inputs and options. This is where OPTARGS comes in - a built-in bash tool that allows us to easily handle command-line options and arguments. You might recognize this from the command-line tools we've used so far, where we can add flags like `-h` for help or `-v` for verbose output. By using OPTARGS in our scripts, we can create flags for our own programs, making them more user-friendly and versatile.
+Up until now, our scripts have been quite rigid - they expect specific input files and parameters; an occasionally bad habit that people refer to as "hardcoding". However, in many scenarios, we often want our scripts to be more flexible and adaptable to different inputs and options. This is where OPTARGS comes in - a built-in bash tool that allows us to easily handle command-line options and arguments. You might recognize this from the command-line tools we've used so far, where we can add flags like `-h` for help or `-v` for verbose output. By using OPTARGS in our scripts, we can create flags for our own programs, making them more user-friendly and versatile.
 
 A few key commands that we will use in this section:
 
@@ -362,6 +376,11 @@ Now that you have a finished script, try to use it to answer the following quest
 AF316: 
 ```
 :::
+:::
+
+::: {.callout-important}
+### Exercise: Describing your script in pseudocode
+Now that you have a finished script, try to translate it into pseudocode. Once you have written a complete pseudocode, trade with a partner and see if they can understand what your script does based on your pseudocode. 
 :::
 
 ---

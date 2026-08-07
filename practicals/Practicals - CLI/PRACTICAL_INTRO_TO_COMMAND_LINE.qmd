@@ -1,13 +1,13 @@
 ---
 title: "Practical 1: Introduction to Command Line Interface"
 subtitle: "BIO511 Genomics - Command Line Basics"
-author: "Tor Kling, Vahid Atabaigielmi"
-date: today
+author: "Tor Kling, Kaisa Thorell"
+date: August 2026
 format: 
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: minty
 ---
@@ -377,17 +377,9 @@ When we perform computational tasks, a simplified pipeline can can be broken dow
 
 ```{mermaid}
 flowchart LR
-    A["`**Input**
-      Data provided to a command 
-      *ex: sequences.fasta*`"]
-    B["`**Process**
-      The command that manipulates or analyzes the data 
-      *ex: grep, sed, script.sh*`"]
-    C["`**Output**
-      The result produced by the command 
-      *ex: [Text in CLI] or
-      filtered_sequences.fasta 
-      (if written)*`"]
+    A["**Input**<br />Data provided to a command<br />*ex: sequences.fasta*"]
+    B["**Process**<br />The command that manipulates or analyzes the data<br />*ex: grep, sed, script.sh*"]
+    C["**Output**<br />The result produced by the command<br />*ex: [Text in CLI] or<br />filtered_sequences.fasta<br />if written*"]
 
     A --> B
     B --> C

@@ -6,8 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tor Kling">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="author" content="Tor Kling, Kaisa Thorell">
+<meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 1: Raw Read Data and Quality Control – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -159,11 +159,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -308,26 +308,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#understanding-fastq-files" id="toc-understanding-fastq-files" class="nav-link" data-scroll-target="#understanding-fastq-files"><span class="header-section-number">2</span> Understanding FASTQ Files</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#understanding-fastq-files" id="toc-understanding-fastq-files" class="nav-link" data-scroll-target="#understanding-fastq-files">Understanding FASTQ Files</a>
   <ul class="collapse">
-  <li><a href="#obtaining-sample-data" id="toc-obtaining-sample-data" class="nav-link" data-scroll-target="#obtaining-sample-data"><span class="header-section-number">2.1</span> Obtaining sample data</a></li>
-  <li><a href="#examining-fastq-structure" id="toc-examining-fastq-structure" class="nav-link" data-scroll-target="#examining-fastq-structure"><span class="header-section-number">2.2</span> Examining FASTQ structure</a></li>
+  <li><a href="#obtaining-sample-data" id="toc-obtaining-sample-data" class="nav-link" data-scroll-target="#obtaining-sample-data">Obtaining sample data</a></li>
+  <li><a href="#examining-fastq-structure" id="toc-examining-fastq-structure" class="nav-link" data-scroll-target="#examining-fastq-structure">Examining FASTQ structure</a></li>
   </ul></li>
-  <li><a href="#quality-assessment-and-filtering-with-fastp" id="toc-quality-assessment-and-filtering-with-fastp" class="nav-link" data-scroll-target="#quality-assessment-and-filtering-with-fastp"><span class="header-section-number">3</span> Quality Assessment and Filtering with fastp</a>
+  <li><a href="#quality-assessment-and-filtering-with-fastp" id="toc-quality-assessment-and-filtering-with-fastp" class="nav-link" data-scroll-target="#quality-assessment-and-filtering-with-fastp">Quality Assessment and Filtering with fastp</a>
   <ul class="collapse">
-  <li><a href="#fastp-analysis" id="toc-fastp-analysis" class="nav-link" data-scroll-target="#fastp-analysis"><span class="header-section-number">3.1</span> Fastp analysis</a></li>
+  <li><a href="#fastp-analysis" id="toc-fastp-analysis" class="nav-link" data-scroll-target="#fastp-analysis">Fastp analysis</a></li>
   </ul></li>
-  <li><a href="#taxonomic-classification-with-kraken2" id="toc-taxonomic-classification-with-kraken2" class="nav-link" data-scroll-target="#taxonomic-classification-with-kraken2"><span class="header-section-number">4</span> Taxonomic Classification with kraken2</a>
+  <li><a href="#taxonomic-classification-with-kraken2" id="toc-taxonomic-classification-with-kraken2" class="nav-link" data-scroll-target="#taxonomic-classification-with-kraken2">Taxonomic Classification with kraken2</a>
   <ul class="collapse">
-  <li><a href="#hpc-job-script-for-kraken2-classification" id="toc-hpc-job-script-for-kraken2-classification" class="nav-link" data-scroll-target="#hpc-job-script-for-kraken2-classification"><span class="header-section-number">4.1</span> HPC job script for kraken2 classification</a></li>
+  <li><a href="#hpc-job-script-for-kraken2-classification" id="toc-hpc-job-script-for-kraken2-classification" class="nav-link" data-scroll-target="#hpc-job-script-for-kraken2-classification">HPC job script for kraken2 classification</a></li>
   </ul></li>
-  <li><a href="#comprehensive-reporting-with-multiqc" id="toc-comprehensive-reporting-with-multiqc" class="nav-link" data-scroll-target="#comprehensive-reporting-with-multiqc"><span class="header-section-number">5</span> Comprehensive Reporting with MultiQC</a>
+  <li><a href="#comprehensive-reporting-with-multiqc" id="toc-comprehensive-reporting-with-multiqc" class="nav-link" data-scroll-target="#comprehensive-reporting-with-multiqc">Comprehensive Reporting with MultiQC</a>
   <ul class="collapse">
-  <li><a href="#preparing-results-for-multiqc" id="toc-preparing-results-for-multiqc" class="nav-link" data-scroll-target="#preparing-results-for-multiqc"><span class="header-section-number">5.1</span> Preparing results for MultiQC</a></li>
-  <li><a href="#running-multiqc" id="toc-running-multiqc" class="nav-link" data-scroll-target="#running-multiqc"><span class="header-section-number">5.2</span> Running MultiQC</a></li>
+  <li><a href="#preparing-results-for-multiqc" id="toc-preparing-results-for-multiqc" class="nav-link" data-scroll-target="#preparing-results-for-multiqc">Preparing results for MultiQC</a></li>
+  <li><a href="#running-multiqc" id="toc-running-multiqc" class="nav-link" data-scroll-target="#running-multiqc">Running MultiQC</a></li>
   </ul></li>
-  <li><a href="#additional-exercises" id="toc-additional-exercises" class="nav-link" data-scroll-target="#additional-exercises"><span class="header-section-number">6</span> Additional exercises</a></li>
+  <li><a href="#additional-exercises" id="toc-additional-exercises" class="nav-link" data-scroll-target="#additional-exercises">Additional exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -347,14 +347,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Tor Kling </p>
+             <p>Tor Kling, Kaisa Thorell </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -366,8 +366,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>Next-generation sequencing (NGS) technologies generate millions of short DNA sequences called reads. You’ve already become quite familiar with Nanopore sequencing by this point, and are aware that NGS reads are error-prone. Hence it is essential that before we do any further sequence analysis, we first assess the quality of our read data using command line tools that provide both efficiency and reproducibility.</p>
 <p>In this practical, we’ll use command line tools to perform quality assessment and filtering, followed by taxonomic classification to understand what organisms are present in our samples. We will provide short-read files for you to use, as well as the code needed to perform the analyses. However, you will need to adapt paths and filenames to your own working environment, as well as select your own data and think about the biological significance of the results.</p>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -414,15 +414,15 @@ Learning Objectives
 </div>
 <hr>
 </section>
-<section id="understanding-fastq-files" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Understanding FASTQ Files</h1>
-<section id="obtaining-sample-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="obtaining-sample-data"><span class="header-section-number">2.1</span> Obtaining sample data</h2>
+<section id="understanding-fastq-files" class="level1">
+<h1>Understanding FASTQ Files</h1>
+<section id="obtaining-sample-data" class="level2">
+<h2 class="anchored" data-anchor-id="obtaining-sample-data">Obtaining sample data</h2>
 <p>For this excersise, we offer a set of fastq file for you to Use Begin by navigating to your symlinked data directory and look at the Files</p>
 <p>You wont need to copy the files to your working directory, but make sure that any edits you make dont overwrite the original files! If you want you can also do this step on your local computer!</p>
 </section>
-<section id="examining-fastq-structure" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="examining-fastq-structure"><span class="header-section-number">2.2</span> Examining FASTQ structure</h2>
+<section id="examining-fastq-structure" class="level2">
+<h2 class="anchored" data-anchor-id="examining-fastq-structure">Examining FASTQ structure</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the first few reads from a compressed file</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use this code example for each of the sample files in the data dir</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Either untar the files first, or use zcat to read them directly</span></span>
@@ -456,11 +456,11 @@ Key Questions
 <hr>
 </section>
 </section>
-<section id="quality-assessment-and-filtering-with-fastp" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Quality Assessment and Filtering with fastp</h1>
+<section id="quality-assessment-and-filtering-with-fastp" class="level1">
+<h1>Quality Assessment and Filtering with fastp</h1>
 <p>fastp is a modern version of what FastQC used to do (in case youve used that before), it is an all-in-one preprocessing tool that combines quality assessment, adapter trimming, and quality filtering in a single program. Unlike the traditional FastQC + Trim Galore workflow, fastp provides integrated analysis with excellent performance. As you likely remember, we set up fastp on your computer locally last practical, so lets use it now.</p>
-<section id="fastp-analysis" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="fastp-analysis"><span class="header-section-number">3.1</span> Fastp analysis</h2>
+<section id="fastp-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="fastp-analysis">Fastp analysis</h2>
 <p>This step must be done on your local computer, make sure you download the data with scp first!</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Begin by creating an output directory for your QC results</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> fastp_results</span>
@@ -518,11 +518,11 @@ Key Questions
 <hr>
 </section>
 </section>
-<section id="taxonomic-classification-with-kraken2" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Taxonomic Classification with kraken2</h1>
+<section id="taxonomic-classification-with-kraken2" class="level1">
+<h1>Taxonomic Classification with kraken2</h1>
 <p>Now we’ll classify our quality-filtered reads to identify what organisms are present in our samples. Classification of reads help us study the composition of DNA in our samples, useful both for cases like metagenomics, but also for contamination detection in our WGS samples. We’ll use the kraken2 container that you made in the previous practical. In case you havent put it up on the cluster yet, there is a copy available in the n2bin_gu group directory.</p>
-<section id="hpc-job-script-for-kraken2-classification" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="hpc-job-script-for-kraken2-classification"><span class="header-section-number">4.1</span> HPC job script for kraken2 classification</h2>
+<section id="hpc-job-script-for-kraken2-classification" class="level2">
+<h2 class="anchored" data-anchor-id="hpc-job-script-for-kraken2-classification">HPC job script for kraken2 classification</h2>
 <p>Lets begin by creating the job script that we will submit to the HPC cluster. Make sure to adjust paths to your actual directories and database locations. You can either create and edit the file on the cluster, or create it locally and then upload it to the cluster if you want. ALso this jobscript will allow you to run a single sample at a time, so you will need to change the sample name for each run, or make a loop to run multiple samples if you feel up for it.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create SLURM job script for kraken2 analysis</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -568,11 +568,11 @@ Key Questions
 <hr>
 </section>
 </section>
-<section id="comprehensive-reporting-with-multiqc" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Comprehensive Reporting with MultiQC</h1>
+<section id="comprehensive-reporting-with-multiqc" class="level1">
+<h1>Comprehensive Reporting with MultiQC</h1>
 <p>MultiQC is a powerful tool that aggregates results from multiple bioinformatics analyses into a single, interactive HTML report. It can automatically detect and parse outputs from fastp, kraken2, and many other tools, making it perfect for generating comprehensive summaries of our quality control and classification workflow.</p>
-<section id="preparing-results-for-multiqc" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="preparing-results-for-multiqc"><span class="header-section-number">5.1</span> Preparing results for MultiQC</h2>
+<section id="preparing-results-for-multiqc" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-results-for-multiqc">Preparing results for MultiQC</h2>
 <p>MultiQC works best when all results are organized in a clear directory structure. Let’s organize our outputs properly.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a comprehensive results directory</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multiqc_analysis/<span class="dt">{fastp_reports</span><span class="op">,</span><span class="dt">kraken2_reports}</span></span>
@@ -583,8 +583,8 @@ Key Questions
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify all files are present</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> multiqc_analysis/<span class="pp">*</span>/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="running-multiqc" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="running-multiqc"><span class="header-section-number">5.2</span> Running MultiQC</h2>
+<section id="running-multiqc" class="level2">
+<h2 class="anchored" data-anchor-id="running-multiqc">Running MultiQC</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run MultiQC on all results to generate a comprehensive report</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multiqc_analysis</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -596,8 +596,8 @@ Key Questions
 <hr>
 </section>
 </section>
-<section id="additional-exercises" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Additional exercises</h1>
+<section id="additional-exercises" class="level1">
+<h1>Additional exercises</h1>
 <p>Now that you have completed the quality control and classification workflow, use your fastp report, MultiQC report and command line tools to answer the following questions:</p>
 <ol type="1">
 <li><p>Which sample had the highest percentage of reads filtered out by fastp? What might this indicate about the sample quality?</p></li>

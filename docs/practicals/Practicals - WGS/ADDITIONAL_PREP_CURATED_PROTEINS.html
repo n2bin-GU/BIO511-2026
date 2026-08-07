@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tor Kling">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="dcterms.date" content="2026-08-01">
 
 <title>Additional: Build curated reference proteins – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -159,11 +159,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -308,16 +308,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#requirements" id="toc-requirements" class="nav-link active" data-scroll-target="#requirements"><span class="header-section-number">1</span> Requirements</a></li>
-  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps"><span class="header-section-number">2</span> Steps</a>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link active" data-scroll-target="#requirements">Requirements</a></li>
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">Steps</a>
   <ul class="collapse">
-  <li><a href="#fetching-protein-fasta-files" id="toc-fetching-protein-fasta-files" class="nav-link" data-scroll-target="#fetching-protein-fasta-files"><span class="header-section-number">2.1</span> Fetching protein FASTA files</a></li>
-  <li><a href="#concatenate-protein-fasta-files" id="toc-concatenate-protein-fasta-files" class="nav-link" data-scroll-target="#concatenate-protein-fasta-files"><span class="header-section-number">2.2</span> Concatenate protein FASTA files</a></li>
-  <li><a href="#remove-exact-duplicates" id="toc-remove-exact-duplicates" class="nav-link" data-scroll-target="#remove-exact-duplicates"><span class="header-section-number">2.3</span> Remove exact duplicates</a></li>
-  <li><a href="#cluster-with-cd-hit" id="toc-cluster-with-cd-hit" class="nav-link" data-scroll-target="#cluster-with-cd-hit"><span class="header-section-number">2.4</span> Cluster with CD-HIT</a></li>
-  <li><a href="#review-the-results" id="toc-review-the-results" class="nav-link" data-scroll-target="#review-the-results"><span class="header-section-number">2.5</span> Review the results</a></li>
+  <li><a href="#fetching-protein-fasta-files" id="toc-fetching-protein-fasta-files" class="nav-link" data-scroll-target="#fetching-protein-fasta-files">Fetching protein FASTA files</a></li>
+  <li><a href="#concatenate-protein-fasta-files" id="toc-concatenate-protein-fasta-files" class="nav-link" data-scroll-target="#concatenate-protein-fasta-files">Concatenate protein FASTA files</a></li>
+  <li><a href="#remove-exact-duplicates" id="toc-remove-exact-duplicates" class="nav-link" data-scroll-target="#remove-exact-duplicates">Remove exact duplicates</a></li>
+  <li><a href="#cluster-with-cd-hit" id="toc-cluster-with-cd-hit" class="nav-link" data-scroll-target="#cluster-with-cd-hit">Cluster with CD-HIT</a></li>
+  <li><a href="#review-the-results" id="toc-review-the-results" class="nav-link" data-scroll-target="#review-the-results">Review the results</a></li>
   </ul></li>
-  <li><a href="#use-with-prokka" id="toc-use-with-prokka" class="nav-link" data-scroll-target="#use-with-prokka"><span class="header-section-number">3</span> Use with Prokka</a></li>
+  <li><a href="#use-with-prokka" id="toc-use-with-prokka" class="nav-link" data-scroll-target="#use-with-prokka">Use with Prokka</a></li>
   </ul>
 </nav>
     </div>
@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -357,8 +357,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Since we know that annotation/classification databases have their limits, especially with <strong>novel or poorly characterized proteins</strong>, its a good idea to create a curated reference set. This page shows how to manually create a curated reference protein FASTA file for use with Prokka.</p>
-<section id="requirements" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="requirements"><span class="header-section-number">1</span> Requirements</h2>
+<section id="requirements" class="level2">
+<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <p>You will need the following tools installed (either via apt or conda):</p>
 <ul>
 <li>seqkit</li>
@@ -366,23 +366,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Tip: Run these steps in a clean folder containing only the protein FASTA files you want to include.</p>
 </section>
-<section id="steps" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="steps"><span class="header-section-number">2</span> Steps</h2>
-<section id="fetching-protein-fasta-files" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="fetching-protein-fasta-files"><span class="header-section-number">2.1</span> Fetching protein FASTA files</h3>
+<section id="steps" class="level2">
+<h2 class="anchored" data-anchor-id="steps">Steps</h2>
+<section id="fetching-protein-fasta-files" class="level3">
+<h3 class="anchored" data-anchor-id="fetching-protein-fasta-files">Fetching protein FASTA files</h3>
 <p>You can download protein FASTA files from various sources, such as NCBI RefSeq, UniProt, or other specialized databases. Ensure that the files are in FASTA format and contain the protein sequences you want to include in your curated reference. A recommendation is to start with NCBI and look for the complete genomes of high quality reference strains of your organism of interest. Next you should try to include some genomes that may be of certain genes of interest, these could be clinical isolates (for virulence factors, ESBL), environmental isolates (for diverse metabolic capabilities and resistance genes), industrial strains (for production relevant genes) etc.</p>
 <p>Once you have identified the genomes, download their protein FASTA files (usually with the extension .faa) from the NCBI Genome or RefSeq database using the “Download” option on the genome’s page. Then place all the downloaded .faa files into a single directory where you will perform the following steps.</p>
 </section>
-<section id="concatenate-protein-fasta-files" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="concatenate-protein-fasta-files"><span class="header-section-number">2.2</span> Concatenate protein FASTA files</h3>
+<section id="concatenate-protein-fasta-files" class="level3">
+<h3 class="anchored" data-anchor-id="concatenate-protein-fasta-files">Concatenate protein FASTA files</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create file </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> merged_raw.faa</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate all .faa files into one</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="pp">*</span>.faa <span class="op">&gt;&gt;</span> merged_raw.faa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="remove-exact-duplicates" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="remove-exact-duplicates"><span class="header-section-number">2.3</span> Remove exact duplicates</h3>
+<section id="remove-exact-duplicates" class="level3">
+<h3 class="anchored" data-anchor-id="remove-exact-duplicates">Remove exact duplicates</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove exact duplicate sequences using rmdup from seqkit</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> rmdup <span class="at">-s</span> <span class="at">-o</span> merged_dedup.faa merged_raw.faa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
@@ -390,8 +390,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>-o: output file</li>
 </ul>
 </section>
-<section id="cluster-with-cd-hit" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="cluster-with-cd-hit"><span class="header-section-number">2.4</span> Cluster with CD-HIT</h3>
+<section id="cluster-with-cd-hit" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-with-cd-hit">Cluster with CD-HIT</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cluster similar sequences at 95% identity to remove redundancy</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">cd-hit</span> <span class="at">-i</span> merged_dedup.faa <span class="at">-o</span> curatedRef.faa <span class="at">-c</span> 0.95 <span class="at">-n</span> 5 <span class="at">-d</span> 0 <span class="at">-T</span> 2 <span class="at">-M</span> 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
@@ -401,8 +401,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>-T: threads; -M: memory in MB (0 = no limit)</li>
 </ul>
 </section>
-<section id="review-the-results" class="level3" data-number="2.5">
-<h3 data-number="2.5" class="anchored" data-anchor-id="review-the-results"><span class="header-section-number">2.5</span> Review the results</h3>
+<section id="review-the-results" class="level3">
+<h3 class="anchored" data-anchor-id="review-the-results">Review the results</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect clustered sequences</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> curatedRef.faa.clstr</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> curatedRef.faa</span>
@@ -413,8 +413,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> curatedRef.faa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="use-with-prokka" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="use-with-prokka"><span class="header-section-number">3</span> Use with Prokka</h2>
+<section id="use-with-prokka" class="level2">
+<h2 class="anchored" data-anchor-id="use-with-prokka">Use with Prokka</h2>
 <p>Provide curatedRef.faa via the proteins flag:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that path/to is a placeholder, adjust accordingly</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--proteins</span> /path/to/curatedRef.faa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

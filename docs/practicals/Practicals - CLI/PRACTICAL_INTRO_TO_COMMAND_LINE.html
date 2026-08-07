@@ -6,8 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tor Kling, Vahid Atabaigielmi">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="author" content="Tor Kling, Kaisa Thorell">
+<meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 1: Introduction to Command Line Interface – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -162,11 +162,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -307,13 +307,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html" class="sidebar-item-text sidebar-link">
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practical 1: Git Fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
+  <a href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practical 2: Algorithmic Thinking</span></a>
   </div>
 </li>
@@ -329,26 +329,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#making-navigating-and-finding-things-in-your-directories" id="toc-making-navigating-and-finding-things-in-your-directories" class="nav-link" data-scroll-target="#making-navigating-and-finding-things-in-your-directories"><span class="header-section-number">2</span> Making, Navigating and finding things in your directories</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#making-navigating-and-finding-things-in-your-directories" id="toc-making-navigating-and-finding-things-in-your-directories" class="nav-link" data-scroll-target="#making-navigating-and-finding-things-in-your-directories">Making, Navigating and finding things in your directories</a>
   <ul class="collapse">
-  <li><a href="#understanding-your-location-pwd-and-ls" id="toc-understanding-your-location-pwd-and-ls" class="nav-link" data-scroll-target="#understanding-your-location-pwd-and-ls"><span class="header-section-number">2.1</span> Understanding Your Location (<code>pwd</code> and <code>ls</code>)</a></li>
-  <li><a href="#making-and-changing-directories-mkdir-and-cd" id="toc-making-and-changing-directories-mkdir-and-cd" class="nav-link" data-scroll-target="#making-and-changing-directories-mkdir-and-cd"><span class="header-section-number">2.2</span> Making and Changing Directories (<code>mkdir</code> and <code>cd</code>)</a></li>
+  <li><a href="#understanding-your-location-pwd-and-ls" id="toc-understanding-your-location-pwd-and-ls" class="nav-link" data-scroll-target="#understanding-your-location-pwd-and-ls">Understanding Your Location (<code>pwd</code> and <code>ls</code>)</a></li>
+  <li><a href="#making-and-changing-directories-mkdir-and-cd" id="toc-making-and-changing-directories-mkdir-and-cd" class="nav-link" data-scroll-target="#making-and-changing-directories-mkdir-and-cd">Making and Changing Directories (<code>mkdir</code> and <code>cd</code>)</a></li>
   </ul></li>
-  <li><a href="#file-creation-and-manipulation" id="toc-file-creation-and-manipulation" class="nav-link" data-scroll-target="#file-creation-and-manipulation"><span class="header-section-number">3</span> File Creation and Manipulation</a>
+  <li><a href="#file-creation-and-manipulation" id="toc-file-creation-and-manipulation" class="nav-link" data-scroll-target="#file-creation-and-manipulation">File Creation and Manipulation</a>
   <ul class="collapse">
-  <li><a href="#text-manipulation-echo-touch-less-cat" id="toc-text-manipulation-echo-touch-less-cat" class="nav-link" data-scroll-target="#text-manipulation-echo-touch-less-cat"><span class="header-section-number">3.1</span> Text manipulation (<code>echo</code>, <code>touch</code>, <code>less</code>, <code>cat</code>)</a></li>
-  <li><a href="#file-manipulation-cp-mv-rm" id="toc-file-manipulation-cp-mv-rm" class="nav-link" data-scroll-target="#file-manipulation-cp-mv-rm"><span class="header-section-number">3.2</span> File Manipulation (<code>cp</code>, <code>mv</code>, <code>rm</code>)</a></li>
+  <li><a href="#text-manipulation-echo-touch-less-cat" id="toc-text-manipulation-echo-touch-less-cat" class="nav-link" data-scroll-target="#text-manipulation-echo-touch-less-cat">Text manipulation (<code>echo</code>, <code>touch</code>, <code>less</code>, <code>cat</code>)</a></li>
+  <li><a href="#file-manipulation-cp-mv-rm" id="toc-file-manipulation-cp-mv-rm" class="nav-link" data-scroll-target="#file-manipulation-cp-mv-rm">File Manipulation (<code>cp</code>, <code>mv</code>, <code>rm</code>)</a></li>
   </ul></li>
-  <li><a href="#viewing-and-searching-file-contents-head-tail-grep" id="toc-viewing-and-searching-file-contents-head-tail-grep" class="nav-link" data-scroll-target="#viewing-and-searching-file-contents-head-tail-grep"><span class="header-section-number">4</span> Viewing and Searching File Contents (<code>head</code>, <code>tail</code>, <code>grep</code>)</a></li>
-  <li><a href="#processes-input-and-output" id="toc-processes-input-and-output" class="nav-link" data-scroll-target="#processes-input-and-output"><span class="header-section-number">5</span> Processes, Input and Output</a>
+  <li><a href="#viewing-and-searching-file-contents-head-tail-grep" id="toc-viewing-and-searching-file-contents-head-tail-grep" class="nav-link" data-scroll-target="#viewing-and-searching-file-contents-head-tail-grep">Viewing and Searching File Contents (<code>head</code>, <code>tail</code>, <code>grep</code>)</a></li>
+  <li><a href="#processes-input-and-output" id="toc-processes-input-and-output" class="nav-link" data-scroll-target="#processes-input-and-output">Processes, Input and Output</a>
   <ul class="collapse">
-  <li><a href="#text-editing-with-sed-stream-editor" id="toc-text-editing-with-sed-stream-editor" class="nav-link" data-scroll-target="#text-editing-with-sed-stream-editor"><span class="header-section-number">5.1</span> Text Editing with <code>sed</code> (Stream Editor)</a></li>
-  <li><a href="#putting-it-all-together-with-pipes" id="toc-putting-it-all-together-with-pipes" class="nav-link" data-scroll-target="#putting-it-all-together-with-pipes"><span class="header-section-number">5.2</span> Putting it all together with pipes (<code>|</code>)</a></li>
+  <li><a href="#text-editing-with-sed-stream-editor" id="toc-text-editing-with-sed-stream-editor" class="nav-link" data-scroll-target="#text-editing-with-sed-stream-editor">Text Editing with <code>sed</code> (Stream Editor)</a></li>
+  <li><a href="#putting-it-all-together-with-pipes" id="toc-putting-it-all-together-with-pipes" class="nav-link" data-scroll-target="#putting-it-all-together-with-pipes">Putting it all together with pipes (<code>|</code>)</a></li>
   </ul></li>
-  <li><a href="#pseudocode-and-thinking-in-processes" id="toc-pseudocode-and-thinking-in-processes" class="nav-link" data-scroll-target="#pseudocode-and-thinking-in-processes"><span class="header-section-number">6</span> Pseudocode and Thinking in Processes</a>
+  <li><a href="#pseudocode-and-thinking-in-processes" id="toc-pseudocode-and-thinking-in-processes" class="nav-link" data-scroll-target="#pseudocode-and-thinking-in-processes">Pseudocode and Thinking in Processes</a>
   <ul class="collapse">
-  <li><a href="#pseudocode-for-scripts" id="toc-pseudocode-for-scripts" class="nav-link" data-scroll-target="#pseudocode-for-scripts"><span class="header-section-number">6.1</span> Pseudocode for Scripts</a></li>
+  <li><a href="#pseudocode-for-scripts" id="toc-pseudocode-for-scripts" class="nav-link" data-scroll-target="#pseudocode-for-scripts">Pseudocode for Scripts</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -369,14 +369,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Tor Kling, Vahid Atabaigielmi </p>
+             <p>Tor Kling, Kaisa Thorell </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -388,8 +388,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>Doing bioinformatics often necessitates the handling of very large files, with complex structure and dense matrices. This makes them often unwieldy to pretty much impossible to handle in traditional GUI-based analysis tools (such as Excel), and as such we rely on more rudimental and lightweight file handling systems such as bash-based command line enviroments that allow us to interact with our computer on a more fundamental level.</p>
 <p>Typically the first thing you encounter on opening a new terminal instance is:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@computer:~$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -427,10 +427,10 @@ Learning Objectives
 </div>
 <hr>
 </section>
-<section id="making-navigating-and-finding-things-in-your-directories" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Making, Navigating and finding things in your directories</h1>
-<section id="understanding-your-location-pwd-and-ls" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="understanding-your-location-pwd-and-ls"><span class="header-section-number">2.1</span> Understanding Your Location (<code>pwd</code> and <code>ls</code>)</h2>
+<section id="making-navigating-and-finding-things-in-your-directories" class="level1">
+<h1>Making, Navigating and finding things in your directories</h1>
+<section id="understanding-your-location-pwd-and-ls" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-your-location-pwd-and-ls">Understanding Your Location (<code>pwd</code> and <code>ls</code>)</h2>
 <p>Before we start creating new things in our directory its a good idea to get a grip on your whereabouts within the working directory</p>
 <ul>
 <li><code>pwd</code>: Print working directory - shows your current location</li>
@@ -487,8 +487,8 @@ Expected output (no peeking!)
 </div>
 </div>
 </section>
-<section id="making-and-changing-directories-mkdir-and-cd" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="making-and-changing-directories-mkdir-and-cd"><span class="header-section-number">2.2</span> Making and Changing Directories (<code>mkdir</code> and <code>cd</code>)</h2>
+<section id="making-and-changing-directories-mkdir-and-cd" class="level2">
+<h2 class="anchored" data-anchor-id="making-and-changing-directories-mkdir-and-cd">Making and Changing Directories (<code>mkdir</code> and <code>cd</code>)</h2>
 <p>Since the command line interface (CLI) can quickly become cluttered, we organize our work into <strong>directories</strong>. Similar to the folders on windows or macOS, directories act as containers that create a hierarchy of files and subdirectories. This is especially important in bioinformatics, where we often deal with large datasets and multiple analysis steps that need to be organized for reproducibility and clarity.</p>
 <ul>
 <li><code>mkdir</code>: Create new directories</li>
@@ -539,11 +539,11 @@ Additional Command: <code>tree</code> [Optional]
 <hr>
 </section>
 </section>
-<section id="file-creation-and-manipulation" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> File Creation and Manipulation</h1>
+<section id="file-creation-and-manipulation" class="level1">
+<h1>File Creation and Manipulation</h1>
 <p>Now that we have an introduction to navigating our workspace, let’s learn how to create and manage files. In bioinformatics, you’ll constantly be creating, copying, moving, and organizing data files - from raw sequencing data to analysis results. While in a typical file explorer, you may drag and drop files as you please, in CLI, these operations require deliberate commands.</p>
-<section id="text-manipulation-echo-touch-less-cat" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="text-manipulation-echo-touch-less-cat"><span class="header-section-number">3.1</span> Text manipulation (<code>echo</code>, <code>touch</code>, <code>less</code>, <code>cat</code>)</h2>
+<section id="text-manipulation-echo-touch-less-cat" class="level2">
+<h2 class="anchored" data-anchor-id="text-manipulation-echo-touch-less-cat">Text manipulation (<code>echo</code>, <code>touch</code>, <code>less</code>, <code>cat</code>)</h2>
 <p>Before we start with file manipulation, we’ll first introduce text files the old school way via <code>echo</code> and <code>touch</code>, as well as some commands to view the contents of files.</p>
 <ul>
 <li><code>touch</code>: Create empty files</li>
@@ -576,8 +576,8 @@ Additional Command: <code>tree</code> [Optional]
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># In the next section.</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"New_text"</span> <span class="op">&gt;</span> test_file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="file-manipulation-cp-mv-rm" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="file-manipulation-cp-mv-rm"><span class="header-section-number">3.2</span> File Manipulation (<code>cp</code>, <code>mv</code>, <code>rm</code>)</h2>
+<section id="file-manipulation-cp-mv-rm" class="level2">
+<h2 class="anchored" data-anchor-id="file-manipulation-cp-mv-rm">File Manipulation (<code>cp</code>, <code>mv</code>, <code>rm</code>)</h2>
 <p>Now let’s create some mock files that we will use downstream in the analysis, and learn how to use commands to copy, rename and remove files</p>
 <ul>
 <li><code>mv</code>: Rename the absolute path of a file (moving it)</li>
@@ -684,8 +684,8 @@ ompA,Cont,100,outer_membrane_protein </code></pre>
 <hr>
 </section>
 </section>
-<section id="viewing-and-searching-file-contents-head-tail-grep" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Viewing and Searching File Contents (<code>head</code>, <code>tail</code>, <code>grep</code>)</h1>
+<section id="viewing-and-searching-file-contents-head-tail-grep" class="level1">
+<h1>Viewing and Searching File Contents (<code>head</code>, <code>tail</code>, <code>grep</code>)</h1>
 <p>One of the most powerful aspects of the command line is being able to quickly peek into files without opening them in a text editor. You already know <code>less</code> and <code>cat</code> by now, but often we dont need to view the entire file.This is especially useful when working with large genomics files where you only need to see a portion of the content or search for specific patterns. The <code>cat</code>’s constiuent parts (its <code>head</code> and <code>tail</code>) are very useful for quick overviews of file contents, while <code>grep</code> is a powerful tool for searching through files for specific patterns.</p>
 <ul>
 <li><code>head</code>: Show first lines of a file<br>
@@ -771,8 +771,8 @@ gyrA</code></pre>
 </div>
 <hr>
 </section>
-<section id="processes-input-and-output" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Processes, Input and Output</h1>
+<section id="processes-input-and-output" class="level1">
+<h1>Processes, Input and Output</h1>
 <p>When we perform computational tasks, a simplified pipeline can can be broken down into three main components: <strong>input</strong>, <strong>process</strong>, and <strong>output</strong>. Understanding these components is crucial for effectively using command line languages, and forms the basis for future workflows where we integrate scripts and proper programming languages (C, Python, R, etc.) into our analysis pipelines. For command line operations, we can think of input as the data we provide to a command, the process as the command itself that manipulates or analyzes the data, and the output as the result produced by the command.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -780,17 +780,9 @@ gyrA</code></pre>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-    A["`**Input**
-      Data provided to a command 
-      *ex: sequences.fasta*`"]
-    B["`**Process**
-      The command that manipulates or analyzes the data 
-      *ex: grep, sed, script.sh*`"]
-    C["`**Output**
-      The result produced by the command 
-      *ex: [Text in CLI] or
-      filtered_sequences.fasta 
-      (if written)*`"]
+    A["**Input**&lt;br /&gt;Data provided to a command&lt;br /&gt;*ex: sequences.fasta*"]
+    B["**Process**&lt;br /&gt;The command that manipulates or analyzes the data&lt;br /&gt;*ex: grep, sed, script.sh*"]
+    C["**Output**&lt;br /&gt;The result produced by the command&lt;br /&gt;*ex: [Text in CLI] or&lt;br /&gt;filtered_sequences.fasta&lt;br /&gt;if written*"]
 
     A --&gt; B
     B --&gt; C
@@ -800,8 +792,8 @@ gyrA</code></pre>
 </div>
 </div>
 </div>
-<section id="text-editing-with-sed-stream-editor" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="text-editing-with-sed-stream-editor"><span class="header-section-number">5.1</span> Text Editing with <code>sed</code> (Stream Editor)</h2>
+<section id="text-editing-with-sed-stream-editor" class="level2">
+<h2 class="anchored" data-anchor-id="text-editing-with-sed-stream-editor">Text Editing with <code>sed</code> (Stream Editor)</h2>
 <p>If we want to make edits to lines or whole files, without having to rewrite whole files, we can use the <code>sed</code> command. <code>sed</code> sees input as a stream of text, and allows us to perform operations on it, such as find-and-replace, deletion, or insertion of text while the program reads the input line by line. This is especially useful for large files where opening them in a text editor would be impractical. The output of <code>sed</code> is printed to the terminal by default, but it can also be redirected to a new file with <code>&gt;</code> or edited inplace with the <code>-i</code> flag.</p>
 <ul>
 <li><code>sed</code> (stream editor): Allows for edits of existing text and replacing/modifying it with new text</li>
@@ -894,8 +886,8 @@ Note
 </div>
 <hr>
 </section>
-<section id="putting-it-all-together-with-pipes" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="putting-it-all-together-with-pipes"><span class="header-section-number">5.2</span> Putting it all together with pipes (<code>|</code>)</h2>
+<section id="putting-it-all-together-with-pipes" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together-with-pipes">Putting it all together with pipes (<code>|</code>)</h2>
 <p>Here’s where the command line really starts to shine! Pipes allow you to chain commands together, passing the output of one command as input to another. This creates powerful, flexible operations that can process data in more advanced ways with just a single line of code. It also saves us time by not having to run multiple executions before we get our desired output.</p>
 <ul>
 <li><code>|</code>: Pipe - pass output from one command to another</li>
@@ -961,8 +953,8 @@ gyrA,chr,5000,6299,-,DNA gyrase subunit A</code></pre>
 <hr>
 </section>
 </section>
-<section id="pseudocode-and-thinking-in-processes" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Pseudocode and Thinking in Processes</h1>
+<section id="pseudocode-and-thinking-in-processes" class="level1">
+<h1>Pseudocode and Thinking in Processes</h1>
 <p>In this introduction to command line we’ve learned how to navigate the filesystem, create and manipulate files, and use pipes to combine commands. Now let’s take a step back and introduce how we can plan our computational workflows using <strong>pseudocode</strong>. Pseudocode is a way to outline your coding and analysis in plain language (mixed with some correct code-formulations) before translating them into actual commands or scripts. This helps you organize your thoughts and sketch out the logic of your analysis without getting bogged down in syntax.</p>
 <p>We can plan pipes in pseudocode for example like this:</p>
 <pre class="text"><code>Pseudocode for a change of a gene name in a file:
@@ -975,8 +967,8 @@ A less good way, but at this point you might as well write the actual command, w
 [cat gene_file.csv | sed 's/old_gene_name/new_gene_name/g' &gt; updated_gene_file.csv]</code></pre>
 <p>which in bash would be implemented like this:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> gene_annotations.csv <span class="kw">|</span> <span class="fu">sed</span> <span class="st">'s/RNA_polymerase_beta_subunit/RNA_polymerase_B/g'</span> <span class="op">&gt;</span> updated_gene_annotations.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="pseudocode-for-scripts" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="pseudocode-for-scripts"><span class="header-section-number">6.1</span> Pseudocode for Scripts</h2>
+<section id="pseudocode-for-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="pseudocode-for-scripts">Pseudocode for Scripts</h2>
 <p>But this becomes all the more important as we start to write scripts and programs, where we need to think about the flow of data and the sequence of operations. By writing pseudocode first, we can ensure that our analysis is well-structured and that the logic is sound before we start coding. For this the format of the pseudocode is a bit subjective, but it should clearly outline the steps of the analysis, including the input data, the processing steps, and the expected output. It should also be easy to read and understand, and make sense in the context of the target language syntax.</p>
 <p>Pseudocode for the overarching parts of a script to analyze some genomics data</p>
 <pre class="text"><code>Input: 

@@ -2,12 +2,12 @@
 title: "Practical 6: Python Plotting"
 subtitle: "BIO511 Genomics - Plotting using matplotlib, plotly and plotnine"
 author: "Alvar Almstedt, Emma Västerviga"
-date: today
+date: August 2026
 format: 
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: false
     theme: cosmo
 ---

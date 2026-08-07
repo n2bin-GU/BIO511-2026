@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tor Kling">
-<meta name="dcterms.date" content="2026-08-07">
+<meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 2: De novo Assembly and Mapping – BIO511 Genomics - Practical Repository</title>
 <style>
@@ -159,11 +159,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_COLLABORATIONS_AND_VERSIONING.qmd">
  <span class="dropdown-text">Practical 1: Git Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.html">
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_ALGORITHMIC_THINKING.qmd">
  <span class="dropdown-text">Practical 2: Algorithmic Thinking</span></a>
   </li>  
     </ul>
@@ -308,35 +308,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#understanding-assembly-vs.-mapping" id="toc-understanding-assembly-vs.-mapping" class="nav-link" data-scroll-target="#understanding-assembly-vs.-mapping"><span class="header-section-number">2</span> Understanding Assembly vs.&nbsp;Mapping</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#understanding-assembly-vs.-mapping" id="toc-understanding-assembly-vs.-mapping" class="nav-link" data-scroll-target="#understanding-assembly-vs.-mapping">Understanding Assembly vs.&nbsp;Mapping</a>
   <ul class="collapse">
-  <li><a href="#a-summary" id="toc-a-summary" class="nav-link" data-scroll-target="#a-summary"><span class="header-section-number">2.1</span> A summary</a></li>
+  <li><a href="#a-summary" id="toc-a-summary" class="nav-link" data-scroll-target="#a-summary">A summary</a></li>
   </ul></li>
-  <li><a href="#de-novo-assembly-with-flye" id="toc-de-novo-assembly-with-flye" class="nav-link" data-scroll-target="#de-novo-assembly-with-flye"><span class="header-section-number">3</span> De Novo Assembly with Flye</a>
+  <li><a href="#de-novo-assembly-with-flye" id="toc-de-novo-assembly-with-flye" class="nav-link" data-scroll-target="#de-novo-assembly-with-flye">De Novo Assembly with Flye</a>
   <ul class="collapse">
-  <li><a href="#job-1-basic-ont-assembly" id="toc-job-1-basic-ont-assembly" class="nav-link" data-scroll-target="#job-1-basic-ont-assembly"><span class="header-section-number">3.1</span> Job 1: Basic ONT Assembly</a></li>
-  <li><a href="#job-2-polished-ont-assembly" id="toc-job-2-polished-ont-assembly" class="nav-link" data-scroll-target="#job-2-polished-ont-assembly"><span class="header-section-number">3.2</span> Job 2: Polished ONT Assembly</a></li>
+  <li><a href="#job-1-basic-ont-assembly" id="toc-job-1-basic-ont-assembly" class="nav-link" data-scroll-target="#job-1-basic-ont-assembly">Job 1: Basic ONT Assembly</a></li>
+  <li><a href="#job-2-polished-ont-assembly" id="toc-job-2-polished-ont-assembly" class="nav-link" data-scroll-target="#job-2-polished-ont-assembly">Job 2: Polished ONT Assembly</a></li>
   </ul></li>
-  <li><a href="#assembly-quality-assessment" id="toc-assembly-quality-assessment" class="nav-link" data-scroll-target="#assembly-quality-assessment"><span class="header-section-number">4</span> Assembly Quality Assessment</a>
+  <li><a href="#assembly-quality-assessment" id="toc-assembly-quality-assessment" class="nav-link" data-scroll-target="#assembly-quality-assessment">Assembly Quality Assessment</a>
   <ul class="collapse">
-  <li><a href="#running-quast-for-assembly-statistics" id="toc-running-quast-for-assembly-statistics" class="nav-link" data-scroll-target="#running-quast-for-assembly-statistics"><span class="header-section-number">4.1</span> Running QUAST for Assembly Statistics</a></li>
-  <li><a href="#look-at-base-assembly-statistics" id="toc-look-at-base-assembly-statistics" class="nav-link" data-scroll-target="#look-at-base-assembly-statistics"><span class="header-section-number">4.2</span> Look at base assembly statistics</a></li>
+  <li><a href="#running-quast-for-assembly-statistics" id="toc-running-quast-for-assembly-statistics" class="nav-link" data-scroll-target="#running-quast-for-assembly-statistics">Running QUAST for Assembly Statistics</a></li>
+  <li><a href="#look-at-base-assembly-statistics" id="toc-look-at-base-assembly-statistics" class="nav-link" data-scroll-target="#look-at-base-assembly-statistics">Look at base assembly statistics</a></li>
   </ul></li>
-  <li><a href="#comprehensive-analysis-with-multiqc" id="toc-comprehensive-analysis-with-multiqc" class="nav-link" data-scroll-target="#comprehensive-analysis-with-multiqc"><span class="header-section-number">5</span> Comprehensive Analysis with MultiQC</a>
+  <li><a href="#comprehensive-analysis-with-multiqc" id="toc-comprehensive-analysis-with-multiqc" class="nav-link" data-scroll-target="#comprehensive-analysis-with-multiqc">Comprehensive Analysis with MultiQC</a>
   <ul class="collapse">
-  <li><a href="#preparing-data-for-multiqc" id="toc-preparing-data-for-multiqc" class="nav-link" data-scroll-target="#preparing-data-for-multiqc"><span class="header-section-number">5.1</span> Preparing Data for MultiQC</a></li>
-  <li><a href="#running-multiqc" id="toc-running-multiqc" class="nav-link" data-scroll-target="#running-multiqc"><span class="header-section-number">5.2</span> Running MultiQC</a></li>
+  <li><a href="#preparing-data-for-multiqc" id="toc-preparing-data-for-multiqc" class="nav-link" data-scroll-target="#preparing-data-for-multiqc">Preparing Data for MultiQC</a></li>
+  <li><a href="#running-multiqc" id="toc-running-multiqc" class="nav-link" data-scroll-target="#running-multiqc">Running MultiQC</a></li>
   </ul></li>
-  <li><a href="#data-interpretation-and-questions" id="toc-data-interpretation-and-questions" class="nav-link" data-scroll-target="#data-interpretation-and-questions"><span class="header-section-number">6</span> Data Interpretation and Questions</a>
+  <li><a href="#data-interpretation-and-questions" id="toc-data-interpretation-and-questions" class="nav-link" data-scroll-target="#data-interpretation-and-questions">Data Interpretation and Questions</a>
   <ul class="collapse">
-  <li><a href="#assembly-quality-metrics" id="toc-assembly-quality-metrics" class="nav-link" data-scroll-target="#assembly-quality-metrics"><span class="header-section-number">6.1</span> Assembly Quality Metrics</a></li>
+  <li><a href="#assembly-quality-metrics" id="toc-assembly-quality-metrics" class="nav-link" data-scroll-target="#assembly-quality-metrics">Assembly Quality Metrics</a></li>
   </ul></li>
-  <li><a href="#optional-advanced-exercise-hybrid-assembly-with-short-read-polishing" id="toc-optional-advanced-exercise-hybrid-assembly-with-short-read-polishing" class="nav-link" data-scroll-target="#optional-advanced-exercise-hybrid-assembly-with-short-read-polishing"><span class="header-section-number">7</span> Optional Advanced Exercise: Hybrid Assembly with Short-Read Polishing</a>
+  <li><a href="#optional-advanced-exercise-hybrid-assembly-with-short-read-polishing" id="toc-optional-advanced-exercise-hybrid-assembly-with-short-read-polishing" class="nav-link" data-scroll-target="#optional-advanced-exercise-hybrid-assembly-with-short-read-polishing">Optional Advanced Exercise: Hybrid Assembly with Short-Read Polishing</a>
   <ul class="collapse">
-  <li><a href="#understanding-hybrid-assembly" id="toc-understanding-hybrid-assembly" class="nav-link" data-scroll-target="#understanding-hybrid-assembly"><span class="header-section-number">7.1</span> Understanding Hybrid Assembly</a></li>
-  <li><a href="#setting-up-hybrid-assembly" id="toc-setting-up-hybrid-assembly" class="nav-link" data-scroll-target="#setting-up-hybrid-assembly"><span class="header-section-number">7.2</span> Setting up Hybrid Assembly</a></li>
-  <li><a href="#comparing-three-assembly-approaches" id="toc-comparing-three-assembly-approaches" class="nav-link" data-scroll-target="#comparing-three-assembly-approaches"><span class="header-section-number">7.3</span> Comparing Three Assembly Approaches</a></li>
+  <li><a href="#understanding-hybrid-assembly" id="toc-understanding-hybrid-assembly" class="nav-link" data-scroll-target="#understanding-hybrid-assembly">Understanding Hybrid Assembly</a></li>
+  <li><a href="#setting-up-hybrid-assembly" id="toc-setting-up-hybrid-assembly" class="nav-link" data-scroll-target="#setting-up-hybrid-assembly">Setting up Hybrid Assembly</a></li>
+  <li><a href="#comparing-three-assembly-approaches" id="toc-comparing-three-assembly-approaches" class="nav-link" data-scroll-target="#comparing-three-assembly-approaches">Comparing Three Assembly Approaches</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -364,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 7, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -376,8 +376,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>After quality control, the next critical step in genomic analysis is either mapping reads to a reference genome or performing de novo assembly to reconstruct genomes from scratch. This practical will both processes in a sense, but focus will be on de novo assembly using long reads from Oxford Nanopore Technologies (ONT) and assessing the quality of these assemblies. We will use tools like Flye for assembly, Quast for quality assessment, and MultiQC for comprehensive reporting. Additionally, we will also explore hybrid assembly to combine long and short reads for improved accuracy. For this we will use the Burrows-Wheeler Aligner (bwa), serving as a somewhat introduction to mapping reads to an assembled sequence.</p>
 <p>The documentation for each tool used in this practical can be found here:</p>
 <ul>
@@ -431,10 +431,10 @@ Learning Objectives
 </div>
 <hr>
 </section>
-<section id="understanding-assembly-vs.-mapping" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Understanding Assembly vs.&nbsp;Mapping</h1>
-<section id="a-summary" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="a-summary"><span class="header-section-number">2.1</span> A summary</h2>
+<section id="understanding-assembly-vs.-mapping" class="level1">
+<h1>Understanding Assembly vs.&nbsp;Mapping</h1>
+<section id="a-summary" class="level2">
+<h2 class="anchored" data-anchor-id="a-summary">A summary</h2>
 <p><strong>De Novo Assembly</strong> is used commonly when:</p>
 <ul>
 <li>No reference genome exists for your organism, or the reference is hard to get good coverage (ie. bacteria with high pangenomic diversity)</li>
@@ -451,11 +451,11 @@ Learning Objectives
 <hr>
 </section>
 </section>
-<section id="de-novo-assembly-with-flye" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> De Novo Assembly with Flye</h1>
+<section id="de-novo-assembly-with-flye" class="level1">
+<h1>De Novo Assembly with Flye</h1>
 <p>Flye is a repeat graph-based assembler designed for long noisy reads from PacBio and Oxford Nanopore technologies. Flye can be used both for mammalian and bacterial assemblies, and includes built-in polishing capabilities. We’ll explore two different assembly strategies using the same ONT reads but with different parameters to compare their performance.</p>
-<section id="job-1-basic-ont-assembly" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="job-1-basic-ont-assembly"><span class="header-section-number">3.1</span> Job 1: Basic ONT Assembly</h2>
+<section id="job-1-basic-ont-assembly" class="level2">
+<h2 class="anchored" data-anchor-id="job-1-basic-ont-assembly">Job 1: Basic ONT Assembly</h2>
 <p>First, let’s create a job script for a basic assembly with no polishing:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A C3SE408-25-2</span></span>
@@ -489,8 +489,8 @@ Learning Objectives
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Basic ONT assembly completed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="job-2-polished-ont-assembly" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="job-2-polished-ont-assembly"><span class="header-section-number">3.2</span> Job 2: Polished ONT Assembly</h2>
+<section id="job-2-polished-ont-assembly" class="level2">
+<h2 class="anchored" data-anchor-id="job-2-polished-ont-assembly">Job 2: Polished ONT Assembly</h2>
 <p>Now create a second job with more aggressive polishing parameters:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A C3SE408-25-2</span></span>
@@ -533,11 +533,11 @@ Learning Objectives
 <hr>
 </section>
 </section>
-<section id="assembly-quality-assessment" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Assembly Quality Assessment</h1>
+<section id="assembly-quality-assessment" class="level1">
+<h1>Assembly Quality Assessment</h1>
 <p>After both assemblies have completed, we need to assess their quality using QUAST (Quality Assessment Tool for Genome Assemblies). We are able to get some of this info from flye, but QUAST provides some neat graphs and other metrics that are useful to look at.</p>
-<section id="running-quast-for-assembly-statistics" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="running-quast-for-assembly-statistics"><span class="header-section-number">4.1</span> Running QUAST for Assembly Statistics</h2>
+<section id="running-quast-for-assembly-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="running-quast-for-assembly-statistics">Running QUAST for Assembly Statistics</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A C3SE408-25-2</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -J quast_analysis</span></span>
@@ -575,17 +575,17 @@ Learning Objectives
 <span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"QUAST analysis completed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="look-at-base-assembly-statistics" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="look-at-base-assembly-statistics"><span class="header-section-number">4.2</span> Look at base assembly statistics</h2>
+<section id="look-at-base-assembly-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="look-at-base-assembly-statistics">Look at base assembly statistics</h2>
 <p>While waiting for the QUAST job to finish, you can look at some basic assembly statistics provided by Flye in the <code>assembly_info.txt</code> file located in each assembly output directory, if you want. Make sure that you understand what each metric means. Google any terms you are unfamiliar with!</p>
 <hr>
 </section>
 </section>
-<section id="comprehensive-analysis-with-multiqc" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Comprehensive Analysis with MultiQC</h1>
+<section id="comprehensive-analysis-with-multiqc" class="level1">
+<h1>Comprehensive Analysis with MultiQC</h1>
 <p>Now we’ll generate a comprehensive report using MultiQC to summarize the QUAST results from both assemblies.</p>
-<section id="preparing-data-for-multiqc" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="preparing-data-for-multiqc"><span class="header-section-number">5.1</span> Preparing Data for MultiQC</h2>
+<section id="preparing-data-for-multiqc" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-data-for-multiqc">Preparing Data for MultiQC</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a comprehensive results directory structure</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multiqc_analysis/<span class="dt">{assembly_qc</span><span class="op">,</span><span class="dt">quast_results</span><span class="op">,</span><span class="dt">kraken2_results}</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -595,8 +595,8 @@ Learning Objectives
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We have also prepared some kraken2 results for the reads that you can include in your report</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/teachers/Tor/extra_data/kraken2_results/<span class="pp">*</span> multiqc_analysis/kraken2_results/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="running-multiqc" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="running-multiqc"><span class="header-section-number">5.2</span> Running MultiQC</h2>
+<section id="running-multiqc" class="level2">
+<h2 class="anchored" data-anchor-id="running-multiqc">Running MultiQC</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Navigate to analysis directory</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multiqc_analysis</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -610,10 +610,10 @@ Learning Objectives
 <hr>
 </section>
 </section>
-<section id="data-interpretation-and-questions" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Data Interpretation and Questions</h1>
-<section id="assembly-quality-metrics" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="assembly-quality-metrics"><span class="header-section-number">6.1</span> Assembly Quality Metrics</h2>
+<section id="data-interpretation-and-questions" class="level1">
+<h1>Data Interpretation and Questions</h1>
+<section id="assembly-quality-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="assembly-quality-metrics">Assembly Quality Metrics</h2>
 <p>Use your QUAST reports and MultiQC output to answer:</p>
 <ol type="1">
 <li>What is the total assembly size for each assembly? How many contigs were generated in each assembly?</li>
@@ -625,11 +625,11 @@ Learning Objectives
 <hr>
 </section>
 </section>
-<section id="optional-advanced-exercise-hybrid-assembly-with-short-read-polishing" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Optional Advanced Exercise: Hybrid Assembly with Short-Read Polishing</h1>
+<section id="optional-advanced-exercise-hybrid-assembly-with-short-read-polishing" class="level1">
+<h1>Optional Advanced Exercise: Hybrid Assembly with Short-Read Polishing</h1>
 <p>If you have extra time and want to explore hybrid assembly approaches, here’s an advanced exercise that combines Flye with short-read polishing using BWA and Polypolish. This approach leverages the strengths of both long and short reads to produce a high-quality assembly.</p>
-<section id="understanding-hybrid-assembly" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="understanding-hybrid-assembly"><span class="header-section-number">7.1</span> Understanding Hybrid Assembly</h2>
+<section id="understanding-hybrid-assembly" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-hybrid-assembly">Understanding Hybrid Assembly</h2>
 <p>An example of a hybrid assembly workflow is:</p>
 <ol type="1">
 <li><strong>Initial assembly</strong> with long reads (Flye)</li>
@@ -638,8 +638,8 @@ Learning Objectives
 <li><strong>Polishing</strong> the assembly using the filtered short reads (Polypolish)</li>
 </ol>
 </section>
-<section id="setting-up-hybrid-assembly" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="setting-up-hybrid-assembly"><span class="header-section-number">7.2</span> Setting up Hybrid Assembly</h2>
+<section id="setting-up-hybrid-assembly" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-hybrid-assembly">Setting up Hybrid Assembly</h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A C3SE408-25-2</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -J hybrid_assembly</span></span>
@@ -704,8 +704,8 @@ Learning Objectives
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Submit the hybrid assembly job</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> hybrid_assembly_job.slurm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="comparing-three-assembly-approaches" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="comparing-three-assembly-approaches"><span class="header-section-number">7.3</span> Comparing Three Assembly Approaches</h2>
+<section id="comparing-three-assembly-approaches" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-three-assembly-approaches">Comparing Three Assembly Approaches</h2>
 <p>After the hybrid assembly completes, you can compare all three approaches:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A C3SE408-25-2</span></span>
