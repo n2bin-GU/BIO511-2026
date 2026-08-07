@@ -51,7 +51,7 @@ Lastly, we cover Python programming with these practical exercises:
 - **[Practical 4: Python Modules 🔒](practicals/Practicals%20-%20Python/PRACTICAL_MODULES_.qmd)**
 - **[Practical 5: Files 🔒](practicals/Practicals%20-%20Python/PRACTICAL_FILES_.qmd)**
 - **[Practical 6: Plotting 🔒](practicals/Practicals%20-%20Python/PRACTICAL_PLOTTING_.qmd)**
-- **[Practical 7: Algorithmic Thinking in Genomics 🔒](practicals/Practicals%20-%20Python/PRACTICAL_ALGORITHMIC_THINKING_IN_GENOMICS_.qmd)**
+- **[Practical 7: Algorithmic Thinking in Genomics 🔒](practicals/Practicals%20-%20Python/PRACTICAL_ALGORITHMIC_THINKING_.qmd)**
 
 ---
 
