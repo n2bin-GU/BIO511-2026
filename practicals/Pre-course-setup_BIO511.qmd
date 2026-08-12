@@ -10,7 +10,8 @@ format:
     toc-depth: 3
     number-sections: true
     code-fold: false
-    theme: cosmo
+    theme: minty
+    css: pages/styles.css
 ---
 
 ## Welcome to the world of bioinformatics :)

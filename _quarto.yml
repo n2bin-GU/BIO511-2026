@@ -11,15 +11,24 @@ website:
     left:
       - text: "Home"
         href: index.qmd
+      - sidebar:setup
       - sidebar:cli
       - sidebar:gwf
       - sidebar:python
 
   sidebar:
+    - id: setup
+      title: "Pre-course Setup"
+      style: docked
+      background: dark
+      contents:
+      - href: "practicals/Pre-course-setup_BIO511.qmd"
+        text: "Practical 0: Pre-course Setup"
+
     - id: cli
       title: "Command Line Programming"
       style: docked
-      background: light
+      background: dark
       contents:
       - section: "Intro to Command Line"
         contents:
@@ -41,7 +50,7 @@ website:
     - id: gwf
       title: "Genomics Workflows"
       style: docked
-      background: light
+      background: dark
       contents:
       - section: "Genome workflows - Whole Genome Sequencing (WGS)"
         contents:
@@ -59,7 +68,7 @@ website:
     - id: python
       title: "Python Programming"
       style: docked
-      background: light
+      background: dark
       contents:
       - href: "practicals/Practicals - Python/PRACTICAL_SETUP.qmd"
         text: "Practical 0: Introduction"
