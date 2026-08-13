@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>Practical 1: Raw Read Data and Quality Control – BIO511 Genomics - Practical Repository</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c405e9740b13eb65d561f5d8e22a9b35.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -150,6 +153,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.html">
  <span class="dropdown-text">Practical 1: CLI Basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_HPC_CLUSTERS_INTRO.html">
+ <span class="dropdown-text">Lecture: HPC Clusters Intro</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html">
@@ -387,11 +394,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-REMEMBER: Create a separate project folder
+<span class="screen-reader-only">Important</span>REMEMBER: Create a separate project folder
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make this practical directory in your home directory on HPC AND your local computer</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make this practical directory in your home directory on HPC AND your local computer</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/yourdir/practical_1</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/yourdir/practical_1</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -400,7 +407,7 @@ REMEMBER: Create a separate project folder
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the files you need to your local computer as well, but DONT overwrite the original files!</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use scp or rsync for this</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq ./data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq ./data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -409,7 +416,7 @@ REMEMBER: Create a separate project folder
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Learning Objectives
+<span class="screen-reader-only">Note</span>Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -434,14 +441,14 @@ Learning Objectives
 </section>
 <section id="examining-fastq-structure" class="level2">
 <h2 class="anchored" data-anchor-id="examining-fastq-structure">Examining FASTQ structure</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the first few reads from a compressed file</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the first few reads from a compressed file</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use this code example for each of the sample files in the data dir</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Either untar the files first, or use zcat to read them directly</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> sample1_R1.fastq.gz</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> sample1_R1.fastq <span class="kw">|</span> <span class="fu">head</span> <span class="at">-8</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> sample1_R1.fastq.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> sample1_R1.fastq.gz <span class="kw">|</span> <span class="fu">head</span> <span class="at">-8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Each sequencing read in a FASTQ file consists of four lines:</p>
 <pre><code>@read_identifier_and_description
 ATCGATCGATCGATCG...
@@ -454,7 +461,7 @@ ATCGATCGATCGATCG...
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Key Questions
+<span class="screen-reader-only">Note</span>Key Questions
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -473,14 +480,14 @@ Key Questions
 <section id="fastp-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="fastp-analysis">Fastp analysis</h2>
 <p>This step must be done on your local computer, make sure you download the data with scp first!</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Begin by creating an output directory for your QC results</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Begin by creating an output directory for your QC results</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> fastp_results</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run fastp on paired-end reads with default settings</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">-i</span> sample1_R1.fastq.gz <span class="at">-I</span> sample1_R2.fastq.gz <span class="at">-o</span> sample1_R1_filtered.fastq.gz <span class="at">-O</span> sample1_R2_filtered.fastq.gz <span class="at">-h</span> sample1_fastp_report.html <span class="at">-j</span> sample1_fastp_report.json</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Go to the output directory and check the results</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># View the HTML report in your browser </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># View the HTML report in your browser </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Key metrics to examine in the HTML reports:</p>
 <ul>
 <li><strong>Read quality</strong>: Before and after filtering quality distributions</li>
@@ -495,7 +502,7 @@ Key Questions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Key Questions
+<span class="screen-reader-only">Note</span>Key Questions
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -508,15 +515,15 @@ Key Questions
 </div>
 </div>
 <p>In some cases, you may want to customize the filtering parameters, such as hard-trimming a specific number of bases from the start or end of reads, or setting a minimum read length. You can do this by adding additional flags to the fastp command. For example, a good agnostic approach is to trim to a fixed quality threshold at the 3’ end of the reads, and filter out any reads that are too short after trimming.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is an example command with additional trimming and filtering options, for a quality threshold of 30 and minimum length of 50bp</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">-i</span> sample1_R1.fastq.gz <span class="at">-I</span> sample1_R2.fastq.gz <span class="at">-o</span> sample1_R1_filtered.fastq.gz <span class="at">-O</span> sample1_R2_filtered.fastq.gz <span class="at">-h</span> sample1_fastp_report.html <span class="at">-j</span> sample1_fastp_report.json <span class="at">--cut_right</span> <span class="at">--cut_mean_quality</span> 30 <span class="at">--length_required</span> 20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is an example command with additional trimming and filtering options, for a quality threshold of 30 and minimum length of 50bp</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">-i</span> sample1_R1.fastq.gz <span class="at">-I</span> sample1_R2.fastq.gz <span class="at">-o</span> sample1_R1_filtered.fastq.gz <span class="at">-O</span> sample1_R2_filtered.fastq.gz <span class="at">-h</span> sample1_fastp_report.html <span class="at">-j</span> sample1_fastp_report.json <span class="at">--cut_right</span> <span class="at">--cut_mean_quality</span> 30 <span class="at">--length_required</span> 20</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Key Questions
+<span class="screen-reader-only">Note</span>Key Questions
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -535,7 +542,7 @@ Key Questions
 <section id="hpc-job-script-for-kraken2-classification" class="level2">
 <h2 class="anchored" data-anchor-id="hpc-job-script-for-kraken2-classification">HPC job script for kraken2 classification</h2>
 <p>Lets begin by creating the job script that we will submit to the HPC cluster. Make sure to adjust paths to your actual directories and database locations. You can either create and edit the file on the cluster, or create it locally and then upload it to the cluster if you want. ALso this jobscript will allow you to run a single sample at a time, so you will need to change the sample name for each run, or make a loop to run multiple samples if you feel up for it.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create SLURM job script for kraken2 analysis</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create SLURM job script for kraken2 analysis</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A C3SE408-25-2</span></span>
@@ -575,7 +582,7 @@ Key Questions
 <span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Completed classification for </span><span class="va">${sample}</span><span class="st">"</span></span>
 <span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All samples processed successfully"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All samples processed successfully"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
 </section>
@@ -585,25 +592,25 @@ Key Questions
 <section id="preparing-results-for-multiqc" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-results-for-multiqc">Preparing results for MultiQC</h2>
 <p>MultiQC works best when all results are organized in a clear directory structure. Let’s organize our outputs properly.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a comprehensive results directory</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a comprehensive results directory</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multiqc_analysis/<span class="dt">{fastp_reports</span><span class="op">,</span><span class="dt">kraken2_reports}</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy fastp outputs to the correct directory</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy kraken2 outputs to the correct directory</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify all files are present</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> multiqc_analysis/<span class="pp">*</span>/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> multiqc_analysis/<span class="pp">*</span>/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="running-multiqc" class="level2">
 <h2 class="anchored" data-anchor-id="running-multiqc">Running MultiQC</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run MultiQC on all results to generate a comprehensive report</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run MultiQC on all results to generate a comprehensive report</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> multiqc_analysis</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate MultiQC report with custom configuration</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> . <span class="at">--title</span> <span class="st">"BIO511 Practical 2 - QC and Classification Summary"</span> <span class="at">--filename</span> <span class="st">"practical2_multiqc_report"</span> <span class="at">--dirs</span> <span class="at">--dirs-depth</span> 2 <span class="at">--force</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the report in your browser</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The HTML file can be opened directly</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The HTML file can be opened directly</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
 </section>
@@ -623,7 +630,7 @@ Key Questions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Key Takeaways
+<span class="screen-reader-only">Note</span>Key Takeaways
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -692,13 +699,14 @@ Key Takeaways
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

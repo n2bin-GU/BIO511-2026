@@ -34,6 +34,8 @@ website:
         contents:
         - href: "practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.qmd"
           text: "Practical 1: CLI Basics"
+        - href: "practicals/Practicals - CLI/PRACTICAL_HPC_CLUSTERS_INTRO.qmd"
+          text: "Lecture: HPC Clusters Intro"
         - href: "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.qmd"
           text: "Practical 2: Setting up the HPC"
         - href: "practicals/Practicals - CLI/PRACTICAL_WORKSPACE_MANAGEMENT.qmd"

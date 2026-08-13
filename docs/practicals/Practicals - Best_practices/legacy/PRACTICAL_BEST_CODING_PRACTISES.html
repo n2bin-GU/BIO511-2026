@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>Best Coding Practices for Command‑Line Programming – BIO511 Genomics - Practical Repository</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -72,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-c405e9740b13eb65d561f5d8e22a9b35.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -149,6 +152,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../../practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.html">
  <span class="dropdown-text">Practical 1: CLI Basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../practicals/Practicals - CLI/PRACTICAL_HPC_CLUSTERS_INTRO.html">
+ <span class="dropdown-text">Lecture: HPC Clusters Intro</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../../practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html">
@@ -300,38 +307,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><p><strong>Start every Bash script safely</strong><br>
 Use strict mode so mistakes fail fast.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail       <span class="co"># exit on error, unset var is error, fail on pipe errors</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">IFS</span><span class="op">=</span><span class="st">$'</span><span class="dt">\n\t</span><span class="st">'</span>              <span class="co"># safer word splitting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">IFS</span><span class="op">=</span><span class="st">$'</span><span class="dt">\n\t</span><span class="st">'</span>              <span class="co"># safer word splitting</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Always offer help</strong><br>
 Let users see how to run the script.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">usage()</span> <span class="kw">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">usage()</span> <span class="kw">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Usage: </span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$0</span><span class="st">"</span><span class="va">)</span><span class="st"> -i INPUT -o OUTDIR [--force]"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Example: </span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$0</span><span class="st">"</span><span class="va">)</span><span class="st"> -i data/sample.txt -o results"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Show help if asked</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="va">${1</span><span class="op">:-</span><span class="va">}</span> <span class="ot">==</span> <span class="st">"-h"</span> <span class="kw">||</span> <span class="va">${1</span><span class="op">:-</span><span class="va">}</span> <span class="ot">==</span> <span class="st">"--help"</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="kw">{</span> <span class="ex">usage</span><span class="kw">;</span> <span class="bu">exit</span> 0<span class="kw">;</span> <span class="kw">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="va">${1</span><span class="op">:-</span><span class="va">}</span> <span class="ot">==</span> <span class="st">"-h"</span> <span class="kw">||</span> <span class="va">${1</span><span class="op">:-</span><span class="va">}</span> <span class="ot">==</span> <span class="st">"--help"</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="kw">{</span> <span class="ex">usage</span><span class="kw">;</span> <span class="bu">exit</span> 0<span class="kw">;</span> <span class="kw">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Use project‑relative paths (not absolute)</strong><br>
 Make scripts portable by computing the project root from the script’s location.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">SCRIPT_DIR</span><span class="op">=</span><span class="va">$(</span><span class="bu">cd</span> <span class="at">--</span> <span class="st">"</span><span class="va">$(</span><span class="fu">dirname</span> <span class="at">--</span> <span class="st">"</span><span class="va">${BASH_SOURCE</span><span class="op">[</span><span class="dv">0</span><span class="op">]</span><span class="va">}</span><span class="st">"</span><span class="va">)</span><span class="st">"</span> <span class="kw">&amp;&amp;</span> <span class="bu">pwd</span><span class="va">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">SCRIPT_DIR</span><span class="op">=</span><span class="va">$(</span><span class="bu">cd</span> <span class="at">--</span> <span class="st">"</span><span class="va">$(</span><span class="fu">dirname</span> <span class="at">--</span> <span class="st">"</span><span class="va">${BASH_SOURCE</span><span class="op">[</span><span class="dv">0</span><span class="op">]</span><span class="va">}</span><span class="st">"</span><span class="va">)</span><span class="st">"</span> <span class="kw">&amp;&amp;</span> <span class="bu">pwd</span><span class="va">)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">PROJECT_ROOT</span><span class="op">=</span><span class="va">$(</span><span class="bu">cd</span> <span class="at">--</span> <span class="st">"</span><span class="va">$SCRIPT_DIR</span><span class="st">/.."</span> <span class="kw">&amp;&amp;</span> <span class="bu">pwd</span><span class="va">)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">IN</span><span class="op">=</span><span class="st">"</span><span class="va">$PROJECT_ROOT</span><span class="st">/data/input.txt"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">OUTDIR</span><span class="op">=</span><span class="st">"</span><span class="va">$PROJECT_ROOT</span><span class="st">/results"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">OUTDIR</span><span class="op">=</span><span class="st">"</span><span class="va">$PROJECT_ROOT</span><span class="st">/results"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Never overwrite outputs by accident</strong><br>
 Create folders you need, and require <code>--force</code> to overwrite existing files.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$OUTDIR</span><span class="st">"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$OUTDIR</span><span class="st">"</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">OUT</span><span class="op">=</span><span class="st">"</span><span class="va">$OUTDIR</span><span class="st">/summary.txt"</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">force</span><span class="op">=</span>false</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="va">${1</span><span class="op">:-</span><span class="va">}</span> <span class="ot">==</span> <span class="st">"--force"</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="va">force</span><span class="op">=</span>true</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="ot">-e</span> <span class="st">"</span><span class="va">$OUT</span><span class="st">"</span> <span class="kw">&amp;&amp;</span> <span class="st">"</span><span class="va">$force</span><span class="st">"</span> <span class="ot">!=</span> true <span class="kw">]];</span> <span class="cf">then</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Refusing to overwrite </span><span class="va">$OUT</span><span class="st"> (use --force)"</span><span class="kw">;</span> <span class="bu">exit</span> 1</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Log what you do</strong><br>
 Print key parameters and tool versions to a small log so runs are traceable.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"# Params"</span><span class="kw">;</span> <span class="bu">echo</span> <span class="st">"input=</span><span class="va">$IN</span><span class="st">"</span><span class="kw">;</span> <span class="bu">echo</span> <span class="st">"outdir=</span><span class="va">$OUTDIR</span><span class="st">"</span><span class="kw">;</span> <span class="fu">date</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"# Tool versions"</span><span class="kw">;</span> <span class="fu">bash</span> <span class="at">--version</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n1</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="st">"</span><span class="va">$OUTDIR</span><span class="st">/run.log"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="st">"</span><span class="va">$OUTDIR</span><span class="st">/run.log"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Quote variables</strong><br>
 Quote <code>"$var"</code> to handle spaces.</p></li>
 </ol>
@@ -341,7 +348,7 @@ Quote <code>"$var"</code> to handle spaces.</p></li>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Did You Know?
+<span class="screen-reader-only">Note</span>Did You Know?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -358,7 +365,7 @@ Did You Know?
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Best Practice
+<span class="screen-reader-only">Tip</span>Best Practice
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -383,7 +390,7 @@ Best Practice
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Common Mistake
+<span class="screen-reader-only">Warning</span>Common Mistake
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -458,13 +465,14 @@ Common Mistake
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

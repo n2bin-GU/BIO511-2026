@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>Practical 7: Algorithmic Thinking in Genomics – BIO511 Genomics - Practical Repository</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c405e9740b13eb65d561f5d8e22a9b35.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -153,6 +156,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.html">
  <span class="dropdown-text">Practical 1: CLI Basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_HPC_CLUSTERS_INTRO.html">
+ <span class="dropdown-text">Lecture: HPC Clusters Intro</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html">
@@ -428,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Learning Objectives
+<span class="screen-reader-only">Note</span>Learning Objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -698,7 +705,7 @@ useDisinfectant</code></pre>
     If all characters match:
         Report the position</code></pre>
 <p>Python example:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>genome <span class="op">=</span> <span class="st">"TTGATGCCCATGAAATGA"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>genome <span class="op">=</span> <span class="st">"TTGATGCCCATGAAATGA"</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pattern <span class="op">=</span> <span class="st">"ATG"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>matches <span class="op">=</span> []</span>
@@ -707,9 +714,9 @@ useDisinfectant</code></pre>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> genome[i:i <span class="op">+</span> <span class="bu">len</span>(pattern)] <span class="op">==</span> pattern:</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        matches.append(i)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This is fine for a small genome and a short pattern. But large-scale genomics often uses <strong>k-mers</strong>, fixed-length sequence words, to make matching faster.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">"ATGACCATGATTACGCCAAGCT"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">"ATGACCATGATTACGCCAAGCT"</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>kmer_counts <span class="op">=</span> {}</span>
@@ -720,7 +727,7 @@ useDisinfectant</code></pre>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        kmer_counts[kmer] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    kmer_counts[kmer] <span class="op">=</span> kmer_counts[kmer] <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(kmer_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(kmer_counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>k-mers are used in many genomics tools:</p>
 <ul>
 <li>read error correction</li>
@@ -783,7 +790,7 @@ left:     align B[j] with a gap</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Biological Interpretation
+<span class="screen-reader-only">Tip</span>Biological Interpretation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -862,7 +869,7 @@ For each read:
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Ambiguous Mapping
+<span class="screen-reader-only">Note</span>Ambiguous Mapping
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1038,7 +1045,7 @@ Trace back from the best final state to recover the most likely path</code></pre
 <p>The value of writing these toy versions is that you can see the algorithmic structure directly.</p>
 <section id="exact-matching-and-k-mer-counting" class="level2">
 <h2 class="anchored" data-anchor-id="exact-matching-and-k-mer-counting">Exact Matching and k-mer Counting</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exact_match_positions(genome, pattern):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exact_match_positions(genome, pattern):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return all zero-based positions where pattern occurs in genome."""</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    positions <span class="op">=</span> []</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1068,12 +1075,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>genome <span class="op">=</span> <span class="st">"TTGATGCCCATGAAATGA"</span></span>
 <span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(exact_match_positions(genome, <span class="st">"ATG"</span>))</span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count_kmers(<span class="st">"ATGACCATGATTACGCCAAGCT"</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(count_kmers(<span class="st">"ATGACCATGATTACGCCAAGCT"</span>, <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="needleman-wunsch-global-alignment" class="level2">
 <h2 class="anchored" data-anchor-id="needleman-wunsch-global-alignment">Needleman-Wunsch Global Alignment</h2>
 <p>This is a small implementation of global alignment. It aligns two full sequences from beginning to end.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> needleman_wunsch(seq_a, seq_b, match<span class="op">=</span><span class="dv">1</span>, mismatch<span class="op">=-</span><span class="dv">1</span>, gap<span class="op">=-</span><span class="dv">2</span>):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> needleman_wunsch(seq_a, seq_b, match<span class="op">=</span><span class="dv">1</span>, mismatch<span class="op">=-</span><span class="dv">1</span>, gap<span class="op">=-</span><span class="dv">2</span>):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> <span class="bu">len</span>(seq_a) <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    cols <span class="op">=</span> <span class="bu">len</span>(seq_b) <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1134,12 +1141,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a>alignment_score, aligned_a, aligned_b <span class="op">=</span> needleman_wunsch(<span class="st">"ATGC"</span>, <span class="st">"ATC"</span>)</span>
 <span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(alignment_score)</span>
 <span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aligned_a)</span>
-<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aligned_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(aligned_b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="smith-waterman-local-alignment" class="level2">
 <h2 class="anchored" data-anchor-id="smith-waterman-local-alignment">Smith-Waterman Local Alignment</h2>
 <p>This version finds the best local matching region between two sequences.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> smith_waterman(seq_a, seq_b, match<span class="op">=</span><span class="dv">2</span>, mismatch<span class="op">=-</span><span class="dv">1</span>, gap<span class="op">=-</span><span class="dv">1</span>):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> smith_waterman(seq_a, seq_b, match<span class="op">=</span><span class="dv">2</span>, mismatch<span class="op">=-</span><span class="dv">1</span>, gap<span class="op">=-</span><span class="dv">1</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> <span class="bu">len</span>(seq_a) <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    cols <span class="op">=</span> <span class="bu">len</span>(seq_b) <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1200,12 +1207,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>local_score, local_a, local_b <span class="op">=</span> smith_waterman(<span class="st">"TTACGTAA"</span>, <span class="st">"GGACGTT"</span>)</span>
 <span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(local_score)</span>
 <span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(local_a)</span>
-<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(local_b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(local_b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="blast-like-seed-and-extend-search" class="level2">
 <h2 class="anchored" data-anchor-id="blast-like-seed-and-extend-search">BLAST-like Seed-and-Extend Search</h2>
 <p>This is a simplified seed-and-extend search. Real BLAST uses richer scoring, word neighborhoods, statistical significance, and optimized indexes.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> seed_and_extend(query, database, k<span class="op">=</span><span class="dv">4</span>, max_mismatches<span class="op">=</span><span class="dv">2</span>):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> seed_and_extend(query, database, k<span class="op">=</span><span class="dv">4</span>, max_mismatches<span class="op">=</span><span class="dv">2</span>):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Search a query against named target sequences using exact seeds."""</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    hits <span class="op">=</span> []</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    seen_hits <span class="op">=</span> <span class="bu">set</span>()</span>
@@ -1260,12 +1267,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> hit <span class="kw">in</span> seed_and_extend(<span class="st">"ATGACCATGATT"</span>, database, k<span class="op">=</span><span class="dv">4</span>):</span>
-<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(hit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(hit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="suffix-array-bwt-and-fm-index-style-exact-search" class="level2">
 <h2 class="anchored" data-anchor-id="suffix-array-bwt-and-fm-index-style-exact-search">Suffix Array, BWT, and FM-index-style Exact Search</h2>
 <p>This code shows the core idea behind BWT/FM-index searching. It builds a suffix array, creates a Burrows-Wheeler Transform, and uses backward search to find exact matches.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> suffix_array(text):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> suffix_array(text):</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sorted</span>(<span class="bu">range</span>(<span class="bu">len</span>(text)), key<span class="op">=</span><span class="kw">lambda</span> position: text[position:])</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1330,12 +1337,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(indexed_text)</span>
 <span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bwt)</span>
-<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fm_index_positions(<span class="st">"TACA"</span>, bwt, sa, first_column_start, occ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fm_index_positions(<span class="st">"TACA"</span>, bwt, sa, first_column_start, occ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="de-bruijn-graph-assembly" class="level2">
 <h2 class="anchored" data-anchor-id="de-bruijn-graph-assembly">de Bruijn Graph Assembly</h2>
 <p>This code builds a tiny de Bruijn graph from reads and reconstructs a simple non-branching path. Real assemblers must handle coverage, errors, repeats, paired-end links, and graph simplification.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_de_bruijn_graph(reads, k):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_de_bruijn_graph(reads, k):</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    graph <span class="op">=</span> {}</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> read <span class="kw">in</span> reads:</span>
@@ -1374,12 +1381,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>reads <span class="op">=</span> [<span class="st">"ATGAC"</span>, <span class="st">"TGACC"</span>, <span class="st">"GACCT"</span>]</span>
 <span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> build_de_bruijn_graph(reads, k<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(graph)</span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reconstruct_simple_path(graph, <span class="st">"ATG"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reconstruct_simple_path(graph, <span class="st">"ATG"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="viterbi-algorithm-for-a-hidden-markov-model" class="level2">
 <h2 class="anchored" data-anchor-id="viterbi-algorithm-for-a-hidden-markov-model">Viterbi Algorithm for a Hidden Markov Model</h2>
 <p>This toy HMM has two hidden states: <code>coding</code> and <code>noncoding</code>. The observed data are DNA bases. The Viterbi algorithm finds the most likely hidden-state path.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_probability(value):</span>
@@ -1450,12 +1457,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a>    <span class="st">"noncoding"</span>: {<span class="st">"A"</span>: <span class="fl">0.30</span>, <span class="st">"T"</span>: <span class="fl">0.30</span>, <span class="st">"G"</span>: <span class="fl">0.20</span>, <span class="st">"C"</span>: <span class="fl">0.20</span>}</span>
 <span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(viterbi(<span class="st">"ATGGCGC"</span>, states, start_probability, transition_probability, emission_probability))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(viterbi(<span class="st">"ATGGCGC"</span>, states, start_probability, transition_probability, emission_probability))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="probabilistic-variant-calling" class="level2">
 <h2 class="anchored" data-anchor-id="probabilistic-variant-calling">Probabilistic Variant Calling</h2>
 <p>This is a simplified genotype-likelihood example for a diploid organism. It uses base quality values to compare possible genotypes.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phred_to_error_probability(quality_score):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phred_to_error_probability(quality_score):</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">10</span> <span class="op">**</span> (<span class="op">-</span>quality_score <span class="op">/</span> <span class="dv">10</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1502,12 +1509,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>quality_scores <span class="op">=</span> [<span class="dv">30</span>, <span class="dv">31</span>, <span class="dv">29</span>, <span class="dv">30</span>, <span class="dv">32</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">31</span>, <span class="dv">30</span>, <span class="dv">29</span>]</span>
 <span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>candidate_genotypes <span class="op">=</span> [<span class="st">"A/A"</span>, <span class="st">"A/G"</span>, <span class="st">"G/G"</span>]</span>
 <span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(call_genotype(read_bases, quality_scores, candidate_genotypes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(call_genotype(read_bases, quality_scores, candidate_genotypes))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="k-mer-lowest-common-ancestor-classification" class="level2">
 <h2 class="anchored" data-anchor-id="k-mer-lowest-common-ancestor-classification">k-mer Lowest Common Ancestor Classification</h2>
 <p>This is a small version of the idea used in k-mer based metagenomic classifiers. A read is broken into k-mers, each k-mer votes for a taxon, and ambiguous k-mers are assigned to the lowest common ancestor.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lineage(taxon, parent):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lineage(taxon, parent):</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> []</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> taxon <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
@@ -1583,12 +1590,12 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>kmer_index <span class="op">=</span> build_kmer_taxon_index(reference_sequences, k<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classify_read_lca(<span class="st">"ACCATGATTA"</span>, <span class="dv">5</span>, kmer_index, parent))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classify_read_lca(<span class="st">"ACCATGATTA"</span>, <span class="dv">5</span>, kmer_index, parent))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="minhash-sketching-for-genome-similarity" class="level2">
 <h2 class="anchored" data-anchor-id="minhash-sketching-for-genome-similarity">MinHash Sketching for Genome Similarity</h2>
 <p>MinHash approximates similarity between large sets. In genomics, the set might be all k-mers from a genome. Tools such as Mash use related sketching ideas for fast genome distance estimation.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_kmer_set(sequence, k):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_kmer_set(sequence, k):</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    kmers <span class="op">=</span> <span class="bu">set</span>()</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(sequence) <span class="op">-</span> k <span class="op">+</span> <span class="dv">1</span>):</span>
@@ -1636,7 +1643,7 @@ Trace back from the best final state to recover the most likely path</code></pre
 <span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>sketch_c <span class="op">=</span> minhash_sketch(genome_c)</span>
 <span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sketch_similarity(sketch_a, sketch_b))</span>
-<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sketch_similarity(sketch_a, sketch_c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sketch_similarity(sketch_a, sketch_c))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="a-capstone-way-to-think-about-bioinformatics-problems" class="level1">
@@ -1767,7 +1774,7 @@ Sequence B: A T C</code></pre>
 <section id="exercise-3-k-mer-counter" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3-k-mer-counter">Exercise 3: k-mer Counter</h2>
 <p>Write Python code that counts all 4-mers in this sequence:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">"ATGACCATGATTACGCCAAGCT"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">"ATGACCATGATTACGCCAAGCT"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Then answer:</p>
 <ol type="1">
 <li>Which 4-mer occurs most often?</li>
@@ -1908,13 +1915,14 @@ GACCT</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
