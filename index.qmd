@@ -19,7 +19,7 @@ This repository contains practical exercises for the BIO511 Genomics course. Use
 
 ### 🔧 Pre-course Setup
 
-- **[ 🔒 Practical 0: Pre-course Setup](practicals/Pre-course-setup_BIO511.qmd)**
+- **[ Practical 0: Pre-course Setup](practicals/Pre-course-setup_BIO511.qmd)**
 
 ### 🖥️ Command Line Programming
 Here are the practical exercises related to command line programming section of the course:
