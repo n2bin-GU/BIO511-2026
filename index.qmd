@@ -25,7 +25,7 @@ This repository contains practical exercises for the BIO511 Genomics course. Use
 Here are the practical exercises related to command line programming section of the course:
 
 #### Introduction to Command Line Programming
-- **[ 🔒 Practical 1: CLI Basics](practicals/Practicals%20-%20CLI/PRACTICAL_INTRO_TO_COMMAND_LINE_.qmd)**
+- **[ Practical 1: CLI Basics](practicals/Practicals%20-%20CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.qmd)**
 - **[ 🔒 Lecture: HPC Clusters Intro](practicals/Practicals%20-%20CLI/PRACTICAL_HPC_CLUSTERS_INTRO_.qmd)**
 - **[ 🔒 Practical 2: Setting up the HPC](practicals/Practicals%20-%20CLI/PRACTICAL_SETTING_UP_THE_HPC_.qmd)**
 - **[ 🔒 Practical 3: Workspace Management and Data Management](practicals/Practicals%20-%20CLI/PRACTICAL_WORKSPACE_MANAGEMENT_.qmd)**
