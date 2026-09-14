@@ -377,12 +377,12 @@ When we perform computational tasks, a simplified pipeline can can be broken dow
 
 ```{mermaid}
 flowchart LR
-    A["**Input**<br />Data provided to a command<br />*ex: sequences.fasta*"]
-    B["**Process**<br />The command that manipulates or analyzes the data<br />*ex: grep, sed, script.sh*"]
-    C["**Output**<br />The result produced by the command<br />*ex: [Text in CLI] or<br />filtered_sequences.fasta<br />if written*"]
+    A["**Input**: Data provided to a command, ex: sequences.fasta"]
+    B["**Process**: The command that manipulates or analyzes the data, ex: grep, sed, script.sh"]
+    C["**Output**: The result produced by the command, ex: filtered_sequences.fasta if written"]
 
-    A --> B
-    B --> C
+    A --- B 
+    B --- C
 ```
 
 ## Text Editing with `sed` (Stream Editor)
