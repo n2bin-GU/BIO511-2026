@@ -145,10 +145,10 @@ These can be combined in a **pipeline** to quickly summarize data. For example, 
 ```{mermaid}
 flowchart LR
     title["Correct sort/uniq order"]
-    In["Unsorted Data"] --> A["sort: orders lines so duplicate aggregate"] 
-    B["uniq: removes duplicates that are adjacent"] 
+    In["Unsorted Data"] --> A["**sort** orders lines so duplicate aggregate"] 
+    B["**uniq** removes duplicates that are adjacent"] 
     C["File redirect or stdout"]
-    D["uniq: removes duplicates, but miss those that are not adjacent"]
+    D["**uniq** removes duplicates, but miss those that are not adjacent"]
     E["Missed duplicates!"]
     A --> B
     B --> C

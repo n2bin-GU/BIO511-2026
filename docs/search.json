@@ -706,7 +706,7 @@
     "href": "practicals/Practicals - CLI/PRACTICAL_WORKSPACE_MANAGEMENT.html#counts-and-quick-summaries-with-wc-sort-uniq-and-cut",
     "title": "Practical 3 — Workspace & Data Management",
     "section": "Counts and quick summaries with wc, sort, uniq and cut",
-    "text": "Counts and quick summaries with wc, sort, uniq and cut\nFour commands that are quite lovely in pipes are wc, sort, uniq and cut\n\nwc counts lines, words, or characters in a file\nsort orders lines according to a specified criteria (alphabetically, numerically, etc.)\nuniq removes duplicates from a file, but only adjacent duplicates.\ncut extracts specific columns from a file, based on a delimiter.\n\nThese can be combined in a pipeline to quickly summarize data. For example, if we want to count how many samples are from each country in our metadata file or pull out all gene annotation names from a larger file, but drop all of the info beyond gene name and annotation. However remember to sort before using uniq:\n\n\n\n\n\nflowchart LR\n    title[\"Correct sort/uniq order\"]\n    In[\"Unsorted Data\"] --&gt; A[\"sort: orders lines so duplicate aggregate\"] \n    B[\"uniq: removes duplicates that are adjacent\"] \n    C[\"File redirect or stdout\"]\n    D[\"uniq: removes duplicates, but miss those that are not adjacent\"]\n    E[\"Missed duplicates!\"]\n    A --&gt; B\n    B --&gt; C\n    In -.-&gt; D\n    D -.-&gt; E\n\n    classDef wrong fill:#f8d7da,stroke:#c0392b,color:#c0392b;\n    class D,E wrong;    \n\n\n\n\n\n\nNow lets try these commands on the metadata file we just created.\n# Example: cut can be used to extract one specific column, or multiple columns\ncut -f2 data/metadata.tsv              # column 2 (e.g., country) from a TAB-separated file\ncut -f2,3 data/metadata.tsv            # columns 2 and 3 (e.g., country and tissue) from a TAB-separated file\n\n# wc is also very useful to get the lenght of a file, which is good to sanity check in case there is an unexpected number of rows\nwc -l data/metadata.tsv\n\n# ----------------------------------------------------------------------------------------------------------------------------------\n\n# However these commands are at their most iconic together\n# Test them step by step here before combining into a single pipeline.\n# STEP-BY-STEP :\ncut -f2 data/metadata.tsv              # column 2 (e.g., country) from a TAB-separated file\ncut -f2 data/metadata.tsv | sort       # order values to cluster identical ones\ncut -f2 data/metadata.tsv | sort | uniq -c   # collapse adjacent duplicates and count\n\n# Now that you’ve seen each stage, try the **pipeline** form that saves the result:\n\ncut -f2 data/metadata.tsv | sort | uniq -c | sort -nr &gt; results/country_counts.txt\nhead results/country_counts.txt\n\n\n\n\n\n\nExercise: Summarizing data and changing delimiters\n\n\n\nSometimes, certain programs might require data in a specific format. While we often can go back to Excel or likewise to export it in a different format, it is often more efficient to do this directly in the command line. We have now learned a bit about delimiters and how to select specific columns from a file, lets see if we can put it to good use with the commands we learned in the first practical.\n\nUse cut to extract columns “Gene_ID”, “Chromosome” and “Product” from the gene_annotations.csv file, then use sed to change the delimiter from a comma to tab, then redirect the output to a new file called gene_annotations.tsv in the data/ folder.\n\n\n\n\n\n\n\nExample solution (Try to solve it yourself before checking!)\n\n\n\n\n\n\n# Cuts default delimiter is tab, so we need to specify the delimiter as a comma with `-d,` and select the first three columns with `-f1,2,3`. Then we use `sed` to replace commas with tabs and redirect the output to a new file.\ncut -d, -f1,2,3 data/gene_annotations.csv | sed 's/,/\\t/g' &gt; data/gene_annotations.tsv\n\n# cat -A data/gene_annotations.tsv:\nGene_ID^IChromosome^IProduct$\nlacZ^Iplasmid^Ibeta-galactosidase$\nrpoB^Ichr^IRNA_polymerase_beta_subunit$\ngyrA^Ichr^IDNA_gyrase_subunit_A$\nompA^Ichr^Iouter_membrane_protein_A$\ngyrA^Ichr^IDNA_gyrase_subunit_A$",
+    "text": "Counts and quick summaries with wc, sort, uniq and cut\nFour commands that are quite lovely in pipes are wc, sort, uniq and cut\n\nwc counts lines, words, or characters in a file\nsort orders lines according to a specified criteria (alphabetically, numerically, etc.)\nuniq removes duplicates from a file, but only adjacent duplicates.\ncut extracts specific columns from a file, based on a delimiter.\n\nThese can be combined in a pipeline to quickly summarize data. For example, if we want to count how many samples are from each country in our metadata file or pull out all gene annotation names from a larger file, but drop all of the info beyond gene name and annotation. However remember to sort before using uniq:\n\n\n\n\n\nflowchart LR\n    title[\"Correct sort/uniq order\"]\n    In[\"Unsorted Data\"] --&gt; A[\"**sort** orders lines so duplicate aggregate\"] \n    B[\"**uniq** removes duplicates that are adjacent\"] \n    C[\"File redirect or stdout\"]\n    D[\"**uniq** removes duplicates, but miss those that are not adjacent\"]\n    E[\"Missed duplicates!\"]\n    A --&gt; B\n    B --&gt; C\n    In -.-&gt; D\n    D -.-&gt; E\n\n    classDef wrong fill:#f8d7da,stroke:#c0392b,color:#c0392b;\n    class D,E wrong;    \n\n\n\n\n\n\nNow lets try these commands on the metadata file we just created.\n# Example: cut can be used to extract one specific column, or multiple columns\ncut -f2 data/metadata.tsv              # column 2 (e.g., country) from a TAB-separated file\ncut -f2,3 data/metadata.tsv            # columns 2 and 3 (e.g., country and tissue) from a TAB-separated file\n\n# wc is also very useful to get the lenght of a file, which is good to sanity check in case there is an unexpected number of rows\nwc -l data/metadata.tsv\n\n# ----------------------------------------------------------------------------------------------------------------------------------\n\n# However these commands are at their most iconic together\n# Test them step by step here before combining into a single pipeline.\n# STEP-BY-STEP :\ncut -f2 data/metadata.tsv              # column 2 (e.g., country) from a TAB-separated file\ncut -f2 data/metadata.tsv | sort       # order values to cluster identical ones\ncut -f2 data/metadata.tsv | sort | uniq -c   # collapse adjacent duplicates and count\n\n# Now that you’ve seen each stage, try the **pipeline** form that saves the result:\n\ncut -f2 data/metadata.tsv | sort | uniq -c | sort -nr &gt; results/country_counts.txt\nhead results/country_counts.txt\n\n\n\n\n\n\nExercise: Summarizing data and changing delimiters\n\n\n\nSometimes, certain programs might require data in a specific format. While we often can go back to Excel or likewise to export it in a different format, it is often more efficient to do this directly in the command line. We have now learned a bit about delimiters and how to select specific columns from a file, lets see if we can put it to good use with the commands we learned in the first practical.\n\nUse cut to extract columns “Gene_ID”, “Chromosome” and “Product” from the gene_annotations.csv file, then use sed to change the delimiter from a comma to tab, then redirect the output to a new file called gene_annotations.tsv in the data/ folder.\n\n\n\n\n\n\n\nExample solution (Try to solve it yourself before checking!)\n\n\n\n\n\n\n# Cuts default delimiter is tab, so we need to specify the delimiter as a comma with `-d,` and select the first three columns with `-f1,2,3`. Then we use `sed` to replace commas with tabs and redirect the output to a new file.\ncut -d, -f1,2,3 data/gene_annotations.csv | sed 's/,/\\t/g' &gt; data/gene_annotations.tsv\n\n# cat -A data/gene_annotations.tsv:\nGene_ID^IChromosome^IProduct$\nlacZ^Iplasmid^Ibeta-galactosidase$\nrpoB^Ichr^IRNA_polymerase_beta_subunit$\ngyrA^Ichr^IDNA_gyrase_subunit_A$\nompA^Ichr^Iouter_membrane_protein_A$\ngyrA^Ichr^IDNA_gyrase_subunit_A$",
     "crumbs": [
       "Intro to Command Line",
       "Practical 3: Workspace Management and Data Management"
@@ -728,14 +728,14 @@
     "href": "index.html",
     "title": "BIO511 Genomics - Practical Repository",
     "section": "",
-    "text": "This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.\n\n\n\nPractical 0: Pre-course Setup\n\n\n\n\nHere are the practical exercises related to command line programming section of the course:\n\n\n\nPractical 1: CLI Basics\n🔒 Lecture: HPC Clusters Intro\n🔒 Practical 2: Setting up the HPC\n🔒 Practical 3: Workspace Management and Data Management\n🔒 Practical 4: Scripting and Advanced Text Manipulation\n🔒 Practical 5: Software & Containers\n\n\n\n\n\n🔒 Practical 1: Best practices\n\n\n\n\n\nThe following practical exercises focus on genomics workflows:\n\n\n\n🔒 Practical 1: Quality Control and Classification\n🔒 Practical 2: Genome Assembly and Mapping\n🔒 Practical 3: Genome Annotation\n\n\n\n\n\n🔒 Additional: Build curated reference files\n\n\n\n\n\nLastly, we cover Python programming with these practical exercises:\n\n🔒 Practical 0: Introduction\n🔒 Practical 1: Python Data Types and If/Else Clauses\n🔒 Practical 2: Python Loops\n🔒 Practical 3: Python Functions\n🔒 Practical 4: Python Modules\n🔒 Practical 5: Files\n🔒 Practical 6: Plotting\n🔒 Practical 7: Algorithmic Thinking in Genomics\n\n\nFor questions or issues, please contact the course instructors."
+    "text": "This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.\n\n\n\nPractical 0: Pre-course Setup\n\n\n\n\nHere are the practical exercises related to command line programming section of the course:\n\n\n\nPractical 1: CLI Basics\nLecture: HPC Clusters Intro\nPractical 2: Setting up the HPC\n🔒 Practical 3: Workspace Management and Data Management\n🔒 Practical 4: Scripting and Advanced Text Manipulation\n🔒 Practical 5: Software & Containers\n\n\n\n\n\n🔒 Practical 1: Best practices\n🔒 Practical 2: Version Control and Collaborative Coding\n\n\n\n\n\nThe following practical exercises focus on genomics workflows:\n\n\n\n🔒 Practical 1: Quality Control and Classification\n🔒 Practical 2: Genome Assembly and Mapping\n🔒 Practical 3: Genome Annotation\n\n\n\n\n\n🔒 Additional: Build curated reference files\n\n\n\n\n\nLastly, we cover Python programming with these practical exercises:\n\n🔒 Practical 0: Introduction\n🔒 Practical 1: Python Data Types and If/Else Clauses\n🔒 Practical 2: Python Loops\n🔒 Practical 3: Python Functions\n🔒 Practical 4: Python Modules\n🔒 Practical 5: Files\n🔒 Practical 6: Plotting\n🔒 Practical 7: Algorithmic Thinking in Genomics\n\n\nFor questions or issues, please contact the course instructors."
   },
   {
     "objectID": "index.html#course-overview",
     "href": "index.html#course-overview",
     "title": "BIO511 Genomics - Practical Repository",
     "section": "",
-    "text": "This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.\n\n\n\nPractical 0: Pre-course Setup\n\n\n\n\nHere are the practical exercises related to command line programming section of the course:\n\n\n\nPractical 1: CLI Basics\n🔒 Lecture: HPC Clusters Intro\n🔒 Practical 2: Setting up the HPC\n🔒 Practical 3: Workspace Management and Data Management\n🔒 Practical 4: Scripting and Advanced Text Manipulation\n🔒 Practical 5: Software & Containers\n\n\n\n\n\n🔒 Practical 1: Best practices\n\n\n\n\n\nThe following practical exercises focus on genomics workflows:\n\n\n\n🔒 Practical 1: Quality Control and Classification\n🔒 Practical 2: Genome Assembly and Mapping\n🔒 Practical 3: Genome Annotation\n\n\n\n\n\n🔒 Additional: Build curated reference files\n\n\n\n\n\nLastly, we cover Python programming with these practical exercises:\n\n🔒 Practical 0: Introduction\n🔒 Practical 1: Python Data Types and If/Else Clauses\n🔒 Practical 2: Python Loops\n🔒 Practical 3: Python Functions\n🔒 Practical 4: Python Modules\n🔒 Practical 5: Files\n🔒 Practical 6: Plotting\n🔒 Practical 7: Algorithmic Thinking in Genomics\n\n\nFor questions or issues, please contact the course instructors."
+    "text": "This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.\n\n\n\nPractical 0: Pre-course Setup\n\n\n\n\nHere are the practical exercises related to command line programming section of the course:\n\n\n\nPractical 1: CLI Basics\nLecture: HPC Clusters Intro\nPractical 2: Setting up the HPC\n🔒 Practical 3: Workspace Management and Data Management\n🔒 Practical 4: Scripting and Advanced Text Manipulation\n🔒 Practical 5: Software & Containers\n\n\n\n\n\n🔒 Practical 1: Best practices\n🔒 Practical 2: Version Control and Collaborative Coding\n\n\n\n\n\nThe following practical exercises focus on genomics workflows:\n\n\n\n🔒 Practical 1: Quality Control and Classification\n🔒 Practical 2: Genome Assembly and Mapping\n🔒 Practical 3: Genome Annotation\n\n\n\n\n\n🔒 Additional: Build curated reference files\n\n\n\n\n\nLastly, we cover Python programming with these practical exercises:\n\n🔒 Practical 0: Introduction\n🔒 Practical 1: Python Data Types and If/Else Clauses\n🔒 Practical 2: Python Loops\n🔒 Practical 3: Python Functions\n🔒 Practical 4: Python Modules\n🔒 Practical 5: Files\n🔒 Practical 6: Plotting\n🔒 Practical 7: Algorithmic Thinking in Genomics\n\n\nFor questions or issues, please contact the course instructors."
   },
   {
     "objectID": "practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.html",
@@ -1037,207 +1037,9 @@
   {
     "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html",
     "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html",
-    "title": "Practical 2: High performance computing clusters - intro",
+    "title": "Practical 2: Setting up the HPC",
     "section": "",
-    "text": "In this course you will use the command line and the Vera high performance computing cluster for bioinformatics work. Before setting up accounts, VPN, SSH, and VSCode, it helps to understand what kind of system Vera is and how work is expected to run on it.\nThis lecture is based on the C3SE introduction to Vera and the C3SE Vera system overview. It is written for master’s students in chemistry and molecular biology who may be new to shared computing systems.\n\n\n\n\n\n\nLearning objectives\n\n\n\nBy the end of this lecture, you should be able to:\n\nExplain what an HPC cluster is in plain language.\nDescribe the difference between a login node and a compute node.\nExplain why jobs are submitted to a scheduler instead of run directly.\nRecognize the most important resources: CPU cores, RAM, storage, time, GPUs, and VRAM.\nUnderstand the basic workflow for running work on Vera.\nKnow where the later “Setting up the HPC” practical fits into the bigger picture.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#cpu",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#cpu",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "CPU",
-    "text": "CPU\nThe CPU is the general-purpose processor in a computer. It is good at running the operating system, scripts, command line tools, and most standard bioinformatics programs. When a SLURM job asks for “cores”, it is asking for CPU cores.\nExamples of CPU-heavy work:\n\nRunning bwa, samtools, blast, fastqc, or many Python/R scripts.\nSorting large tables.\nRunning many independent sample analyses in parallel.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#gpu",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#gpu",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "GPU",
-    "text": "GPU\nThe GPU is a specialised accelerator originally designed for graphics, but now also used for many scientific and machine learning tasks. A GPU can do some kinds of numerical work very quickly, especially when the software has been written to use the GPU.\nExamples of GPU-aware work:\n\nSome deep learning programs using PyTorch or TensorFlow with CUDA.\nSome molecular dynamics or molecular modelling software configured for GPUs.\nSome image analysis workflows.\n\nMany ordinary command line tools do not use a GPU. If the program cannot use a GPU, requesting one will not make the job faster.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#ram",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#ram",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "RAM",
-    "text": "RAM\nRAM is the short-term memory used by the CPU while a program is running. If a genome assembly needs to keep a large graph in memory, or a Python script loads a large matrix, that memory is RAM.\nIf a job runs out of RAM, it may crash or be killed by the scheduler.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#vram",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#vram",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "VRAM",
-    "text": "VRAM\nVRAM is the memory built into a GPU card. GPU programs must fit the data they process on the GPU into VRAM. This is why GPU cards are often described by both model and memory size, for example A40 with 48 GB VRAM or H100 with 96 GB VRAM.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#simplified-vera-hardware",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#simplified-vera-hardware",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "Simplified Vera hardware",
-    "text": "Simplified Vera hardware\nThe Vera documentation currently describes two main CPU generations:\n\n\n\n\n\n\n\n\nNode type\nCPU hardware\nSimple meaning\n\n\n\n\nZen4\n2 AMD EPYC 9354 CPUs per node, 32 cores per CPU\n64 CPU cores per full node; currently the default if you do not request a specific CPU type\n\n\nIcelake\n2 Intel Xeon Gold 6338 CPUs per node, 32 cores per CPU\n64 CPU cores per full node; can be requested when needed\n\n\n\nStandard Zen4 Vera nodes commonly have 768 GB RAM per node. Icelake nodes commonly have 512 GB RAM per node. Some nodes have more memory, such as 1024 or 1536 GB RAM, and some larger-memory nodes may be private or limited to specific projects.\nThe seminar slides describe Vera in terms of CPU generations and accelerator cards. The live Vera hardware page gives the exact current node counts. You do not need to memorize the numbers. The useful student-level summary is:\n\nMost normal jobs run on 64-core CPU nodes.\nMany standard nodes have hundreds of GB of RAM, far more than a laptop.\nSome nodes have larger RAM for memory-hungry jobs.\nA small number of nodes have GPUs, so GPU jobs are a special request.\nYou can inspect current node information on Vera with sinfo.\n\nVera also has GPU nodes:\n\n\n\n\n\n\n\n\n\n\nGPU type\nApproximate total on main partition\nWhere it is used\nVRAM per GPU\nBeginner-level interpretation\n\n\n\n\nA40\n16 GPUs\nIcelake GPU nodes\nabout 45-48 GB\nUseful for some GPU workloads, often graphics/AI-oriented\n\n\nA100\n12 GPUs\nIcelake GPU nodes\n40 GB\nStrong scientific/AI GPU\n\n\nH100\n8 GPUs\nZen4 GPU nodes\nabout 94-96 GB\nVery powerful newer GPU\n\n\n\nThe C3SE slides also list theoretical floating-point performance for A40, A100, and H100 GPUs. These numbers can be useful for specialists, but for this course the important message is simpler:\n\nCPU nodes are the normal choice for most command line and bioinformatics jobs.\nLarge-memory nodes are useful when a program needs a lot of RAM.\nGPU nodes are useful only when the software is GPU-aware.\nYou should not request special hardware unless you know why your job needs it.\n\nExample GPU accounting from the C3SE slides:\n\n\n\n\n\n\n\n\nGPU\nExtra allocation cost\nWhat this means\n\n\n\n\nA40\n16 extra core-hour equivalents per GPU-hour\nLower extra cost\n\n\nA100\n48 extra core-hour equivalents per GPU-hour\nHigher extra cost\n\n\nH100\n160 extra core-hour equivalents per GPU-hour\nHighest extra cost\n\n\n\nFor example, if a job uses part of a CPU node plus one A100 for 10 hours, the project is charged for the CPU cores plus the extra GPU cost. This is why GPU requests should be intentional.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#vera-alvis-cephyr-and-mimer",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#vera-alvis-cephyr-and-mimer",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "Vera, Alvis, Cephyr, and Mimer",
-    "text": "Vera, Alvis, Cephyr, and Mimer\nThe C3SE slides mention several systems. They are related, but they are not the same thing.\n\n\n\n\n\n\n\n\nName\nWhat it is\nHow it relates to Vera\n\n\n\n\nVera\nThe HPC compute cluster used in this course\nWhere your CPU/GPU jobs run\n\n\nAlvis\nA NAISS system for AI/ML research\nA different compute system; it is retiring and being replaced by Arrhenius\n\n\nCephyr\nA C3SE storage system based on CephFS\nProvides storage areas used by C3SE systems, including Vera project/home storage\n\n\nMimer\nA high-performance storage system based on WekaIO\nMainly intended for Alvis-style high-I/O workloads, but can also be available for data staging from other systems\n\n\n\nIn short: Vera computes; Cephyr and Mimer store data; Alvis is another compute system.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#login-nodes",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#login-nodes",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "Login nodes",
-    "text": "Login nodes\nLogin nodes are the front doors of the cluster. You use them to:\n\nConnect to Vera.\nNavigate files.\nEdit scripts.\nTransfer small files.\nPrepare job scripts.\nSubmit jobs to the scheduler.\nCheck job status.\n\nLogin nodes are shared by many users. They are not for large calculations.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#compute-nodes",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#compute-nodes",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "Compute nodes",
-    "text": "Compute nodes\nCompute nodes are where heavy work runs. You use them indirectly by submitting a job. The scheduler starts your script on one or more compute nodes when the requested resources are available.\nUse compute nodes for:\n\nGenome assembly.\nMapping reads.\nLarge BLAST or database searches.\nLong-running Python or R analyses.\nMolecular simulations.\nGPU-enabled workloads.\n\n\n\n\n\n\n\nMain rule\n\n\n\nDo not run big or long jobs on the login node. Prepare your work on the login node, then submit it to the scheduler so it can run on compute nodes.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#i-am-logged-in-so-i-can-run-my-analysis-here",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#i-am-logged-in-so-i-can-run-my-analysis-here",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "“I am logged in, so I can run my analysis here”",
-    "text": "“I am logged in, so I can run my analysis here”\nNot quite. You are usually on a login node. Use it to prepare and submit work, not to run heavy analyses.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#more-cores-always-makes-my-job-faster",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#more-cores-always-makes-my-job-faster",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "“More cores always makes my job faster”",
-    "text": "“More cores always makes my job faster”\nOnly if the software can use multiple cores efficiently. Some programs are single-core. Giving them 32 cores will not make them 32 times faster.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#a-gpu-is-always-better",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#a-gpu-is-always-better",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "“A GPU is always better”",
-    "text": "“A GPU is always better”\nOnly GPU-aware software benefits from a GPU. Many standard command line and bioinformatics programs are CPU-based. If your program documentation does not mention CUDA, GPU acceleration, NVIDIA GPUs, or a GPU-specific option, assume it is probably CPU-based.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#if-my-job-waits-something-is-wrong",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#if-my-job-waits-something-is-wrong",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "“If my job waits, something is wrong”",
-    "text": "“If my job waits, something is wrong”\nNot necessarily. Queuing is normal on shared systems. Your job may be waiting for priority, enough free resources, or a suitable node.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#the-cluster-will-keep-all-temporary-files",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#the-cluster-will-keep-all-temporary-files",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "“The cluster will keep all temporary files”",
-    "text": "“The cluster will keep all temporary files”\nNo. Temporary job storage such as $TMPDIR is cleaned when the job ends. Copy final results back to persistent storage.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e1-can-i-make-my-own-conda-environment",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e1-can-i-make-my-own-conda-environment",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "E1: Can I make my own Conda environment?",
-    "text": "E1: Can I make my own Conda environment?\nUsually, yes, but on Vera it is not the first recommended option. C3SE recommends this order:\n\nPrefer centrally installed modules when they already contain what you need.\nFor Python packages, prefer a Python virtualenv built on top of loaded modules.\nFor complex Conda environments, prefer building an Apptainer/Singularity container.\nUse a direct Conda environment only when you have a clear reason and understand that it can create many files and use quota quickly.\n\nThe reason is practical: Conda environments often contain thousands of small files. On a shared network filesystem this can be slow and can use up your file quota. Containers turn the environment into one portable .sif file, which is easier for the storage system.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e2-recommended-simple-python-environment-with-virtualenv",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e2-recommended-simple-python-environment-with-virtualenv",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "E2: Recommended simple Python environment with virtualenv",
-    "text": "E2: Recommended simple Python environment with virtualenv\nUse this when your script needs extra Python packages.\nCreate the environment once:\n# 1. Search for suitable modules\nmodule spider Python\nmodule spider SciPy-bundle\nmodule spider virtualenv\n\n# 2. Load Python-related modules from a compatible toolchain\n# The exact versions may change; use versions available on Vera.\nmodule load virtualenv/20.26.2-GCCcore-13.3.0\nmodule load SciPy-bundle/2024.05-gfbf-2024a\n\n# 3. Create an environment in a project or course storage area if possible\nmkdir -p /cephyr/NOBACKUP/groups/replace_with_project/my_envs\ncd /cephyr/NOBACKUP/groups/replace_with_project/my_envs\nvirtualenv --system-site-packages bio511_env\n\n# 4. Activate it\nsource bio511_env/bin/activate\n\n# 5. Install only the extra packages you need\npip install package_name\nUse the environment in a job script:\n#!/bin/bash\n#SBATCH -A replace_with_project_account\n#SBATCH -p vera\n#SBATCH -n 4\n#SBATCH -t 01:00:00\n#SBATCH -J bio511_python\n\nmodule purge\nmodule load virtualenv/20.26.2-GCCcore-13.3.0\nmodule load SciPy-bundle/2024.05-gfbf-2024a\n\nsource /cephyr/NOBACKUP/groups/replace_with_project/my_envs/bio511_env/bin/activate\n\npython my_script.py\n\n\n\n\n\n\nAvoid pip install --user\n\n\n\nDo not install Python packages directly into ~/.local with pip install --user. Packages installed there can interfere with other environments and can quickly use up your home quota.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e3-if-you-really-need-conda",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e3-if-you-really-need-conda",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "E3: If you really need Conda",
-    "text": "E3: If you really need Conda\nC3SE notes that Miniforge modules are available, but recommends using Conda inside a container for most cases. If a course instructor specifically asks you to create a Conda environment directly on Vera, the basic idea is:\n# 1. Search for available Miniforge or Conda modules\nmodule spider Miniforge\nmodule spider conda\n\n# 2. Load the available module shown by Vera.\n# Replace &lt;version&gt; with the exact module version shown by `module spider`.\nmodule load Miniforge3/&lt;version&gt;\n\n# 3. Create the environment in project storage, not in your small home quota\nmkdir -p /cephyr/NOBACKUP/groups/replace_with_project/conda_envs\nconda create -p /cephyr/NOBACKUP/groups/replace_with_project/conda_envs/bio511_conda \\\n  -c conda-forge python=3.11 package_name\n\n# 4. Activate it\nconda activate /cephyr/NOBACKUP/groups/replace_with_project/conda_envs/bio511_conda\n\n# 5. Test your script\npython my_script.py\nUse it in a job script by loading the same module and activating the same path before running the script.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e4-container-alternative-for-conda-dependencies",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e4-container-alternative-for-conda-dependencies",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "E4: Container alternative for Conda dependencies",
-    "text": "E4: Container alternative for Conda dependencies\nFor a complex Conda environment, a container is often better. A container recipe can install packages from an environment.yml, and the finished .sif file can be run in a job:\napptainer exec my_environment.sif python my_script.py\nFor GPU containers, the command usually needs --nv so the container can see NVIDIA GPUs:\napptainer exec --nv my_gpu_environment.sif python gpu_script.py\nYou do not need to master containers in this first HPC introduction, but you should know that they are often the cleaner alternative to large Conda environments on a shared cluster.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 2: Setting up the HPC"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e4-do-i-need-tmux",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#e4-do-i-need-tmux",
-    "title": "Practical 2: High performance computing clusters - intro",
-    "section": "E4: Do I need tmux?",
-    "text": "E4: Do I need tmux?\nUsually, no. For normal HPC work you should submit long-running analyses with sbatch. Once the job is submitted, it belongs to the scheduler, not to your laptop connection. You can close your computer, disconnect from VPN, or lose Wi-Fi, and the batch job should continue running.\nUse this safe pattern:\nsbatch job_script.sh\nsqueue -u $USER\nThen you can log out. Later, log in again and check the output files and SLURM log.\ntmux can still be useful for:\n\nEditing files during a long login session.\nKeeping a terminal layout open while you prepare scripts.\nRunning short monitoring commands.\n\nBut tmux is not a replacement for SLURM. Do not start a long analysis inside tmux on the login node. If you need an interactive compute session for debugging, use an interactive SLURM job or the Open OnDemand portal, and keep it short.",
+    "text": "Introduction\nThis tutorial is to take you through the final steps of setting up and accessing the c3se High Performance Computing infrastructure. The specific cluster we will use is called Vera. You will be introduced to this cluster in the lecture and here you can find more information about it, including what resources that are available, how to run jobs and other documentation.\nWe will walk you through step by step in this tutorial so that we (hopefully) can assist if there are any problems.\n\n\n\n\n\n\nPre-course setup\n\n\n\nTo be able to follow these steps you first have to have followed the steps of the Pre-course Setup including registration at SUPR and application to the course HPC project.\n\n\n\n\n\nAdding Vera/c3se at SUPR\n\nLog in to SUPR\nClick “Accounts” in the left side menu\nRequest access to Vera/c3se\n\n\n\n\nSetting up a Chalmers ID\n\nNavigate to https://myaccount.chalmers.se/.\nLog in with your GU account.\nChoose “Activate CID” and follow the instructions to activate your account\n\n\n\n\n\n\n\nRemember your password!\n\n\n\nThe CID username and password are the ones you will use to log in to the cluster\n\n\n\n\n\nSetting up Chalmers VPN\nTo be able to access c3se from other networks than in GU or Chalmers, you will need a Chalmers VPN\n\nNavigate to https://chalmers.topdesk.net/tas/public/ssp/content/detail/knowledgeitem?unid=07e6154089a648d09711ccc42a42fc88\nFollow the instructions to set up the Chalmers VPN\n\n\n\n\nConnecting to the HPC using ssh in VSCode\nTo be able to connect to the HPC in a manner that will let you use the full suite of tools available (or most of them at least) in VSCode, you will need to install the Remote - SSH extension.\n\nOpen VSCode\nGo to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window or by pressing Ctrl+Shift+X\nSearch for “Remote - SSH” and install the extension by Microsoft (if youre unsure how install extensions, see here)\nAfter installation, you will see a new icon in the Activity Bar on the side of the window. Click on it to open the Remote Explorer view.\n\nIf the SSH Targets are not visible, click on the drop down to expand the view\n\nClick on the + (“New Remote”) icon next to SSH header to add a new SSH host\nIn the input box that appears, enter the SSH connection string for Vera: &lt;your_chalmers_id&gt;@vera1.c3se.chalmers.se (replace &lt;your_chalmers_id&gt; with your actual Chalmers ID)\nPress Enter to confirm\nYou will be prompted to select the SSH configuration file to update. Choose the default option (usually ~/.ssh/config)\n\nOnce you have added the SSH host, you can connect to Vera:\n\nIn the Remote Explorer view, find the Vera entry under SSH Targets (or by clicking on the blue “remote window” icon in the bottom left corner of VSCode)\n\nClick on the “Connect to Host” icon (an arrow if you want the same window, square if you want a new one) next to the Vera entry\nIf you clicked on the blue “remote window” icon, select “Remote-SSH: Connect to Host…” and then select the Vera entry\n\nA new VSCode window will open, and you will be prompted to enter your Chalmers ID password\nAfter entering your password, you should be connected to Vera, and you can start working on the HPC cluster directly from VSCode. Make sure that you open your home folder on Vera to open up a workspace.\nYou can verify that you are connected to Vera by opening a new terminal in VSCode (Terminal &gt; New Terminal) and checking the hostname in the terminal prompt. It should show something like your_chalmers_id@vera:~$",
     "crumbs": [
       "Intro to Command Line",
       "Practical 2: Setting up the HPC"

@@ -555,10 +555,10 @@ Expected output (no peeking!)
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
     title["Correct sort/uniq order"]
-    In["Unsorted Data"] --&gt; A["sort: orders lines so duplicate aggregate"] 
-    B["uniq: removes duplicates that are adjacent"] 
+    In["Unsorted Data"] --&gt; A["**sort** orders lines so duplicate aggregate"] 
+    B["**uniq** removes duplicates that are adjacent"] 
     C["File redirect or stdout"]
-    D["uniq: removes duplicates, but miss those that are not adjacent"]
+    D["**uniq** removes duplicates, but miss those that are not adjacent"]
     E["Missed duplicates!"]
     A --&gt; B
     B --&gt; C
