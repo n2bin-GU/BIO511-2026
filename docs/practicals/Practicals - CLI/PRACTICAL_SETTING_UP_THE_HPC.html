@@ -2,15 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Vahid Atabaigielmi, Kaisa Thorell, Tor Kling">
-<meta name="dcterms.date" content="2026-08-01">
+<meta name="author" content="Kaisa Thorell, Tor Kling, Vahid Atabaigielmi">
+<meta name="dcterms.date" content="2026-09-01">
 
-<title>Practical 2: Setting up the HPC – BIO511 Genomics - Practical Repository</title>
+<title>Practical: Setting up the HPC – BIO511 Genomics - Practical Repository</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -21,6 +24,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -38,10 +76,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-fd3cdb6591c6e78768236938076114a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-fe7ce69853b96be4afbeeddfbd468f14.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -306,11 +344,42 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#adding-verac3se-at-supr" id="toc-adding-verac3se-at-supr" class="nav-link" data-scroll-target="#adding-verac3se-at-supr">Adding Vera/c3se at SUPR</a></li>
-  <li><a href="#setting-up-a-chalmers-id" id="toc-setting-up-a-chalmers-id" class="nav-link" data-scroll-target="#setting-up-a-chalmers-id">Setting up a Chalmers ID</a></li>
-  <li><a href="#setting-up-chalmers-vpn" id="toc-setting-up-chalmers-vpn" class="nav-link" data-scroll-target="#setting-up-chalmers-vpn">Setting up Chalmers VPN</a></li>
-  <li><a href="#connecting-to-the-hpc-using-ssh-in-vscode" id="toc-connecting-to-the-hpc-using-ssh-in-vscode" class="nav-link" data-scroll-target="#connecting-to-the-hpc-using-ssh-in-vscode">Connecting to the HPC using ssh in VSCode</a></li>
+  <li><a href="#why-this-practical" id="toc-why-this-practical" class="nav-link active" data-scroll-target="#why-this-practical"><span class="header-section-number">1</span> Why this practical?</a></li>
+  <li><a href="#account-activation-and-password" id="toc-account-activation-and-password" class="nav-link" data-scroll-target="#account-activation-and-password"><span class="header-section-number">2</span> 1. Account activation and password</a></li>
+  <li><a href="#vpn-when-is-it-needed" id="toc-vpn-when-is-it-needed" class="nav-link" data-scroll-target="#vpn-when-is-it-needed"><span class="header-section-number">3</span> 2. VPN: when is it needed?</a></li>
+  <li><a href="#first-ssh-connection" id="toc-first-ssh-connection" class="nav-link" data-scroll-target="#first-ssh-connection"><span class="header-section-number">4</span> 3. First SSH connection</a></li>
+  <li><a href="#make-ssh-easier-with-an-alias" id="toc-make-ssh-easier-with-an-alias" class="nav-link" data-scroll-target="#make-ssh-easier-with-an-alias"><span class="header-section-number">5</span> 4. Make SSH easier with an alias</a></li>
+  <li><a href="#confirm-your-project-allocation" id="toc-confirm-your-project-allocation" class="nav-link" data-scroll-target="#confirm-your-project-allocation"><span class="header-section-number">6</span> 6. Confirm your project allocation</a></li>
+  <li><a href="#check-your-storage-and-quota" id="toc-check-your-storage-and-quota" class="nav-link" data-scroll-target="#check-your-storage-and-quota"><span class="header-section-number">7</span> 7. Check your storage and quota</a>
+  <ul class="collapse">
+  <li><a href="#home-versus-project-storage" id="toc-home-versus-project-storage" class="nav-link" data-scroll-target="#home-versus-project-storage"><span class="header-section-number">7.1</span> Home versus project storage</a></li>
+  </ul></li>
+  <li><a href="#software-modules" id="toc-software-modules" class="nav-link" data-scroll-target="#software-modules"><span class="header-section-number">8</span> 10. Software modules</a></li>
+  <li><a href="#inspect-the-scheduler" id="toc-inspect-the-scheduler" class="nav-link" data-scroll-target="#inspect-the-scheduler"><span class="header-section-number">9</span> 11. Inspect the scheduler</a></li>
+  <li><a href="#disconnect-safely" id="toc-disconnect-safely" class="nav-link" data-scroll-target="#disconnect-safely"><span class="header-section-number">10</span> 14. Disconnect safely</a></li>
+  <li><a href="#connect-vs-code-to-vera-with-remote-ssh" id="toc-connect-vs-code-to-vera-with-remote-ssh" class="nav-link" data-scroll-target="#connect-vs-code-to-vera-with-remote-ssh"><span class="header-section-number">11</span> 16. Connect VS Code to Vera with Remote SSH</a>
+  <ul class="collapse">
+  <li><a href="#python-interpreter-in-vs-code" id="toc-python-interpreter-in-vs-code" class="nav-link" data-scroll-target="#python-interpreter-in-vs-code"><span class="header-section-number">11.1</span> Python interpreter in VS Code</a></li>
+  <li><a href="#vs-code-troubleshooting" id="toc-vs-code-troubleshooting" class="nav-link" data-scroll-target="#vs-code-troubleshooting"><span class="header-section-number">11.2</span> VS Code troubleshooting</a></li>
+  </ul></li>
+  <li><a href="#login-node-versus-compute-node-checklist" id="toc-login-node-versus-compute-node-checklist" class="nav-link" data-scroll-target="#login-node-versus-compute-node-checklist"><span class="header-section-number">12</span> 20. Login node versus compute node checklist</a>
+  <ul class="collapse">
+  <li><a href="#safe-on-a-login-node" id="toc-safe-on-a-login-node" class="nav-link" data-scroll-target="#safe-on-a-login-node"><span class="header-section-number">12.1</span> Safe on a login node</a></li>
+  <li><a href="#submit-through-slurm" id="toc-submit-through-slurm" class="nav-link" data-scroll-target="#submit-through-slurm"><span class="header-section-number">12.2</span> Submit through SLURM</a></li>
+  </ul></li>
+  <li><a href="#useful-diagnostic-commands" id="toc-useful-diagnostic-commands" class="nav-link" data-scroll-target="#useful-diagnostic-commands"><span class="header-section-number">13</span> 21. Useful diagnostic commands</a>
+  <ul class="collapse">
+  <li><a href="#where-am-i" id="toc-where-am-i" class="nav-link" data-scroll-target="#where-am-i"><span class="header-section-number">13.1</span> Where am I?</a></li>
+  <li><a href="#which-projects-do-i-have" id="toc-which-projects-do-i-have" class="nav-link" data-scroll-target="#which-projects-do-i-have"><span class="header-section-number">13.2</span> Which projects do I have?</a></li>
+  <li><a href="#what-storage-do-i-have" id="toc-what-storage-do-i-have" class="nav-link" data-scroll-target="#what-storage-do-i-have"><span class="header-section-number">13.3</span> What storage do I have?</a></li>
+  <li><a href="#what-jobs-do-i-have" id="toc-what-jobs-do-i-have" class="nav-link" data-scroll-target="#what-jobs-do-i-have"><span class="header-section-number">13.4</span> What jobs do I have?</a></li>
+  <li><a href="#what-happened-to-my-completed-job" id="toc-what-happened-to-my-completed-job" class="nav-link" data-scroll-target="#what-happened-to-my-completed-job"><span class="header-section-number">13.5</span> What happened to my completed job?</a></li>
+  <li><a href="#which-software-module-exists" id="toc-which-software-module-exists" class="nav-link" data-scroll-target="#which-software-module-exists"><span class="header-section-number">13.6</span> Which software module exists?</a></li>
+  <li><a href="#which-python-am-i-using" id="toc-which-python-am-i-using" class="nav-link" data-scroll-target="#which-python-am-i-using"><span class="header-section-number">13.7</span> Which Python am I using?</a></li>
+  </ul></li>
+  <li><a href="#completion-checklist" id="toc-completion-checklist" class="nav-link" data-scroll-target="#completion-checklist"><span class="header-section-number">14</span> 24. Completion checklist</a></li>
+  <li><a href="#take-home-workflow" id="toc-take-home-workflow" class="nav-link" data-scroll-target="#take-home-workflow"><span class="header-section-number">15</span> 25. Take-home workflow</a></li>
+  <li><a href="#sources-and-further-reading" id="toc-sources-and-further-reading" class="nav-link" data-scroll-target="#sources-and-further-reading"><span class="header-section-number">16</span> Sources and further reading</a></li>
   </ul>
 </nav>
     </div>
@@ -319,8 +388,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.html">Intro to Command Line</a></li><li class="breadcrumb-item"><a href="../../practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html">Practical 2: Setting up the HPC</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Practical 2: Setting up the HPC</h1>
-<p class="subtitle lead">BIO511 Genomics - understanding Vera before logging in</p>
+<h1 class="title">Practical: Setting up the HPC</h1>
+<p class="subtitle lead">BIO511 Genomics - from first login to a working Vera environment</p>
 </div>
 
 
@@ -330,14 +399,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Vahid Atabaigielmi, Kaisa Thorell, Tor Kling </p>
+             <p>Kaisa Thorell, Tor Kling, Vahid Atabaigielmi </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 1, 2026</p>
+      <p class="date">September 1, 2026</p>
     </div>
   </div>
   
@@ -349,91 +418,502 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>This tutorial is to take you through the final steps of setting up and accessing the <a href="https://www.c3se.chalmers.se/">c3se</a> High Performance Computing infrastructure. The specific cluster we will use is called Vera. You will be introduced to this cluster in the lecture and <a href="https://www.c3se.chalmers.se/about/Vera/">here</a> you can find more information about it, including what resources that are available, how to run jobs and other documentation.</p>
-<p>We will walk you through step by step in this tutorial so that we (hopefully) can assist if there are any problems.</p>
+<section id="why-this-practical" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Why this practical?</h1>
+<p>This practical takes you from having a newly created C3SE/Vera account to a usable day-to-day HPC workflow.</p>
+<p>It assumes you have already read the introductory lecture on HPC clusters and understand the basic difference between a <strong>login node</strong>, a <strong>compute node</strong>, shared storage, and the SLURM scheduler.</p>
+<p>The examples below use the following course account details:</p>
+<pre class="text"><code>CID / Vera username: jonsnow
+Project:             C3SE408-25-2
+Cluster:             Vera
+Login nodes:         vera2.c3se.chalmers.se
+                     </code></pre>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Pre-course setup
+<span class="screen-reader-only">Note</span>Learning objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>To be able to follow these steps you first have to have followed the steps of the <strong>Pre-course Setup</strong> including registration at SUPR and application to the course HPC project.</p>
+<p>By the end of this practical, you should be able to:</p>
+<ul>
+<li>Activate and test your Chalmers CID password.</li>
+<li>Connect to Vera through SSH.</li>
+<li>Understand when VPN is required.</li>
+<li>Configure a convenient SSH alias.</li>
+<li>Verify project membership and storage quota.</li>
+<li>Navigate safely on a login node.</li>
+<li>Find software using the module system.</li>
+<li>Submit, monitor, and inspect a simple SLURM job.</li>
+<li>Connect VS Code to Vera using Remote SSH.</li>
+<li>Know what should and should not be done on a login node.</li>
+</ul>
 </div>
 </div>
 <hr>
 </section>
-<section id="adding-verac3se-at-supr" class="level1">
-<h1>Adding Vera/c3se at SUPR</h1>
-<ul>
-<li>Log in to <a href="https://supr.naiss.se/">SUPR</a></li>
-<li>Click “Accounts” in the left side menu</li>
-<li>Request access to Vera/c3se</li>
-</ul>
-<hr>
-</section>
-<section id="setting-up-a-chalmers-id" class="level1">
-<h1>Setting up a Chalmers ID</h1>
-<ul>
-<li>Navigate to <a href="https://myaccount.chalmers.se/">https://myaccount.chalmers.se/</a>.</li>
-<li>Log in with your GU account.</li>
-<li>Choose “Activate CID” and follow the instructions to activate your account</li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="account-activation-and-password" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 1. Account activation and password</h1>
+<p>When C3SE creates a Vera account, the username is normally your Chalmers ID, or CID.</p>
+<p>For this practical:</p>
+<pre class="text"><code>CID: jonsnow</code></pre>
+<p>If the CID is newly created, set its password through Chalmers MyAccount:</p>
+<p><a href="https://myaccount.chalmers.se" class="uri">https://myaccount.chalmers.se</a></p>
+<p>If you already had the same CID, your normal CID password should work.</p>
+<p>A newly created CID can take some time to propagate through Chalmers systems. If login fails immediately after activation, this does not necessarily mean the password is wrong.</p>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remember your password!
+<span class="screen-reader-only">Important</span>Password safety
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The CID username and password are the ones you will use to log in to the cluster</p>
+<p>Never put your CID password inside a shell script, SLURM script, Quarto document, Git repository, or plain-text notes.</p>
 </div>
 </div>
 <hr>
 </section>
-<section id="setting-up-chalmers-vpn" class="level1">
-<h1>Setting up Chalmers VPN</h1>
-<p>To be able to access c3se from other networks than in GU or Chalmers, you will need a Chalmers VPN</p>
+<section id="vpn-when-is-it-needed" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 2. VPN: when is it needed?</h1>
+<p>Vera is directly reachable from the Chalmers and GU networks.</p>
+<p>When you are outside those networks, for example at home, connect to the Chalmers VPN before trying to use Vera.</p>
+<p>The typical connection path is:</p>
+<pre class="text"><code>Your laptop
+   |
+   | Chalmers VPN, when off campus
+   v
+Vera login node
+   |
+   | SLURM
+   v
+Compute node</code></pre>
+<p>If SSH waits for a long time and eventually gives:</p>
+<pre class="text"><code>ssh: connect to host ... port 22: Operation timed out</code></pre>
+<p>check the VPN first.</p>
+<p>C3SE’s connection documentation is available at:</p>
+<p><a href="https://www.c3se.chalmers.se/documentation/connecting/" class="uri">https://www.c3se.chalmers.se/documentation/connecting/</a></p>
+<hr>
+</section>
+<section id="first-ssh-connection" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 3. First SSH connection</h1>
+<p>Open <strong>Terminal</strong> on your laptop.</p>
+<p>Use Vera2 login nodes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> jonsnow@vera2.c3se.chalmers.se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The first time you connect, SSH may ask whether you trust the host key:</p>
+<pre class="text"><code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+<p>If the hostname and fingerprint match the C3SE documentation, type:</p>
+<pre class="text"><code>yes</code></pre>
+<p>Then enter your CID password.</p>
+<p>A successful login looks similar to:</p>
+<pre class="text"><code>[jonsnow@vera2 ~]$</code></pre>
+<p>This tells you:</p>
 <ul>
-<li>Navigate to <a href="https://chalmers.topdesk.net/tas/public/ssp/content/detail/knowledgeitem?unid=07e6154089a648d09711ccc42a42fc88">https://chalmers.topdesk.net/tas/public/ssp/content/detail/knowledgeitem?unid=07e6154089a648d09711ccc42a42fc88</a></li>
-<li>Follow the instructions to set up the Chalmers VPN</li>
+<li>You are logged in as <code>jonsnow</code>.</li>
+<li>You are currently on the <code>vera2</code> login node.</li>
+<li><code>~</code> means your home directory.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Do not run heavy analyses here
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>vera2</code> is shared login node. Use it for navigation, editing, file transfer, preparing jobs, submitting jobs, and checking jobs.</p>
+<p>Large analyses belong on compute nodes through SLURM.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="make-ssh-easier-with-an-alias" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 4. Make SSH easier with an alias</h1>
+<p>Typing the full hostname every time is unnecessary.</p>
+<p>On your <strong>local laptop</strong>, create or edit:</p>
+<pre class="text"><code>~/.ssh/config</code></pre>
+<p>For example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.ssh</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.ssh/config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Add:</p>
+<pre class="text"><code>Host vera
+    HostName vera2.c3se.chalmers.se
+    User jonsnow</code></pre>
+<p>Save the file.</p>
+<p>Now you can connect with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> vera</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>C3SE documents this SSH configuration approach here:</p>
+<p><a href="https://www.c3se.chalmers.se/documentation/connecting/ssh/" class="uri">https://www.c3se.chalmers.se/documentation/connecting/ssh/</a></p>
+<hr>
+</section>
+<section id="confirm-your-project-allocation" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 6. Confirm your project allocation</h1>
+<p>After logging into Vera, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">projinfo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For this course account, the output should contain something similar to:</p>
+<pre class="text"><code>Project                Used[h]         Allocated[h]      Queue
+   User
+---------------------------------------------------------------
+C3SE408-25-2              16.00                 5000       vera
+   aryastark              16.00
+   jonsnow                0.00</code></pre>
+<p>The important lines are:</p>
+<pre class="text"><code>Project:       C3SE408-25-2
+Allocation:    5000 core-hours
+Queue:         vera
+Your user:     jonsnow</code></pre>
+<p><code>projinfo</code> is useful whenever you want to check which projects you can charge jobs to.</p>
+<hr>
+</section>
+<section id="check-your-storage-and-quota" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 7. Check your storage and quota</h1>
+<p>Run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">C3SE_quota</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Example output for the course user <code>jonsnow</code>:</p>
+<pre class="text"><code>[jonsnow@vera2 ~]$ C3SE_quota
+
+Home: /cephyr/users/jonsnow
+  Space used:     0.0GiB       Quota:      30GiB
+  Files used:          9       Quota:      60000
+
+Path: /cephyr/NOBACKUP/groups/n2bin_gu
+Proj: c3se408-25-2
+  Space used:   370.5GiB       Quota:    5000GiB
+  Files used:      48652       Quota:     500000
+
+------------------------------------------</code></pre>
+<p>This output shows two storage areas. The <strong>Home</strong> area belongs to the individual user and has a 30 GiB space quota. The project storage is located at <code>/cephyr/NOBACKUP/groups/n2bin_gu</code> and is associated with project <code>c3se408-25-2</code>. In this example, the project area has a 5000 GiB quota. The <code>Space used</code> lines show storage consumption, while the <code>Files used</code> lines show how many filesystem entries are currently counted against each file quota.</p>
+<p>This shows storage areas available to your account and how much space is being used.</p>
+<p>Also learn these basic commands:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-sh</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Typical Vera paths can include locations such as:</p>
+<pre class="text"><code>/cephyr/users/&lt;CID&gt;/Vera
+/cephyr/NOBACKUP/groups/&lt;project-or-group&gt;/</code></pre>
+<p>The exact project/group path available to you should be confirmed from <code>C3SE_quota</code> or the course instructions.</p>
+<section id="home-versus-project-storage" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="home-versus-project-storage"><span class="header-section-number">7.1</span> Home versus project storage</h2>
+<p>Use your home directory for:</p>
+<ul>
+<li>Small scripts.</li>
+<li>Configuration files.</li>
+<li>Notes.</li>
+<li>Small test inputs.</li>
+</ul>
+<p>Use project/group storage for:</p>
+<ul>
+<li>FASTQ files.</li>
+<li>BAM/CRAM files.</li>
+<li>Genome references.</li>
+<li>Larger result directories.</li>
+<li>Shared datasets.</li>
+</ul>
+<p>Do not fill the home directory with large sequencing datasets.</p>
+<hr>
+</section>
+</section>
+<section id="software-modules" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> 10. Software modules</h1>
+<p>Vera is a managed HPC environment. You normally do not use <code>sudo</code> or <code>apt-get</code> to install system software.</p>
+<p>Software is commonly provided using modules.</p>
+<p>Start with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Search for software:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> spider Python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>or:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> spider samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Load a module only after identifying the version you need:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load <span class="op">&lt;</span>module-name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check what is loaded:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Remove currently loaded modules:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For reproducibility, load required modules inside your SLURM job script.</p>
+<hr>
+</section>
+<section id="inspect-the-scheduler" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> 11. Inspect the scheduler</h1>
+<p>Vera uses SLURM.</p>
+<p>Check the cluster/partition state:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sinfo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>STATE</code> column summarizes what is happening on the nodes. The most useful states to recognize are:</p>
+<pre class="text"><code>idle   = available for new jobs
+alloc  = fully allocated/running jobs
+mix    = partially occupied
+down   = unavailable
+drain  = being taken out of service
+resv   = reserved</code></pre>
+<p>A real <code>sinfo</code> output can look like this:</p>
+<pre class="text"><code>[jonsnow@vera2 cephyr]$ sinfo
+PARTITION  AVAIL  TIMELIMIT  NODES  STATE NODELIST
+vera*         up 7-00:00:00     22   mix- vera-r01-[20-21],vera-r02-[02,12,14,17,20-21],vera-r03-[02-03,05,12-13,16-19],vera-r04-[05,08,16],vera-r05-05,vera-r06-10
+vera*         up 7-00:00:00     73  idle~ vera-m06-[01-15],vera-m07-[01-13],vera-m11-[01-10,24-34],vera-r10-[21-24],vera-r11-[01-20]
+vera*         up 7-00:00:00      2  down~ vera-r03-09,vera-r04-13
+vera*         up 7-00:00:00      1 drain* vera-m11-18
+vera*         up 7-00:00:00      1  drain vera-m11-35
+vera*         up 7-00:00:00      1   resv vera-m11-17
+vera*         up 7-00:00:00     20    mix vera-m11-15,vera-r01-[17,19],vera-r02-[04-05,07],vera-r03-[06,14],vera-r04-[17,22],vera-r05-04,vera-r06-[01,03-06,08],vera-r07-[01,03,05]
+vera*         up 7-00:00:00     94  alloc vera-m11-[11-14,16,19-21],vera-r01-[16,18,22-24],vera-r02-[01,03,06,08-11,13,15-16,18-19,22-24],vera-r03-[01,04,07-08,10-11,15,20-24],vera-r04-[01-04,06-07,09-12,14-15,18-21,23-24],vera-r05-[01-02],vera-r06-[02,07,09,11-12],vera-r07-06,vera-r08-[02,04-05,07,13-14],vera-r09-[01-20],vera-r10-[01-02]
+vera*         up 7-00:00:00     33   idle vera-m11-[22-23],vera-r07-[02,04,07-12],vera-r08-[01,03,06,08-09],vera-r10-[03-20]
+gpu           up 7-00:00:00     69  idle~ vera-m06-[01-15],vera-m07-[01-13],vera-m11-[01-10,24-34],vera-r11-[01-20]
+gpu           up 7-00:00:00      1 drain* vera-m11-18
+gpu           up 7-00:00:00      1  drain vera-m11-35
+gpu           up 7-00:00:00      1   resv vera-m11-17
+gpu           up 7-00:00:00      4    mix vera-m11-15,vera-r07-[01,03,05]
+gpu           up 7-00:00:00     11  alloc vera-m11-[11-14,16,19-21],vera-r05-[01-02],vera-r07-06
+gpu           up 7-00:00:00      4   idle vera-m11-[22-23],vera-r07-[02,04]
+cpu           up 7-00:00:00     22   mix- vera-r01-[20-21],vera-r02-[02,12,14,17,20-21],vera-r03-[02-03,05,12-13,16-19],vera-r04-[05,08,16],vera-r05-05,vera-r06-10
+cpu           up 7-00:00:00      4  idle~ vera-r10-[21-24]
+cpu           up 7-00:00:00      2  down~ vera-r03-09,vera-r04-13
+cpu           up 7-00:00:00     16    mix vera-r01-[17,19],vera-r02-[04-05,07],vera-r03-[06,14],vera-r04-[17,22],vera-r05-04,vera-r06-[01,03-06,08]
+cpu           up 7-00:00:00     83  alloc vera-r01-[16,18,22-24],vera-r02-[01,03,06,08-11,13,15-16,18-19,22-24],vera-r03-[01,04,07-08,10-11,15,20-24],vera-r04-[01-04,06-07,09-12,14-15,18-21,23-24],vera-r06-[02,07,09,11-12],vera-r08-[02,04-05,07,13-14],vera-r09-[01-20],vera-r10-[01-02]
+cpu           up 7-00:00:00     29   idle vera-r07-[07-12],vera-r08-[01,03,06,08-09],vera-r10-[03-20]
+kck           up 7-00:00:00      2   idle vera-r08-[10-11]
+m2dynamics    up 7-00:00:00      1    mix vera-r08-12
+nafci         up 7-00:00:00     16  idle~ vera-r01-[01-15],vera-r05-03
+vsip          up 7-00:00:00      1  idle~ vera-r05-06
+meta          up 7-00:00:00      5  alloc vera-r07-[13-17]
+meta          up 7-00:00:00      1   idle vera-r07-18</code></pre>
+<p>The same partition can appear on several lines because <code>sinfo</code> groups nodes according to their current state. For example, some nodes in <code>vera</code> are idle, some are allocated, and some are partially occupied. The asterisk in <code>vera*</code> indicates the default partition.</p>
+<p>Check your jobs:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Before submitting your first job, this will probably show no jobs.</p>
+<p>Useful SLURM commands include:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> job.sh</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> JOBID</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">sacct</span> <span class="at">-j</span> JOBID</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="disconnect-safely" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> 14. Disconnect safely</h1>
+<p>When a job was submitted with <code>sbatch</code>, it belongs to SLURM and keeps running after you disconnect.</p>
+<p>You can leave Vera with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Closing your laptop does not stop a normal batch job.</p>
+<p>You do <strong>not</strong> need <code>tmux</code> simply to keep <code>sbatch</code> jobs alive.</p>
+<hr>
+</section>
+<section id="connect-vs-code-to-vera-with-remote-ssh" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> 16. Connect VS Code to Vera with Remote SSH</h1>
+<p>VS Code can edit files directly on Vera using the <strong>Remote - SSH</strong> extension.</p>
+<p>This is convenient for scripts, Quarto files, configuration files, and small development tasks.</p>
+<p>C3SE warns that heavy or long-running VS Code activity should not consume login-node resources. For heavier interactive work, C3SE recommends running VS Code/code-server on compute resources through its portal when appropriate.</p>
+<p>C3SE documentation:</p>
+<p><a href="https://www.c3se.chalmers.se/documentation/software/development/vscode/" class="uri">https://www.c3se.chalmers.se/documentation/software/development/vscode/</a></p>
+<p>From your laptop:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> vera</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Do not troubleshoot VS Code until normal SSH works.</p>
+<p>Open VS Code on your laptop.</p>
+<p>Open <strong>Extensions</strong> and install:</p>
+<pre class="text"><code>Remote - SSH</code></pre>
+<p>from Microsoft.</p>
+<p>If you already created this local file:</p>
+<pre class="text"><code>~/.ssh/config</code></pre>
+<p>with:</p>
+<pre class="text"><code>Host vera
+    HostName vera2.c3se.chalmers.se
+    User jonsnow</code></pre>
+<p>VS Code can use it directly.</p>
+<p>Alternatively:</p>
+<ol type="1">
+<li>Press <code>Cmd+Shift+P</code>.</li>
+<li>Run <code>Remote-SSH: Add New SSH Host...</code>.</li>
+<li>Enter:</li>
+</ol>
+<pre class="text"><code>ssh jonsnow@vera2.c3se.chalmers.se</code></pre>
+<ol start="4" type="1">
+<li>Select your normal SSH configuration file, usually <code>~/.ssh/config</code>.</li>
+</ol>
+<p>Press <code>Cmd+Shift+P</code> and run:</p>
+<pre class="text"><code>Remote-SSH: Connect to Host...</code></pre>
+<p>Choose:</p>
+<pre class="text"><code>vera</code></pre>
+<p>A new VS Code window should open.</p>
+<p>The lower-left corner should indicate that VS Code is connected to the remote host.</p>
+<p>In the remote VS Code window, select:</p>
+<pre class="text"><code>File -&gt; Open Folder</code></pre>
+<p>For example:</p>
+<pre class="text"><code>/home/.../hpc_practical</code></pre>
+<p>or simply browse from your home directory.</p>
+<p>For a real course project, open the appropriate directory in project storage.</p>
+<p>Open:</p>
+<pre class="text"><code>Terminal -&gt; New Terminal</code></pre>
+<p>The prompt should look like a Vera prompt, for example:</p>
+<pre class="text"><code>[jonsnow@vera2 ...]$</code></pre>
+<p>That terminal is remote.</p>
+<p>The same login-node rule applies: use it for light work and job submission, not large analyses.</p>
+<section id="python-interpreter-in-vs-code" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="python-interpreter-in-vs-code"><span class="header-section-number">11.1</span> Python interpreter in VS Code</h2>
+<p>If you load a Python module on Vera:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load <span class="op">&lt;</span>Python-module<span class="op">&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>copy the resulting interpreter path.</p>
+<p>In VS Code:</p>
+<ol type="1">
+<li>Press <code>Cmd+Shift+P</code>.</li>
+<li>Choose <code>Python: Select Interpreter</code>.</li>
+<li>Choose <code>Enter interpreter path</code> if needed.</li>
+<li>Paste the path returned by <code>which python</code>.</li>
+</ol>
+<p>Because module environments can change, keep your real computational environment reproducible in scripts/job files rather than depending only on VS Code state.</p>
+</section>
+<section id="vs-code-troubleshooting" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="vs-code-troubleshooting"><span class="header-section-number">11.2</span> VS Code troubleshooting</h2>
+<p>If VS Code Remote SSH becomes stuck after changing configuration:</p>
+<ol type="1">
+<li>Press <code>Cmd+Shift+P</code>.</li>
+<li>Search for <code>Remote-SSH: Kill VS Code Server on Host...</code>.</li>
+<li>Select <code>vera</code>.</li>
+<li>Reconnect.</li>
+</ol>
+<p>Also verify that the VPN is still connected when you are off campus.</p>
+<hr>
+</section>
+</section>
+<section id="login-node-versus-compute-node-checklist" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> 20. Login node versus compute node checklist</h1>
+<section id="safe-on-a-login-node" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="safe-on-a-login-node"><span class="header-section-number">12.1</span> Safe on a login node</h2>
+<ul>
+<li><code>cd</code>, <code>ls</code>, <code>pwd</code></li>
+<li>Editing scripts</li>
+<li>Git operations of reasonable size</li>
+<li>Small file inspection</li>
+<li><code>module spider</code></li>
+<li><code>projinfo</code></li>
+<li><code>C3SE_quota</code></li>
+<li><code>sbatch</code></li>
+<li><code>squeue</code></li>
+<li><code>sacct</code></li>
+<li>Short/light testing</li>
+</ul>
+</section>
+<section id="submit-through-slurm" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="submit-through-slurm"><span class="header-section-number">12.2</span> Submit through SLURM</h2>
+<ul>
+<li>Genome assembly</li>
+<li>Read mapping over real datasets</li>
+<li>Large BLAST searches</li>
+<li>Large Python/R analyses</li>
+<li>Long jobs</li>
+<li>Memory-intensive jobs</li>
+<li>Parallel CPU jobs</li>
+<li>GPU workloads</li>
+</ul>
+<p>If you are unsure, submit it as a job rather than running it for a long time on <code>vera2</code>.</p>
+<hr>
+</section>
+</section>
+<section id="useful-diagnostic-commands" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> 21. Useful diagnostic commands</h1>
+<section id="where-am-i" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="where-am-i"><span class="header-section-number">13.1</span> Where am I?</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">whoami</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="which-projects-do-i-have" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="which-projects-do-i-have"><span class="header-section-number">13.2</span> Which projects do I have?</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">projinfo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="what-storage-do-i-have" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="what-storage-do-i-have"><span class="header-section-number">13.3</span> What storage do I have?</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">C3SE_quota</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="what-jobs-do-i-have" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="what-jobs-do-i-have"><span class="header-section-number">13.4</span> What jobs do I have?</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="what-happened-to-my-completed-job" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="what-happened-to-my-completed-job"><span class="header-section-number">13.5</span> What happened to my completed job?</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sacct</span> <span class="at">-j</span> JOBID</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="which-software-module-exists" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="which-software-module-exists"><span class="header-section-number">13.6</span> Which software module exists?</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> spider NAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="which-python-am-i-using" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="which-python-am-i-using"><span class="header-section-number">13.7</span> Which Python am I using?</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> python</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="completion-checklist" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> 24. Completion checklist</h1>
+<p>By the end of this practical, you should be able to tick all of these:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">My CID password works.</label></li>
+<li><label><input type="checkbox">I know when I need the Chalmers VPN.</label></li>
+<li><label><input type="checkbox">I can connect using <code>ssh jonsnow@vera2.c3se.chalmers.se</code>.</label></li>
+<li><label><input type="checkbox">I created a convenient <code>vera</code> SSH alias.</label></li>
+<li><label><input type="checkbox">I can run <code>projinfo</code>.</label></li>
+<li><label><input type="checkbox">I see project <code>C3SE408-25-2</code>.</label></li>
+<li><label><input type="checkbox">I can run <code>C3SE_quota</code>.</label></li>
+<li><label><input type="checkbox">I know where my home and project storage are.</label></li>
+<li><label><input type="checkbox">I know that <code>vera2</code> is login nodes.</label></li>
+<li><label><input type="checkbox">I can search for modules.</label></li>
+<li><label><input type="checkbox">I submitted a job with <code>sbatch</code>.</label></li>
+<li><label><input type="checkbox">I can monitor jobs with <code>squeue</code>.</label></li>
+<li><label><input type="checkbox">I can inspect old jobs with <code>sacct</code>.</label></li>
+<li><label><input type="checkbox">I can transfer files with <code>scp</code> or <code>rsync</code>.</label></li>
+<li><label><input type="checkbox">I can connect VS Code with Remote SSH.</label></li>
+<li><label><input type="checkbox">I know that heavy computation must run through SLURM.</label></li>
 </ul>
 <hr>
 </section>
-<section id="connecting-to-the-hpc-using-ssh-in-vscode" class="level1">
-<h1>Connecting to the HPC using ssh in VSCode</h1>
-<p>To be able to connect to the HPC in a manner that will let you use the full suite of tools available (or most of them at least) in VSCode, you will need to install the Remote - SSH extension.</p>
+<section id="take-home-workflow" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> 25. Take-home workflow</h1>
+<p>The practical setup can be summarized as:</p>
+<pre class="text"><code>CID/password
+      |
+      v
+VPN when off campus
+      |
+      v
+SSH / VS Code Remote SSH
+      |
+      v
+vera2 login node
+      |
+      +--&gt; project + storage checks
+      +--&gt; edit scripts
+      +--&gt; transfer files
+      |
+      v
+sbatch
+      |
+      v
+SLURM scheduler
+      |
+      v
+compute node
+      |
+      v
+results in persistent storage
+      |
+      v
+inspect / rsync / download results</code></pre>
+<p>The goal is not simply to “log in to Vera”. The goal is to develop a reproducible workflow where the login node is used to prepare work and SLURM is used to execute computation safely on compute nodes.</p>
+<hr>
+</section>
+<section id="sources-and-further-reading" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Sources and further reading</h1>
 <ul>
-<li>Open VSCode</li>
-<li>Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window or by pressing <code>Ctrl+Shift+X</code></li>
-<li>Search for “Remote - SSH” and install the extension by Microsoft (if youre unsure how install extensions, see <a href="https://code.visualstudio.com/docs/getstarted/extensions">here</a>)</li>
-<li>After installation, you will see a new icon in the Activity Bar on the side of the window. Click on it to open the Remote Explorer view.
-<ul>
-<li>If the SSH Targets are not visible, click on the drop down to expand the view</li>
-</ul></li>
-<li>Click on the <code>+</code> (“New Remote”) icon next to SSH header to add a new SSH host</li>
-<li>In the input box that appears, enter the SSH connection string for Vera: <code>&lt;your_chalmers_id&gt;@vera1.c3se.chalmers.se</code> (replace <code>&lt;your_chalmers_id&gt;</code> with your actual Chalmers ID)</li>
-<li>Press Enter to confirm</li>
-<li>You will be prompted to select the SSH configuration file to update. Choose the default option (usually <code>~/.ssh/config</code>)</li>
-</ul>
-<p>Once you have added the SSH host, you can connect to Vera:</p>
-<ul>
-<li>In the Remote Explorer view, find the Vera entry under SSH Targets (or by clicking on the blue “remote window” icon in the bottom left corner of VSCode)
-<ul>
-<li>Click on the “Connect to Host” icon (an arrow if you want the same window, square if you want a new one) next to the Vera entry</li>
-<li>If you clicked on the blue “remote window” icon, select “Remote-SSH: Connect to Host…” and then select the Vera entry</li>
-</ul></li>
-<li>A new VSCode window will open, and you will be prompted to enter your Chalmers ID password</li>
-<li>After entering your password, you should be connected to Vera, and you can start working on the HPC cluster directly from VSCode. Make sure that you open your home folder on Vera to open up a workspace.</li>
-<li>You can verify that you are connected to Vera by opening a new terminal in VSCode (Terminal &gt; New Terminal) and checking the hostname in the terminal prompt. It should show something like <code>your_chalmers_id@vera:~$</code></li>
+<li>C3SE. <a href="https://www.c3se.chalmers.se/documentation/first_time_users/intro-vera/slides/">Introduction to Vera</a>, accessed September 2026.</li>
+<li>C3SE. <a href="https://www.c3se.chalmers.se/documentation/connecting/ssh/">SSH shell access</a>, accessed September 2026.</li>
+<li>C3SE. <a href="https://www.c3se.chalmers.se/documentation/software/development/vscode/">VS Code</a>, accessed September 2026.</li>
+<li>C3SE. <a href="https://www.c3se.chalmers.se/documentation/connecting/">Connecting to C3SE systems</a>, accessed September 2026.</li>
 </ul>
 
 
@@ -491,13 +971,14 @@ Remember your password!
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

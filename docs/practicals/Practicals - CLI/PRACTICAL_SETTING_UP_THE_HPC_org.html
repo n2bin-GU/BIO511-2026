@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alvar Almstedt, Emma Västerviga">
-<meta name="dcterms.date" content="2026-01-01">
+<meta name="author" content="Vahid Atabaigielmi, Kaisa Thorell, Tor Kling">
+<meta name="dcterms.date" content="2026-08-01">
 
-<title>Practical 3: Python Functions – BIO511 Genomics - Practical Repository</title>
+<title>Practical 2: Setting up the HPC – BIO511 Genomics - Practical Repository</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,41 +24,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -79,7 +44,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-c405e9740b13eb65d561f5d8e22a9b35.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-fe7ce69853b96be4afbeeddfbd468f14.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../pages/styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -253,75 +218,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../practicals/Practicals - Python/PRACTICAL_FUNCTIONS.html">Practical 3: Python Functions</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_SETUP.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 0: Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 1: Python Data Types and If/Else Clauses</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_LOOPING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 2: Python Loops</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_FUNCTIONS.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Practical 3: Python Functions</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_MODULES.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 4: Python Modules</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_FILES.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 5: Files</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_PLOTTING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 6: Plotting</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -329,18 +229,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful links</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a>
-  <ul class="collapse">
-  <li><a href="#defining-a-function" id="toc-defining-a-function" class="nav-link" data-scroll-target="#defining-a-function">Defining a function</a></li>
-  <li><a href="#calling-the-function" id="toc-calling-the-function" class="nav-link" data-scroll-target="#calling-the-function">Calling the function</a></li>
-  </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
-  <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
-  </ul></li>
+  <li><a href="#adding-verac3se-at-supr" id="toc-adding-verac3se-at-supr" class="nav-link" data-scroll-target="#adding-verac3se-at-supr">Adding Vera/c3se at SUPR</a></li>
+  <li><a href="#setting-up-a-chalmers-id" id="toc-setting-up-a-chalmers-id" class="nav-link" data-scroll-target="#setting-up-a-chalmers-id">Setting up a Chalmers ID</a></li>
+  <li><a href="#setting-up-chalmers-vpn" id="toc-setting-up-chalmers-vpn" class="nav-link" data-scroll-target="#setting-up-chalmers-vpn">Setting up Chalmers VPN</a></li>
+  <li><a href="#connecting-to-the-hpc-using-ssh-in-vscode" id="toc-connecting-to-the-hpc-using-ssh-in-vscode" class="nav-link" data-scroll-target="#connecting-to-the-hpc-using-ssh-in-vscode">Connecting to the HPC using ssh in VSCode</a></li>
   </ul>
 </nav>
     </div>
@@ -349,8 +241,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practical 3: Python Functions</h1>
-<p class="subtitle lead">BIO511 Genomics - Python Functions (and more looping)</p>
+<h1 class="title">Practical 2: Setting up the HPC</h1>
+<p class="subtitle lead">BIO511 Genomics - understanding Vera before logging in</p>
 </div>
 
 
@@ -360,14 +252,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Alvar Almstedt, Emma Västerviga </p>
+             <p>Vahid Atabaigielmi, Kaisa Thorell, Tor Kling </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 1, 2026</p>
+      <p class="date">August 1, 2026</p>
     </div>
   </div>
   
@@ -381,129 +273,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>Functions are everywhere in python and its time for you to start using them to take you to the next level!</p>
-<p>If there are any built-in python functions you have not seen or heard about before (like for example <code>isdigit()</code>, <code>max()</code> etc.), search online for the documentation. The official page <code>python.docs.org</code> has information on the built-in functionality that comes with the standard python installation.</p>
+<p>This tutorial is to take you through the final steps of setting up and accessing the <a href="https://www.c3se.chalmers.se/">c3se</a> High Performance Computing infrastructure. The specific cluster we will use is called Vera. You will be introduced to this cluster in the lecture and <a href="https://www.c3se.chalmers.se/about/Vera/">here</a> you can find more information about it, including what resources that are available, how to run jobs and other documentation.</p>
+<p>We will walk you through step by step in this tutorial so that we (hopefully) can assist if there are any problems.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Pre-course setup
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To be able to follow these steps you first have to have followed the steps of the <strong>Pre-course Setup</strong> including registration at SUPR and application to the course HPC project.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="adding-verac3se-at-supr" class="level1">
+<h1>Adding Vera/c3se at SUPR</h1>
 <ul>
-<li>Remember that you have to both define a function using the <code>def</code> block and then later call the function itself to have the code it contains acutally run. Calling a function means running the fucntion.</li>
-<li>Also do not forget that the function has its own namespace, meaning code outside the funtion can not access the variables that only exist inside the function. The function is meant to be sectioned off. The data you want to access outside the function needs to be <code>return</code>ed</li>
+<li>Log in to <a href="https://supr.naiss.se/">SUPR</a></li>
+<li>Click “Accounts” in the left side menu</li>
+<li>Request access to Vera/c3se</li>
 </ul>
+<hr>
 </section>
-<section id="useful-links" class="level1">
-<h1>Useful links</h1>
-<p><a href="">Python functions (text)</a></p>
-<p><a href="https://www.youtube.com/watch?v=9Os0o3wzS_I">Python functions (video)</a></p>
+<section id="setting-up-a-chalmers-id" class="level1">
+<h1>Setting up a Chalmers ID</h1>
+<ul>
+<li>Navigate to <a href="https://myaccount.chalmers.se/">https://myaccount.chalmers.se/</a>.</li>
+<li>Log in with your GU account.</li>
+<li>Choose “Activate CID” and follow the instructions to activate your account</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Remember your password!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The CID username and password are the ones you will use to log in to the cluster</p>
+</div>
+</div>
+<hr>
 </section>
-<section id="example" class="level1">
-<h1>Example</h1>
-<section id="defining-a-function" class="level2">
-<h2 class="anchored" data-anchor-id="defining-a-function">Defining a function</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_two_numbers(num_one, num_two):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    number_to_return <span class="op">=</span> num_one <span class="op">+</span> num_two</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> number_to_return</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="setting-up-chalmers-vpn" class="level1">
+<h1>Setting up Chalmers VPN</h1>
+<p>To be able to access c3se from other networks than in GU or Chalmers, you will need a Chalmers VPN</p>
+<ul>
+<li>Navigate to <a href="https://chalmers.topdesk.net/tas/public/ssp/content/detail/knowledgeitem?unid=07e6154089a648d09711ccc42a42fc88">https://chalmers.topdesk.net/tas/public/ssp/content/detail/knowledgeitem?unid=07e6154089a648d09711ccc42a42fc88</a></li>
+<li>Follow the instructions to set up the Chalmers VPN</li>
+</ul>
+<hr>
 </section>
-<section id="calling-the-function" class="level2">
-<h2 class="anchored" data-anchor-id="calling-the-function">Calling the function</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_added_numbers <span class="op">=</span> add_two_numbers(<span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_added_numbers) <span class="co"># will print 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
-<p>You can copy the text blocks describing the tasks in comments below into your IDE to avoid having to refer back to this page.</p>
-<p>Use the exact variables defined in this block and set them on the global namespace (outside any function). Then write the functions and function calls we ask for in the tasks yourself.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provided inputs (use these)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>nums <span class="op">=</span> [<span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">0</span>, <span class="dv">4</span>]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>limit <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Room 101: bring 2 apples &amp; 1 banana."</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Globals to observe name masking (same-name local variables hides the global variable so use different variable names inside the function). Do not rename these.</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">999</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> <span class="st">"unset"</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="st">"unset"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count-above  (uses nums, limit, count)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Goal: make a small function called whatever you want and then call(run) it.</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a) Define a function named count_above that takes two arguments: seq and lim.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># b) Inside the function, create a LOCAL variable named count starting at 0.</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># c) Loop through seq; for each number strictly greater than lim, increase count by 1.</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># d) Return count.</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># e) Outside the function:</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Print the GLOBAL count.</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Call count_above(nums, limit) and print the returned number.</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Print the GLOBAL count again (notice the global didn’t change).</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code below</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1"></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Text summary  (uses text, summary)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Goal: classify characters with an if/elif/else chain and return a clear result.</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a) Define a function named summarize_text that takes one argument: s.</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># b) Inside the function, create a LOCAL variable named summary that holds a result dictionary</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#    with exactly these keys: "digits", "letters", "other" — each starting at 0.</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># c) Loop through each character in s:</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#       - if the character is a digit, increase "digits"</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       - elif the character is a letter, increase "letters"</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#       - else increase "other"</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># d) Return the summary dictionary.</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># e) Outside the function:</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Print the GLOBAL summary.</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Call summarize_text(text) and print the returned dictionary.</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Print the GLOBAL summary again.</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code below</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2"></h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#C) Aggregate with mode  (uses nums, limit, result)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Goal: nested decisions based on a mode string. Return one final value.</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># a) Define a function named aggregate that takes three arguments: seq, mode, threshold.</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># b) Inside the function, create a LOCAL variable named result.</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#    Initialize it based on mode:</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#       - if mode is "sum": start at 0</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#       - if mode is "count": start at 0</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#       - if mode is "max": start at None (meaning “no qualifying value yet”)</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># c) Loop through each number n in seq:</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       - First, ignore n if it is negative (skip it).</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#       - If n is at least threshold, then:</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#           * if mode is "sum": add n to result</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#           * elif mode is "count": increase result by 1</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#           * else (treat any other mode as "max"):</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                 if result is None or n is greater than result, update result to n</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># d) Return the result.</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># e) Outside the function:</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Print the GLOBAL result.</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Call and print each of these:</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#         aggregate(nums, "sum", limit)</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#         aggregate(nums, "count", limit)</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#         aggregate(nums, "max", limit)</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Print the GLOBAL result again.</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Your Code below</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="connecting-to-the-hpc-using-ssh-in-vscode" class="level1">
+<h1>Connecting to the HPC using ssh in VSCode</h1>
+<p>To be able to connect to the HPC in a manner that will let you use the full suite of tools available (or most of them at least) in VSCode, you will need to install the Remote - SSH extension.</p>
+<ul>
+<li>Open VSCode</li>
+<li>Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window or by pressing <code>Ctrl+Shift+X</code></li>
+<li>Search for “Remote - SSH” and install the extension by Microsoft (if youre unsure how install extensions, see <a href="https://code.visualstudio.com/docs/getstarted/extensions">here</a>)</li>
+<li>After installation, you will see a new icon in the Activity Bar on the side of the window. Click on it to open the Remote Explorer view.
+<ul>
+<li>If the SSH Targets are not visible, click on the drop down to expand the view</li>
+</ul></li>
+<li>Click on the <code>+</code> (“New Remote”) icon next to SSH header to add a new SSH host</li>
+<li>In the input box that appears, enter the SSH connection string for Vera: <code>&lt;your_chalmers_id&gt;@vera1.c3se.chalmers.se</code> (replace <code>&lt;your_chalmers_id&gt;</code> with your actual Chalmers ID)</li>
+<li>Press Enter to confirm</li>
+<li>You will be prompted to select the SSH configuration file to update. Choose the default option (usually <code>~/.ssh/config</code>)</li>
+</ul>
+<p>Once you have added the SSH host, you can connect to Vera:</p>
+<ul>
+<li>In the Remote Explorer view, find the Vera entry under SSH Targets (or by clicking on the blue “remote window” icon in the bottom left corner of VSCode)
+<ul>
+<li>Click on the “Connect to Host” icon (an arrow if you want the same window, square if you want a new one) next to the Vera entry</li>
+<li>If you clicked on the blue “remote window” icon, select “Remote-SSH: Connect to Host…” and then select the Vera entry</li>
+</ul></li>
+<li>A new VSCode window will open, and you will be prompted to enter your Chalmers ID password</li>
+<li>After entering your password, you should be connected to Vera, and you can start working on the HPC cluster directly from VSCode. Make sure that you open your home folder on Vera to open up a workspace.</li>
+<li>You can verify that you are connected to Vera by opening a new terminal in VSCode (Terminal &gt; New Terminal) and checking the hostname in the terminal prompt. It should show something like <code>your_chalmers_id@vera:~$</code></li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
