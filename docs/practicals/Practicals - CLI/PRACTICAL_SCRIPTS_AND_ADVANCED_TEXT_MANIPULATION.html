@@ -418,10 +418,10 @@ Learning Objectives
 <p>By the end of this practical you should be able to:</p>
 <ul>
 <li>Use <code>awk</code> to execute short programs for text manipulation</li>
-<li>Convert pseudocode into bash scripts</li>
 <li>Write iterative bash scripts using for loops and if/else statements</li>
 <li>Debug your scripts using global set-options, traps and custom error messages</li>
 <li>Be able to write basic flexible shell scripts using OPTARGS</li>
+<li>Convert bash scripts into pseudocode</li>
 </ul>
 </div>
 </div>
@@ -431,12 +431,12 @@ Learning Objectives
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the data from canvas</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># use scp (secure copy) to copy the data from the HPC group directory</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="op">&lt;</span>CIDusername<span class="op">&gt;</span>@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/practical4/DATAPRACTICAL4.tar.gz ~/CLI_intro/data/</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="op">&lt;</span>CIDusername<span class="op">&gt;</span>@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/data/genomes.tar.gz ~/CLI_intro/data/</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Unpack the data</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># You might need to use a different command depending on your OS</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># For Linux:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> ~/CLI_intro/data/DATAPRACTICAL4.tar.gz <span class="at">-C</span> ~/CLI_intro/data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvzf</span> ~/CLI_intro/data/genomes.tar.gz <span class="at">-C</span> ~/CLI_intro/data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 </section>
@@ -609,7 +609,7 @@ Solution:
 <ul>
 <li><code>for</code>: A control flow statement that allows us to iterate over a list of items and execute a block of code for each item</li>
 <li><code>do</code> and <code>done</code>: Keywords used to define the start and end of a loop block</li>
-<li><code>basename</code>: A command that extracts the base name of a file (the file name without the path and extension), very useful for creating output file names based on input file names</li>
+<li><code>basename</code>: A command that extracts the the components of a pathname, very useful for creating output file names based on input file names</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initiate the gene_counts.tsv file with a header</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[..1..]</span> <span class="op">&gt;</span> <span class="va">${OUTPUT_DIR}</span>/gene_counts.tsv</span>
@@ -619,7 +619,7 @@ Solution:
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">base_name</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${ffn_file}</span> .ffn<span class="va">)</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grep</span> <span class="at">-A</span> 1 <span class="at">-E</span> <span class="st">"^&gt;</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">"</span> <span class="st">"</span><span class="va">${ffn_file}</span><span class="st">"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${base_name}</span><span class="st">_filtered.ffn"</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grep</span> <span class="at">-A</span> 1 <span class="at">-E</span> <span class="st">"</span><span class="va">${GENE_NAME_PATTERN}</span><span class="st">"</span> <span class="st">"</span><span class="va">${ffn_file}</span><span class="st">"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">${OUTPUT_DIR}</span><span class="st">/</span><span class="va">${base_name}</span><span class="st">_filtered.ffn"</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">gene_count</span><span class="op">=</span><span class="va">$(</span><span class="ex">[..2..]</span> <span class="kw">||</span> <span class="fu">true</span><span class="va">)</span></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="va">TOTAL_GENES_FOR_PATTERN</span><span class="op">=</span><span class="va">$((TOTAL_GENES_FOR_PATTERN</span> <span class="op">+</span> <span class="va">gene_count))</span></span>
@@ -640,7 +640,7 @@ Exercise: Missing code
 <div class="callout-body-container callout-body">
 <p>There are some missing pieces in the code above, indicated by [..N..]. They are single command replacements, and should be filled in with the correct command to make the script work as intended.</p>
 <ol type="1">
-<li>The first missing piece is the command to create the <code>gene_counts.tsv</code> file with a header. This should be a command that creates a new file and writes the header line to it. The header line should be “File_Count” and needs to be printed to the file <code>${OUTPUT_DIR}/gene_counts.tsv</code>.</li>
+<li>The first missing piece is the command to create the <code>gene_counts.tsv</code> file with a header. This should be a command that creates a new file and writes the header line to it. The header line should be “File Gene_Count” (tab separated) and needs to be printed to the file <code>${OUTPUT_DIR}/gene_counts.tsv</code>.</li>
 <li>The second missing piece is the command to count the number of genes found in the filtered ffn file. This should be a command that counts the number of lines in the file <code>${OUTPUT_DIR}/${base_name}_filtered.ffn</code> that start with <code>&gt;</code>, which indicates a gene header line. The result should be stored in the variable <code>gene_count</code>.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -826,7 +826,7 @@ Exercise: Using your script to biological questions
 <div class="callout-body-container callout-body">
 <p>Now that you have a finished script, try to use it to answer the following questions:</p>
 <ol type="1">
-<li>How many genes in total across all three ffn files match the pattern “hypothetical protein”?</li>
+<li>How many genes in each of the five ffn files match the pattern “hypothetical protein”?</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
@@ -840,7 +840,11 @@ Answer:
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<pre class="text"><code>AF316: </code></pre>
+<pre class="text"><code>AF316: 69
+AF1002: 118
+AF10: 100
+AF1171: 76
+AD2052: 49</code></pre>
 </div>
 </div>
 </div>

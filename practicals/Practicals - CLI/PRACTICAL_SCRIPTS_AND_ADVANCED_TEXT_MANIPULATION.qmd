@@ -21,10 +21,10 @@ Now that you've learned the basics of the command-line, its high time that we st
 By the end of this practical you should be able to:
 
 - Use `awk` to execute short programs for text manipulation
-- Convert pseudocode into bash scripts
 - Write iterative bash scripts using for loops and if/else statements
 - Debug your scripts using global set-options, traps and custom error messages
 - Be able to write basic flexible shell scripts using OPTARGS
+- Convert bash scripts into pseudocode
 :::
 
 ## Download data
@@ -34,12 +34,12 @@ For this practical, we will work with actual data. This means that the files wil
 # Download the data from canvas
 # or 
 # use scp (secure copy) to copy the data from the HPC group directory
-scp <CIDusername>@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/practical4/DATAPRACTICAL4.tar.gz ~/CLI_intro/data/
+scp <CIDusername>@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/data/genomes.tar.gz ~/CLI_intro/data/
 
 # Unpack the data
 # You might need to use a different command depending on your OS
 # For Linux:
-tar -xvzf ~/CLI_intro/data/DATAPRACTICAL4.tar.gz -C ~/CLI_intro/data/
+tar -xvzf ~/CLI_intro/data/genomes.tar.gz -C ~/CLI_intro/data/
 ```
 
 ---
@@ -157,7 +157,6 @@ For scripts to be automated, reusable and flexible we need three core concepts: 
 | Variables are used to store values that can be used later in the script. | For loops are used to iterate over a list of items and execute a block of code for each item in the list. | If/else statements are used to execute a block of code if a certain condition is met, and another block of code if the condition is not met. |
 | `GENE_NAME_PATTERN="gene_name"` | `for ffn_file in ${INPUT_DIR}/*.ffn; do ... done` | `if [ "${gene_count}" -gt 0 ]; then ... else ... fi` |
 
-
 # Adding functionality to our script
 
 ## Variables
@@ -184,7 +183,7 @@ Since the ffn files we have contain a multitude of gene sequences and their head
 
 - `for`: A control flow statement that allows us to iterate over a list of items and execute a block of code for each item
 - `do` and `done`: Keywords used to define the start and end of a loop block
-- `basename`: A command that extracts the base name of a file (the file name without the path and extension), very useful for creating output file names based on input file names
+- `basename`: A command that extracts the the components of a pathname, very useful for creating output file names based on input file names
 
 ```bash
 # Initiate the gene_counts.tsv file with a header
@@ -195,7 +194,7 @@ for ffn_file in ${INPUT_DIR}/*.ffn; do
 
   base_name=$(basename ${ffn_file} .ffn)
   
-  grep -A 1 -E "^>${GENE_NAME_PATTERN}" "${ffn_file}" > "${OUTPUT_DIR}/${base_name}_filtered.ffn"
+  grep -A 1 -E "${GENE_NAME_PATTERN}" "${ffn_file}" > "${OUTPUT_DIR}/${base_name}_filtered.ffn"
 
   gene_count=$([..2..] || true)
   TOTAL_GENES_FOR_PATTERN=$((TOTAL_GENES_FOR_PATTERN + gene_count))
@@ -211,7 +210,7 @@ done
 ### Exercise: Missing code 
 There are some missing pieces in the code above, indicated by [..N..]. They are single command replacements, and should be filled in with the correct command to make the script work as intended.
 
-  1. The first missing piece is the command to create the `gene_counts.tsv` file with a header. This should be a command that creates a new file and writes the header line to it. The header line should be "File\tGene_Count" and needs to be printed to the file `${OUTPUT_DIR}/gene_counts.tsv`.
+  1. The first missing piece is the command to create the `gene_counts.tsv` file with a header. This should be a command that creates a new file and writes the header line to it. The header line should be "File  Gene_Count" (tab separated) and needs to be printed to the file `${OUTPUT_DIR}/gene_counts.tsv`.
   2. The second missing piece is the command to count the number of genes found in the filtered ffn file. This should be a command that counts the number of lines in the file `${OUTPUT_DIR}/${base_name}_filtered.ffn` that start with `>`, which indicates a gene header line. The result should be stored in the variable `gene_count`.
 
 
@@ -368,12 +367,16 @@ GENE_NAME_PATTERN="${GENE_NAME_PATTERN:-gene_name}"  # Default pattern if not pr
 ### Exercise: Using your script to biological questions
 Now that you have a finished script, try to use it to answer the following questions:
 
-1. How many genes in total across all three ffn files match the pattern "hypothetical protein"?
+1. How many genes in each of the five ffn files match the pattern "hypothetical protein"?
 
 ::: {.callout-tip collapse="true"}
 ### Answer:
 ```text
-AF316: 
+AF316: 69
+AF1002: 118
+AF10: 100
+AF1171: 76
+AD2052: 49
 ```
 :::
 :::
