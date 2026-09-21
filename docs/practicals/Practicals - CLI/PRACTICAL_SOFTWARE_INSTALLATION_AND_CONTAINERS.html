@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tor Kling, Stuti Jain">
+<meta name="author" content="Tor Kling, Vahid Ataibaigielmi">
 <meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 5: Software Installation and Containers – BIO511 Genomics - Practical Repository</title>
@@ -381,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Tor Kling, Stuti Jain </p>
+             <p>Tor Kling, Vahid Ataibaigielmi </p>
           </div>
   </div>
     
@@ -444,7 +444,7 @@ REMEMBER: Create a separate project folder
 </section>
 <section id="finding-software-package-managers-and-repositories" class="level1">
 <h1>Finding software: package managers and repositories</h1>
-<p>While paid licensed software are often hosted on their own websites, and are delivered via installers, open source software are often hosted on public repositories, such as GitHub, CRAN (R language), PyPI (Python language). Downloading and installing software from these sources can in many cases be harder, as you sometimes need to manually resolve <em>dependencies</em> (other software or libraries that the tool relies on) and ensure compatibility with your operating system.</p>
+<p>While paid licensed software are often hosted on their own websites, and are delivered via installers, open source software are often hosted on public repositories, such as GitHub, CRAN (R language), PyPI (Python language). Downloading and installing software from these sources can in many cases be harder, as you sometimes need to manually resolve <em>dependencies</em> (other software or libraries that the tool relies on) and ensure compatibility with your operating system. [For Mac users] If apt does not work for you, some of these packages might also be available with <code>brew</code></p>
 <section id="exercises-discover-tools" class="level2">
 <h2 class="anchored" data-anchor-id="exercises-discover-tools">Exercises: Discover tools</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore apt </span></span>
@@ -482,6 +482,7 @@ On the use of sudo
 <section id="setting-up-conda" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-conda">Setting up Conda</h2>
 <p>To begin with, we will install Miniconda, a minimal installer for Conda. Conda is an open-source package management system and environment management system that runs on Windows, macOS, and Linux. It quickly installs, runs, and updates packages and their dependencies. Conda also creates, saves, loads, and switches between environments on your local computer. This is particularly useful in bioinformatics, where different projects may require different versions of software and libraries.</p>
+<p>[For Mac users] You should not use the link in the wget command, instead go to the <a href="https://continuumio-docs.readthedocs-hosted.com/miniconda/install/#quick-command-line-install">webpage</a> for miniconda and install it correctly for Mac</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Miniconda</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For this we need to fetch files from the internet via wget </span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> Miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span>
@@ -501,7 +502,7 @@ On the use of sudo
 </section>
 <section id="install-fastp-locally-via-apt" class="level2">
 <h2 class="anchored" data-anchor-id="install-fastp-locally-via-apt">Install fastp locally via apt</h2>
-<p>Next up, we will install <code>fastp</code> locally using apt, the default package manager for Debian-based Linux distributions. You will encounter fastp later in the genomics workflow praticals, its a tool inteded for quality control and preprocessing of FASTQ read files.</p>
+<p>Next up, we will install <code>fastp</code> locally using apt, the default package manager for Debian-based Linux distributions. You will encounter fastp later in the genomics workflow praticals, its a tool intended for quality control and preprocessing of FASTQ read files.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before we install anything via apt, its always a good idea to update the package lists</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This ensures you get the latest versions available in the repositories</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
@@ -518,8 +519,8 @@ On the use of sudo
 <section id="use-conda-to-install-multiqc-locally" class="level2">
 <h2 class="anchored" data-anchor-id="use-conda-to-install-multiqc-locally">Use Conda to install MultiQC locally</h2>
 <p>For this segment we will install MultiQC, a tool that aggregates results from bioinformatics analyses across many samples into a single report. This is particularly useful for summarizing the output of tools like FastQC. Our install will be done in a conda enviroment, installing the version hosted on bioconda.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new conda environment named MultiQC with python 3.9</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> MultiQC python=3.9</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new conda environment named MultiQC with python 3.11</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> MultiQC python=3.11</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the environment</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate MultiQC</span>
@@ -539,10 +540,23 @@ On the use of sudo
 <h2 class="anchored" data-anchor-id="containerization-with-singularity">Containerization with Singularity</h2>
 <p>Containers are a way to package software and its dependencies into a single, portable unit that can run consistently across different computing environments. Unlike virtual machines, containers share the host system’s kernel, making them more lightweight and efficient. This is particularly useful in bioinformatics, where software often has complex dependencies and needs to run on various systems, including high-performance computing (HPC) clusters.</p>
 <p>On HPC you usually cannot sudo and may not be allowed to build images on the login/compute nodes. Best practice is then: - Build the image locally (or via a remote builder). - Copy the .sif to the HPC. - Bind-mount data and databases at runtime.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Installing singularity-CE
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The instructions for installing Singularity CE can be found <a href="https://docs.sylabs.io/guides/4.5/user-guide/quick_start.html#quick-installation-steps">here</a></p>
+</div>
+</div>
 </section>
 <section id="a-minimal-kraken2-singularity-definition-file" class="level2">
 <h2 class="anchored" data-anchor-id="a-minimal-kraken2-singularity-definition-file">A minimal kraken2 Singularity definition file</h2>
-<p>The first step to creating a singularity container is to write a definition file. This file describes the base image, metadata, and the steps needed to install and configure the software inside the container. In many cases it will be simple, if an already hosted image exists (e.g.&nbsp;on BioContainers), luckily kraken2 is one of those cases. if you want to learn more about writing definition files, check out the <a href="https://sylabs.io/guides/3.0/user-guide/definition_files.html">Singularity documentation</a>.</p>
+<p>The first step to creating a singularity container is to write a definition file. This file describes the base image, metadata, and the steps needed to install and configure the software inside the container. In many cases it will be simple, if an already hosted image exists (e.g.&nbsp;on BioContainers), luckily kraken2 is one of those cases. if you want to learn more about writing definition files, check out the <a href="https://docs.sylabs.io/guides/4.5/user-guide/definition_files.html">Singularity documentation</a>.</p>
 <p>Create a file named kraken2.def with the contents below. It uses the BioContainers kraken2 image as a base.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># kraken2.def</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Bootstrap:</span> docker</span>
@@ -605,7 +619,7 @@ On the use of sudo
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> exec /home/user/containers/kraken2.sif kraken2 <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="slurm-job-script-to-invoke-singularity-container-based-software" class="level2">
 <h2 class="anchored" data-anchor-id="slurm-job-script-to-invoke-singularity-container-based-software">SLURM job script to invoke singularity container based software</h2>
-<p>As you already know, running software in the login node of an HPC is frowned upon. Instead, you should submit jobs to the scheduler (SLURM in this case), which allows you to take up space on one of the production nodes in the cluster. Below is a example of a SLURM job script that i (Tor) have used to run a Roary pangenome analysis on another cluster. <strong>Se if you can configure it to run kraken2 instead</strong>. All HPCs are different, so make sure to adjust paths, partitions, memory, time, etc to fit your HPC. The manual for Vera can be found <a href="https://www.c3se.chalmers.se/documentation/submitting_jobs/running_jobs/#writing-a-job-script">here</a>.</p>
+<p>As you already know, running software in the login node of an HPC is frowned upon. Instead, you should submit jobs to the scheduler (SLURM in this case), which allows you to take up space on one of the production nodes in the cluster. Below is a example of a SLURM job script that i (Tor) have used to run a Roary pangenome analysis on another cluster. <strong>Se if you can configure it to run kraken2 instead</strong>. All HPCs are different, so sure to adjust paths, partitions, memory, time, etc to fit your HPC. The manual for Vera can be found <a href="https://www.c3se.chalmers.se/documentation/submitting_jobs/running_jobs/#writing-a-job-script">here</a>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A nbin2-gu               # Project ID</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -J Roary_Pangenome        # Job name</span></span>
