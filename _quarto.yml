@@ -86,8 +86,10 @@ website:
         text: "Practical 5: Files"
       - href: "practicals/Practicals - Python/PRACTICAL_PLOTTING.qmd"
         text: "Practical 6: Plotting"
+      - href: "practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.qmd"
+        text: "Practical 7: Object Oriented Programming"
       - href: "practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.qmd"
-        text: "Practical 7: Algorithmic Thinking in Genomics"
+        text: "Practical 8: Algorithmic Thinking in Genomics"
 
 
 format:
