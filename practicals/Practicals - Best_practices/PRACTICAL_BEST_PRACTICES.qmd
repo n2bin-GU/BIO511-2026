@@ -35,10 +35,11 @@ By the end of this practical, you should be able to:
 ## Files – download zipped file from Canvas
 ```text
 Practical_1/
-├── bad_analysis.sh
-├── README_STARTER.md
-└── data/
-    ├── assembly_stats.tsv
+└──hands_on/
+    ├── bad_analysis.sh
+    ├── README_STARTER.md
+    └── data/
+        ├── assembly_stats.tsv
 ```
 
 The tables contain sample ID, assembly size (bp), number of contigs, N50 (bp), GC content (%), completeness (%) and contamination (%). Treat these as summary statistics supplied by upstream tools; today the focus is the code that uses them.

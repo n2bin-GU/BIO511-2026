@@ -1204,7 +1204,7 @@
     "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#files-download-zipped-file-from-canvas",
     "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
     "section": "Files – download zipped file from Canvas",
-    "text": "Files – download zipped file from Canvas\nPractical_1/\n├── bad_analysis.sh\n├── README_STARTER.md\n└── data/\n    ├── assembly_stats.tsv\nThe tables contain sample ID, assembly size (bp), number of contigs, N50 (bp), GC content (%), completeness (%) and contamination (%). Treat these as summary statistics supplied by upstream tools; today the focus is the code that uses them.",
+    "text": "Files – download zipped file from Canvas\nPractical_1/\n└──hands_on/\n    ├── bad_analysis.sh\n    ├── README_STARTER.md\n    └── data/\n        ├── assembly_stats.tsv\nThe tables contain sample ID, assembly size (bp), number of contigs, N50 (bp), GC content (%), completeness (%) and contamination (%). Treat these as summary statistics supplied by upstream tools; today the focus is the code that uses them.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 1: Best Practices"
