@@ -1,5 +1,5 @@
 ---
-title: "Practical 7: Algorithmic Thinking in Genomics"
+title: "Practical 8: Algorithmic Thinking in Genomics"
 author: "Vahid Atabaigielmi"
 date: August 2026
 format: 
