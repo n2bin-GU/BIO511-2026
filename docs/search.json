@@ -618,11 +618,25 @@
     ]
   },
   {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#submit-through-slurm",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#submit-through-slurm",
-    "title": "Practical: Setting up the HPC",
-    "section": "12.2 Submit through SLURM",
-    "text": "12.2 Submit through SLURM\n\nGenome assembly\nRead mapping over real datasets\nLarge BLAST searches\nLarge Python/R analyses\nLong jobs\nMemory-intensive jobs\nParallel CPU jobs\nGPU workloads\n\nIf you are unsure, submit it as a job rather than running it for a long time on vera2.",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BIO511 Genomics - Practical Repository",
+    "section": "",
+    "text": "This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.\n\n\n\nPractical 0: Pre-course Setup\n\n\n\n\nHere are the practical exercises related to command line programming section of the course:\n\n\n\nPractical 1: CLI Basics\nLecture: HPC Clusters Intro\nPractical 2: Setting up the HPC\nPractical 3: Workspace Management and Data Management\nPractical 4: Scripting and Advanced Text Manipulation\nPractical 5: Software & Containers\n\n\n\n\n\nPractical 1: Best practices\n🔒 Practical 2: Version Control and Collaborative Coding\n\n\n\n\n\nThe following practical exercises focus on genomics workflows:\n\n\n\n🔒 Practical 1: Quality Control and Classification\n🔒 Practical 2: Genome Assembly and Mapping\n🔒 Practical 3: Genome Annotation\n\n\n\n\n\n🔒 Additional: Build curated reference files\n\n\n\n\n\nLastly, we cover Python programming with these practical exercises:\n\n🔒 Practical 0: Introduction\n🔒 Practical 1: Python Data Types and If/Else Clauses\n🔒 Practical 2: Python Loops\n🔒 Practical 3: Python Functions\n🔒 Practical 4: Python Modules\n🔒 Practical 5: Files\n🔒 Practical 6: Plotting\n🔒 Practical 7: Algorithmic Thinking in Genomics\n\n\nFor questions or issues, please contact the course instructors."
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "BIO511 Genomics - Practical Repository",
+    "section": "",
+    "text": "This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.\n\n\n\nPractical 0: Pre-course Setup\n\n\n\n\nHere are the practical exercises related to command line programming section of the course:\n\n\n\nPractical 1: CLI Basics\nLecture: HPC Clusters Intro\nPractical 2: Setting up the HPC\nPractical 3: Workspace Management and Data Management\nPractical 4: Scripting and Advanced Text Manipulation\nPractical 5: Software & Containers\n\n\n\n\n\nPractical 1: Best practices\n🔒 Practical 2: Version Control and Collaborative Coding\n\n\n\n\n\nThe following practical exercises focus on genomics workflows:\n\n\n\n🔒 Practical 1: Quality Control and Classification\n🔒 Practical 2: Genome Assembly and Mapping\n🔒 Practical 3: Genome Annotation\n\n\n\n\n\n🔒 Additional: Build curated reference files\n\n\n\n\n\nLastly, we cover Python programming with these practical exercises:\n\n🔒 Practical 0: Introduction\n🔒 Practical 1: Python Data Types and If/Else Clauses\n🔒 Practical 2: Python Loops\n🔒 Practical 3: Python Functions\n🔒 Practical 4: Python Modules\n🔒 Practical 5: Files\n🔒 Practical 6: Plotting\n🔒 Practical 7: Algorithmic Thinking in Genomics\n\n\nFor questions or issues, please contact the course instructors."
+  },
+  {
+    "objectID": "practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.html",
+    "href": "practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.html",
+    "title": "Practical 4: Scripts and Advanced Text Manipulation",
+    "section": "",
+    "text": "Now that you’ve learned the basics of the command-line, its high time that we start working on making our computational work structured and reproducible. While runnning pipes in our command line is a good way to execute many steps at once, writing our code in structured machine-readable text files called scripts allows us to expand the automate steps in a much more reproducible and capable way. In genomics, you’ll pretty much always need to process massive datasets - think millions of sequences, GWAS data with millions of variants, or annotation files with complex formatting. Typically these files have a standardized structure, which the handling of we can automate by creating generalizable and well-formatted scripts.\n\n\n\n\n\n\nLearning Objectives\n\n\n\nBy the end of this practical you should be able to:\n\nUse awk to execute short programs for text manipulation\nWrite iterative bash scripts using for loops and if/else statements\nDebug your scripts using global set-options, traps and custom error messages\nBe able to write basic flexible shell scripts using OPTARGS\nConvert bash scripts into pseudocode\n\n\n\n\n\nFor this practical, we will work with actual data. This means that the files will be much larger than before and you will really need to apply what you’ve learned. The data-package contains annotation data for 5 E. coli genomes. You may either retrieve these from the canvas course page, or if you want, you can try to fetch them from the HPC group directory (if you have access).\n# Download the data from canvas\n# or \n# use scp (secure copy) to copy the data from the HPC group directory\nscp &lt;CIDusername&gt;@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/data/genomes.tar.gz ~/CLI_intro/data/\n\n# Unpack the data\n# You might need to use a different command depending on your OS\n# For Linux:\ntar -xvzf ~/CLI_intro/data/genomes.tar.gz -C ~/CLI_intro/data/",
     "crumbs": [
       "Intro to Command Line",
       "Practical 2: Setting up the HPC"
@@ -1237,84 +1251,132 @@
     ]
   },
   {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html#build-test-and-run-locally",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html#build-test-and-run-locally",
-    "title": "Practical 5: Software Installation and Containers",
-    "section": "Build, test, and run locally",
-    "text": "Build, test, and run locally\n# Build a read-only image from the def file (locally)\nsingularity build kraken2.sif kraken2.def\n\n# Test that kraken works by running a version check\nsingularity exec kraken2.sif kraken2 --version\n\n# We also made a little text file in /home, lets check that too\n# For this, try to shell into the container and once your in try to print the contents of the file to stdout\nsingularity shell kraken2.sif",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "",
+    "text": "For this practical we will start analyzing bioinformatic datasets, applying the best practices and habits that make our code reproducible, resilient and intepreteable for others. The practical is split into two subsections",
     "crumbs": [
       "Intro to Command Line",
       "Practical 5: Software & Containers"
     ]
   },
   {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html#slurm-job-script-to-invoke-singularity-container-based-software",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html#slurm-job-script-to-invoke-singularity-container-based-software",
-    "title": "Practical 5: Software Installation and Containers",
-    "section": "SLURM job script to invoke singularity container based software",
-    "text": "SLURM job script to invoke singularity container based software\nAs you already know, running software in the login node of an HPC is frowned upon. Instead, you should submit jobs to the scheduler (SLURM in this case), which allows you to take up space on one of the production nodes in the cluster. Below is a example of a SLURM job script that i (Tor) have used to run a Roary pangenome analysis on another cluster. Se if you can configure it to run kraken2 instead. All HPCs are different, so sure to adjust paths, partitions, memory, time, etc to fit your HPC. The manual for Vera can be found here.\n#!/bin/bash -l\n#SBATCH -A nbin2-gu               # Project ID\n#SBATCH -J Roary_Pangenome        # Job name\n#SBATCH -t 20:00:00               # Time limit \n#SBATCH -n 1                      # Number of tasks (processes)\n#SBATCH -p main                   # Partition to submit to\n#SBATCH --mem=200G                # Memory per node\n#SBATCH --output=/cfs/klemming/projects/supr/naiss2024-22-639/05_PANGENOME_ANALYSIS/logs/roary_%j.out  # Standard output\n#SBATCH --error=/cfs/klemming/projects/supr/naiss2024-22-639/05_PANGENOME_ANALYSIS/logs/roary_%j.err   # Standard error\n\n# Load necessary modules (Do you need to load any modules for singularity on your HPC?)\nml singularity/4.1.1-cpeGNU-23.12\n\n# Define paths to script and container\nSINGULARITY_CONTAINER=\"/cfs/klemming/projects/supr/naiss2024-22-639/DBGWAS_test\"\"\n\n# Execute script within singularity environment\nsrun singularity exec -B /cfs/klemming/projects/supr/nbin2-gu:/mnt/data $SINGULARITY_CONTAINER roary -e --mafft -p 8 -f /mnt/data/05_PANGENOME_ANALYSIS/output/ /mnt/data/05_PANGENOME_ANALYSIS/input/*.gff\nOnce a jobscript is done, you can submit it to SLURM with the sbatch command, monitor its progress with squeue, and check the output files once its done.\nWe wont be running a jobscript for kraken2 here, but try to set one up yourself. You can use the jobscript above as a template Well run kraken2 for real in the next practical\n# Example of submitting a jobscript\nsbatch job_kraken2.slurm\n\n# Monitor\nsqueue -u $USER\n# or \nscontrol show job JOBID\n\n# Check output files\ntail -20 kraken2_12345.out\n\n\n\n\n\n\n\nKey Takeaways\n\n\n\n\nPackage managers (apt, conda) simplify software installation and dependency management.\nConda environments allow for isolated setups, preventing conflicts between projects.\nContainers (Singularity/Apptainer) provide portability and reproducibility across different systems.\nAlways bind necessary directories (data, databases) when running containers on HPC.\n\n\n\n\n\n\n\n\n\nPro Tips\n\n\n\n\nTest containers locally before HPC deployment. Run exec, shell, and run commands to ensure functionality.\nKeep containers minimal; BioContainers images are a quick and reliable base.\nUse %help and labels in your definition file; inspect with singularity run-help and singularity inspect. This helps reproducibility for other users.\nBind data with --bind host_dir:container_dir; pass multiple directories with variables\nIn some cases, you may need additional config for your runs. Instead of making complex invokes in the jobscript, consider writing a script to run the analysis, and then invoke that script within the container.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Scenario",
+    "text": "Scenario\nYou have received assembly-quality summaries for a set of bacterial isolates. Someone wrote a Bash script to select genomes for downstream comparative genomics. The script runs and produces a list of “good” assemblies. Your task is to decide whether that list deserves to be trusted, then improve the analysis without accidentally changing its intended rule.\n\n\n\n\n\n\nLearning Objectives\n\n\n\nBy the end of this practical, you should be able to:\n\nRecognise hidden assumptions and fragile coding practices.\nImprove readability, parameterisation and error handling in a Bash analysis.\nDocument an analysis so another person can rerun it.",
     "crumbs": [
       "Intro to Command Line",
       "Practical 5: Software & Containers"
     ]
   },
   {
-    "objectID": "practicals/README_practicals.html",
-    "href": "practicals/README_practicals.html",
-    "title": "BIO511 Genomics - Practical Repository",
-    "section": "",
-    "text": "Here you will find the practicals divided into::\n\nCommand-line programming\nBest coding practices\nPython programming\nWhole genome sequencing analysis\n\nEnjoy :)"
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#files-download-zipped-file-from-canvas",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#files-download-zipped-file-from-canvas",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Files – download zipped file from Canvas",
+    "text": "Files – download zipped file from Canvas\nPractical_1/\n└──hands_on/\n    ├── bad_analysis.sh\n    ├── README_STARTER.md\n    └── data/\n        ├── assembly_stats.tsv\nThe tables contain sample ID, assembly size (bp), number of contigs, N50 (bp), GC content (%), completeness (%) and contamination (%). Treat these as summary statistics supplied by upstream tools; today the focus is the code that uses them.",
+    "crumbs": [
+      "Coding Best Practices",
+      "Practical 1: Best Practices"
+    ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html",
-    "title": "Practical 2: Version Control and Collaborative Coding",
-    "section": "",
-    "text": "As we refine our skills in command-line operations and text manipulation, it becomes increasingly important to manage our codebase in such a way that changes are tracked, collaboration is facilitated, and the history of the project is preserved. This practical will introduce you to version control using Git and collaborative coding practices with GitHub, which are essential for maintaining reproducible and organized computational workflows.\nA few core concepts are:\n\nRepository (repo): a project folder that Git watches (contains a hidden .git/ directory).\nWorking tree: your actual files on disk.\nStaging area (index): a waiting room where you queue the exact changes for your next snapshot.\nCommit: a permanent snapshot with a message (what/why).\nBranch: a label that moves forward as you commit, representing a line of work (e.g., main, feature/x).\n.gitignore: patterns telling Git which files/folders not to track (e.g., results/).\n\n\n\n\n\n\n\nLearning Objectives\n\n\n\nBy the end of this practical you should be able to:\n\nUse some basic git commands like git init, git add, git commit, git status, and git push\nUnderstand the concept of branches and how to create and switch between them using git switch\nCollaborate with others using GitHub by branching, creating pull requests from your branches, and merging code",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1-crime-scene-investigation",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1-crime-scene-investigation",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 1 — Crime scene investigation",
+    "text": "Part 1 — Crime scene investigation\nRun the analysis from the hands_on directory. Do not edit it yet. In pairs, list as many concerns as you can. For each concern, label it R = readability, P = reproducibility, B = robustness, or S = scientific correctness.\n./bad_analysis.sh\ncat results.txt\n\nKey questions\n\nWhat do columns 3, 6 and 7 represent? How do you know?\nWhy are the thresholds 100, 95 and 5? Are the inequalities part of the scientific definition?\nWhat happens if the input file is missing or empty?\nWhat assumption does grep -v sample make about the header and sample names?\nCould the temporary file overwrite something important?\nDoes the script notice NA values or biologically implausible assembly statistics?\nWhat does “done” tell you about whether the analysis succeeded?",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#initializing-a-local-git-repository",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#initializing-a-local-git-repository",
-    "title": "Practical 2: Version Control and Collaborative Coding",
-    "section": "Initializing a Local Git Repository",
-    "text": "Initializing a Local Git Repository\nTo initialize a local git repository, first make a new directory for your project and navigate into it:\nmkdir my_project\ncd my_project\nThen, initialize the git repository with the following command:\ngit init\nThis command will create a new subdirectory named .git that contains all of your necessary repository files for a local git repository skeleton. At this point, nothing in your project is tracked yet.\nYou can then start adding (using git add) files to your repository and commit changes as you go, checking changes with git status and git log:\ntouch testdata.txt analysis.sh\ngit add testdata.txt analysis.sh\n\n# Check that the change is staged\ngit status\n\n# Commit the staged changes\ngit commit -m \"Initial commit\"\n\n# View the commit history\ngit log\n\n\n\n\n\n\nExercise: Adding some files, ignoring others\n\n\n\nCreate two files, name one of them testdata.txt and the other one analysis.sh. Then, run git status and look at the output.\nThen, create a .gitignore file and add testdata.txt to it. After that, run git status again to see the effect of the .gitignore file:\necho \"testdata.txt\" &gt;&gt; .gitignore\ngit status\n\n# Commit after updating the .gitignore file\ngit commit -m \"Update .gitignore\"\nKey Question: What is happening? In what scenario would you want to use a .gitignore file?",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2-make-it-understandable",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2-make-it-understandable",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 2 — Make it understandable",
+    "text": "Part 2 — Make it understandable\nCreate analysis.sh from bad_analysis.sh. Improve variable names, formatting and comments. Keep the output scientifically identical for now. Make the QC criteria visible near the top of the script. Add comments only where they explain intent or assumptions.\nCheckpoint: your partner should be able to explain every command and identify every QC threshold without decoding a one-liner.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#managing-new-development-with-branches",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#managing-new-development-with-branches",
-    "title": "Practical 2: Version Control and Collaborative Coding",
-    "section": "Managing new Development with Branches",
-    "text": "Managing new Development with Branches\nWhen working on new features or bug fixes, it’s a good practice to create a new branch. This allows you to work independently of the main branch (main or master) and merge your changes only when they are ready (Avoiding conflicts and keeping the main branch stable). Branches can be made and handled with both the git switch and git checkout commands, however switch is a bit more intuitive for branch use.\n# We use the `git switch -c` command to create and switch to a new branch in one step\ngit switch -c feature/newtextfile\n\n# Look at the new status message to see that branching worked\ngit status\n\n# Work on your changes, then add and commit them\ntouch newtextfile.txt\ngit add newtextfile.txt\necho \"This is a new text file\" &gt; newtextfile.txt\ngit commit -m \"Work on new feature\"\n\n# Switch back to the main branch\ngit switch main\n\n# Merge the feature branch into the main branch\ngit merge feature/newtextfile\n\n\n\n\n\n\nExercise:Resolving a merge conflict\n\n\n\nConflicts happen when two branches change the same line of a file without a clear timeline of which change should take precedence, and Git can’t decide which version to keep for you.\n1. Branch a new feature from main\ngit switch main\ntouch divtextfile.txt\necho \"line one\" &gt; divtextfile.txt\ngit add divtextfile.txt\ngit commit -m \"Add divtextfile on main\"\n2. Make a conflicting change on the feature branch\ngit switch -c feature/divtextfile\necho \"edited on feature branch\" &gt; divtextfile.txt\ngit add divtextfile.txt\ngit commit -m \"Edit divtextfile on feature branch\"\n3. Make another edit on the main branch before merging\ngit switch main\necho \"edited on main, take 2\" &gt; divtextfile.txt\ngit add divtextfile.txt\ngit commit -m \"Edit divtextfile on main again\"\n4. Merge the feature branch into main and resolve the conflict\n# From main \ngit merge feature/divtextfile\nA conflict occurred, resolved and commit the changes to complete the merge.\n\n\n\n\n\n\nSolution (No peeking!)\n\n\n\n\n\n# The conflict markers will appear in the file\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD\nedited on main, take 2\n=======\nedited on feature branch\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/divtextfile\n\n# Resolve the conflict by editing the file to keep the desired changes, then add and commit the resolved file\ngit add divtextfile.txt\ngit commit -m \"Resolve merge conflict in divtextfile.txt\"",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3-break-your-program",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3-break-your-program",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 3 — Break your program",
+    "text": "Part 3 — Break your program\nTry cases that should not silently succeed. Improve the script so failures produce a useful message and non-zero exit status.\n\nnonexistent input file\nempty input file\nwrong number of arguments\noutput directory that does not yet exist\na filename containing spaces\n\nConsider whether set -euo pipefail is appropriate. If you use it, be able to explain what each option protects against, and what it does not check.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#fetchingpulling-and-pushing-changes",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#fetchingpulling-and-pushing-changes",
-    "title": "Practical 2: Version Control and Collaborative Coding",
-    "section": "Fetching/Pulling and Pushing Changes",
-    "text": "Fetching/Pulling and Pushing Changes\nInteraction with remote repositiores involves fetching changes from the remote repository, pulling updates to your local repository, and pushing your local changes to the remote repository.\n\nFetching: git fetch downloads changes from the remote repository without integrating them into your local branch.\nPulling: git pull downloads changes from the remote repository and integrates them into your local branch.\nPushing: git push uploads your local changes to the remote repository, making them available for integration for others to use.\n\nYour repository that you made on GitHub might have already have an initial commit (usually a README file). Lets fetch the changes from the remote repository to ensure your local repository is up-to-date:\ngit pull origin main\nReplace main with the name of your default branch if it is different.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-4-reproducibility-swap",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-4-reproducibility-swap",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 4 — Reproducibility swap",
+    "text": "Part 4 — Reproducibility swap\nComplete the README. Swap project directories with another pair. Without verbal instructions, the other pair should be able to answer:\n\nWhat does the analysis do?\nHow do I run it?\nWhat inputs and parameters are required?\nWhat output is produced?\nWhat QC rule is applied?\nWhich assumptions or sanity checks are not covered by the script?\n\n\n\n\n\n\n\nBonus — Make it reusable\n\n\n\n\n\nChange the script so input and output are command-line arguments. Then make the QC thresholds parameters, with sensible defaults if you are comfortable doing so. This could for example be done with the OPTARGS described in CLI practical 4. Its also possible to do it using positional arguments (e.g., $1 for the input file, $2 for the output file, $3 for the first QC threshold, etc.)\n./analysis.sh data/assembly_stats.tsv results/selected_genomes.txt or ./analysis.sh -a data/assembly_stats.tsv -o results/selected_genomes.txt\nOptional extension: ./analysis.sh data/assembly_stats.tsv results/selected_genomes.txt 100 95 5\nDo not use absolute paths tied to your own computer. Decide whether your script should create the output directory or require it to exist, and document that choice.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#using-branches-and-pull-requests-on-github",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#using-branches-and-pull-requests-on-github",
-    "title": "Practical 2: Version Control and Collaborative Coding",
-    "section": "Using Branches and Pull Requests on Github",
-    "text": "Using Branches and Pull Requests on Github\nWhen collaborating on GitHub, it is common to use branches and pull requests to manage changes. You are now familiar with branches, but pushing them to the remote repository is the next step where our collaborators will be able to weigh in as well. Once your changes are ready, you can create a pull request to propose merging your branch into the main branch. This allows for code review and discussion before the changes are integrated.\nCreate a new branch and make some changes before commiting and pushing it:\ngit switch -c feature/readme-update\n\necho \"Adding a note about collaboration.\" &gt;&gt; README.md\n\ngit add README.md && git commit -m \"Add collaboration note to README\"\n\ngit push -u origin feature/readme-update\nGoing onto GitHub, navigate to your repository. You should see a prompt to create a pull request for your recently pushed branch. Click on “Compare & pull request”, provide a meaningful description of your changes, and submit the pull request for review. Review the changes and merge the pull request once youve had a look-through.\n\n\n\n\n\n\nExercise: Key Questions\n\n\n\nWhy might a team prefer merging changes through a Pull Request on GitHub instead of merging branches locally and pushing directly to main?",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario-1",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario-1",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Scenario",
+    "text": "Scenario\nYou have a tab-separated annotation table of genes involved in antimicrobial resistance from a set of bacterial genomes. Each row describes one annotated gene and contains three columns: strain, gene, and product.\nstrain  gene    product\nS01 gyrA    DNA gyrase subunit A\nS01 blaTEM  beta-lactamase TEM\nS02 tetA    tetracycline efflux protein\n\n\n\n\n\n\n\nTask:\n\n\n\nYou want to find which bacterial strains contain a particular target gene. In the end the\n\nstrain names should be saved to a file\nhow many strains that contain the target gene should be reported\n\nWork in pairs. The instructor will tell you the target gene. Do not start by writing Bash commands.",
+    "crumbs": [
+      "Coding Best Practices",
+      "Practical 1: Best Practices"
+    ]
+  },
+  {
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1---write-pseudocode-first",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1---write-pseudocode-first",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 1 - Write pseudocode first",
+    "text": "Part 1 - Write pseudocode first\nDescribe the analysis as a sequence of plain-language steps. Your pseudocode should be understandable to another student even if they have not seen your commands.\nBefore coding, swap pseudocode your classmate. Can they understand the plan without asking what you meant? Revise anything ambiguous.",
+    "crumbs": [
+      "Coding Best Practices",
+      "Practical 1: Best Practices"
+    ]
+  },
+  {
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2---translate-your-plan-into-bash",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2---translate-your-plan-into-bash",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 2 - Translate your plan into Bash",
+    "text": "Part 2 - Translate your plan into Bash\nNow translate each pseudocode step into commands that we’ve introduced in the previous practicals. Useful commands may include grep, cut, sort, uniq, wc and awk.\nKeep the solution simple, remember the tips about good coding practice. The goal is not to write the shortest possible command.\nSave your commands in a small bash script. As you work, consider:\n\nCan another person tell what biological question the script answers?\nIs the target gene easy to find and change in the script?\nDoes the script create a clearly named output file?\nAre there comments where they help explain the purpose or reasoning?\nCan you inspect an intermediate result if something looks wrong?",
+    "crumbs": [
+      "Coding Best Practices",
+      "Practical 1: Best Practices"
+    ]
+  },
+  {
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3---swap-scripts",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3---swap-scripts",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 3 - Swap scripts",
+    "text": "Part 3 - Swap scripts\nGive your script to your classmate. Do not explain it at first. The receiver should run and read the script and answer:\n\nWhat biological question does the script answer?\nWhich gene is being searched for?\nWhat output does it produce?\nDoes it count genes or unique samples?\nCould you change the target gene without rewriting the workflow?\nIs any line difficult to understand?\nWhat is one thing that is particularly clear, and one thing you would improve?\n\nReturn the script and feedback. The original author may make one or two improvements.\n\n\n\n\n\n\nBonus - Predict before you test\n\n\n\n\n\nIf you have reached here before it’s time to reconvene, let us know and we will provide a surprise annotation table. Before running your script, inspect the file and write down which samples you think should count as containing the target gene. The intended question is:\nWhich samples have an exact match to the target gene in the gene column?\nThen run your script on the surprise table and compare the output with your prediction.\nIf they differ, investigate why. Look especially for:\n\nthe same gene occurring more than once in one sample\nsimilar but non-identical gene names\nthe target gene name appearing in the product description rather than the gene column\ncapitalization differences\nwhether your command searches the whole line or a particular column",
+    "crumbs": [
+      "Coding Best Practices",
+      "Practical 1: Best Practices"
+    ]
+  },
+  {
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#final-wrap-up---discuss-and-revise",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#final-wrap-up---discuss-and-revise",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Final wrap up - Discuss and revise",
+    "text": "Final wrap up - Discuss and revise\nWith your partner, discuss what the surprise dataset revealed. If necessary, revise your script so that it answers the stated biological question more precisely.\nBe ready to explain one design choice to the class.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"
