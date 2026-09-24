@@ -40,7 +40,7 @@ Here are the practical exercises related to command line programming section of 
 The following practical exercises focus on genomics workflows:
 
 #### Genome workflows - Whole Genome Sequencing (WGS)
-- **[ 🔒 Practical 1: Quality Control and Classification](practicals/Practicals%20-%20WGS/PRACTICAL_RAWDATA_AND_QC_.qmd)**
+- **[ Practical 1: Quality Control and Classification](practicals/Practicals%20-%20WGS/PRACTICAL_RAWDATA_AND_QC.qmd)**
 - **[ 🔒 Practical 2: Genome Assembly and Mapping](practicals/Practicals%20-%20WGS/PRACTICAL_ASSEMBLY_AND_MAPPING_.qmd)**
 - **[ 🔒 Practical 3: Genome Annotation](practicals/Practicals%20-%20WGS/PRACTICAL_FUNCTIONAL_ANNOTATION_.qmd)**
 

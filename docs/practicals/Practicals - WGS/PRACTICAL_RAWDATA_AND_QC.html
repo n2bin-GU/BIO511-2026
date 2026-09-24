@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-fd3cdb6591c6e78768236938076114a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -346,7 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#preparing-results-for-multiqc" id="toc-preparing-results-for-multiqc" class="nav-link" data-scroll-target="#preparing-results-for-multiqc">Preparing results for MultiQC</a></li>
   <li><a href="#running-multiqc" id="toc-running-multiqc" class="nav-link" data-scroll-target="#running-multiqc">Running MultiQC</a></li>
   </ul></li>
-  <li><a href="#additional-exercises" id="toc-additional-exercises" class="nav-link" data-scroll-target="#additional-exercises">Additional exercises</a></li>
+  <li><a href="#additional-questions" id="toc-additional-questions" class="nav-link" data-scroll-target="#additional-questions">Additional Questions</a></li>
   </ul>
 </nav>
     </div>
@@ -387,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>Next-generation sequencing (NGS) technologies generate millions of short DNA sequences called reads. You’ve already become quite familiar with Nanopore sequencing by this point, and are aware that NGS reads are error-prone. Hence it is essential that before we do any further sequence analysis, we first assess the quality of our read data using command line tools that provide both efficiency and reproducibility.</p>
+<p>Next-generation sequencing (NGS) technologies generate millions of short DNA sequences called reads. You’ve already become quite familiar with Nanopore sequencing by this point, and are aware that NGS reads are error-prone. Hence it is essential that before we do any further sequence analysis, we first assess the quality of our read data using command line tools.</p>
 <p>In this practical, we’ll use command line tools to perform quality assessment and filtering, followed by taxonomic classification to understand what organisms are present in our samples. We will provide short-read files for you to use, as well as the code needed to perform the analyses. However, you will need to adapt paths and filenames to your own working environment, as well as select your own data and think about the biological significance of the results.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -395,20 +395,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-REMEMBER: Create a separate project folder
+Setting Up Data Access
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make this practical directory in your home directory on HPC AND your local computer</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/yourdir/practical_1</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/yourdir/practical_1</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Symlink the data directory in the n2bin-gu project dir for easy access on the HPC</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># From your home directory on the HPC</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span>  /cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026 .</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Then symlink the data directory in the n2bin-gu project dir for easy access on the HPC</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span>  /cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq ./data</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the files you need to your local computer as well, but DONT overwrite the original files!</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use scp or rsync for this</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq ./data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the fastq files you need to your local computer as well</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq ./data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -470,6 +466,23 @@ Key Questions
 <li>Why is the bottom line encoded? What does it represent?</li>
 <li>How can you identify paired-end reads?</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The bottom line in a FASTQ file represents the quality scores of each base in the corresponding sequence. These scores are encoded using ASCII characters, where each character corresponds to a specific quality value. Higher quality scores indicate more confidence in the accuracy of the base call.</p>
+<p>Paired-end reads can be identified by their filenames (e.g., <code>_R1</code> and <code>_R2</code> suffixes) and by the fact that they appear in the same order in their respective files. Each read in the first file has a corresponding mate in the second file.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <hr>
@@ -477,10 +490,10 @@ Key Questions
 </section>
 <section id="quality-assessment-and-filtering-with-fastp" class="level1">
 <h1>Quality Assessment and Filtering with fastp</h1>
-<p>fastp is a modern version of what FastQC used to do (in case youve used that before), it is an all-in-one preprocessing tool that combines quality assessment, adapter trimming, and quality filtering in a single program. Unlike the traditional FastQC + Trim Galore workflow, fastp provides integrated analysis with excellent performance. As you likely remember, we set up fastp on your computer locally last practical, so lets use it now.</p>
+<p><code>fastp</code> is a modern version of what FastQC used to do (in case youve used that before), it is an all-in-one preprocessing tool that combines quality assessment, adapter trimming, and quality filtering in a single program. Unlike the traditional <code>FastQC</code> + <code>TrimGalore</code> workflow, fastp provides integrated analysis with excellent performance. As you likely remember, we set up fastp on your computer locally last practical, so lets use it now.</p>
 <section id="fastp-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="fastp-analysis">Fastp analysis</h2>
-<p>This step must be done on your local computer, make sure you download the data with scp first!</p>
+<p>This step can be done on your local computer, since we installed <code>fastp</code> in the software practical. Make sure you download the data with scp first!</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Begin by creating an output directory for your QC results</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> fastp_results</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -488,7 +501,7 @@ Key Questions
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">-i</span> sample1_R1.fastq.gz <span class="at">-I</span> sample1_R2.fastq.gz <span class="at">-o</span> sample1_R1_filtered.fastq.gz <span class="at">-O</span> sample1_R2_filtered.fastq.gz <span class="at">-h</span> sample1_fastp_report.html <span class="at">-j</span> sample1_fastp_report.json</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Go to the output directory and check the results</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># View the HTML report in your browser </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># View the HTML report in your browser (e.g., open sample1_fastp_report.html)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Key metrics to examine in the HTML reports:</p>
 <ul>
 <li><strong>Read quality</strong>: Before and after filtering quality distributions</li>
@@ -532,6 +545,22 @@ Key Questions
 <li>Did this improve or change the quality of the reads?</li>
 <li>We set a minimum length of 20bp, what are the pros and cons of this choice?</li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Generally as reads extend, the quality of base calls tends to decrease towards the 3’ end. This is why trimming low-quality bases from the ends can improve read quality. Additionally, removing very short reads helps to reduce noise and potential mapping errors in downstream analyses. However being to carefree in removing short reads may also result in the loss of potentially useful data, so it’s important to balance quality and read length.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <hr>
@@ -554,36 +583,38 @@ Key Questions
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/cephyr/users/ktor/Vera/practical_1/logs/kraken2_%j.out  # Standard output</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/cephyr/users/ktor/Vera/practical_1/logs/kraken2_%j.err   # Standard error</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Set paths - ADJUST THESE TO YOUR ACTUAL PATHS</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/kraken2.sif"</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="va">DB_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/ref_dbs/kraken2db"</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq"</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/teachers/Tor/results"</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind paths for container</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_BINDPATH</span><span class="op">=</span><span class="st">"</span><span class="va">${DB_PATH}</span><span class="st">:/db,</span><span class="va">${DATA_PATH}</span><span class="st">:/data,</span><span class="va">${RESULTS_PATH}</span><span class="st">:/results"</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create results directory</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${RESULTS_PATH}</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify sample</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="st">"A210"</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Processing sample: </span><span class="va">${sample}</span><span class="st">"</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Kraken2 classification</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> singularity exec <span class="va">${CONTAINER_PATH}</span> kraken2 <span class="dt">\</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">--db</span> /db <span class="dt">\</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">--threads</span> 8 <span class="dt">\</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">--paired</span> <span class="dt">\</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">--output</span> /results/<span class="va">${sample}</span>_kraken2_output.txt <span class="dt">\</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">--report</span> /results/<span class="va">${sample}</span>_kraken2_report.txt <span class="dt">\</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">--classified-out</span> /results/<span class="va">${sample}</span>_classified#.fastq <span class="dt">\</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">--unclassified-out</span> /results/<span class="va">${sample}</span>_unclassified#.fastq <span class="dt">\</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        /data/<span class="va">${sample}</span>_R1.fastq.gz /data/<span class="va">${sample}</span>_R2.fastq.gz</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Completed classification for </span><span class="va">${sample}</span><span class="st">"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Preset path for container and database</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/users/ktor/Vera/n2bin_gu/BIO511-2026/containers/kraken2.sif"</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="va">DB_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/refs/kraken2db"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># These ones need to be set by you </span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"path/to/data"</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"path/to/results"</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind paths for container</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_BINDPATH</span><span class="op">=</span><span class="st">"</span><span class="va">${DB_PATH}</span><span class="st">:/db,</span><span class="va">${DATA_PATH}</span><span class="st">:/data,</span><span class="va">${RESULTS_PATH}</span><span class="st">:/results"</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Create results directory</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${RESULTS_PATH}</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify sample (change this to run the rest)</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="va">sample</span><span class="op">=</span><span class="st">"A210"</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Processing sample: </span><span class="va">${sample}</span><span class="st">"</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Kraken2 classification</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> singularity exec <span class="va">${CONTAINER_PATH}</span> kraken2 <span class="dt">\</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">--db</span> /db <span class="dt">\</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">--threads</span> 8 <span class="dt">\</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">--paired</span> <span class="dt">\</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">--output</span> /results/<span class="va">${sample}</span>_kraken2_output.txt <span class="dt">\</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">--report</span> /results/<span class="va">${sample}</span>_kraken2_report.txt <span class="dt">\</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">--classified-out</span> /results/<span class="va">${sample}</span>_classified#.fastq <span class="dt">\</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">--unclassified-out</span> /results/<span class="va">${sample}</span>_unclassified#.fastq <span class="dt">\</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        /data/<span class="va">${sample}</span>_R1.fastq.gz /data/<span class="va">${sample}</span>_R2.fastq.gz</span>
 <span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All samples processed successfully"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Completed classification for </span><span class="va">${sample}</span><span class="st">"</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"All samples processed successfully"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 </section>
@@ -592,15 +623,13 @@ Key Questions
 <p>MultiQC is a powerful tool that aggregates results from multiple bioinformatics analyses into a single, interactive HTML report. It can automatically detect and parse outputs from fastp, kraken2, and many other tools, making it perfect for generating comprehensive summaries of our quality control and classification workflow.</p>
 <section id="preparing-results-for-multiqc" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-results-for-multiqc">Preparing results for MultiQC</h2>
-<p>MultiQC works best when all results are organized in a clear directory structure. Let’s organize our outputs properly.</p>
+<p>MultiQC works best when all results are organized in a clear directory structure. Let’s organize our outputs properly. Remember how we structured our workspaces, but now we want the fastp and kraken2 results to be neatly placed into separate subdirectories within a common directory that we can point <code>multiqc</code> to.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a comprehensive results directory</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multiqc_analysis/<span class="dt">{fastp_reports</span><span class="op">,</span><span class="dt">kraken2_reports}</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy fastp outputs to the correct directory</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy kraken2 outputs to the correct directory</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify all files are present</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> multiqc_analysis/<span class="pp">*</span>/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy fastp outputs to the correct directory</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy kraken2 outputs to the correct directory</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify all files are present (tree is also fine)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> multiqc_analysis/<span class="pp">*</span>/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="running-multiqc" class="level2">
 <h2 class="anchored" data-anchor-id="running-multiqc">Running MultiQC</h2>
@@ -610,13 +639,12 @@ Key Questions
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate MultiQC report with custom configuration</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> . <span class="at">--title</span> <span class="st">"BIO511 Practical 2 - QC and Classification Summary"</span> <span class="at">--filename</span> <span class="st">"practical2_multiqc_report"</span> <span class="at">--dirs</span> <span class="at">--dirs-depth</span> 2 <span class="at">--force</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the report in your browser</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The HTML file can be opened directly</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Open the report in your browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 </section>
-<section id="additional-exercises" class="level1">
-<h1>Additional exercises</h1>
+<section id="additional-questions" class="level1">
+<h1>Additional Questions</h1>
 <p>Now that you have completed the quality control and classification workflow, use your fastp report, MultiQC report and command line tools to answer the following questions:</p>
 <ol type="1">
 <li><p>Which sample had the highest percentage of reads filtered out by fastp? What might this indicate about the sample quality?</p></li>

@@ -9,29 +9,24 @@ format:
     toc-depth: 3
     number-sections: false
     code-fold: false
-    theme: cosmo
+    theme: minty
 ---
 
 # Introduction
 
-Next-generation sequencing (NGS) technologies generate millions of short DNA sequences called reads. You've already become quite familiar with Nanopore sequencing by this point, and are aware that NGS reads are error-prone. Hence it is essential that before we do any further sequence analysis, we first assess the quality of our read data using command line tools that provide both efficiency and reproducibility.
+Next-generation sequencing (NGS) technologies generate millions of short DNA sequences called reads. You've already become quite familiar with Nanopore sequencing by this point, and are aware that NGS reads are error-prone. Hence it is essential that before we do any further sequence analysis, we first assess the quality of our read data using command line tools.
 
 In this practical, we'll use command line tools to perform quality assessment and filtering, followed by taxonomic classification to understand what organisms are present in our samples. We will provide short-read files for you to use, as well as the code needed to perform the analyses. However, you will need to adapt paths and filenames to your own working environment, as well as select your own data and think about the biological significance of the results.
 
 ::: {.callout-important}
-## REMEMBER: Create a separate project folder
+## Setting Up Data Access
 ```bash
-# Make this practical directory in your home directory on HPC AND your local computer
-mkdir -p ~/yourdir/practical_1
-cd ~/yourdir/practical_1
+# Symlink the data directory in the n2bin-gu project dir for easy access on the HPC
+# From your home directory on the HPC
+ln -s  /cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026 .
 
-# Then symlink the data directory in the n2bin-gu project dir for easy access on the HPC
-ln -s  /cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq ./data
-
-# Copy the files you need to your local computer as well, but DONT overwrite the original files!
-# You can use scp or rsync for this
+# Copy the fastq files you need to your local computer as well
 scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq ./data
-
 ```
 :::
 
@@ -85,17 +80,24 @@ ATCGATCGATCGATCG...
 ## Key Questions
 - Why is the bottom line encoded? What does it represent?
 - How can you identify paired-end reads?
+
+::: {.callout-tip collapse="true"}
+## Explanation
+The bottom line in a FASTQ file represents the quality scores of each base in the corresponding sequence. These scores are encoded using ASCII characters, where each character corresponds to a specific quality value. Higher quality scores indicate more confidence in the accuracy of the base call.
+
+Paired-end reads can be identified by their filenames (e.g., `_R1` and `_R2` suffixes) and by the fact that they appear in the same order in their respective files. Each read in the first file has a corresponding mate in the second file.
+:::
 :::
 
 ---
 
 # Quality Assessment and Filtering with fastp
 
-fastp is a modern version of what FastQC used to do (in case youve used that before), it is an all-in-one preprocessing tool that combines quality assessment, adapter trimming, and quality filtering in a single program. Unlike the traditional FastQC + Trim Galore workflow, fastp provides integrated analysis with excellent performance. As you likely remember, we set up fastp on your computer locally last practical, so lets use it now. 
+`fastp` is a modern version of what FastQC used to do (in case youve used that before), it is an all-in-one preprocessing tool that combines quality assessment, adapter trimming, and quality filtering in a single program. Unlike the traditional `FastQC` + `TrimGalore` workflow, fastp provides integrated analysis with excellent performance. As you likely remember, we set up fastp on your computer locally last practical, so lets use it now. 
 
 ## Fastp analysis
 
-This step must be done on your local computer, make sure you download the data with scp first! 
+This step can be done on your local computer, since we installed `fastp` in the software practical. Make sure you download the data with scp first! 
 
 ```bash
 # Begin by creating an output directory for your QC results
@@ -105,7 +107,7 @@ mkdir -p fastp_results
 fastp -i sample1_R1.fastq.gz -I sample1_R2.fastq.gz -o sample1_R1_filtered.fastq.gz -O sample1_R2_filtered.fastq.gz -h sample1_fastp_report.html -j sample1_fastp_report.json
 
 # Go to the output directory and check the results
-# View the HTML report in your browser 
+# View the HTML report in your browser (e.g., open sample1_fastp_report.html)
 ```
 
 Key metrics to examine in the HTML reports:
@@ -125,6 +127,7 @@ Key metrics to examine in the HTML reports:
 :::
 
 In some cases, you may want to customize the filtering parameters, such as hard-trimming a specific number of bases from the start or end of reads, or setting a minimum read length. You can do this by adding additional flags to the fastp command. For example, a good agnostic approach is to trim to a fixed quality threshold at the 3' end of the reads, and filter out any reads that are too short after trimming.
+
 ```bash
 # Here is an example command with additional trimming and filtering options, for a quality threshold of 30 and minimum length of 50bp
 fastp -i sample1_R1.fastq.gz -I sample1_R2.fastq.gz -o sample1_R1_filtered.fastq.gz -O sample1_R2_filtered.fastq.gz -h sample1_fastp_report.html -j sample1_fastp_report.json --cut_right --cut_mean_quality 30 --length_required 20
@@ -133,6 +136,12 @@ fastp -i sample1_R1.fastq.gz -I sample1_R2.fastq.gz -o sample1_R1_filtered.fastq
 ## Key Questions
 1. Did this improve or change the quality of the reads?
 2. We set a minimum length of 20bp, what are the pros and cons of this choice?
+
+::: {.callout-tip collapse="true"}
+### Explanation
+Generally as reads extend, the quality of base calls tends to decrease towards the 3' end. This is why trimming low-quality bases from the ends can improve read quality. Additionally, removing very short reads helps to reduce noise and potential mapping errors in downstream analyses. However being to carefree in removing short reads may also result in the loss of potentially useful data, so it's important to balance quality and read length.
+:::
+
 :::
 
 ---
@@ -158,11 +167,13 @@ Lets begin by creating the job script that we will submit to the HPC cluster. Ma
 #SBATCH --output=/cephyr/users/ktor/Vera/practical_1/logs/kraken2_%j.out  # Standard output
 #SBATCH --error=/cephyr/users/ktor/Vera/practical_1/logs/kraken2_%j.err   # Standard error
 
-# Set paths - ADJUST THESE TO YOUR ACTUAL PATHS
-CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/kraken2.sif"
-DB_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/ref_dbs/kraken2db"
-DATA_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq"
-RESULTS_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/teachers/Tor/results"
+# Preset path for container and database
+CONTAINER_PATH="/cephyr/users/ktor/Vera/n2bin_gu/BIO511-2026/containers/kraken2.sif"
+DB_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/refs/kraken2db"
+
+# These ones need to be set by you 
+DATA_PATH="path/to/data"
+RESULTS_PATH="path/to/results"
 
 # Bind paths for container
 export SINGULARITY_BINDPATH="${DB_PATH}:/db,${DATA_PATH}:/data,${RESULTS_PATH}:/results"
@@ -170,7 +181,7 @@ export SINGULARITY_BINDPATH="${DB_PATH}:/db,${DATA_PATH}:/data,${RESULTS_PATH}:/
 # Create results directory
 mkdir -p ${RESULTS_PATH}
 
-# Identify sample
+# Identify sample (change this to run the rest)
 sample="A210"
 echo "Processing sample: ${sample}"
 
@@ -198,16 +209,14 @@ MultiQC is a powerful tool that aggregates results from multiple bioinformatics 
 
 ## Preparing results for MultiQC
 
-MultiQC works best when all results are organized in a clear directory structure. Let's organize our outputs properly.
+MultiQC works best when all results are organized in a clear directory structure. Let's organize our outputs properly. Remember how we structured our workspaces, but now we want the fastp and kraken2 results to be neatly placed into separate subdirectories within a common directory that we can point `multiqc` to.
 
 ```bash
 # Create a comprehensive results directory
-mkdir -p multiqc_analysis/{fastp_reports,kraken2_reports}
-
 # Copy fastp outputs to the correct directory
 # Copy kraken2 outputs to the correct directory
 
-# Verify all files are present
+# Verify all files are present (tree is also fine)
 ls -la multiqc_analysis/*/
 ```
 
@@ -221,13 +230,11 @@ cd multiqc_analysis
 multiqc . --title "BIO511 Practical 2 - QC and Classification Summary" --filename "practical2_multiqc_report" --dirs --dirs-depth 2 --force
 
 # Open the report in your browser
-# The HTML file can be opened directly
-
 ```
 
 ---
 
-# Additional exercises
+# Additional Questions
 
 Now that you have completed the quality control and classification workflow, use your fastp report, MultiQC report and command line tools to answer the following questions:
 
