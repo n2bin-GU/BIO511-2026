@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alvar Almstedt, Emma Västerviga">
+<meta name="author" content="Alvar Almstedt, Bart Edelbroek, Emma Västerviga">
 <meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 1: Python Data Types and If/Else Clauses – BIO511 Genomics - Practical Repository</title>
@@ -69,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-684f5c8cc4ce7c0ec5f1fb4a38df694e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,6 +117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">BIO511 Genomics - Practical Repository</span>
     </a>
@@ -127,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -239,8 +242,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Practical 6: Plotting</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html">
+ <span class="dropdown-text">Practical 7: Object Oriented Programming</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html">
- <span class="dropdown-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="dropdown-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </li>  
     </ul>
   </li>
@@ -265,6 +272,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -311,8 +322,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 7: Object Oriented Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="menu-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </div>
 </li>
     </ul>
@@ -334,10 +351,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-type-usage" id="toc-data-type-usage" class="nav-link" data-scroll-target="#data-type-usage">Data type usage</a></li>
   <li><a href="#if-elif-else-on-your-data-types" id="toc-if-elif-else-on-your-data-types" class="nav-link" data-scroll-target="#if-elif-else-on-your-data-types">If / Elif / Else on your data types</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#multi-way-ifelifelse-clause" id="toc-multi-way-ifelifelse-clause" class="nav-link" data-scroll-target="#multi-way-ifelifelse-clause">Multi-way (If/elif/else clause)</a></li>
   <li><a href="#type-gate-nested-classification-nested-ifelifelse" id="toc-type-gate-nested-classification-nested-ifelifelse" class="nav-link" data-scroll-target="#type-gate-nested-classification-nested-ifelifelse">Type gate + nested classification (Nested If/elif/else)</a></li>
+  <li><a href="#look-up-a-sample-dictionaries-in-and-none" id="toc-look-up-a-sample-dictionaries-in-and-none" class="nav-link" data-scroll-target="#look-up-a-sample-dictionaries-in-and-none">Look up a sample (dictionaries, <code>in</code> and <code>None</code>)</a></li>
   </ul></li>
+  <li><a href="#extra-task-gc-content" id="toc-extra-task-gc-content" class="nav-link" data-scroll-target="#extra-task-gc-content">Extra task: GC content</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -358,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Alvar Almstedt, Emma Västerviga </p>
+             <p>Alvar Almstedt, Bart Edelbroek, Emma Västerviga </p>
           </div>
   </div>
     
@@ -380,8 +398,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>Now we are finally getting into the bread and butter of python syntax! Today you will do some very simple exercises with some of the most commonly used python data types as well as starting with boolean logic using if/else clauses.</p>
-<p>You can copy the code blocks containing comments below and work on the tasks from within your IDE (Integrated Developer Environment)/text editor or a jupyter notebook. Remember, comments are the lines that start with <code>#</code> and will be ignored when you run your code</p>
-<p>Remember to refer back to todays presentations for help or ask the teachers - It’s what we are here for :)</p>
+<p>You can copy the code blocks containing comments below and work on the tasks from within your IDE (Integrated Development Environment)/text editor or a jupyter notebook. Remember, comments are the lines that start with <code>#</code> and will be ignored when you run your code</p>
+<p>Remember to refer back to today’s presentations for help or ask the teachers - It’s what we are here for :)</p>
 <section id="some-links-that-you-may-find-helpful" class="level2">
 <h2 class="anchored" data-anchor-id="some-links-that-you-may-find-helpful">Some links that you may find helpful</h2>
 <p>They may even contain information that the teachers missed or didn’t explain well enough!</p>
@@ -396,9 +414,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-type-usage" class="level2">
 <h2 class="anchored" data-anchor-id="data-type-usage">Data type usage</h2>
 <p>Here’s some example code of how to save the number 4, which is interpreted as an integer by python, to a variable that we choose to call <code>my_int</code>. Then we print the variable.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_int <span class="op">=</span> <span class="dv">4</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_int <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_int)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Create a python script (<code>.py file</code>) where you save one value of each data type to its own variable. Afterwards, print all the variables and their type using the commands <code>print()</code> and <code>type()</code>.</p>
 <p>Data types to include: integer, floating point, string, boolean, nonetype, list, dictionary, tuple, set, range.</p>
 </section>
@@ -412,24 +430,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hint
+<span class="screen-reader-only">Tip</span>Hint
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Double check what type a variable is with <code>type(variablename)</code>, to deremine which variable to use.</p>
+<p>Double check what type a variable is with <code>type(variablename)</code>, to determine which variable to use.</p>
 </div>
 </div>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"></h3>
+<p><br></p>
 <p>Let’s start with strings! Below is an example code block of how to determine the length of a string:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save a string to a variable</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save a string to a variable</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_string <span class="op">=</span> <span class="st">"variablestuesday"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check how many letters are in my_string. It's the same thing as checking the length of a string.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(my_string) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(my_string) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Pick a STRING you created. Then create an if/else-statement to determine if the string is empty or not. If the string is empty, the length should be zero.</p>
 <p>If it’s empty, print “empty”, else print “non-empty”.</p>
-</section>
 <section id="multi-way-ifelifelse-clause" class="level3">
 <h3 class="anchored" data-anchor-id="multi-way-ifelifelse-clause">Multi-way (If/elif/else clause)</h3>
 <p>Pick an INTEGER you created. Write an if-statement with 3 scenarios:</p>
@@ -445,7 +461,7 @@ Hint
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hint
+<span class="screen-reader-only">Tip</span>Hint
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -455,7 +471,7 @@ Hint
 </section>
 <section id="type-gate-nested-classification-nested-ifelifelse" class="level3">
 <h3 class="anchored" data-anchor-id="type-gate-nested-classification-nested-ifelifelse">Type gate + nested classification (Nested If/elif/else)</h3>
-<p>Pick a SEQUENCE you created (list, tuple or range). Here, we want you to cerate a nested loop.</p>
+<p>Pick a SEQUENCE you created (list, tuple or range). Here, we want you to create a nested if-statement.</p>
 <p>In the outer if-statement, check if your choice of variable matches any of the data types list <strong>or</strong> tuple <strong>or</strong> range. Use <code>or</code> to allow the variable to match any of them. If the variable is not a match, print “wrong type for this task”.</p>
 <p>The inner if-statement should be used IF the variable was a match. Here, you need to check for 3 different scenarios:</p>
 <ul>
@@ -463,9 +479,52 @@ Hint
 <li><p>if the length == 1, print “single item”</p></li>
 <li><p>Should the length be &gt; 1, print “multiple items”</p></li>
 </ul>
-
-
 </section>
+<section id="look-up-a-sample-dictionaries-in-and-none" class="level3">
+<h3 class="anchored" data-anchor-id="look-up-a-sample-dictionaries-in-and-none">Look up a sample (dictionaries, <code>in</code> and <code>None</code>)</h3>
+<p>A sequencing run produced the dictionary below. The keys are sample names and the values are the number of reads for each sample. Sequencing failed for one sample, so it has no value.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>read_counts <span class="op">=</span> {<span class="st">"sample_A"</span>: <span class="dv">1520000</span>, <span class="st">"sample_B"</span>: <span class="dv">830000</span>, <span class="st">"sample_C"</span>: <span class="va">None</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can check whether a key exists in a dictionary with <code>in</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"sample_A"</span> <span class="kw">in</span> read_counts) <span class="co"># prints True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li><p>Save the name of one sample to a variable called <code>sample</code>. Write an if/elif/else statement that prints:</p>
+<ul>
+<li>“unknown sample” if <code>sample</code> is not in the dictionary</li>
+<li>“sequencing failed” if the value for <code>sample</code> is <code>None</code></li>
+<li>“enough reads” if the sample has at least 1000000 reads</li>
+<li>“too few reads” otherwise</li>
+</ul></li>
+<li><p>Run your code with <code>sample</code> set to each of the three samples, and then to a name that is not in the dictionary. Check that you get the right message every time.</p></li>
+<li><p>Create a variable <code>passed_qc</code> and set it to <code>True</code>. Change your code so that it prints “ready for analysis” instead of “enough reads”, but only if the sample has enough reads <strong>and</strong> <code>passed_qc</code> is <code>True</code>. What is printed for <code>sample_A</code> when you change <code>passed_qc</code> to <code>False</code>?</p></li>
+</ol>
+</section>
+</section>
+<section id="extra-task-gc-content" class="level2">
+<h2 class="anchored" data-anchor-id="extra-task-gc-content">Extra task: GC content</h2>
+<p>This task is optional. Try it if you have finished the other exercises and have time left.</p>
+<p>The GC content of a DNA sequence is the percentage of its bases that are either <code>G</code> or <code>C</code>. It is one of the first things you check when you get new sequencing data.</p>
+<p>You can get a single base out of a string with square brackets and its position. Positions start at <code>0</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dna <span class="op">=</span> <span class="st">"TGCA"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dna[<span class="dv">0</span>]) <span class="co"># prints T</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dna[<span class="dv">1</span>]) <span class="co"># prints G</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use this sequence:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">"ATGCGTACTTAGCAAT"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li><p><strong>Check one base.</strong></p>
+<p>Write an <code>if</code> statement that checks whether the first base of <code>sequence</code> is a <code>G</code> or a <code>C</code>. Print a message saying whether it is or not.</p></li>
+<li><p><strong>Count the G and C bases.</strong></p>
+<p>Create a variable <code>gc_count</code> that starts at <code>0</code>. Check every base in <code>sequence</code> and increase <code>gc_count</code> by <code>1</code> each time you find a <code>G</code> or a <code>C</code>. Print <code>gc_count</code>.</p></li>
+<li><p><strong>Calculate the GC content.</strong></p>
+<p>Use <code>gc_count</code> and <code>len(sequence)</code> to calculate the GC content as a percentage. Print it.</p></li>
+<li><p><strong>A new sequence arrives.</strong></p>
+<p>A colleague sends you a second sequence:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">"TTAGGCATGCCGATATCGGCTTA"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Calculate the GC content of this sequence too.</p>
+<p>Which parts of your code did you have to change? What would you have to do if the sequence was a whole bacterial genome with several million bases?</p></li>
+</ol>
+
+
 </section>
 </section>
 
@@ -521,13 +580,14 @@ Hint
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

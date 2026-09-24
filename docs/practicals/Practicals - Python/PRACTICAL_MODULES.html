@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alvar Almstedt, Emma Västerviga, Emilio Rudbeck">
+<meta name="author" content="Alvar Almstedt, Bart Edelbroek, Emma Västerviga, Emilio Rudbeck">
 <meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 4: Python Modules – BIO511 Genomics - Practical Repository</title>
@@ -69,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-684f5c8cc4ce7c0ec5f1fb4a38df694e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,6 +117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">BIO511 Genomics - Practical Repository</span>
     </a>
@@ -127,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -239,8 +242,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Practical 6: Plotting</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html">
+ <span class="dropdown-text">Practical 7: Object Oriented Programming</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html">
- <span class="dropdown-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="dropdown-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </li>  
     </ul>
   </li>
@@ -265,6 +272,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -311,8 +322,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 7: Object Oriented Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="menu-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </div>
 </li>
     </ul>
@@ -327,26 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful links</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
-  <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a>
-  <ul class="collapse">
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
-  </ul></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a>
-  <ul class="collapse">
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"></a></li>
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"></a></li>
-  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7"></a></li>
-  </ul></li>
-  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8"></a>
-  <ul class="collapse">
-  <li><a href="#section-9" id="toc-section-9" class="nav-link" data-scroll-target="#section-9"></a></li>
-  <li><a href="#section-10" id="toc-section-10" class="nav-link" data-scroll-target="#section-10"></a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -366,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Alvar Almstedt, Emma Västerviga, Emilio Rudbeck </p>
+             <p>Alvar Almstedt, Bart Edelbroek, Emma Västerviga, Emilio Rudbeck </p>
           </div>
   </div>
     
@@ -392,11 +390,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Remember the suggested general workflow when attempting to install something:</p>
 <ul>
 <li>create new conda env</li>
-<li>try conda install with conda-forge and bioconda channels. If you dont find what you need:</li>
+<li>try conda install with conda-forge and bioconda channels. If you don’t find what you need:</li>
 <li>install pip in your env and try that</li>
-<li>If you still cant find the thing you need you can attempt to install from source via a github repo but that can be a little bit annoying (especially for a beginner)</li>
+<li>If you still can’t find the thing you need you can attempt to install from source via a github repo but that can be a little bit annoying (especially for a beginner)</li>
 </ul>
-<p><em>(You dont have to use conda if you know what youre doing. Its just a convenient suggestion. Other package managers are available)</em></p>
+<p><em>(You don’t have to use conda if you know what you’re doing. It’s just a convenient suggestion. Other package managers are available)</em></p>
 </section>
 <section id="useful-links" class="level1">
 <h1>Useful links</h1>
@@ -405,65 +403,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
-<p>In these exercises you will learn how you can import functions from other scripts that you have written as well as install an external modul as well as install an external module.</p>
-<p>You will be given two scripts (see below), where the main.py will import all functions from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to aminoacids. To get this to work, you first need to import the amino acid translation function, install and call Bio.Seq and see how variables are passed between two files.</p>
+<p>In these exercises you will learn how you can import functions from other scripts that you have written as well as install an external module.</p>
+<p>You will be given two scripts (see below), where the main.py will import all functions from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to amino acids. You will also need a FASTA file to run the scripts on, which you can find on Canvas. To get this to work, you first need to import the amino acid translation function, install and call Bio.Seq and see how variables are passed between two files.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hint
+<span class="screen-reader-only">Tip</span>Hint
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>You will need to install Biopython to use the Seq object. We have not discussed it yet so you have to look up the documentation yourself.</p>
 </div>
 </div>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<p><br></p>
 <p>Navigate the imported code from premade_script.py</p>
-<section id="section-1" class="level3">
-<h3 class="anchored" data-anchor-id="section-1"></h3>
+<p><br></p>
 <p>Using the comments in the function codons, can you describe what it does?</p>
-</section>
-<section id="section-2" class="level3">
-<h3 class="anchored" data-anchor-id="section-2"></h3>
+<p><br></p>
 <p>What’s the input of the function?</p>
-</section>
-<section id="section-3" class="level3">
-<h3 class="anchored" data-anchor-id="section-3"></h3>
+<p><br></p>
 <p>In the main function of main.py, add a print statement to print the output of the function</p>
-</section>
-</section>
-<section id="section-4" class="level2">
-<h2 class="anchored" data-anchor-id="section-4"></h2>
+<p><br></p>
 <p>Open the script called premade_script.py and find the function called exercise_function</p>
-<section id="section-5" class="level3">
-<h3 class="anchored" data-anchor-id="section-5"></h3>
+<p><br></p>
 <p>What’s the input of the function?</p>
-</section>
-<section id="section-6" class="level3">
-<h3 class="anchored" data-anchor-id="section-6"></h3>
+<p><br></p>
 <p>What does this function do?</p>
-</section>
-<section id="section-7" class="level3">
-<h3 class="anchored" data-anchor-id="section-7"></h3>
+<p><br></p>
 <p>Try calling it through main.py (see how the previous function is imported and used)</p>
-</section>
-</section>
-<section id="section-8" class="level2">
-<h2 class="anchored" data-anchor-id="section-8"></h2>
+<p><br></p>
 <p>Make the exercise_function work</p>
-<section id="section-9" class="level3">
-<h3 class="anchored" data-anchor-id="section-9"></h3>
-<p>A non standard module is needed to run the function. Which? Install/use/call it</p>
-</section>
-<section id="section-10" class="level3">
-<h3 class="anchored" data-anchor-id="section-10"></h3>
+<p><br></p>
+<p>A non-standard module is needed to run the function. Which? Install/use/call it</p>
+<p><br></p>
 <p>Check the output of the script</p>
 <p><strong>main.py</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> premade_script <span class="im">import</span> codons</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -487,13 +465,13 @@ Hint
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here the students should check the output of the function</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here the students will need to call the exercise_function from my_function.py</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here the students will need to call the exercise_function from premade_script.py</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># And check the output of that function</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>premade_script.py</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> codons(sequence_file):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> codons(sequence_file):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A function that reads a fasta file and returns a list of codons for each sequence in the file"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First we read the fasta file and store the sequences as a string</span></span>
@@ -528,11 +506,9 @@ Hint
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> codon <span class="kw">in</span> sequence_codons:</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        amino_acid <span class="op">=</span> Seq(codon).translate()</span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        aa_string <span class="op">+=</span> <span class="bu">str</span>(amino_acid)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> aa_string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> aa_string</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -587,13 +563,14 @@ Hint
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

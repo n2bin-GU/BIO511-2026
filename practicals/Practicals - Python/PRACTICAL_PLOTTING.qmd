@@ -1,7 +1,7 @@
 ---
 title: "Practical 6: Python Plotting"
 subtitle: "BIO511 Genomics - Plotting using matplotlib, plotly and plotnine"
-author: "Alvar Almstedt, Emma Västerviga"
+author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
 date: August 2026
 format: 
   html:
@@ -28,9 +28,10 @@ Plotting is a necessity in most omics projects. A good plot can help the viewer 
 [Plotnine (video)](https://www.youtube.com/watch?v=2KrJ2tNrvGo)
 
 # Exercises
-Let’s start with doing something quite similar to what we went through in today’s presentation. For this exercise you’ll need the following external libraries: pandas, matplotlib, seaborn, plotly and plotnine. You can use the environment file provided for the practice dugga or make your own environment if you prefer. Start the code with setting up a suitable environment for this practical.
+Let’s start with doing something quite similar to what we went through in today’s presentation. For this exercise you’ll need the following external libraries: pandas, matplotlib, seaborn, plotly and plotnine. You can use the environment file provided for the practice dugga (available on Canvas) or make your own environment if you prefer. Start the code with setting up a suitable environment for this practical.
 
-##
+<br>
+
 For the following subtasks you can refer to the slides of today’s presentation.
 
 a. Load the ‘penguins’ dataset using seaborn. Remove any rows with missing values. Hint: Check out how to use the dropna() function. 
@@ -43,27 +44,33 @@ d. Create and save the same plot using `seaborn` instead. See if you can set col
 
 e. Finally, try it out using `plotnine`. To save the plot you will need to import and use the function `ggsave`. (A good practice is to always import any packages or functions at the top of your script.)
 
-##
+<br>
+
 Create a histogram to show the distribution of the bill lengths in the data. Use the function you like best.
 
-##
+<br>
+
 Use the `pandas` library to group the penguins data by body mass and island and calculate the mean value of body mass per island. Save the results to a new variable. Create a bar plot where each bar represents the average body mass of one island. 
 
-##
+<br>
+
 Optional:
 
-Create two (or more) plots of your own choosing to visualize the penguins data. Use seaborn and try to subplot them together. Create a palette or use one of seaborne’s pre-existing palettes to separate the data by any factor you think is appropriate. (island, sex, species, etc.. )
+Create two (or more) plots of your own choosing to visualize the penguins data. Use seaborn and try to subplot them together. Create a palette or use one of seaborn’s pre-existing palettes to separate the data by any factor you think is appropriate. (island, sex, species, etc.. )
 
 # Additional plotting assignment (optional)
 For those who are asked to: hand in via github and send teachers a link.
 
-##
+<br>
+
 Load the `penguins` dataset using the `seaborn` module. Remove any rows with missing values. Hint: Check out how to use the dropna() function. 
 
-##
+<br>
+
 Create a scatterplot. The plot should show flipper length on the x-axis and body mass on the y-axis. Add an informative title, xlabel and ylabel. Save the plot.
 
-##
+<br>
+
 Plot a distribution plot of the penguin flipper length using a histogram.
 
 a. What does this plot show? What are some conclusions you can draw from it? 
@@ -74,8 +81,9 @@ c. Add appropriate y and x-labels, as well as a title.
 
 d. Save the plot.
 
-## 
-Read the data `CNV_log2_skin_melanoma.csv` from the practice dugga using pandas. 
+<br>
+
+Read the data `CNV_log2_skin_melanoma.csv` from the practice dugga (available on Canvas) using pandas. 
 
 a. Create a violinplot (the `seaborn` package is useful for this) with chromosome on the x-axis and cnv_log2 on the y-axis. Add informative titles and save the plot.
 

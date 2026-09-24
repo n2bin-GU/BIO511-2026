@@ -1,7 +1,7 @@
 ---
 title: "Practical 5: Files"
 subtitle: "BIO511 Genomics - Python File Manipulation and Command Line Arguments"
-author: "Alvar Almstedt, Emma Västerviga"
+author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
 date: August 2026
 format: 
   html:
@@ -14,7 +14,7 @@ format:
 
 # Introduction
 
-Todays topics include: Reading and writing to files, working with pandas dataframes and some of the functionality in biopython
+Today's topics include: Reading and writing to files, working with pandas dataframes and some of the functionality in biopython
 
 # Useful links
 
@@ -32,7 +32,7 @@ Todays topics include: Reading and writing to files, working with pandas datafra
 
 # Exercises
 
-## 
+<br>
 
 **File Manipulation**
 
@@ -40,9 +40,9 @@ Create a script that:
 
 a. Uses with open() to create a csv file with 5 rows and 5 columns. Make sure to save the file and use comma as the separator.
 
-b. Appends a row to the file based on the users input, using argv.
+b. Appends a row to the file based on the user's input, using argv.
 
-##
+<br>
 
 **Arguments and pandas**
 
@@ -50,12 +50,11 @@ a. Create a second script that takes the file you created in the previous task a
 
 b. Make sure to add useful help messages to the arguments in your script.
 
-c. use the csv module to read the csv file you created
+c. Use the csv module to read the csv file you created
 
 d. Convert the data to a pandas dataframe. Print a statistical summary of your data.
 
-## 
-
+<br>
 
 ```python
 """
@@ -85,7 +84,8 @@ CATGACTGACTGATGCTAGCTAGCTGATCGTACGATC
 """
 ```
 
-###
+<br>
+
 ```python
 # A) Load and report (use SeqIO)
 
@@ -94,7 +94,8 @@ CATGACTGACTGATGCTAGCTAGCTGATCGTACGATC
 # - Also print the first 10 bases of the sequence.
 ```
 
-###
+<br>
+
 ```python
 # B) Reverse complements to a new FASTA (use Seq, SeqRecord, SeqIO)
 
@@ -104,7 +105,8 @@ CATGACTGACTGATGCTAGCTAGCTGATCGTACGATC
 # - Write all reverse-complement records to a file named `dna_rc.fasta`.
 ```
 
-###
+<br>
+
 ```python
 # C) GC% annotation to a new FASTA (use SeqRecord, SeqIO)
 
@@ -114,7 +116,8 @@ CATGACTGACTGATGCTAGCTAGCTGATCGTACGATC
 # - Write these annotated records to `dna_with_gc.fasta`.
 ```
 
-###
+<br>
+
 ```python
 # D) Translation (Optional, do if you have extra time)
 

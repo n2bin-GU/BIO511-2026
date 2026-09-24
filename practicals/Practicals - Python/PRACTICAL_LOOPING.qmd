@@ -1,7 +1,7 @@
 ---
 title: "Practical 2: Python Loops"
 subtitle: "BIO511 Genomics - Think iteration and loops"
-author: "Alvar Almstedt, Emma Västerviga"
+author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
 date: August 2026
 format: 
   html:
@@ -45,7 +45,7 @@ print(mylist[0])
 ## Simple loops 
 
 1. Create a list of 7 items. Loop over the list printing each item of the list. 
-2. For each iteration, print the loop number (index). E.g. on the third loop (iteration) its supposed to print a "3".
+2. For each iteration, print the loop number (index). E.g. on the third loop (iteration) it's supposed to print a "3".
 3. Add an If-statement to make the loop stop after printing its 5th item. 
 
 
@@ -124,7 +124,7 @@ Which sequence(s) have a start codon before a stop codon?
 We can loop through a dictionary by defining two variables: both the key and value.
 
 Example:
-Build a simple dict with the keys `pat_001`, `pat_002` and `pat_003` that has a value each. Here, the values are list:
+Build a simple dict with the keys `pat_001`, `pat_002` and `pat_003` that has a value each. Here, the values are lists:
 ```python
 data = {
     'pat_001': ['bacZZt98', 'bac889Ytd'], 

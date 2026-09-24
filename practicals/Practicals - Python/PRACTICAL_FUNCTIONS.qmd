@@ -1,9 +1,9 @@
 ---
 title: "Practical 3: Python Functions"
 subtitle: "BIO511 Genomics -  Python Functions (and more looping)"
-author: "Alvar Almstedt, Emma Västerviga"
-date: Aufust 2026
-format: 
+author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
+date: August 2026
+format:
   html:
     toc: true
     toc-depth: 3
@@ -13,16 +13,19 @@ format:
 ---
 
 # Introduction
-Functions are everywhere in python and its time for you to start using them to take you to the next level!
 
-If there are any built-in python functions you have not seen or heard about before (like for example `isdigit()`, `max()` etc.), search online for the documentation. The official page `python.docs.org` has information on the built-in functionality that comes with the standard python installation.
+Functions are everywhere in Python and it's time for you to start using them to take you to the next level!
 
-* Remember that you have to both define a function using the `def` block and then later call the function itself to have the code it contains acutally run. Calling a function means running the fucntion.
-* Also do not forget that the function has its own namespace, meaning code outside the funtion can not access the variables that only exist inside the function. The function is meant to be sectioned off. The data you want to access outside the function needs to be `return`ed
+If there are any built-in Python functions you have not seen or heard about before (for example `isdigit()` or `max()`), search online for the documentation. The official page [docs.python.org](https://docs.python.org/3/library/functions.html) has information on the built-in functionality that comes with the standard Python installation.
+
+Two things to keep in mind:
+
+* A function has to be both **defined** with a `def` block and then **called** before the code inside it actually runs. Calling a function means running the function.
+* A function has its own **namespace**. Code outside the function cannot access the variables that only exist inside the function. If you want to use a value outside the function, the function needs to `return` it.
 
 # Useful links
 
-[Python functions (text)]()
+[Python functions (text)](https://docs.python.org/3/tutorial/controlflow.html#defining-functions)
 
 [Python functions (video)](https://www.youtube.com/watch?v=9Os0o3wzS_I)
 
@@ -34,8 +37,8 @@ If there are any built-in python functions you have not seen or heard about befo
 def add_two_numbers(num_one, num_two):
     number_to_return = num_one + num_two
     return number_to_return
-
 ```
+
 ## Calling the function
 
 ```python
@@ -44,109 +47,133 @@ my_added_numbers = add_two_numbers(1, 1)
 print(my_added_numbers) # will print 2
 ```
 
-
 # Exercises
 
-You can copy the text blocks describing the tasks in comments below into your IDE to avoid having to refer back to this page.
+## Setup
 
-Use the exact variables defined in this block and set them on the global namespace (outside any function). Then write the functions and function calls we ask for in the tasks yourself.
+All three exercises use the variables below. Copy them into the top of your script, outside of any function, and do not rename them.
 
 ```python
-# Provided inputs (use these)
+# Provided inputs
 nums = [3, -1, 7, 2, 9, 0, 4]
 limit = 4
 text = "Room 101: bring 2 apples & 1 banana."
 
-# Globals to observe name masking (same-name local variables hides the global variable so use different variable names inside the function). Do not rename these.
+# Global variables
 count = 999
 summary = "unset"
 result = "unset"
 ```
 
+The last three variables are **global** variables. In each exercise you will create a **local** variable with the same name inside a function. This lets you see that changing a local variable does not change the global variable with the same name.
 
-## 
-```python
-# Count-above  (uses nums, limit, count)
-# Goal: make a small function called whatever you want and then call(run) it.
+## Count numbers above a limit
 
-# a) Define a function named count_above that takes two arguments: seq and lim.
+Write a function that counts how many numbers in a list are larger than a limit.
 
-# b) Inside the function, create a LOCAL variable named count starting at 0.
+1. **Define the function.**
 
-# c) Loop through seq; for each number strictly greater than lim, increase count by 1.
+   Define a function named `count_above` that takes two arguments: `seq` and `lim`.
 
-# d) Return count.
+2. **Create a local counter.**
 
-# e) Outside the function:
-#    - Print the GLOBAL count.
-#    - Call count_above(nums, limit) and print the returned number.
-#    - Print the GLOBAL count again (notice the global didn’t change).
+   Inside the function, create a local variable named `count` that starts at `0`.
 
-# Your code below
- 
+3. **Count the numbers.**
 
-```
+   Loop through `seq`. For each number that is strictly greater than `lim`, increase `count` by `1`.
 
-##
-```python
-# Text summary  (uses text, summary)
-# Goal: classify characters with an if/elif/else chain and return a clear result.
+4. **Return the result.**
 
-# a) Define a function named summarize_text that takes one argument: s.
+   Return `count` from the function.
 
-# b) Inside the function, create a LOCAL variable named summary that holds a result dictionary
-#    with exactly these keys: "digits", "letters", "other" — each starting at 0.
+5. **Call the function.**
 
-# c) Loop through each character in s:
-#       - if the character is a digit, increase "digits"
-#       - elif the character is a letter, increase "letters"
-#       - else increase "other"
+   Outside the function:
 
-# d) Return the summary dictionary.
+   - Print the global `count`.
+   - Call `count_above(nums, limit)` and print the returned number.
+   - Print the global `count` again.
 
-# e) Outside the function:
-#    - Print the GLOBAL summary.
-#    - Call summarize_text(text) and print the returned dictionary.
-#    - Print the GLOBAL summary again.
+Why is the global `count` still `999`, even though the function set a variable called `count` to `0` and then increased it?
 
-# Your code below
+## Summarise a text
 
+Write a function that classifies each character in a string as a digit, a letter or something else.
 
-```
+1. **Define the function.**
 
-##
-```python
-#C) Aggregate with mode  (uses nums, limit, result)
-# Goal: nested decisions based on a mode string. Return one final value.
+   Define a function named `summarize_text` that takes one argument: `s`.
 
-# a) Define a function named aggregate that takes three arguments: seq, mode, threshold.
+2. **Create a local dictionary.**
 
-# b) Inside the function, create a LOCAL variable named result.
-#    Initialize it based on mode:
-#       - if mode is "sum": start at 0
-#       - if mode is "count": start at 0
-#       - if mode is "max": start at None (meaning “no qualifying value yet”)
+   Inside the function, create a local variable named `summary` that holds a dictionary with exactly these keys: `"digits"`, `"letters"` and `"other"`. Each key should start at `0`.
 
-# c) Loop through each number n in seq:
-#       - First, ignore n if it is negative (skip it).
-#       - If n is at least threshold, then:
-#           * if mode is "sum": add n to result
-#           * elif mode is "count": increase result by 1
-#           * else (treat any other mode as "max"):
-#                 if result is None or n is greater than result, update result to n
+3. **Classify each character.**
 
-# d) Return the result.
+   Loop through each character in `s` and use an `if`/`elif`/`else` chain:
 
-# e) Outside the function:
-#    - Print the GLOBAL result.
-#    - Call and print each of these:
-#         aggregate(nums, "sum", limit)
-#         aggregate(nums, "count", limit)
-#         aggregate(nums, "max", limit)
-#    - Print the GLOBAL result again.
+   - If the character is a digit, increase `"digits"` by `1`.
+   - Else, if the character is a letter, increase `"letters"` by `1`.
+   - Else, increase `"other"` by `1`.
 
-# Your Code below
+   *Hint:* Strings have the methods `isdigit()` and `isalpha()`.
 
+4. **Return the result.**
 
+   Return the `summary` dictionary.
 
-```
+5. **Call the function.**
+
+   Outside the function:
+
+   - Print the global `summary`.
+   - Call `summarize_text(text)` and print the returned dictionary.
+   - Print the global `summary` again.
+
+What counts as `"other"` in `text`? Check that the numbers add up to the length of the string using `len(text)`.
+
+## Aggregate with a mode
+
+Write one function that can calculate three different things, depending on a `mode` argument. This exercise combines a loop with nested `if` statements.
+
+1. **Define the function.**
+
+   Define a function named `aggregate` that takes three arguments: `seq`, `mode` and `threshold`.
+
+2. **Create a local result.**
+
+   Inside the function, create a local variable named `result`. Its starting value depends on `mode`:
+
+   - If `mode` is `"sum"`, start at `0`.
+   - If `mode` is `"count"`, start at `0`.
+   - If `mode` is `"max"`, start at `None`. This means "no qualifying value found yet".
+
+3. **Loop through the numbers.**
+
+   Loop through each number `n` in `seq`:
+
+   - If `n` is negative, skip it.
+   - If `n` is at least `threshold`:
+     - If `mode` is `"sum"`, add `n` to `result`.
+     - Else, if `mode` is `"count"`, increase `result` by `1`.
+     - Else, treat the mode as `"max"`. If `result` is `None` or `n` is greater than `result`, set `result` to `n`.
+
+   *Hint:* `continue` skips the rest of the current iteration and moves on to the next number.
+
+4. **Return the result.**
+
+   Return `result` from the function.
+
+5. **Call the function.**
+
+   Outside the function:
+
+   - Print the global `result`.
+   - Call the function three times and print each returned value:
+     - `aggregate(nums, "sum", limit)`
+     - `aggregate(nums, "count", limit)`
+     - `aggregate(nums, "max", limit)`
+   - Print the global `result` again.
+
+What does `aggregate(nums, "max", 100)` return, and why?

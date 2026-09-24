@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alvar Almstedt, Emma Västerviga">
+<meta name="author" content="Alvar Almstedt, Bart Edelbroek, Emma Västerviga">
 <meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 2: Python Loops – BIO511 Genomics - Practical Repository</title>
@@ -69,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-684f5c8cc4ce7c0ec5f1fb4a38df694e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,6 +117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">BIO511 Genomics - Practical Repository</span>
     </a>
@@ -127,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -239,8 +242,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Practical 6: Plotting</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html">
+ <span class="dropdown-text">Practical 7: Object Oriented Programming</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html">
- <span class="dropdown-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="dropdown-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </li>  
     </ul>
   </li>
@@ -265,6 +272,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -311,8 +322,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 7: Object Oriented Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="menu-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </div>
 </li>
     </ul>
@@ -330,13 +347,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
   <li><a href="#simple-loops" id="toc-simple-loops" class="nav-link" data-scroll-target="#simple-loops">Simple loops</a></li>
-  <li><a href="#nested-loops" id="toc-nested-loops" class="nav-link" data-scroll-target="#nested-loops">Nested loops</a>
+  <li><a href="#while-loops" id="toc-while-loops" class="nav-link" data-scroll-target="#while-loops">While loops</a></li>
+  <li><a href="#nested-loops" id="toc-nested-loops" class="nav-link" data-scroll-target="#nested-loops">Nested loops</a></li>
+  <li><a href="#loop-through-a-dictionary" id="toc-loop-through-a-dictionary" class="nav-link" data-scroll-target="#loop-through-a-dictionary">Loop through a dictionary</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
+  <li><a href="#exercise-reverse-the-dictionary" id="toc-exercise-reverse-the-dictionary" class="nav-link" data-scroll-target="#exercise-reverse-the-dictionary">Exercise: Reverse the dictionary</a></li>
+  </ul></li>
+  <li><a href="#errors-and-tryexcept" id="toc-errors-and-tryexcept" class="nav-link" data-scroll-target="#errors-and-tryexcept">Errors and <code>try</code>/<code>except</code></a>
+  <ul class="collapse">
+  <li><a href="#handling-an-error" id="toc-handling-an-error" class="nav-link" data-scroll-target="#handling-an-error">Handling an error</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -358,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Alvar Almstedt, Emma Västerviga </p>
+             <p>Alvar Almstedt, Bart Edelbroek, Emma Västerviga </p>
           </div>
   </div>
     
@@ -388,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example code</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example code</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a list</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mylist <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"list"</span>, <span class="st">"can"</span>, <span class="st">"contain"</span>, <span class="st">"strings"</span>, <span class="st">"and"</span>, <span class="st">"numbers"</span>, <span class="dv">2</span>]</span>
@@ -399,60 +419,147 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mylist)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># print the first item in your list</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>prit(thislist[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mylist[<span class="dv">0</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="simple-loops" class="level2">
 <h2 class="anchored" data-anchor-id="simple-loops">Simple loops</h2>
 <ol type="1">
 <li>Create a list of 7 items. Loop over the list printing each item of the list.</li>
-<li>For each iteration, print the loop number (index). E.g. on the third loop (iteration) its supposed to print a “3”.</li>
+<li>For each iteration, print the loop number (index). E.g. on the third loop (iteration) it’s supposed to print a “3”.</li>
 <li>Add an If-statement to make the loop stop after printing its 5th item.</li>
+</ol>
+</section>
+<section id="while-loops" class="level2">
+<h2 class="anchored" data-anchor-id="while-loops">While loops</h2>
+<p>A <code>while</code> loop is useful when you want to continue until an event happens. A <code>for</code> loop can solve the same problem when you count occurrences and stop with <code>break</code>.</p>
+<p>Use this DNA sequence:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sequence <span class="op">=</span> <span class="st">'GATTACAGAACTGATAC'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Your task is to find the position of the <strong>third <code>A</code></strong> in the sequence. Use zero-based indexing, so the first character is at position <code>0</code>. The expected answer is:</p>
+<pre class="text"><code>The third A is at position 6</code></pre>
+<ol type="1">
+<li><p><strong>Use a <code>while</code> loop.</strong></p>
+<p>Start at position <code>0</code> and keep track of how many <code>A</code> bases you have seen. Use <code>a_count &lt; 3</code> as the condition for the <code>while</code> loop. Each time you inspect a base, increase the position by <code>1</code>. When the loop ends, the third <code>A</code> has been found at the resulting position.</p></li>
+<li><p><strong>Use a <code>for</code> loop.</strong></p>
+<p>Solve the same problem again. Use a counter to keep track of the number of <code>A</code> bases found.</p>
+<ul>
+<li>Hint: When the counter reaches <code>3</code>, use <code>break</code> to stop the loop.</li>
+</ul></li>
+<li><p>Print the position of the third <code>A</code> for both solutions. Both solutions should give the same answer.</p></li>
+</ol>
+<p>What is different about the two solutions? In the <code>while</code> loop, it checks whether you have found three <code>A</code> bases. In the <code>for</code> loop, you need to add the condition inside the loop yourself.</p>
+<ol start="4" type="1">
+<li>Add a variable in the beginning of the code <code>count_a = 3</code> and reuse that in both loops. You can now easily change the value for both loops. What happens if you look for the tenth <code>A</code> in the sequence?</li>
 </ol>
 </section>
 <section id="nested-loops" class="level2">
 <h2 class="anchored" data-anchor-id="nested-loops">Nested loops</h2>
-<p>Example code: Here’s a simple nested loop, looking for codons in sequences</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sequences <span class="op">=</span> [<span class="st">'ATCTGAGTCCACACATG'</span>, <span class="st">'GCGTCGTGCGATGTTCACGTTGAT'</span>, <span class="st">'CAGTAGTACTCAGT'</span>, <span class="st">'GGTATGCTAGACGAGATCTAATA'</span>]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>codons <span class="op">=</span> [<span class="st">'CCA'</span>, <span class="st">'TGT'</span>, <span class="st">'GTA'</span>, <span class="st">'TAG'</span>]</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sequence <span class="kw">in</span> sequences:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> codon <span class="kw">in</span> codons:</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> codon <span class="kw">in</span> sequence:</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(codon <span class="op">+</span> <span class="st">" is in "</span> <span class="op">+</span> sequence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>See if you can follow every line and work out how this example code works.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sequences <span class="op">=</span> [<span class="st">'ATCTGAGTCCACACATG'</span>, <span class="st">'GCGTCGTGCGATGTTCACGTTGAT'</span>, <span class="st">'CAGTAGTACTCAGT'</span>, <span class="st">'GGTATGCTAGACGAGATCTAATA'</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>codons <span class="op">=</span> [<span class="st">'CCA'</span>, <span class="st">'TGT'</span>, <span class="st">'GTA'</span>, <span class="st">'TAG'</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sequence <span class="kw">in</span> sequences:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> codon <span class="kw">in</span> codons:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> codon <span class="kw">in</span> sequence:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(codon <span class="op">+</span> <span class="st">" is in "</span> <span class="op">+</span> sequence)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>See if you can follow every line and work out how this example code works.</li>
+</ol>
 <p>When working with loops within loops it can get a bit tricky to keep track of things. A tip is to write the steps down in plain text before writing the actual code.</p>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"></h3>
-<p>Create a nested for loop as in the example which looks for start and stop codons in the <code>sequences</code> list from the example above. Which sequences have both a start and a stop codon?</p>
+<ol start="2" type="1">
+<li>Create a nested for loop as in the example which looks for start and stop codons in the <code>sequences</code> list from the example above. Which sequences have both a start and a stop codon?</li>
+</ol>
+<p>Hint: Start codons are <code>ATG</code> and stop codons are <code>TAA</code>, <code>TAG</code> and <code>TGA</code>.</p>
+<ol start="3" type="1">
+<li>Try to find a way to make sure that the start codon is before the stop codon in a sequence. Which sequence(s) have a start codon before a stop codon?</li>
+</ol>
 </section>
-<section id="section-1" class="level3">
-<h3 class="anchored" data-anchor-id="section-1"></h3>
-<p>Try to find a way to make sure that the start codon is before the stop codon in a sequence. Which sequence(s) have a start codon before a stop codon? We can loop through a dictionary by defining two variables: both the key and value.</p>
-<p>Example: Build a simple dict with the keys <code>pat_001</code>, <code>pat_002</code> and <code>pat_003</code> that has a value each. Here, the values are list:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="bu">dict</span>({<span class="st">'pat_001'</span>: [<span class="st">'bacZZt98'</span>, <span class="st">'bac889Ytd'</span>], <span class="st">'pat_002'</span>: [<span class="st">'bac0GFrr'</span>], <span class="st">'pat_003'</span>: [<span class="st">'bac889Ytd'</span>, <span class="st">'bacFq55Hj'</span>, <span class="st">'bacZZt98'</span>]})</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through the dict printing each key and each value as a list.</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key_patient, value_bact_list <span class="kw">in</span> data.items():  </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(key_patient)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(value_bact_list)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># add a line to see if the value (list) has the bacterial strain 'bac889Ytd'. </span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># If it does it should return 'True'. If not, it should say 'False'.</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key_patient, value_bact_list <span class="kw">in</span> data.items():  </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(key_patient)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(value_bact_list)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">'bac889Ytd'</span> <span class="kw">in</span> value_bact_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="loop-through-a-dictionary" class="level2">
+<h2 class="anchored" data-anchor-id="loop-through-a-dictionary">Loop through a dictionary</h2>
+<p>We can loop through a dictionary by defining two variables: both the key and value.</p>
+<p>Example: Build a simple dict with the keys <code>pat_001</code>, <code>pat_002</code> and <code>pat_003</code> that has a value each. Here, the values are lists:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pat_001'</span>: [<span class="st">'bacZZt98'</span>, <span class="st">'bac889Ytd'</span>], </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pat_002'</span>: [<span class="st">'bac0GFrr'</span>], </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pat_003'</span>: [<span class="st">'bac889Ytd'</span>, <span class="st">'bacFq55Hj'</span>, <span class="st">'bacZZt98'</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through the dict printing each key and each value as a list.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key_patient, value_bact_list <span class="kw">in</span> data.items():  </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(key_patient)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(value_bact_list)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># add a line to see if the value (list) has the bacterial strain 'bac889Ytd'. </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># If it does it should return 'True'. If not, it should say 'False'.</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key_patient, value_bact_list <span class="kw">in</span> data.items():  </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(key_patient)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(value_bact_list)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">'bac889Ytd'</span> <span class="kw">in</span> value_bact_list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercise-reverse-the-dictionary" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-reverse-the-dictionary">Exercise: Reverse the dictionary</h3>
+<p>The dictionary <code>data</code> links each patient to a list of bacterial strains. In this exercise, you will build the reverse relationship: each bacterium should be linked to the patients in which it occurs.</p>
+<p>Work through the following steps. Do not import any additional modules.</p>
+<ol type="1">
+<li><p><strong>Collect the unique bacteria.</strong></p>
+<p>Create an empty list called <code>unique_bacteria</code>. Loop through <code>data</code> and then through each patient’s list of bacteria. Add a bacterium to <code>unique_bacteria</code> only if it is not already in the list.</p>
+<p>Print the list. It should contain each bacterium once:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>[<span class="st">'bacZZt98'</span>, <span class="st">'bac889Ytd'</span>, <span class="st">'bac0GFrr'</span>, <span class="st">'bacFq55Hj'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><em>Hint:</em> Use the <code>append()</code> method and an <code>if</code> statement.</p></li>
+<li><p><strong>Create the reverse dictionary.</strong></p>
+<p>Create an empty dictionary called <code>bacteria_to_patients</code>. Use the list from step 1 to add each unique bacterium as a key. Give every key an empty list as its value.</p>
+<p>At this stage, the dictionary should have this structure:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bacZZt98'</span>: [],</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bac889Ytd'</span>: [],</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bac0GFrr'</span>: [],</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bacFq55Hj'</span>: []</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><em>Hint:</em> To check whether a bacterium is already a dictionary key, use <code>if bacterium not in bacteria_to_patients</code>.</p></li>
+<li><p><strong>Add the patients to the reverse dictionary.</strong></p>
+<p>Loop through <code>data</code> again. For each patient and bacterium, append the patient ID to the list belonging to that bacterium.</p>
+<p>Print the completed dictionary. It should look like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bacZZt98'</span>: [<span class="st">'pat_001'</span>, <span class="st">'pat_003'</span>],</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bac889Ytd'</span>: [<span class="st">'pat_001'</span>, <span class="st">'pat_003'</span>],</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bac0GFrr'</span>: [<span class="st">'pat_002'</span>],</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bacFq55Hj'</span>: [<span class="st">'pat_003'</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
 </section>
-<section id="section-2" class="level3">
-<h3 class="anchored" data-anchor-id="section-2"></h3>
-<p>Make a loop going through the dictionary saved as <code>data</code>, given in the example. Use the loop to create a list of all the unique bacteria. Start by creating an empty list. Then create a for-loop where, for each iteration, you add the current bacteria to the list. Next, introduce an if-statement. Before adding each bacteria, use the if-statement to check whether the bacteria is or is not already in the list. If it’s not in the list, add it (Hint: use the <code>append()</code> command). Otherwise, continue to the next bacteria. See if you can use a search engine (like google) to figure out how to append items to a list.</p>
 </section>
-<section id="section-3" class="level3">
-<h3 class="anchored" data-anchor-id="section-3"></h3>
-<p>Lets do the same thing but instead add each unique bacteria as a key in a dictionary. The values can be empty lists. Start by making an empty dictionary. Hint: Search online for how to list the keys in a dict, in order to compare each bacteria to the dict you’re building.</p>
+<section id="errors-and-tryexcept" class="level2">
+<h2 class="anchored" data-anchor-id="errors-and-tryexcept">Errors and <code>try</code>/<code>except</code></h2>
+<p>Errors are a normal part of programming. Python stops the program when it encounters an error unless we tell it how to respond.</p>
+<p>Run this example and observe the error:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>number <span class="op">=</span> <span class="bu">int</span>(<span class="st">'five'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(number)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>int()</code> function cannot convert the string <code>'five'</code> into a number. This produces a <code>ValueError</code>.</p>
+<section id="handling-an-error" class="level3">
+<h3 class="anchored" data-anchor-id="handling-an-error">Handling an error</h3>
+<p>A <code>try</code> block contains code that might cause an error. An <code>except</code> block says what to do if that error occurs.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    number <span class="op">=</span> <span class="bu">int</span>(<span class="st">'five'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(number)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'That is not a valid number.'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The program now prints a message instead of stopping with an error.</p>
 </section>
-<section id="section-4" class="level3">
-<h3 class="anchored" data-anchor-id="section-4"></h3>
-<p>Now let’s append the patients to the lists of each key. The final dict should look like this: ``<code>python {'bacZZt98': ['pat_001', 'pat_003'], 'bac889Ytd': ['pat_001', 'pat_003'], 'bac0GFrr': ['pat_002'], 'bacFq55Hj': ['pat_003']}</code></p>
+<section id="exercise" class="level3">
+<h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
+<p>Use the following list of values:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="st">'10'</span>, <span class="st">'5'</span>, <span class="st">'hello'</span>, <span class="st">'8'</span>, <span class="st">'three'</span>, <span class="st">'2'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li><p>Loop through <code>values</code> and convert each value to an integer using <code>int()</code>. Print each converted number. Observe what happens when the loop reaches a value that cannot be converted.</p></li>
+<li><p>Put the conversion and printing inside a <code>try</code> block. Use an <code>except</code> block to catch <code>ValueError</code> and print:</p>
+<pre class="text"><code>Skipping invalid value: hello</code></pre>
+<p>Use the value from the list in the message rather than always printing <code>hello</code>.</p></li>
+<li><p>Improve your solution so that the loop continues after an invalid value. The expected output is:</p>
+<pre class="text"><code>10
+5
+Skipping invalid value: hello
+8
+Skipping invalid value: three
+2</code></pre></li>
+<li><p>Change the list by adding another invalid value. Check that your code still handles it without stopping the loop.</p></li>
+</ol>
+<p>The goal is not to hide every error. Catch the specific error you expect, explain what happened, and let the program continue when that is appropriate.</p>
 
 
 </section>
@@ -511,13 +618,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

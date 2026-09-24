@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alvar Almstedt, Emma Västerviga">
+<meta name="author" content="Alvar Almstedt, Bart Edelbroek, Emma Västerviga">
 <meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 6: Python Plotting – BIO511 Genomics - Practical Repository</title>
@@ -34,14 +34,15 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-684f5c8cc4ce7c0ec5f1fb4a38df694e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,6 +82,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">BIO511 Genomics - Practical Repository</span>
     </a>
@@ -92,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -204,8 +207,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Practical 6: Plotting</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html">
+ <span class="dropdown-text">Practical 7: Object Oriented Programming</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html">
- <span class="dropdown-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="dropdown-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </li>  
     </ul>
   </li>
@@ -230,6 +237,10 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -276,8 +287,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 7: Object Oriented Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="menu-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </div>
 </li>
     </ul>
@@ -292,20 +309,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful links</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
-  <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
-  </ul></li>
-  <li><a href="#additional-plotting-assignment-optional" id="toc-additional-plotting-assignment-optional" class="nav-link" data-scroll-target="#additional-plotting-assignment-optional">Additional plotting assignment (optional)</a>
-  <ul class="collapse">
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"></a></li>
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"></a></li>
-  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7"></a></li>
-  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#additional-plotting-assignment-optional" id="toc-additional-plotting-assignment-optional" class="nav-link" data-scroll-target="#additional-plotting-assignment-optional">Additional plotting assignment (optional)</a></li>
   </ul>
 </nav>
     </div>
@@ -325,7 +330,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Alvar Almstedt, Emma Västerviga </p>
+             <p>Alvar Almstedt, Bart Edelbroek, Emma Västerviga </p>
           </div>
   </div>
     
@@ -358,9 +363,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
-<p>Let’s start with doing something quite similar to what we went through in today’s presentation. For this exercise you’ll need the following external libraries: pandas, matplotlib, seaborn, plotly and plotnine. You can use the environment file provided for the practice dugga or make your own environment if you prefer. Start the code with setting up a suitable environment for this practical.</p>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<p>Let’s start with doing something quite similar to what we went through in today’s presentation. For this exercise you’ll need the following external libraries: pandas, matplotlib, seaborn, plotly and plotnine. You can use the environment file provided for the practice dugga (available on Canvas) or make your own environment if you prefer. Start the code with setting up a suitable environment for this practical.</p>
+<p><br></p>
 <p>For the following subtasks you can refer to the slides of today’s presentation.</p>
 <ol type="a">
 <li><p>Load the ‘penguins’ dataset using seaborn. Remove any rows with missing values. Hint: Check out how to use the dropna() function.</p></li>
@@ -369,34 +373,22 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Create and save the same plot using <code>seaborn</code> instead. See if you can set colors based on species.</p></li>
 <li><p>Finally, try it out using <code>plotnine</code>. To save the plot you will need to import and use the function <code>ggsave</code>. (A good practice is to always import any packages or functions at the top of your script.)</p></li>
 </ol>
-</section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1"></h2>
+<p><br></p>
 <p>Create a histogram to show the distribution of the bill lengths in the data. Use the function you like best.</p>
-</section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2"></h2>
+<p><br></p>
 <p>Use the <code>pandas</code> library to group the penguins data by body mass and island and calculate the mean value of body mass per island. Save the results to a new variable. Create a bar plot where each bar represents the average body mass of one island.</p>
-</section>
-<section id="section-3" class="level2">
-<h2 class="anchored" data-anchor-id="section-3"></h2>
+<p><br></p>
 <p>Optional:</p>
-<p>Create two (or more) plots of your own choosing to visualize the penguins data. Use seaborn and try to subplot them together. Create a palette or use one of seaborne’s pre-existing palettes to separate the data by any factor you think is appropriate. (island, sex, species, etc.. )</p>
-</section>
+<p>Create two (or more) plots of your own choosing to visualize the penguins data. Use seaborn and try to subplot them together. Create a palette or use one of seaborn’s pre-existing palettes to separate the data by any factor you think is appropriate. (island, sex, species, etc.. )</p>
 </section>
 <section id="additional-plotting-assignment-optional" class="level1">
 <h1>Additional plotting assignment (optional)</h1>
 <p>For those who are asked to: hand in via github and send teachers a link.</p>
-<section id="section-4" class="level2">
-<h2 class="anchored" data-anchor-id="section-4"></h2>
+<p><br></p>
 <p>Load the <code>penguins</code> dataset using the <code>seaborn</code> module. Remove any rows with missing values. Hint: Check out how to use the dropna() function.</p>
-</section>
-<section id="section-5" class="level2">
-<h2 class="anchored" data-anchor-id="section-5"></h2>
+<p><br></p>
 <p>Create a scatterplot. The plot should show flipper length on the x-axis and body mass on the y-axis. Add an informative title, xlabel and ylabel. Save the plot.</p>
-</section>
-<section id="section-6" class="level2">
-<h2 class="anchored" data-anchor-id="section-6"></h2>
+<p><br></p>
 <p>Plot a distribution plot of the penguin flipper length using a histogram.</p>
 <ol type="a">
 <li><p>What does this plot show? What are some conclusions you can draw from it?</p></li>
@@ -404,10 +396,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Add appropriate y and x-labels, as well as a title.</p></li>
 <li><p>Save the plot.</p></li>
 </ol>
-</section>
-<section id="section-7" class="level2">
-<h2 class="anchored" data-anchor-id="section-7"></h2>
-<p>Read the data <code>CNV_log2_skin_melanoma.csv</code> from the practice dugga using pandas.</p>
+<p><br></p>
+<p>Read the data <code>CNV_log2_skin_melanoma.csv</code> from the practice dugga (available on Canvas) using pandas.</p>
 <ol type="a">
 <li><p>Create a violinplot (the <code>seaborn</code> package is useful for this) with chromosome on the x-axis and cnv_log2 on the y-axis. Add informative titles and save the plot.</p></li>
 <li><p>What do you see? Which chromosome(s) has the largest CNV interval? Which chromosome(s) has the smallest interval? Do the intervals add up with the numbers in the dataframe you used for the plot?</p></li>
@@ -415,7 +405,6 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -470,13 +459,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

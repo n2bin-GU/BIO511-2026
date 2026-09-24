@@ -1,7 +1,7 @@
 ---
 title: "Practical 4: Python Modules"
 subtitle: "BIO511 Genomics - Importing and the standard Library (stdlib)"
-author: "Alvar Almstedt, Emma Västerviga, Emilio Rudbeck"
+author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga, Emilio Rudbeck"
 date: August 2026
 format: 
   html:
@@ -22,11 +22,11 @@ For example, pip contains over 675 000 packages as of the time of writing!!!
 Remember the suggested general workflow when attempting to install something:
 
 * create new conda env
-* try conda install with conda-forge and bioconda channels. If you dont find what you need:
+* try conda install with conda-forge and bioconda channels. If you don't find what you need:
 * install pip in your env and try that
-* If you still cant find the thing you need you can attempt to install from source via a github repo but that can be a little bit annoying (especially for a beginner)
+* If you still can't find the thing you need you can attempt to install from source via a github repo but that can be a little bit annoying (especially for a beginner)
 
-*(You dont have to use conda if you know what youre doing. Its just a convenient suggestion. Other package managers are available)*
+*(You don't have to use conda if you know what you're doing. It's just a convenient suggestion. Other package managers are available)*
 
 # Useful links
 
@@ -37,9 +37,9 @@ Remember the suggested general workflow when attempting to install something:
 
 # Exercises
 
-In these exercises you will learn how you can import functions from other scripts that you have written as well as install an external modul as well as install an external module.
+In these exercises you will learn how you can import functions from other scripts that you have written as well as install an external module.
 
-You will be given two scripts (see below), where the main.py will import all functions from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to aminoacids. 
+You will be given two scripts (see below), where the main.py will import all functions from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to amino acids. You will also need a FASTA file to run the scripts on, which you can find on Canvas.
 To get this to work, you first need to import the amino acid translation function, install and call Bio.Seq and see how variables are passed between two files.
 
 
@@ -48,40 +48,48 @@ To get this to work, you first need to import the amino acid translation functio
 You will need to install Biopython to use the Seq object. We have not discussed it yet so you have to look up the documentation yourself.
 :::
 
+<br>
 
-##
 Navigate the imported code from premade_script.py
 
-### 
+<br>
+
 Using the comments in the function codons, can you describe what it does?
 
-###
+<br>
+
 What's the input of the function?
 
-### 
+<br>
+
 In the main function of main.py, add a print statement to print the output of the function
 
+<br>
 
-##
 Open the script called premade_script.py and find the function called exercise_function
 
-### 
+<br>
+
 What's the input of the function?
 
-### 
+<br>
+
 What does this function do?
 
-### 
+<br>
+
 Try calling it through main.py (see how the previous function is imported and used)
 
+<br>
 
-##
 Make the exercise_function work
 
-###
-A non standard module is needed to run the function. Which? Install/use/call it 
+<br>
 
-###
+A non-standard module is needed to run the function. Which? Install/use/call it 
+
+<br>
+
 Check the output of the script
 
 
@@ -113,7 +121,7 @@ def main():
     
     # Here the students should check the output of the function
     
-    # Here the students will need to call the exercise_function from my_function.py
+    # Here the students will need to call the exercise_function from premade_script.py
     
     # And check the output of that function
 if __name__ == "__main__":

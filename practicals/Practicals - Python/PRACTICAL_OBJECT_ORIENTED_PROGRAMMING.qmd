@@ -1,7 +1,7 @@
 ---
 title: "Practical 7: Object Oriented Programming"
 subtitle: "BIO511 Genomics -  Object Oriented Programming (OOP) in Python"
-author: "Bart Edelbroek"
+author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
 date: October 2026
 format: 
   html:

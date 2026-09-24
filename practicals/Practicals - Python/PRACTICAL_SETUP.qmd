@@ -17,7 +17,7 @@ Welcome!!
 
 The exercises for this first lesson are meant to connect the python part of the course to what you have previously done in the unix shell scripting part of the course and are meant to be done in the terminal (not jupyter). You can start using jupyter after today.
 
-If you think there is a lot of new syntax, dont worry. We will begin explaning the python syntax from the ground up starting tomorrow.
+If you think there is a lot of new syntax, don't worry. We will begin explaining the python syntax from the ground up starting tomorrow.
 
 ## Some useful links
 [Jupyter notebooks (text)](https://www.datacamp.com/tutorial/tutorial-jupyter-notebook)
@@ -29,7 +29,7 @@ If you think there is a lot of new syntax, dont worry. We will begin explaning t
 
 
 We are going to use github repos to present and compare each assignment within groups.
-Create a github repo for this course. Name it `BIO511_python_2025_<My-Name>`. Create a folder for the first assignment in your new git repo and push your solutions for the next exercise below. This should allow you to easily show the rest of the group what you did tomorrow.
+Create a github repo for this course. Name it `BIO511_python_2026_<My-Name>`. Create a folder for the first assignment in your new git repo and push your solutions for the next exercise below. This should allow you to easily show the rest of the group what you did tomorrow.
 
 Let’s start exploring Python! Some of the terms and tools used below we will go through in greater detail later on in the course. For now, let’s just try them out. 
 
@@ -71,7 +71,7 @@ Create a new directory in the one you're in right now
 ```python
 os.mkdir("test_dir_from_python")
 ```
-Create a subrdirectory in the one you just created
+Create a subdirectory in the one you just created
 ```python
 os.mkdir("test_dir_from_python/subdir1")
 ```
@@ -82,7 +82,7 @@ os.makedirs("test_dir_from_python/subdir2/subdir2.1")
 What happens if you try to create the directories you just made again? Try it out.
 
 
-Should you want to create a directory that might already exist without getting an error message, just to create it if it doesn't exist and otherwise do nothing, you can use the command `os.makedirs()` with an input argument especially made for cases like these, called exist_true. `exist_ok` is set to `False` by default so we need to set it to `True` like this:
+Should you want to create a directory that might already exist without getting an error message, just to create it if it doesn't exist and otherwise do nothing, you can use the command `os.makedirs()` with an input argument especially made for cases like these, called `exist_ok`. `exist_ok` is set to `False` by default so we need to set it to `True` like this:
 ```python
 os.makedirs("test_dir_from_python/subdir2/", exist_ok=True)
 ```
@@ -106,7 +106,7 @@ We can use a function called `basename` to work with any path we’re given. The
 my_file_path = 'test_dir_from_python/subdir2/my_python_script.py'
 # Get only the file name
 os.path.basename(my_file_path)
-````
+```
 
 ## arguments
 
@@ -125,6 +125,6 @@ Save the file and try to run it from the terminal. This time we should give an i
 ```python
 python test_dir_from_python/subdir2/input_arguments_test.py "This is a test string"
 ```
-Finally, we will combine what we’ve gone through so far. Create a script with and input argument that is a path to one of your files. Make the script print the basename of the file.
+Finally, we will combine what we’ve gone through so far. Create a script with an input argument that is a path to one of your files. Make the script print the basename of the file.
 
 
