@@ -39,16 +39,63 @@ type(mylist)
 print(mylist)
 
 # print the first item in your list
-prit(thislist[0])
+print(mylist[0])
 ```
 
 ## Simple loops 
+
 1. Create a list of 7 items. Loop over the list printing each item of the list. 
 2. For each iteration, print the loop number (index). E.g. on the third loop (iteration) its supposed to print a "3".
 3. Add an If-statement to make the loop stop after printing its 5th item. 
 
+
+
+## While loops
+
+A `while` loop is useful when you want to continue until an event happens. A
+`for` loop can solve the same problem when you count occurrences and stop with
+`break`.
+
+Use this DNA sequence:
+
+```python
+sequence = 'GATTACAGAACTGATAC'
+```
+
+Your task is to find the position of the **third `A`** in the sequence. Use
+zero-based indexing, so the first character is at position `0`. The expected
+answer is:
+
+```text
+The third A is at position 6
+```
+
+1. **Use a `while` loop.**
+
+   Start at position `0` and keep track of how many `A` bases you have seen.
+   Use `a_count < 3` as the condition for the `while` loop. Each time you
+   inspect a base, increase the position by `1`. When the loop ends, the third
+   `A` has been found at the resulting position.
+
+2. **Use a `for` loop.**
+
+   Solve the same problem again. Use a counter to keep track of the number of
+   `A` bases found. 
+
+   - Hint: When the counter reaches `3`, use `break` to stop the loop.
+
+3. Print the position of the third `A` for both solutions. Both solutions
+   should give the same answer.
+
+What is different about the two solutions? In the `while` loop, it
+checks whether you have found three `A` bases. In the `for` loop,
+you need to add the condition inside the loop yourself.
+
+4. Add a variable in the beginning of the code `count_a = 3` and reuse that in both loops. 
+You can now easily change the value for both loops. What happens if you look for the 
+tenth `A` in the sequence?
+
 ## Nested loops
-Example code: Here's a simple nested loop, looking for codons in sequences
 ```python
 sequences = ['ATCTGAGTCCACACATG', 'GCGTCGTGCGATGTTCACGTTGAT', 'CAGTAGTACTCAGT', 'GGTATGCTAGACGAGATCTAATA']
 codons = ['CCA', 'TGT', 'GTA', 'TAG']
@@ -57,25 +104,33 @@ for sequence in sequences:
     if codon in sequence:
       print(codon + " is in " + sequence)
 ```
-See if you can follow every line and work out how this example code works.
+1. See if you can follow every line and work out how this example code works.
 
-
-When working with loops within loops it can get a bit tricky to keep track of things. A tip is to write the steps down in plain text before writing the actual code.
+When working with loops within loops it can get a bit tricky to keep track of things. 
+A tip is to write the steps down in plain text before writing the actual code.
  
-
-###
-Create a nested for loop as in the example which looks for start and stop codons in the `sequences` list from the example above.
+2. Create a nested for loop as in the example which looks for start and stop codons in the 
+`sequences` list from the example above.
 Which sequences have both a start and a stop codon?
 
-###
-Try to find a way to make sure that the start codon is before the stop codon in a sequence.
+Hint: Start codons are `ATG` and stop codons are `TAA`, `TAG` and `TGA`.
+
+
+3. Try to find a way to make sure that the start codon is before the stop codon in a sequence.
 Which sequence(s) have a start codon before a stop codon? 
+
+## Loop through a dictionary
+
 We can loop through a dictionary by defining two variables: both the key and value.
 
 Example:
 Build a simple dict with the keys `pat_001`, `pat_002` and `pat_003` that has a value each. Here, the values are list:
 ```python
-data = dict({'pat_001': ['bacZZt98', 'bac889Ytd'], 'pat_002': ['bac0GFrr'], 'pat_003': ['bac889Ytd', 'bacFq55Hj', 'bacZZt98']})
+data = {
+    'pat_001': ['bacZZt98', 'bac889Ytd'], 
+    'pat_002': ['bac0GFrr'], 
+    'pat_003': ['bac889Ytd', 'bacFq55Hj', 'bacZZt98']
+}
 
 # Loop through the dict printing each key and each value as a list.
 for key_patient, value_bact_list in data.items():  
@@ -90,20 +145,131 @@ for key_patient, value_bact_list in data.items():
   print(value_bact_list)
   'bac889Ytd' in value_bact_list
 ```
-###
-Make a loop going through the dictionary saved as `data`, given in the example.
-Use the loop to create a list of all the unique bacteria.
-Start by creating an empty list. Then create a for-loop where, for each iteration, you add the current bacteria to the list.
-Next, introduce an if-statement. Before adding each bacteria, use the if-statement to check whether the bacteria is or is not already in the list. 
-If it's not in the list, add it (Hint: use the `append()` command). Otherwise, continue to the next bacteria. See if you can use a search engine (like google) to figure out how to append items to a list. 
 
-###
-Lets do the same thing but instead add each unique bacteria as a key in a dictionary. The values can be empty lists.
-Start by making an empty dictionary. Hint: Search online for how to list the keys in a dict, in order to compare each bacteria to the dict you're building. 
+### Exercise: Reverse the dictionary
 
-###
-Now let's append the patients to the lists of each key.
-The final dict should look like this: 
-````python
-{'bacZZt98': ['pat_001', 'pat_003'], 'bac889Ytd': ['pat_001', 'pat_003'], 'bac0GFrr': ['pat_002'], 'bacFq55Hj': ['pat_003']}
-``
+The dictionary `data` links each patient to a list of bacterial strains. In
+this exercise, you will build the reverse relationship: each bacterium should
+be linked to the patients in which it occurs.
+
+Work through the following steps. Do not import any additional modules.
+
+1. **Collect the unique bacteria.**
+
+   Create an empty list called `unique_bacteria`. Loop through `data` and then
+   through each patient's list of bacteria. Add a bacterium to
+   `unique_bacteria` only if it is not already in the list.
+
+   Print the list. It should contain each bacterium once:
+
+   ```python
+   ['bacZZt98', 'bac889Ytd', 'bac0GFrr', 'bacFq55Hj']
+   ```
+
+   *Hint:* Use the `append()` method and an `if` statement.
+
+2. **Create the reverse dictionary.**
+
+   Create an empty dictionary called `bacteria_to_patients`. Use the list from
+   step 1 to add each unique bacterium as a key. Give every key an empty list
+   as its value.
+
+   At this stage, the dictionary should have this structure:
+
+   ```python
+   {
+       'bacZZt98': [],
+       'bac889Ytd': [],
+       'bac0GFrr': [],
+       'bacFq55Hj': []
+   }
+   ```
+
+   *Hint:* To check whether a bacterium is already a dictionary key, use
+   `if bacterium not in bacteria_to_patients`.
+
+3. **Add the patients to the reverse dictionary.**
+
+   Loop through `data` again. For each patient and bacterium, append the
+   patient ID to the list belonging to that bacterium.
+
+   Print the completed dictionary. It should look like this:
+
+   ```python
+   {
+       'bacZZt98': ['pat_001', 'pat_003'],
+       'bac889Ytd': ['pat_001', 'pat_003'],
+       'bac0GFrr': ['pat_002'],
+       'bacFq55Hj': ['pat_003']
+   }
+   ```
+
+## Errors and `try`/`except`
+
+Errors are a normal part of programming. Python stops the program when it
+encounters an error unless we tell it how to respond.
+
+Run this example and observe the error:
+
+```python
+number = int('five')
+print(number)
+```
+
+The `int()` function cannot convert the string `'five'` into a number. This
+produces a `ValueError`.
+
+### Handling an error
+
+A `try` block contains code that might cause an error. An `except` block says
+what to do if that error occurs.
+
+```python
+try:
+    number = int('five')
+    print(number)
+except ValueError:
+    print('That is not a valid number.')
+```
+
+The program now prints a message instead of stopping with an error.
+
+### Exercise
+
+Use the following list of values:
+
+```python
+values = ['10', '5', 'hello', '8', 'three', '2']
+```
+
+1. Loop through `values` and convert each value to an integer using `int()`.
+   Print each converted number. Observe what happens when the loop reaches a
+   value that cannot be converted.
+
+2. Put the conversion and printing inside a `try` block. Use an `except`
+   block to catch `ValueError` and print:
+
+   ```text
+   Skipping invalid value: hello
+   ```
+
+   Use the value from the list in the message rather than always printing
+   `hello`.
+
+3. Improve your solution so that the loop continues after an invalid value.
+   The expected output is:
+
+   ```text
+   10
+   5
+   Skipping invalid value: hello
+   8
+   Skipping invalid value: three
+   2
+   ```
+
+4. Change the list by adding another invalid value. Check that your code still
+   handles it without stopping the loop.
+
+The goal is not to hide every error. Catch the specific error you expect,
+explain what happened, and let the program continue when that is appropriate.
