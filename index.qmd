@@ -50,15 +50,15 @@ The following practical exercises focus on genomics workflows:
 ### 🐍 Python Programming
 Lastly, we cover Python programming with these practical exercises:
 
-- **[ 🔒 Practical 0: Introduction](practicals/Practicals%20-%20Python/PRACTICAL_SETUP_.qmd)**
-- **[ 🔒 Practical 1: Python Data Types and If/Else Clauses](practicals/Practicals%20-%20Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE_.qmd)**
-- **[ 🔒 Practical 2: Python Loops](practicals/Practicals%20-%20Python/PRACTICAL_LOOPING_.qmd)**
-- **[ 🔒 Practical 3: Python Functions](practicals/Practicals%20-%20Python/PRACTICAL_FUNCTIONS_.qmd)**
-- **[ 🔒 Practical 4: Python Modules](practicals/Practicals%20-%20Python/PRACTICAL_MODULES_.qmd)**
-- **[ 🔒 Practical 5: Files](practicals/Practicals%20-%20Python/PRACTICAL_FILES_.qmd)**
-- **[ 🔒 Practical 6: Plotting](practicals/Practicals%20-%20Python/PRACTICAL_PLOTTING_.qmd)**
-- **[ 🔒 Practical 7: Object Oriented Programming](practicals/Practicals%20-%20Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING_.qmd)**
-- **[ 🔒 Practical 8: Algorithmic Thinking in Genomics](practicals/Practicals%20-%20Python/PRACTICAL_ALGORITHMIC_THINKING_.qmd)**
+- **[ Practical 0: Introduction](practicals/Practicals%20-%20Python/PRACTICAL_SETUP.qmd)**
+- **[ Practical 1: Python Data Types and If/Else Clauses](practicals/Practicals%20-%20Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE.qmd)**
+- **[ Practical 2: Python Loops](practicals/Practicals%20-%20Python/PRACTICAL_LOOPING.qmd)**
+- **[ Practical 3: Python Functions](practicals/Practicals%20-%20Python/PRACTICAL_FUNCTIONS.qmd)**
+- **[ Practical 4: Python Modules](practicals/Practicals%20-%20Python/PRACTICAL_MODULES.qmd)**
+- **[ Practical 5: Files](practicals/Practicals%20-%20Python/PRACTICAL_FILES.qmd)**
+- **[ Practical 6: Plotting](practicals/Practicals%20-%20Python/PRACTICAL_PLOTTING.qmd)**
+- **[ Practical 7: Object Oriented Programming](practicals/Practicals%20-%20Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.qmd)**
+- **[ Practical 8: Algorithmic Thinking in Genomics](practicals/Practicals%20-%20Python/PRACTICAL_ALGORITHMIC_THINKING.qmd)**
 
 ---
 
