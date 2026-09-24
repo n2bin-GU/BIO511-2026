@@ -33,8 +33,8 @@ Here are the practical exercises related to command line programming section of 
 - **[ Practical 5: Software & Containers](practicals/Practicals%20-%20CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.qmd)**
 
 #### Coding Best Practices
-- **[ 🔒 Practical 1: Best practices](practicals/Practicals%20-%20Best_practices/PRACTICAL_BEST_PRACTICES_.qmd)**
-- **[ 🔒 Practical 2: Version Control and Collaborative Coding](practicals/Practicals%20-%20Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING_.qmd)**
+- **[ Practical 1: Best practices](practicals/Practicals%20-%20Best_practices/PRACTICAL_BEST_PRACTICES.qmd)**
+- **[ Practical 2: Version Control and Collaborative Coding](practicals/Practicals%20-%20Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.qmd)**
 
 ### 🧬 Genomics Workflows
 The following practical exercises focus on genomics workflows:

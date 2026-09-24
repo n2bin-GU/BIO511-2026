@@ -345,7 +345,7 @@ while getopts "i:o:p:h" opt; do
 done
 
 # We can add checks to ensure that the required options are provided
-if [ -z "$INPUT_DIR" ] || [ -z "$OUTPUT_DIR" ]; then
+if [ ! -d "$INPUT_DIR" ] || [ ! -d "$OUTPUT_DIR" ]; then
   echo "Error: Input and output directories are required."
   echo "Usage: $0 -i input_dir -o output_dir -p gene_name_pattern"
   exit 1
