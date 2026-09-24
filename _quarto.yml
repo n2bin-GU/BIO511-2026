@@ -48,6 +48,8 @@ website:
         contents:
         - href: "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.qmd"
           text: "Practical 1: Best Practices"
+        - href: "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.qmd"
+          text: "Practical 2: Version Control and Collaborative Coding"
 
     - id: gwf
       title: "Genomics Workflows"
