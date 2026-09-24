@@ -477,86 +477,130 @@
   {
     "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html",
     "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html",
-    "title": "Best Practices 1: Algorithmic Thinking",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
     "section": "",
-    "text": "By this point in the course you have been introduced to the basics of programming through bash, but you have not yet been introduced to the more advanced algorithms that are used in bioinformatics. In this practical, instead of simple questions like “how do i write this loop”, we now ask a deeper question:\nWhat kind of problem is this, and what kind of algorithm is powerful enough to solve it at genomic scale?\nModern bioinformatics depends on a small number of recurring algorithmic ideas. Sequence alignment, read mapping, genome assembly, gene prediction, taxonomic classification, and variant calling all look different on the surface, but many of them reuse the same patterns:\n\nbreak a biological object into computable pieces\nscore many possible explanations\nsearch efficiently through a huge space of possibilities\nuse data structures that avoid scanning everything\naccept tradeoffs between exactness, speed, memory, and biological realism\n\n\n\n\n\n\n\nLearning Objectives\n\n\n\nBy the end of this practical, you should be able to:\n\nExplain why naive algorithms often fail on genomic-scale data\nRecognize common genomics algorithms and the problems they solve\nReflect on algorithmic tradeoffs: exact vs heuristic, fast vs sensitive, memory-efficient vs simple\nDesign pseudocode to describe your approach to solving a problem before writing the code",
+    "text": "For this practical we will start analyzing bioinformatic datasets, applying the best practices and habits that make our code reproducible, resilient and intepreteable for others. The practical is split into two subsections",
     "crumbs": [
       "Coding Best Practices",
       "Practical 1: Best Practices"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#algorithmic-vocabulary",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#algorithmic-vocabulary",
-    "title": "Best Practices 1: Algorithmic Thinking",
-    "section": "Algorithmic Vocabulary",
-    "text": "Algorithmic Vocabulary\n\n\n\n\n\n\n\nConcept\nMeaning in practice\n\n\n\n\nInput\nThe data the algorithm starts with, such as reads, sequences, or tables\n\n\nOutput\nThe result, such as an alignment, assembly, variant list, or classification\n\n\nState\nInformation retained by the algorithm in the background\n\n\nScore\nA number/metric used to compare the possible solutions given by algorithm\n\n\nSearch space\nAll possible solutions the algorithm could consider\n\n\nComplexity\nHow runtime or memory grows as input grows\n\n\nExact algorithm\nGuaranteed to find the optimal answer under its model\n\n\nHeuristic algorithm\nFaster strategy that may approximate or miss some answers\n\n\nDynamic programming\nA method that breaks a problem into smaller subproblems and reuses their solutions\n\n\nData structure\nA special organization of data that makes some operations efficient\n\n\n\nIn genomics, the most important question is often not “can I solve this for one sequence?” but “can I compute my full dataset within a reasonable time and memory usage?” The correct algorithmic choice depends on the biological question, the data type, and the scale of the problem.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Scenario",
+    "text": "Scenario\nYou have received assembly-quality summaries for a set of bacterial isolates. Someone wrote a Bash script to select genomes for downstream comparative genomics. The script runs and produces a list of “good” assemblies. Your task is to decide whether that list deserves to be trusted, then improve the analysis without accidentally changing its intended rule.\n\n\n\n\n\n\nLearning Objectives\n\n\n\nBy the end of this practical, you should be able to:\n\nRecognise hidden assumptions and fragile coding practices.\nImprove readability, parameterisation and error handling in a Bash analysis.\nDocument an analysis so another person can rerun it.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 1: Best Practices"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#exact-string-matching-and-k-mers",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#exact-string-matching-and-k-mers",
-    "title": "Best Practices 1: Algorithmic Thinking",
-    "section": "Exact String Matching and k-mers",
-    "text": "Exact String Matching and k-mers\nOne of the simplest genomics algorithms is exact string matching: finding where a DNA pattern occurs in a longer sequence.\nQuestion: Where does the pattern ATG occur in a genome, and which short sequence words occur most often?\nNaive algorithm:\nFor each position in the genome:\n    Compare the pattern to the genome at that position\n    If all characters match:\n        Report the position\ngenome=\"TTGATGCCCATGAAATGA\"\npattern=\"ATG\"\n\nmatches=''\n\nfor (( i=0; i&lt;=${#genome}-${#pattern}; i++ )); do\n    if [[ ${genome:i:${#pattern}} == $pattern ]]; then\n        matches+=\"$(($i+1)) \"\n    fi\ndone\n\necho \"Pattern $pattern occurs at positions: $matches\"\nThis is fine for a small genome and a short pattern. But large-scale genomics often uses k-mers, fixed-length sequence words, to make matching faster. These are constructed by sliding a window of length k across the sequence, moving one base at a time.\nsequence=\"ATGACCATGATTACGCCAAGCT\"\nk=3\n\nfor (( i=0; i&lt;=${#sequence}-k; i++ )); do\n    kmer=${sequence:i:k}\n    echo $kmer\ndone\nk-mers are used in many genomics tools:\n\nread error correction\ngenome assembly\nmetagenomic classification\ncontamination checks\nAs sequence variation representations (similar to SNPs, but for short sequences)\n\n\n\n\n\n\n\nExercise\n\n\n\nSince kmers only move one base at a time, there is typically a lot of redudancy and duplicates. Write bash code that counts all 4-mers in this sequence:\nsequence=\"ATGACCATGATTACGCCAAGCT\"\nThen answer:\n\nWhich 4-mer occurs most often?\nWhat would happen if k were very small (think 1 or 2-mers)?\nWhat would happen if k were larger than the read length?\n\n[Hint: Try and pipe the output of the k-mer loop with a combination of sort and uniq to count the unique k-mers.]\n\n\nThe key idea is that in bioinformatics, we often use sequence representations that arent necessarily biologically meaningful by themselves, but are computationally useful. k-mers are a good example of this: they are not genes, proteins, or regulatory elements or SNPs, but they are a convenient way to represent sequences for many algorithms and can be analysed to find biologically meaningful patterns.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#files-download-zipped-file-from-canvas",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#files-download-zipped-file-from-canvas",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Files – download zipped file from Canvas",
+    "text": "Files – download zipped file from Canvas\nPractical_1/\n└──hands_on/\n    ├── bad_analysis.sh\n    ├── README_STARTER.md\n    └── data/\n        ├── assembly_stats.tsv\nThe tables contain sample ID, assembly size (bp), number of contigs, N50 (bp), GC content (%), completeness (%) and contamination (%). Treat these as summary statistics supplied by upstream tools; today the focus is the code that uses them.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 1: Best Practices"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#sequence-alignment-with-dynamic-programming",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#sequence-alignment-with-dynamic-programming",
-    "title": "Best Practices 1: Algorithmic Thinking",
-    "section": "Sequence Alignment with Dynamic Programming",
-    "text": "Sequence Alignment with Dynamic Programming\nThe first genomics algorithm we will look at is sequence alignment. In principle it is as simple as what we did for exact string matching, but in practice it is more complicated because we need to allow for substitutions, insertions, and deletions when comparing one or more sequences.\nQuestion: How do we compare two sequences when they may contain substitutions, insertions, and deletions?\nFor example:\nSequence A: A C G T A C\nSequence B: A C - T G C\nThe challenge is that many alignments are possible. A brute-force search over all alignments becomes impossible as sequence length grows.\nDynamic programming solves this by breaking the alignment into smaller subproblems and storing their scores in a matrix.\nWell known algorithms:\n\n\n\nAlgorithm\nUse\n\n\n\n\nNeedleman-Wunsch\nGlobal alignment of two full sequences\n\n\nSmith-Waterman\nLocal alignment of best matching subsequences\n\n\nViterbi\nMost likely path through a hidden Markov model\n\n\n\nFor global alignment, define:\nscore[i][j] = best alignment score between the first i bases of sequence A\n              and the first j bases of sequence B\nAt each cell, the algorithm chooses among three possibilities:\ndiagonal: align A[i] with B[j]\nup:       align A[i] with a gap\nleft:     align B[j] with a gap\nSimplified recurrence:\nscore[i][j] = max(\n    score[i-1][j-1] + match_or_mismatch,\n    score[i-1][j]   + gap_penalty,\n    score[i][j-1]   + gap_penalty\n)\nThis is algorithmically sophisticated because the method does not try every full alignment independently. It reuses partial solutions. Runtime is still usually proportional to the product of sequence lengths, O(nm), but that is far better than enumerating all possible alignments.\n\n\n\n\n\n\nBiological Interpretation\n\n\n\nThe scoring system is a biological model. A high match score says matches are likely or valuable. A strong gap penalty says insertions/deletions are costly. Changing the scoring scheme changes what kind of alignment the algorithm prefers.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1-crime-scene-investigation",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1-crime-scene-investigation",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 1 — Crime scene investigation",
+    "text": "Part 1 — Crime scene investigation\nRun the analysis from the hands_on directory. Do not edit it yet. In pairs, list as many concerns as you can. For each concern, label it R = readability, P = reproducibility, B = robustness, or S = scientific correctness.\n./bad_analysis.sh\ncat results.txt\n\nKey questions\n\nWhat do columns 3, 6 and 7 represent? How do you know?\nWhy are the thresholds 100, 95 and 5? Are the inequalities part of the scientific definition?\nWhat happens if the input file is missing or empty?\nWhat assumption does grep -v sample make about the header and sample names?\nCould the temporary file overwrite something important?\nDoes the script notice NA values or biologically implausible assembly statistics?\nWhat does “done” tell you about whether the analysis succeeded?",
     "crumbs": [
       "Coding Best Practices",
       "Practical 1: Best Practices"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#read-mapping-with-indexes-bwt-and-fm-index",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#read-mapping-with-indexes-bwt-and-fm-index",
-    "title": "Best Practices 1: Algorithmic Thinking",
-    "section": "Read Mapping with Indexes, BWT, and FM-index",
-    "text": "Read Mapping with Indexes, BWT, and FM-index\nQuestion: Where did each sequencing read most likely come from in the reference genome?\nA naive mapper compares every read to every genome position. Modern mappers avoid this by building an index of the reference genome.\nWell known ideas and tools:\n\n\n\n\n\n\n\nIdea\nUsed for\n\n\n\n\nsuffix arrays\nfast substring search\n\n\nBurrows-Wheeler Transform (BWT)\ncompressed representation that preserves searchable structure\n\n\nFM-index\nmemory-efficient exact matching based on BWT\n\n\nBWA and Bowtie\nwidely used read mappers based on these ideas\n\n\n\nConceptual algorithm:\nBuild an index of the reference genome\nFor each read:\n    Search for exact seed matches using the index\n    Extend or refine candidate matches\n    Score candidate alignments\n    Report the best location or mark the read as ambiguous\nThe cleverness is in the index. Instead of storing every possible alignment, the algorithm stores the reference in a form that supports fast backward search.\nThis is why read mapping can be feasible even when there are millions of reads. The expensive work is partly shifted into building an efficient reference index.\n\n\n\n\n\n\nCode example\n\n\n\n\n\nThis code shows the core idea behind BWT/FM-index searching. It builds a suffix array, creates a Burrows-Wheeler Transform, and uses backward search to find exact matches.\ndef suffix_array(text):\n    return sorted(range(len(text)), key=lambda position: text[position:])\n\n\ndef burrows_wheeler_transform(text):\n    if not text.endswith(\"$\"):\n        text = text + \"$\"\n\n    sa = suffix_array(text)\n    bwt = []\n\n    for position in sa:\n        if position == 0:\n            bwt.append(text[-1])\n        else:\n            bwt.append(text[position - 1])\n\n    return \"\".join(bwt), sa, text\n\n\ndef build_fm_index(bwt):\n    alphabet = sorted(set(bwt))\n    running_counts = {}\n\n    for character in alphabet:\n        running_counts[character] = 0\n\n    occ = []\n    for character in bwt:\n        occ.append(running_counts.copy())\n        running_counts[character] = running_counts[character] + 1\n    occ.append(running_counts.copy())\n\n    first_column_start = {}\n    total = 0\n    for character in alphabet:\n        first_column_start[character] = total\n        total = total + running_counts[character]\n\n    return first_column_start, occ\n\n\ndef fm_index_positions(pattern, bwt, suffix_array_values, first_column_start, occ):\n    top = 0\n    bottom = len(bwt)\n\n    for character in reversed(pattern):\n        if character not in first_column_start:\n            return []\n\n        top = first_column_start[character] + occ[top][character]\n        bottom = first_column_start[character] + occ[bottom][character]\n\n        if top &gt;= bottom:\n            return []\n\n    return sorted(suffix_array_values[top:bottom])\n\n\nreference = \"GATTACAGATTACA\"\nbwt, sa, indexed_text = burrows_wheeler_transform(reference)\nfirst_column_start, occ = build_fm_index(bwt)\n\nprint(indexed_text)\nprint(bwt)\nprint(fm_index_positions(\"TACA\", bwt, sa, first_column_start, occ))",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2-make-it-understandable",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2-make-it-understandable",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 2 — Make it understandable",
+    "text": "Part 2 — Make it understandable\nCreate analysis.sh from bad_analysis.sh. Improve variable names, formatting and comments. Keep the output scientifically identical for now. Make the QC criteria visible near the top of the script. Add comments only where they explain intent or assumptions.\nCheckpoint: your partner should be able to explain every command and identify every QC threshold without decoding a one-liner.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 1: Best Practices"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#hidden-markov-models-for-predicting-genes-and-proteins",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#hidden-markov-models-for-predicting-genes-and-proteins",
-    "title": "Best Practices 1: Algorithmic Thinking",
-    "section": "Hidden Markov Models for predicting genes and proteins",
-    "text": "Hidden Markov Models for predicting genes and proteins\nFurther along when working with genomic pipelines, we typically want to predict what biological meaning the sequences have. For example, we may want to predict which parts of a genome are coding, which parts are intergenic, and which parts are regulatory. There are many ways to do this, such as likelihood-based predicitions or HMMs, for now we will focus on HMMs.\nQuestion: Given an observed DNA or protein sequence, what hidden biological states most likely generated it?\nA hidden Markov model, or HMM, is useful when the observed data are visible but the underlying biological state is hidden.\nExample:\nObserved sequence: A T G G C A T A A ...\nHidden state:      intergenic, start codon, coding region, stop codon, ...\nAn HMM includes:\n\nstates, such as coding and non-coding\ntransition probabilities between states\nemission probabilities for observed bases or amino acids\n\nThe Viterbi algorithm finds the most likely sequence of hidden states.\nConceptual pseudocode:\nFor each position in the sequence:\n    For each possible hidden state:\n        Calculate the best score for arriving at this state\n        Store where that best score came from\nTrace back from the best final state to recover the most likely path\nHMMs appear in:\n\ngene prediction\nprotein domain detection\nprofile HMM searches, such as HMMER\nannotation of conserved protein families\n\nHMMs are powerful because they let us model biological uncertainty. Instead of saying “this position definitely is coding”, the algorithm asks which hidden explanation is most probable under the model.\n\n\n\n\n\n\nCode example\n\n\n\n\n\nThis toy HMM has two hidden states: coding and noncoding. The observed data are DNA bases. The Viterbi algorithm finds the most likely hidden-state path.\nimport math\n\n\ndef log_probability(value):\n    return math.log(value)\n\n\ndef viterbi(observations, states, start_probability, transition_probability, emission_probability):\n    dynamic_table = []\n    backpointer = []\n\n    first_column = {}\n    first_backpointer = {}\n\n    for state in states:\n        first_column[state] = (\n            log_probability(start_probability[state]) +\n            log_probability(emission_probability[state][observations[0]])\n        )\n        first_backpointer[state] = None\n\n    dynamic_table.append(first_column)\n    backpointer.append(first_backpointer)\n\n    for position in range(1, len(observations)):\n        column = {}\n        column_backpointer = {}\n\n        for current_state in states:\n            best_previous_state = None\n            best_score = None\n\n            for previous_state in states:\n                score = (\n                    dynamic_table[position - 1][previous_state] +\n                    log_probability(transition_probability[previous_state][current_state]) +\n                    log_probability(emission_probability[current_state][observations[position]])\n                )\n\n                if best_score is None or score &gt; best_score:\n                    best_score = score\n                    best_previous_state = previous_state\n\n            column[current_state] = best_score\n            column_backpointer[current_state] = best_previous_state\n\n        dynamic_table.append(column)\n        backpointer.append(column_backpointer)\n\n    final_state = max(dynamic_table[-1], key=dynamic_table[-1].get)\n    best_path = [final_state]\n\n    for position in range(len(observations) - 1, 0, -1):\n        final_state = backpointer[position][final_state]\n        best_path.append(final_state)\n\n    best_path.reverse()\n    return best_path\n\n\nstates = [\"coding\", \"noncoding\"]\nstart_probability = {\"coding\": 0.5, \"noncoding\": 0.5}\ntransition_probability = {\n    \"coding\": {\"coding\": 0.90, \"noncoding\": 0.10},\n    \"noncoding\": {\"coding\": 0.10, \"noncoding\": 0.90}\n}\nemission_probability = {\n    \"coding\": {\"A\": 0.20, \"T\": 0.20, \"G\": 0.30, \"C\": 0.30},\n    \"noncoding\": {\"A\": 0.30, \"T\": 0.30, \"G\": 0.20, \"C\": 0.20}\n}\n\nprint(viterbi(\"ATGGCGC\", states, start_probability, transition_probability, emission_probability))",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3-break-your-program",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3-break-your-program",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 3 — Break your program",
+    "text": "Part 3 — Break your program\nTry cases that should not silently succeed. Improve the script so failures produce a useful message and non-zero exit status.\n\nnonexistent input file\nempty input file\nwrong number of arguments\noutput directory that does not yet exist\na filename containing spaces\n\nConsider whether set -euo pipefail is appropriate. If you use it, be able to explain what each option protects against, and what it does not check.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 1: Best Practices"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#course-and-textbook-references",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#course-and-textbook-references",
-    "title": "Best Practices 1: Algorithmic Thinking",
-    "section": "Course and Textbook References",
-    "text": "Course and Textbook References\n\nRahmann, S. Lecture “Algorithms for Sequence Analysis”. Saarland University, Germany.\nArtificial Intelligence Core Course. Planning example/course material. Saarland University, Germany.\nNavarro, G. and Raffinot, M. Flexible Pattern Matching in Strings. Cambridge University Press.\nGusfield, D. Algorithms on Strings, Trees, and Sequences. Cambridge University Press.\nMakinen, V., Belazzougui, D., Cunial, F. and Tomescu, A. I. Genome-Scale Algorithm Design: Biological Sequence Analysis in the Era of High-Throughput Sequencing. Cambridge University Press.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-4-reproducibility-swap",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-4-reproducibility-swap",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 4 — Reproducibility swap",
+    "text": "Part 4 — Reproducibility swap\nComplete the README. Swap project directories with another pair. Without verbal instructions, the other pair should be able to answer:\n\nWhat does the analysis do?\nHow do I run it?\nWhat inputs and parameters are required?\nWhat output is produced?\nWhat QC rule is applied?\nWhich assumptions or sanity checks are not covered by the script?\n\n\n\n\n\n\n\nBonus — Make it reusable\n\n\n\n\n\nChange the script so input and output are command-line arguments. Then make the QC thresholds parameters, with sensible defaults if you are comfortable doing so. This could for example be done with the OPTARGS described in CLI practical 4. Its also possible to do it using positional arguments (e.g., $1 for the input file, $2 for the output file, $3 for the first QC threshold, etc.)\n./analysis.sh data/assembly_stats.tsv results/selected_genomes.txt or ./analysis.sh -a data/assembly_stats.tsv -o results/selected_genomes.txt\nOptional extension: ./analysis.sh data/assembly_stats.tsv results/selected_genomes.txt 100 95 5\nDo not use absolute paths tied to your own computer. Decide whether your script should create the output directory or require it to exist, and document that choice.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 1: Best Practices"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#algorithm-and-tool-references",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#algorithm-and-tool-references",
-    "title": "Best Practices 1: Algorithmic Thinking",
-    "section": "Algorithm and Tool References",
-    "text": "Algorithm and Tool References\n\nNeedleman, S. B. and Wunsch, C. D. (1970). A general method applicable to the search for similarities in the amino acid sequence of two proteins. Journal of Molecular Biology.\nSmith, T. F. and Waterman, M. S. (1981). Identification of common molecular subsequences. Journal of Molecular Biology.\nAltschul, S. F. et al. (1990). Basic local alignment search tool. Journal of Molecular Biology.\nBurrows, M. and Wheeler, D. J. (1994). A block-sorting lossless data compression algorithm. Digital Systems Research Center Research Report.\nFerragina, P. and Manzini, G. (2000). Opportunistic data structures with applications. Proceedings of FOCS.\nLi, H. and Durbin, R. (2009). Fast and accurate short read alignment with Burrows-Wheeler transform. Bioinformatics.\nLangmead, B. et al. (2009). Ultrafast and memory-efficient alignment of short DNA sequences to the human genome. Genome Biology.\nPevzner, P. A., Tang, H. and Waterman, M. S. (2001). An Eulerian path approach to DNA fragment assembly. Proceedings of the National Academy of Sciences.\nBankevich, A. et al. (2012). SPAdes: A new genome assembly algorithm and its applications to single-cell sequencing. Journal of Computational Biology.\nEddy, S. R. (1998). Profile hidden Markov models. Bioinformatics.\nEddy, S. R. (2011). Accelerated profile HMM searches. PLOS Computational Biology.\nMcKenna, A. et al. (2010). The Genome Analysis Toolkit: A MapReduce framework for analyzing next-generation DNA sequencing data. Genome Research.\nWood, D. E. and Salzberg, S. L. (2014). Kraken: Ultrafast metagenomic sequence classification using exact alignments. Genome Biology.\nOndov, B. D. et al. (2016). Mash: Fast genome and metagenome distance estimation using MinHash. Genome Biology.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario-1",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario-1",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Scenario",
+    "text": "Scenario\nYou have a tab-separated annotation table of genes involved in antimicrobial resistance from a set of bacterial genomes. Each row describes one annotated gene and contains three columns: strain, gene, and product.\nstrain  gene    product\nS01 gyrA    DNA gyrase subunit A\nS01 blaTEM  beta-lactamase TEM\nS02 tetA    tetracycline efflux protein\n\n\n\n\n\n\n\nTask:\n\n\n\nYou want to find which bacterial strains contain a particular target gene. In the end the\n\nstrain names should be saved to a file\nhow many strains that contain the target gene should be reported\n\nWork in pairs. The instructor will tell you the target gene. Do not start by writing Bash commands.",
+    "crumbs": [
+      "Coding Best Practices",
+      "Practical 1: Best Practices"
+    ]
+  },
+  {
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1---write-pseudocode-first",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1---write-pseudocode-first",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 1 - Write pseudocode first",
+    "text": "Part 1 - Write pseudocode first\nDescribe the analysis as a sequence of plain-language steps. Your pseudocode should be understandable to another student even if they have not seen your commands.\nBefore coding, swap pseudocode your classmate. Can they understand the plan without asking what you meant? Revise anything ambiguous.",
+    "crumbs": [
+      "Coding Best Practices",
+      "Practical 1: Best Practices"
+    ]
+  },
+  {
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2---translate-your-plan-into-bash",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2---translate-your-plan-into-bash",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 2 - Translate your plan into Bash",
+    "text": "Part 2 - Translate your plan into Bash\nNow translate each pseudocode step into commands that we’ve introduced in the previous practicals. Useful commands may include grep, cut, sort, uniq, wc and awk.\nKeep the solution simple, remember the tips about good coding practice. The goal is not to write the shortest possible command.\nSave your commands in a small bash script. As you work, consider:\n\nCan another person tell what biological question the script answers?\nIs the target gene easy to find and change in the script?\nDoes the script create a clearly named output file?\nAre there comments where they help explain the purpose or reasoning?\nCan you inspect an intermediate result if something looks wrong?",
+    "crumbs": [
+      "Coding Best Practices",
+      "Practical 1: Best Practices"
+    ]
+  },
+  {
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3---swap-scripts",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3---swap-scripts",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Part 3 - Swap scripts",
+    "text": "Part 3 - Swap scripts\nGive your script to your classmate. Do not explain it at first. The receiver should run and read the script and answer:\n\nWhat biological question does the script answer?\nWhich gene is being searched for?\nWhat output does it produce?\nDoes it count genes or unique samples?\nCould you change the target gene without rewriting the workflow?\nIs any line difficult to understand?\nWhat is one thing that is particularly clear, and one thing you would improve?\n\nReturn the script and feedback. The original author may make one or two improvements.\n\n\n\n\n\n\nBonus - Predict before you test\n\n\n\n\n\nIf you have reached here before it’s time to reconvene, let us know and we will provide a surprise annotation table. Before running your script, inspect the file and write down which samples you think should count as containing the target gene. The intended question is:\nWhich samples have an exact match to the target gene in the gene column?\nThen run your script on the surprise table and compare the output with your prediction.\nIf they differ, investigate why. Look especially for:\n\nthe same gene occurring more than once in one sample\nsimilar but non-identical gene names\nthe target gene name appearing in the product description rather than the gene column\ncapitalization differences\nwhether your command searches the whole line or a particular column",
+    "crumbs": [
+      "Coding Best Practices",
+      "Practical 1: Best Practices"
+    ]
+  },
+  {
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#final-wrap-up---discuss-and-revise",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#final-wrap-up---discuss-and-revise",
+    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "section": "Final wrap up - Discuss and revise",
+    "text": "Final wrap up - Discuss and revise\nWith your partner, discuss what the surprise dataset revealed. If necessary, revise your script so that it answers the stated biological question more precisely.\nBe ready to explain one design choice to the class.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 1: Best Practices"
@@ -618,25 +662,11 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BIO511 Genomics - Practical Repository",
-    "section": "",
-    "text": "This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.\n\n\n\nPractical 0: Pre-course Setup\n\n\n\n\nHere are the practical exercises related to command line programming section of the course:\n\n\n\nPractical 1: CLI Basics\nLecture: HPC Clusters Intro\nPractical 2: Setting up the HPC\nPractical 3: Workspace Management and Data Management\nPractical 4: Scripting and Advanced Text Manipulation\nPractical 5: Software & Containers\n\n\n\n\n\nPractical 1: Best practices\n🔒 Practical 2: Version Control and Collaborative Coding\n\n\n\n\n\nThe following practical exercises focus on genomics workflows:\n\n\n\n🔒 Practical 1: Quality Control and Classification\n🔒 Practical 2: Genome Assembly and Mapping\n🔒 Practical 3: Genome Annotation\n\n\n\n\n\n🔒 Additional: Build curated reference files\n\n\n\n\n\nLastly, we cover Python programming with these practical exercises:\n\n🔒 Practical 0: Introduction\n🔒 Practical 1: Python Data Types and If/Else Clauses\n🔒 Practical 2: Python Loops\n🔒 Practical 3: Python Functions\n🔒 Practical 4: Python Modules\n🔒 Practical 5: Files\n🔒 Practical 6: Plotting\n🔒 Practical 7: Algorithmic Thinking in Genomics\n\n\nFor questions or issues, please contact the course instructors."
-  },
-  {
-    "objectID": "index.html#course-overview",
-    "href": "index.html#course-overview",
-    "title": "BIO511 Genomics - Practical Repository",
-    "section": "",
-    "text": "This repository contains practical exercises for the BIO511 Genomics course. Use this page, or the navbar to navigate to the different sections.\n\n\n\nPractical 0: Pre-course Setup\n\n\n\n\nHere are the practical exercises related to command line programming section of the course:\n\n\n\nPractical 1: CLI Basics\nLecture: HPC Clusters Intro\nPractical 2: Setting up the HPC\nPractical 3: Workspace Management and Data Management\nPractical 4: Scripting and Advanced Text Manipulation\nPractical 5: Software & Containers\n\n\n\n\n\nPractical 1: Best practices\n🔒 Practical 2: Version Control and Collaborative Coding\n\n\n\n\n\nThe following practical exercises focus on genomics workflows:\n\n\n\n🔒 Practical 1: Quality Control and Classification\n🔒 Practical 2: Genome Assembly and Mapping\n🔒 Practical 3: Genome Annotation\n\n\n\n\n\n🔒 Additional: Build curated reference files\n\n\n\n\n\nLastly, we cover Python programming with these practical exercises:\n\n🔒 Practical 0: Introduction\n🔒 Practical 1: Python Data Types and If/Else Clauses\n🔒 Practical 2: Python Loops\n🔒 Practical 3: Python Functions\n🔒 Practical 4: Python Modules\n🔒 Practical 5: Files\n🔒 Practical 6: Plotting\n🔒 Practical 7: Algorithmic Thinking in Genomics\n\n\nFor questions or issues, please contact the course instructors."
-  },
-  {
-    "objectID": "practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.html",
-    "href": "practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.html",
-    "title": "Practical 4: Scripts and Advanced Text Manipulation",
-    "section": "",
-    "text": "Now that you’ve learned the basics of the command-line, its high time that we start working on making our computational work structured and reproducible. While runnning pipes in our command line is a good way to execute many steps at once, writing our code in structured machine-readable text files called scripts allows us to expand the automate steps in a much more reproducible and capable way. In genomics, you’ll pretty much always need to process massive datasets - think millions of sequences, GWAS data with millions of variants, or annotation files with complex formatting. Typically these files have a standardized structure, which the handling of we can automate by creating generalizable and well-formatted scripts.\n\n\n\n\n\n\nLearning Objectives\n\n\n\nBy the end of this practical you should be able to:\n\nUse awk to execute short programs for text manipulation\nWrite iterative bash scripts using for loops and if/else statements\nDebug your scripts using global set-options, traps and custom error messages\nBe able to write basic flexible shell scripts using OPTARGS\nConvert bash scripts into pseudocode\n\n\n\n\n\nFor this practical, we will work with actual data. This means that the files will be much larger than before and you will really need to apply what you’ve learned. The data-package contains annotation data for 5 E. coli genomes. You may either retrieve these from the canvas course page, or if you want, you can try to fetch them from the HPC group directory (if you have access).\n# Download the data from canvas\n# or \n# use scp (secure copy) to copy the data from the HPC group directory\nscp &lt;CIDusername&gt;@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/data/genomes.tar.gz ~/CLI_intro/data/\n\n# Unpack the data\n# You might need to use a different command depending on your OS\n# For Linux:\ntar -xvzf ~/CLI_intro/data/genomes.tar.gz -C ~/CLI_intro/data/",
+    "objectID": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#submit-through-slurm",
+    "href": "practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html#submit-through-slurm",
+    "title": "Practical: Setting up the HPC",
+    "section": "12.2 Submit through SLURM",
+    "text": "12.2 Submit through SLURM\n\nGenome assembly\nRead mapping over real datasets\nLarge BLAST searches\nLarge Python/R analyses\nLong jobs\nMemory-intensive jobs\nParallel CPU jobs\nGPU workloads\n\nIf you are unsure, submit it as a job rather than running it for a long time on vera2.",
     "crumbs": [
       "Intro to Command Line",
       "Practical 2: Setting up the HPC"
@@ -1251,132 +1281,84 @@
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
+    "objectID": "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html#build-test-and-run-locally",
+    "href": "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html#build-test-and-run-locally",
+    "title": "Practical 5: Software Installation and Containers",
+    "section": "Build, test, and run locally",
+    "text": "Build, test, and run locally\n# Build a read-only image from the def file (locally)\nsingularity build kraken2.sif kraken2.def\n\n# Test that kraken works by running a version check\nsingularity exec kraken2.sif kraken2 --version\n\n# We also made a little text file in /home, lets check that too\n# For this, try to shell into the container and once your in try to print the contents of the file to stdout\nsingularity shell kraken2.sif",
+    "crumbs": [
+      "Intro to Command Line",
+      "Practical 5: Software & Containers"
+    ]
+  },
+  {
+    "objectID": "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html#slurm-job-script-to-invoke-singularity-container-based-software",
+    "href": "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html#slurm-job-script-to-invoke-singularity-container-based-software",
+    "title": "Practical 5: Software Installation and Containers",
+    "section": "SLURM job script to invoke singularity container based software",
+    "text": "SLURM job script to invoke singularity container based software\nAs you already know, running software in the login node of an HPC is frowned upon. Instead, you should submit jobs to the scheduler (SLURM in this case), which allows you to take up space on one of the production nodes in the cluster. Below is a example of a SLURM job script that i (Tor) have used to run a Roary pangenome analysis on another cluster. Se if you can configure it to run kraken2 instead. All HPCs are different, so sure to adjust paths, partitions, memory, time, etc to fit your HPC. The manual for Vera can be found here.\n#!/bin/bash -l\n#SBATCH -A nbin2-gu               # Project ID\n#SBATCH -J Roary_Pangenome        # Job name\n#SBATCH -t 20:00:00               # Time limit \n#SBATCH -n 1                      # Number of tasks (processes)\n#SBATCH -p main                   # Partition to submit to\n#SBATCH --mem=200G                # Memory per node\n#SBATCH --output=/cfs/klemming/projects/supr/naiss2024-22-639/05_PANGENOME_ANALYSIS/logs/roary_%j.out  # Standard output\n#SBATCH --error=/cfs/klemming/projects/supr/naiss2024-22-639/05_PANGENOME_ANALYSIS/logs/roary_%j.err   # Standard error\n\n# Load necessary modules (Do you need to load any modules for singularity on your HPC?)\nml singularity/4.1.1-cpeGNU-23.12\n\n# Define paths to script and container\nSINGULARITY_CONTAINER=\"/cfs/klemming/projects/supr/naiss2024-22-639/DBGWAS_test\"\"\n\n# Execute script within singularity environment\nsrun singularity exec -B /cfs/klemming/projects/supr/nbin2-gu:/mnt/data $SINGULARITY_CONTAINER roary -e --mafft -p 8 -f /mnt/data/05_PANGENOME_ANALYSIS/output/ /mnt/data/05_PANGENOME_ANALYSIS/input/*.gff\nOnce a jobscript is done, you can submit it to SLURM with the sbatch command, monitor its progress with squeue, and check the output files once its done.\nWe wont be running a jobscript for kraken2 here, but try to set one up yourself. You can use the jobscript above as a template Well run kraken2 for real in the next practical\n# Example of submitting a jobscript\nsbatch job_kraken2.slurm\n\n# Monitor\nsqueue -u $USER\n# or \nscontrol show job JOBID\n\n# Check output files\ntail -20 kraken2_12345.out\n\n\n\n\n\n\n\nKey Takeaways\n\n\n\n\nPackage managers (apt, conda) simplify software installation and dependency management.\nConda environments allow for isolated setups, preventing conflicts between projects.\nContainers (Singularity/Apptainer) provide portability and reproducibility across different systems.\nAlways bind necessary directories (data, databases) when running containers on HPC.\n\n\n\n\n\n\n\n\n\nPro Tips\n\n\n\n\nTest containers locally before HPC deployment. Run exec, shell, and run commands to ensure functionality.\nKeep containers minimal; BioContainers images are a quick and reliable base.\nUse %help and labels in your definition file; inspect with singularity run-help and singularity inspect. This helps reproducibility for other users.\nBind data with --bind host_dir:container_dir; pass multiple directories with variables\nIn some cases, you may need additional config for your runs. Instead of making complex invokes in the jobscript, consider writing a script to run the analysis, and then invoke that script within the container.",
+    "crumbs": [
+      "Intro to Command Line",
+      "Practical 5: Software & Containers"
+    ]
+  },
+  {
+    "objectID": "practicals/README_practicals.html",
+    "href": "practicals/README_practicals.html",
+    "title": "BIO511 Genomics - Practical Repository",
     "section": "",
-    "text": "For this practical we will start analyzing bioinformatic datasets, applying the best practices and habits that make our code reproducible, resilient and intepreteable for others. The practical is split into two subsections",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 5: Software & Containers"
-    ]
+    "text": "Here you will find the practicals divided into::\n\nCommand-line programming\nBest coding practices\nPython programming\nWhole genome sequencing analysis\n\nEnjoy :)"
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Scenario",
-    "text": "Scenario\nYou have received assembly-quality summaries for a set of bacterial isolates. Someone wrote a Bash script to select genomes for downstream comparative genomics. The script runs and produces a list of “good” assemblies. Your task is to decide whether that list deserves to be trusted, then improve the analysis without accidentally changing its intended rule.\n\n\n\n\n\n\nLearning Objectives\n\n\n\nBy the end of this practical, you should be able to:\n\nRecognise hidden assumptions and fragile coding practices.\nImprove readability, parameterisation and error handling in a Bash analysis.\nDocument an analysis so another person can rerun it.",
-    "crumbs": [
-      "Intro to Command Line",
-      "Practical 5: Software & Containers"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#files-download-zipped-file-from-canvas",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#files-download-zipped-file-from-canvas",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Files – download zipped file from Canvas",
-    "text": "Files – download zipped file from Canvas\nPractical_1/\n└──hands_on/\n    ├── bad_analysis.sh\n    ├── README_STARTER.md\n    └── data/\n        ├── assembly_stats.tsv\nThe tables contain sample ID, assembly size (bp), number of contigs, N50 (bp), GC content (%), completeness (%) and contamination (%). Treat these as summary statistics supplied by upstream tools; today the focus is the code that uses them.",
-    "crumbs": [
-      "Coding Best Practices",
-      "Practical 1: Best Practices"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1-crime-scene-investigation",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1-crime-scene-investigation",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Part 1 — Crime scene investigation",
-    "text": "Part 1 — Crime scene investigation\nRun the analysis from the hands_on directory. Do not edit it yet. In pairs, list as many concerns as you can. For each concern, label it R = readability, P = reproducibility, B = robustness, or S = scientific correctness.\n./bad_analysis.sh\ncat results.txt\n\nKey questions\n\nWhat do columns 3, 6 and 7 represent? How do you know?\nWhy are the thresholds 100, 95 and 5? Are the inequalities part of the scientific definition?\nWhat happens if the input file is missing or empty?\nWhat assumption does grep -v sample make about the header and sample names?\nCould the temporary file overwrite something important?\nDoes the script notice NA values or biologically implausible assembly statistics?\nWhat does “done” tell you about whether the analysis succeeded?",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html",
+    "title": "Practical 2: Version Control and Collaborative Coding",
+    "section": "",
+    "text": "As we refine our skills in command-line operations and text manipulation, it becomes increasingly important to manage our codebase in such a way that changes are tracked, collaboration is facilitated, and the history of the project is preserved. This practical will introduce you to version control using Git and collaborative coding practices with GitHub, which are essential for maintaining reproducible and organized computational workflows.\nA few core concepts are:\n\nRepository (repo): a project folder that Git watches (contains a hidden .git/ directory).\nWorking tree: your actual files on disk.\nStaging area (index): a waiting room where you queue the exact changes for your next snapshot.\nCommit: a permanent snapshot with a message (what/why).\nBranch: a label that moves forward as you commit, representing a line of work (e.g., main, feature/x).\n.gitignore: patterns telling Git which files/folders not to track (e.g., results/).\n\n\n\n\n\n\n\nLearning Objectives\n\n\n\nBy the end of this practical you should be able to:\n\nUse some basic git commands like git init, git add, git commit, git status, and git push\nUnderstand the concept of branches and how to create and switch between them using git switch\nCollaborate with others using GitHub by branching, creating pull requests from your branches, and merging code",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2-make-it-understandable",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2-make-it-understandable",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Part 2 — Make it understandable",
-    "text": "Part 2 — Make it understandable\nCreate analysis.sh from bad_analysis.sh. Improve variable names, formatting and comments. Keep the output scientifically identical for now. Make the QC criteria visible near the top of the script. Add comments only where they explain intent or assumptions.\nCheckpoint: your partner should be able to explain every command and identify every QC threshold without decoding a one-liner.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#initializing-a-local-git-repository",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#initializing-a-local-git-repository",
+    "title": "Practical 2: Version Control and Collaborative Coding",
+    "section": "Initializing a Local Git Repository",
+    "text": "Initializing a Local Git Repository\nTo initialize a local git repository, first make a new directory for your project and navigate into it:\nmkdir my_project\ncd my_project\nThen, initialize the git repository with the following command:\ngit init\nThis command will create a new subdirectory named .git that contains all of your necessary repository files for a local git repository skeleton. At this point, nothing in your project is tracked yet.\nYou can then start adding (using git add) files to your repository and commit changes as you go, checking changes with git status and git log:\ntouch testdata.txt analysis.sh\ngit add analysis.sh\n\n# Check that the change is staged\ngit status\n\n# Commit the staged changes\ngit commit -m \"Initial commit\"\n\n# View the commit history\ngit log\n\n\n\n\n\n\nExercise: Adding some files, ignoring others\n\n\n\nCreate two files, name one of them testdata.txt and the other one analysis.sh. Then, run git status and look at the output.\nThen, create a .gitignore file and add testdata.txt to it. After that, run git status again to see the effect of the .gitignore file:\necho \"testdata.txt\" &gt;&gt; .gitignore\ngit status\n\n# Commit after updating the .gitignore file\ngit commit -m \"Update .gitignore\"\n\n# The testdata.txt might already have been added to repo (if you added it in the previous step), you can remove it by using:\ngit rm --cached testdata.txt\ngit status\ngit commit -m \"Remove testdata.txt from tracking\"\n\n# Now try adding the file again and see what happens\ngit add testdata.txt\nKey Question: What is happening? In what scenario would you want to use a .gitignore file?",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3-break-your-program",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3-break-your-program",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Part 3 — Break your program",
-    "text": "Part 3 — Break your program\nTry cases that should not silently succeed. Improve the script so failures produce a useful message and non-zero exit status.\n\nnonexistent input file\nempty input file\nwrong number of arguments\noutput directory that does not yet exist\na filename containing spaces\n\nConsider whether set -euo pipefail is appropriate. If you use it, be able to explain what each option protects against, and what it does not check.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#managing-new-development-with-branches",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#managing-new-development-with-branches",
+    "title": "Practical 2: Version Control and Collaborative Coding",
+    "section": "Managing new Development with Branches",
+    "text": "Managing new Development with Branches\nWhen working on new features or bug fixes, it’s a good practice to create a new branch. This allows you to work independently of the main branch (main or master) and merge your changes only when they are ready (Avoiding conflicts and keeping the main branch stable). Branches can be made and handled with both the git switch and git checkout commands, however switch is a bit more intuitive for branch use.\n# We use the `git switch -c` command to create and switch to a new branch in one step\ngit switch -c feature/newtextfile\n\n# Look at the new status message to see that branching worked\ngit status\n\n# Work on your changes, then add and commit them\ntouch newtextfile.txt\ngit add newtextfile.txt\necho \"This is a new text file\" &gt; newtextfile.txt\ngit commit -m \"Work on new feature\"\n\n# Switch back to the main branch\ngit switch main\n\n# Merge the feature branch into the main branch\ngit merge feature/newtextfile\n\n\n\n\n\n\nExercise:Resolving a merge conflict\n\n\n\nConflicts happen when two branches change the same line of a file without a clear timeline of which change should take precedence, and Git can’t decide which version to keep for you.\n1. Branch a new feature from main\ngit switch main\ntouch divtextfile.txt\necho \"line one\" &gt; divtextfile.txt\ngit add divtextfile.txt\ngit commit -m \"Add divtextfile on main\"\n2. Make a conflicting change on the feature branch\ngit switch -c feature/divtextfile\necho \"edited on feature branch\" &gt; divtextfile.txt\ngit add divtextfile.txt\ngit commit -m \"Edit divtextfile on feature branch\"\n3. Make another edit on the main branch before merging\ngit switch main\necho \"edited on main, take 2\" &gt; divtextfile.txt\ngit add divtextfile.txt\ngit commit -m \"Edit divtextfile on main again\"\n4. Merge the feature branch into main and resolve the conflict\n# From main \ngit merge feature/divtextfile\nA conflict occurred, resolved and commit the changes to complete the merge.\n\n\n\n\n\n\nSolution (No peeking!)\n\n\n\n\n\n# The conflict markers will appear in the file\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD\nedited on main, take 2\n=======\nedited on feature branch\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/divtextfile\n\n# Resolve the conflict by editing the file to keep the desired changes, then add and commit the resolved file\ngit add divtextfile.txt\ngit commit -m \"Resolve merge conflict in divtextfile.txt\"",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-4-reproducibility-swap",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-4-reproducibility-swap",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Part 4 — Reproducibility swap",
-    "text": "Part 4 — Reproducibility swap\nComplete the README. Swap project directories with another pair. Without verbal instructions, the other pair should be able to answer:\n\nWhat does the analysis do?\nHow do I run it?\nWhat inputs and parameters are required?\nWhat output is produced?\nWhat QC rule is applied?\nWhich assumptions or sanity checks are not covered by the script?\n\n\n\n\n\n\n\nBonus — Make it reusable\n\n\n\n\n\nChange the script so input and output are command-line arguments. Then make the QC thresholds parameters, with sensible defaults if you are comfortable doing so. This could for example be done with the OPTARGS described in CLI practical 4. Its also possible to do it using positional arguments (e.g., $1 for the input file, $2 for the output file, $3 for the first QC threshold, etc.)\n./analysis.sh data/assembly_stats.tsv results/selected_genomes.txt or ./analysis.sh -a data/assembly_stats.tsv -o results/selected_genomes.txt\nOptional extension: ./analysis.sh data/assembly_stats.tsv results/selected_genomes.txt 100 95 5\nDo not use absolute paths tied to your own computer. Decide whether your script should create the output directory or require it to exist, and document that choice.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#fetchingpulling-and-pushing-changes",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#fetchingpulling-and-pushing-changes",
+    "title": "Practical 2: Version Control and Collaborative Coding",
+    "section": "Fetching/Pulling and Pushing Changes",
+    "text": "Fetching/Pulling and Pushing Changes\nInteraction with remote repositiores involves fetching changes from the remote repository, pulling updates to your local repository, and pushing your local changes to the remote repository.\n\nFetching: git fetch downloads changes from the remote repository without integrating them into your local branch.\nPulling: git pull downloads changes from the remote repository and integrates them into your local branch.\nPushing: git push uploads your local changes to the remote repository, making them available for integration for others to use.\n\nYour repository that you made on GitHub might have already have an initial commit (usually a README file). Lets fetch the changes from the remote repository to ensure your local repository is up-to-date:\ngit pull origin main\nReplace main with the name of your default branch if it is different.",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"
     ]
   },
   {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario-1",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#scenario-1",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Scenario",
-    "text": "Scenario\nYou have a tab-separated annotation table of genes involved in antimicrobial resistance from a set of bacterial genomes. Each row describes one annotated gene and contains three columns: strain, gene, and product.\nstrain  gene    product\nS01 gyrA    DNA gyrase subunit A\nS01 blaTEM  beta-lactamase TEM\nS02 tetA    tetracycline efflux protein\n\n\n\n\n\n\n\nTask:\n\n\n\nYou want to find which bacterial strains contain a particular target gene. In the end the\n\nstrain names should be saved to a file\nhow many strains that contain the target gene should be reported\n\nWork in pairs. The instructor will tell you the target gene. Do not start by writing Bash commands.",
-    "crumbs": [
-      "Coding Best Practices",
-      "Practical 1: Best Practices"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1---write-pseudocode-first",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-1---write-pseudocode-first",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Part 1 - Write pseudocode first",
-    "text": "Part 1 - Write pseudocode first\nDescribe the analysis as a sequence of plain-language steps. Your pseudocode should be understandable to another student even if they have not seen your commands.\nBefore coding, swap pseudocode your classmate. Can they understand the plan without asking what you meant? Revise anything ambiguous.",
-    "crumbs": [
-      "Coding Best Practices",
-      "Practical 1: Best Practices"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2---translate-your-plan-into-bash",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-2---translate-your-plan-into-bash",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Part 2 - Translate your plan into Bash",
-    "text": "Part 2 - Translate your plan into Bash\nNow translate each pseudocode step into commands that we’ve introduced in the previous practicals. Useful commands may include grep, cut, sort, uniq, wc and awk.\nKeep the solution simple, remember the tips about good coding practice. The goal is not to write the shortest possible command.\nSave your commands in a small bash script. As you work, consider:\n\nCan another person tell what biological question the script answers?\nIs the target gene easy to find and change in the script?\nDoes the script create a clearly named output file?\nAre there comments where they help explain the purpose or reasoning?\nCan you inspect an intermediate result if something looks wrong?",
-    "crumbs": [
-      "Coding Best Practices",
-      "Practical 1: Best Practices"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3---swap-scripts",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#part-3---swap-scripts",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Part 3 - Swap scripts",
-    "text": "Part 3 - Swap scripts\nGive your script to your classmate. Do not explain it at first. The receiver should run and read the script and answer:\n\nWhat biological question does the script answer?\nWhich gene is being searched for?\nWhat output does it produce?\nDoes it count genes or unique samples?\nCould you change the target gene without rewriting the workflow?\nIs any line difficult to understand?\nWhat is one thing that is particularly clear, and one thing you would improve?\n\nReturn the script and feedback. The original author may make one or two improvements.\n\n\n\n\n\n\nBonus - Predict before you test\n\n\n\n\n\nIf you have reached here before it’s time to reconvene, let us know and we will provide a surprise annotation table. Before running your script, inspect the file and write down which samples you think should count as containing the target gene. The intended question is:\nWhich samples have an exact match to the target gene in the gene column?\nThen run your script on the surprise table and compare the output with your prediction.\nIf they differ, investigate why. Look especially for:\n\nthe same gene occurring more than once in one sample\nsimilar but non-identical gene names\nthe target gene name appearing in the product description rather than the gene column\ncapitalization differences\nwhether your command searches the whole line or a particular column",
-    "crumbs": [
-      "Coding Best Practices",
-      "Practical 1: Best Practices"
-    ]
-  },
-  {
-    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#final-wrap-up---discuss-and-revise",
-    "href": "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html#final-wrap-up---discuss-and-revise",
-    "title": "Best Practices 1: Coding for Trustworthy Bioinformatics",
-    "section": "Final wrap up - Discuss and revise",
-    "text": "Final wrap up - Discuss and revise\nWith your partner, discuss what the surprise dataset revealed. If necessary, revise your script so that it answers the stated biological question more precisely.\nBe ready to explain one design choice to the class.",
+    "objectID": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#using-branches-and-pull-requests-on-github",
+    "href": "practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html#using-branches-and-pull-requests-on-github",
+    "title": "Practical 2: Version Control and Collaborative Coding",
+    "section": "Using Branches and Pull Requests on Github",
+    "text": "Using Branches and Pull Requests on Github\nWhen collaborating on GitHub, it is common to use branches and pull requests to manage changes. You are now familiar with branches, but pushing them to the remote repository is the next step where our collaborators will be able to weigh in as well. Once your changes are ready, you can create a pull request to propose merging your branch into the main branch. This allows for code review and discussion before the changes are integrated.\nCreate a new branch and make some changes before commiting and pushing it:\ngit switch -c feature/readme-update\n\necho \"Adding a note about collaboration.\" &gt;&gt; README.md\n\ngit add README.md && git commit -m \"Add collaboration note to README\"\n\ngit push -u origin feature/readme-update\nGoing onto GitHub, navigate to your repository. You should see a prompt to create a pull request for your recently pushed branch. Click on “Compare & pull request”, provide a meaningful description of your changes, and submit the pull request for review. Review the changes and merge the pull request once youve had a look-through.\n\n\n\n\n\n\nExercise: Key Questions\n\n\n\nWhy might a team prefer merging changes through a Pull Request on GitHub instead of merging branches locally and pushing directly to main?",
     "crumbs": [
       "Coding Best Practices",
       "Practical 2: Version Control and Collaborative Coding"

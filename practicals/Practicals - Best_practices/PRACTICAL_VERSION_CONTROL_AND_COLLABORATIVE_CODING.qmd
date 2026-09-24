@@ -72,7 +72,7 @@ You can then start adding (using `git add`) files to your repository and `commit
 
 ```bash
 touch testdata.txt analysis.sh
-git add testdata.txt analysis.sh
+git add analysis.sh
 
 # Check that the change is staged
 git status
@@ -97,6 +97,14 @@ git status
 
 # Commit after updating the .gitignore file
 git commit -m "Update .gitignore"
+
+# The testdata.txt might already have been added to repo (if you added it in the previous step), you can remove it by using:
+git rm --cached testdata.txt
+git status
+git commit -m "Remove testdata.txt from tracking"
+
+# Now try adding the file again and see what happens
+git add testdata.txt
 ```
 
 **Key Question:**
