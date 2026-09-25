@@ -388,6 +388,59 @@ Now that you have a finished script, try to translate it into pseudocode. Once y
 
 ---
 
+::: {.callout-tip collapse="true"}
+## FINISHED SCRIPT EXAMPLE
+```bash
+#!/usr/bin/env bash
+set -e  
+set -u  
+set -o pipefail  
+
+
+INPUT_DIR="/home/torkl/Teaching/BIO511/Intro_to_CLI/CLI_intro/ffn"
+OUTPUT_DIR="/home/torkl/Teaching/BIO511/Intro_to_CLI/CLI_intro/Genome_files"
+
+GENE_NAME_PATTERN="hypothetical protein"
+
+TOTAL_GENES_FOR_PATTERN=0
+
+if [ ! -d "$INPUT_DIR" ]; then
+  echo "Error: Input directory $INPUT_DIR does not exist."
+  exit 1
+fi
+# and 
+if [ ! -d "$OUTPUT_DIR" ]; then
+  echo "Error: Output directory $OUTPUT_DIR does not exist."
+  exit 1
+fi
+
+echo -e "File\tGene_Count" > ${OUTPUT_DIR}/gene_counts.tsv
+
+for ffn_file in ${INPUT_DIR}/*.ffn; do
+
+    base_name=$(basename ${ffn_file} .ffn)
+
+    echo "Processing file: ${base_name}"
+
+    grep -A 1 "${GENE_NAME_PATTERN}" "${ffn_file}" > "${OUTPUT_DIR}/${base_name}_filtered.ffn"
+
+    gene_count=$(grep -c '^>' "${OUTPUT_DIR}/${base_name}_filtered.ffn")
+    TOTAL_GENES_FOR_PATTERN=$((TOTAL_GENES_FOR_PATTERN + gene_count))
+
+    echo -e "${base_name}\t${gene_count}" >> ${OUTPUT_DIR}/gene_counts.tsv
+    
+    if [ "${gene_count}" -eq 0 ]; then
+    echo "Warning: No genes matching pattern '${GENE_NAME_PATTERN}' found in ${ffn_file}"
+    fi
+
+    echo "Processed ${ffn_file}, found ${gene_count} genes matching pattern '${GENE_NAME_PATTERN}'"
+done
+
+```
+:::
+
+---
+
 ::: {.callout-note}
 ## Key Takeaways
 - `awk` is a powerful tool for advanced text processing and file manipulation, it can fulfill some roles without needing to write a full script.
