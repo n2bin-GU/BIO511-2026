@@ -39,8 +39,8 @@ Remember the suggested general workflow when attempting to install something:
 
 In these exercises you will learn how you can import functions from other scripts that you have written as well as install an external module.
 
-You will be given two scripts (see below), where the main.py will import all functions from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to amino acids. You will also need a FASTA file to run the scripts on, which you can find on Canvas.
-To get this to work, you first need to import the amino acid translation function, install and call Bio.Seq and see how variables are passed between two files.
+You will be given two scripts (see below), where the main.py will import the codons function from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to amino acids. You will also need a FASTA file to run the scripts on, which you can find on Canvas.
+To get this to work, you first need to import the amino acid translation function, install Biopython and call Bio.Seq and see how variables are passed between two files.
 
 
 ::: {.callout-tip} 
@@ -48,51 +48,33 @@ To get this to work, you first need to import the amino acid translation functio
 You will need to install Biopython to use the Seq object. We have not discussed it yet so you have to look up the documentation yourself.
 :::
 
-<br>
+## Explore the codons function
 
-Navigate the imported code from premade_script.py
+Open `premade_script.py` and find the function called `codons`. `main.py` imports this function and uses it.
 
-<br>
+1. Using the comments in the function, can you describe what it does?
 
-Using the comments in the function codons, can you describe what it does?
+2. What's the input of the function?
 
-<br>
+3. In the main function of `main.py`, add a print statement to print the output of the function.
 
-What's the input of the function?
+## Explore the exercise_function
 
-<br>
+Stay in `premade_script.py` and find the function called `exercise_function`.
 
-In the main function of main.py, add a print statement to print the output of the function
+1. What's the input of the function?
 
-<br>
+2. What does this function do?
 
-Open the script called premade_script.py and find the function called exercise_function
+3. Try calling it through `main.py`. See how the previous function is imported and used.
 
-<br>
+## Make the exercise_function work
 
-What's the input of the function?
+1. A non-standard module is needed to run the function. Which one? Install and use it.
 
-<br>
+2. Check the output of the script.
 
-What does this function do?
-
-<br>
-
-Try calling it through main.py (see how the previous function is imported and used)
-
-<br>
-
-Make the exercise_function work
-
-<br>
-
-A non-standard module is needed to run the function. Which? Install/use/call it 
-
-<br>
-
-Check the output of the script
-
-
+## The scripts
 
 **main.py**
 
@@ -112,16 +94,16 @@ def existing_file(file_path):
 
 def main():
     # First we capture the input arguments from the command line
-    parser = argparse.ArgumentParser(description="Process a string and a folder.")
-    parser.add_argument('-s', '--sequence', type=existing_file, required=True, help='Input sequence file')
+    parser = argparse.ArgumentParser(description="Split the sequences in a FASTA file into codons.")
+    parser.add_argument('-s', '--sequence', type=existing_file, required=True, help='Path to the input FASTA file')
     args = parser.parse_args()
     
-    # We first call the function from the script, and use the input string as an argument
+    # We first call the function from the script, and use the input file path as an argument
     sequence_codons = codons(args.sequence)
     
-    # Here the students should check the output of the function
+    # Here you need to check the output of the function
     
-    # Here the students will need to call the exercise_function from premade_script.py
+    # Here you need to call the exercise_function from premade_script.py
     
     # And check the output of that function
 if __name__ == "__main__":
@@ -139,30 +121,37 @@ if __name__ == "__main__":
 def codons(sequence_file):
     """A function that reads a fasta file and returns a list of codons for each sequence in the file"""
     
-    # First we read the fasta file and store the sequences as a string
-    sequence = ""
+    # First we read the fasta file and store each sequence in a dictionary, with its header as the key
+    sequences = {}
     
     # Open the file
     with open(sequence_file) as fasta_file:
         # Read the file line by line
         for row in fasta_file:
-            # If the line starts with '>', it is a header and we skip it
-            if not row.startswith('>'):
-                # If the line does not start with '>', it is a sequence and we add it to the list
-                sequence += row.strip()
+            row = row.strip()
+            # If the line starts with '>', it is a header and we start a new, empty sequence
+            if row.startswith('>'):
+                header = row[1:]
+                sequences[header] = ""
+            # If the line does not start with '>', it is part of the current sequence and we add it to that sequence
+            else:
+                sequences[header] += row
     
-    # Now we split the sequences into codons
-    sequence_codon_list = []
+    # Now we split each sequence into codons
+    sequence_codons = {}
     
-    # Loop over the sequence in steps of 3
-    for i in range(0, len(sequence), 3):
-        # Append the codon to the list if it is a full codon (3 nucleotides)
-        if i + 3 <= len(sequence):
-            # Then append the codon to the list
-            sequence_codon_list.append(sequence[i:i + 3])
+    for header, sequence in sequences.items():
+        codon_list = []
+        # Loop over the sequence in steps of 3
+        for i in range(0, len(sequence), 3):
+            # Append the codon to the list if it is a full codon (3 nucleotides)
+            if i + 3 <= len(sequence):
+                codon_list.append(sequence[i:i + 3])
+        # Save the list of codons under the header of the sequence
+        sequence_codons[header] = codon_list
     
-    # Return the list of codons
-    return sequence_codon_list
+    # Return the dictionary of codons
+    return sequence_codons
 
 
 def exercise_function(sequence_codons):

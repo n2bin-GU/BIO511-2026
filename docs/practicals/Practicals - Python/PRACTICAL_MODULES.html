@@ -344,7 +344,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful links</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#explore-the-codons-function" id="toc-explore-the-codons-function" class="nav-link" data-scroll-target="#explore-the-codons-function">Explore the codons function</a></li>
+  <li><a href="#explore-the-exercise_function" id="toc-explore-the-exercise_function" class="nav-link" data-scroll-target="#explore-the-exercise_function">Explore the exercise_function</a></li>
+  <li><a href="#make-the-exercise_function-work" id="toc-make-the-exercise_function-work" class="nav-link" data-scroll-target="#make-the-exercise_function-work">Make the exercise_function work</a></li>
+  <li><a href="#the-scripts" id="toc-the-scripts" class="nav-link" data-scroll-target="#the-scripts">The scripts</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -404,7 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
 <p>In these exercises you will learn how you can import functions from other scripts that you have written as well as install an external module.</p>
-<p>You will be given two scripts (see below), where the main.py will import all functions from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to amino acids. You will also need a FASTA file to run the scripts on, which you can find on Canvas. To get this to work, you first need to import the amino acid translation function, install and call Bio.Seq and see how variables are passed between two files.</p>
+<p>You will be given two scripts (see below), where the main.py will import the codons function from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to amino acids. You will also need a FASTA file to run the scripts on, which you can find on Canvas. To get this to work, you first need to import the amino acid translation function, install Biopython and call Bio.Seq and see how variables are passed between two files.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -418,28 +424,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You will need to install Biopython to use the Seq object. We have not discussed it yet so you have to look up the documentation yourself.</p>
 </div>
 </div>
-<p><br></p>
-<p>Navigate the imported code from premade_script.py</p>
-<p><br></p>
-<p>Using the comments in the function codons, can you describe what it does?</p>
-<p><br></p>
-<p>What’s the input of the function?</p>
-<p><br></p>
-<p>In the main function of main.py, add a print statement to print the output of the function</p>
-<p><br></p>
-<p>Open the script called premade_script.py and find the function called exercise_function</p>
-<p><br></p>
-<p>What’s the input of the function?</p>
-<p><br></p>
-<p>What does this function do?</p>
-<p><br></p>
-<p>Try calling it through main.py (see how the previous function is imported and used)</p>
-<p><br></p>
-<p>Make the exercise_function work</p>
-<p><br></p>
-<p>A non-standard module is needed to run the function. Which? Install/use/call it</p>
-<p><br></p>
-<p>Check the output of the script</p>
+<section id="explore-the-codons-function" class="level2">
+<h2 class="anchored" data-anchor-id="explore-the-codons-function">Explore the codons function</h2>
+<p>Open <code>premade_script.py</code> and find the function called <code>codons</code>. <code>main.py</code> imports this function and uses it.</p>
+<ol type="1">
+<li><p>Using the comments in the function, can you describe what it does?</p></li>
+<li><p>What’s the input of the function?</p></li>
+<li><p>In the main function of <code>main.py</code>, add a print statement to print the output of the function.</p></li>
+</ol>
+</section>
+<section id="explore-the-exercise_function" class="level2">
+<h2 class="anchored" data-anchor-id="explore-the-exercise_function">Explore the exercise_function</h2>
+<p>Stay in <code>premade_script.py</code> and find the function called <code>exercise_function</code>.</p>
+<ol type="1">
+<li><p>What’s the input of the function?</p></li>
+<li><p>What does this function do?</p></li>
+<li><p>Try calling it through <code>main.py</code>. See how the previous function is imported and used.</p></li>
+</ol>
+</section>
+<section id="make-the-exercise_function-work" class="level2">
+<h2 class="anchored" data-anchor-id="make-the-exercise_function-work">Make the exercise_function work</h2>
+<ol type="1">
+<li><p>A non-standard module is needed to run the function. Which one? Install and use it.</p></li>
+<li><p>Check the output of the script.</p></li>
+</ol>
+</section>
+<section id="the-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="the-scripts">The scripts</h2>
 <p><strong>main.py</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> premade_script <span class="im">import</span> codons</span>
@@ -456,16 +467,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First we capture the input arguments from the command line</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"Process a string and a folder."</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">'-s'</span>, <span class="st">'--sequence'</span>, <span class="bu">type</span><span class="op">=</span>existing_file, required<span class="op">=</span><span class="va">True</span>, <span class="bu">help</span><span class="op">=</span><span class="st">'Input sequence file'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"Split the sequences in a FASTA file into codons."</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(<span class="st">'-s'</span>, <span class="st">'--sequence'</span>, <span class="bu">type</span><span class="op">=</span>existing_file, required<span class="op">=</span><span class="va">True</span>, <span class="bu">help</span><span class="op">=</span><span class="st">'Path to the input FASTA file'</span>)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> parser.parse_args()</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We first call the function from the script, and use the input string as an argument</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We first call the function from the script, and use the input file path as an argument</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    sequence_codons <span class="op">=</span> codons(args.sequence)</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here the students should check the output of the function</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here you need to check the output of the function</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here the students will need to call the exercise_function from premade_script.py</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here you need to call the exercise_function from premade_script.py</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># And check the output of that function</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
@@ -474,41 +485,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> codons(sequence_file):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A function that reads a fasta file and returns a list of codons for each sequence in the file"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First we read the fasta file and store the sequences as a string</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    sequence <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First we read the fasta file and store each sequence in a dictionary, with its header as the key</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    sequences <span class="op">=</span> {}</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Open the file</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(sequence_file) <span class="im">as</span> fasta_file:</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Read the file line by line</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> row <span class="kw">in</span> fasta_file:</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="co"># If the line starts with '&gt;', it is a header and we skip it</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> row.startswith(<span class="st">'&gt;'</span>):</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                <span class="co"># If the line does not start with '&gt;', it is a sequence and we add it to the list</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                sequence <span class="op">+=</span> row.strip()</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Now we split the sequences into codons</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    sequence_codon_list <span class="op">=</span> []</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Loop over the sequence in steps of 3</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(sequence), <span class="dv">3</span>):</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Append the codon to the list if it is a full codon (3 nucleotides)</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">+</span> <span class="dv">3</span> <span class="op">&lt;=</span> <span class="bu">len</span>(sequence):</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Then append the codon to the list</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            sequence_codon_list.append(sequence[i:i <span class="op">+</span> <span class="dv">3</span>])</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the list of codons</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sequence_codon_list</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exercise_function(sequence_codons):</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""What does this function do?"""</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    aa_string <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> codon <span class="kw">in</span> sequence_codons:</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        amino_acid <span class="op">=</span> Seq(codon).translate()</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        aa_string <span class="op">+=</span> <span class="bu">str</span>(amino_acid)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> aa_string</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> row.strip()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="co"># If the line starts with '&gt;', it is a header and we start a new, empty sequence</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> row.startswith(<span class="st">'&gt;'</span>):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                header <span class="op">=</span> row[<span class="dv">1</span>:]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                sequences[header] <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            <span class="co"># If the line does not start with '&gt;', it is part of the current sequence and we add it to that sequence</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                sequences[header] <span class="op">+=</span> row</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Now we split each sequence into codons</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    sequence_codons <span class="op">=</span> {}</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> header, sequence <span class="kw">in</span> sequences.items():</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        codon_list <span class="op">=</span> []</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Loop over the sequence in steps of 3</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(sequence), <span class="dv">3</span>):</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Append the codon to the list if it is a full codon (3 nucleotides)</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">+</span> <span class="dv">3</span> <span class="op">&lt;=</span> <span class="bu">len</span>(sequence):</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                codon_list.append(sequence[i:i <span class="op">+</span> <span class="dv">3</span>])</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Save the list of codons under the header of the sequence</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        sequence_codons[header] <span class="op">=</span> codon_list</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the dictionary of codons</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sequence_codons</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exercise_function(sequence_codons):</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""What does this function do?"""</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    aa_string <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> codon <span class="kw">in</span> sequence_codons:</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        amino_acid <span class="op">=</span> Seq(codon).translate()</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        aa_string <span class="op">+=</span> <span class="bu">str</span>(amino_acid)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> aa_string</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
