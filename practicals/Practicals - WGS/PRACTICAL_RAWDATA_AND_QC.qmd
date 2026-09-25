@@ -26,7 +26,7 @@ In this practical, we'll use command line tools to perform quality assessment an
 ln -s  /cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026 .
 
 # Copy the fastq files you need to your local computer as well
-scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq ./data
+scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/data/fastq ./data
 ```
 :::
 
