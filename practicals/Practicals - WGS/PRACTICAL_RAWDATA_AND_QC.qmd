@@ -135,11 +135,11 @@ fastp -i sample1_R1.fastq.gz -I sample1_R2.fastq.gz -o sample1_R1_filtered.fastq
 ::: {.callout-note}
 ## Key Questions
 1. Did this improve or change the quality of the reads?
-2. We set a minimum length of 20bp, what are the pros and cons of this choice?
+2. We set a minimum length of 20bp, why might this be important?
 
 ::: {.callout-tip collapse="true"}
 ### Explanation
-Generally as reads extend, the quality of base calls tends to decrease towards the 3' end. This is why trimming low-quality bases from the ends can improve read quality. Additionally, removing very short reads helps to reduce noise and potential mapping errors in downstream analyses. However being to carefree in removing short reads may also result in the loss of potentially useful data, so it's important to balance quality and read length.
+Generally as reads extend, the quality of base calls tends to decrease towards the 3' end. This is why trimming low-quality bases from the ends can improve read quality. Additionally, removing very short reads helps to reduce noise and potential mapping errors in downstream analyses. 
 :::
 
 :::
