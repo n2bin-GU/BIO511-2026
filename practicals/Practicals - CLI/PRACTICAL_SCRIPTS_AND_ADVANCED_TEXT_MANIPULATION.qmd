@@ -390,6 +390,8 @@ Now that you have a finished script, try to translate it into pseudocode. Once y
 
 ::: {.callout-tip collapse="true"}
 ## FINISHED SCRIPT EXAMPLE
+OBS: The paths are for my (Tors) homedirectory, you should change them to match your own directory structure.
+
 ```bash
 #!/usr/bin/env bash
 set -e  
