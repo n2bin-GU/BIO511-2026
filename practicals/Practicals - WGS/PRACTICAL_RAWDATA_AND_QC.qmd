@@ -130,12 +130,12 @@ In some cases, you may want to customize the filtering parameters, such as hard-
 
 ```bash
 # Here is an example command with additional trimming and filtering options, for a quality threshold of 30 and minimum length of 50bp
-fastp -i sample1_R1.fastq.gz -I sample1_R2.fastq.gz -o sample1_R1_filtered.fastq.gz -O sample1_R2_filtered.fastq.gz -h sample1_fastp_report.html -j sample1_fastp_report.json --cut_right --cut_mean_quality 30 --length_required 20
+fastp -i sample1_R1.fastq.gz -I sample1_R2.fastq.gz -o sample1_R1_filtered.fastq.gz -O sample1_R2_filtered.fastq.gz -h sample1_fastp_report.html -j sample1_fastp_report.json --cut_right --cut_mean_quality 30 --length_required 50
 ```
 ::: {.callout-note}
 ## Key Questions
 1. Did this improve or change the quality of the reads?
-2. We set a minimum length of 20bp, why might this be important?
+2. We set a minimum length on bp, why might this be important?
 
 ::: {.callout-tip collapse="true"}
 ### Explanation

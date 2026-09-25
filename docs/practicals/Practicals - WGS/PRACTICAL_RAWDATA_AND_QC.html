@@ -530,7 +530,7 @@ Key Questions
 </div>
 <p>In some cases, you may want to customize the filtering parameters, such as hard-trimming a specific number of bases from the start or end of reads, or setting a minimum read length. You can do this by adding additional flags to the fastp command. For example, a good agnostic approach is to trim to a fixed quality threshold at the 3’ end of the reads, and filter out any reads that are too short after trimming.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is an example command with additional trimming and filtering options, for a quality threshold of 30 and minimum length of 50bp</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">-i</span> sample1_R1.fastq.gz <span class="at">-I</span> sample1_R2.fastq.gz <span class="at">-o</span> sample1_R1_filtered.fastq.gz <span class="at">-O</span> sample1_R2_filtered.fastq.gz <span class="at">-h</span> sample1_fastp_report.html <span class="at">-j</span> sample1_fastp_report.json <span class="at">--cut_right</span> <span class="at">--cut_mean_quality</span> 30 <span class="at">--length_required</span> 20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fastp</span> <span class="at">-i</span> sample1_R1.fastq.gz <span class="at">-I</span> sample1_R2.fastq.gz <span class="at">-o</span> sample1_R1_filtered.fastq.gz <span class="at">-O</span> sample1_R2_filtered.fastq.gz <span class="at">-h</span> sample1_fastp_report.html <span class="at">-j</span> sample1_fastp_report.json <span class="at">--cut_right</span> <span class="at">--cut_mean_quality</span> 30 <span class="at">--length_required</span> 50</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -543,7 +543,7 @@ Key Questions
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Did this improve or change the quality of the reads?</li>
-<li>We set a minimum length of 20bp, why might this be important?</li>
+<li>We set a minimum length on bp, why might this be important?</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
