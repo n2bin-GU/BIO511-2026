@@ -164,11 +164,11 @@ Lets begin by creating the job script that we will submit to the HPC cluster. Ma
 #SBATCH -p vera
 #SBATCH -N 1 --cpus-per-task=12 # Request 1 node with 12 CPUs
 #SBATCH -t 01:00:00
-#SBATCH --output=/cephyr/users/ktor/Vera/practical_1/logs/kraken2_%j.out  # Standard output
-#SBATCH --error=/cephyr/users/ktor/Vera/practical_1/logs/kraken2_%j.err   # Standard error
+#SBATCH --output=path/to/logs/kraken2_%j.out  # Standard output OBS: Change this to your actual log directory
+#SBATCH --error=path/to/logs/kraken2_%j.err   # Standard error OBS: Change this to your actual log directory
 
 # Preset path for container and database
-CONTAINER_PATH="/cephyr/users/ktor/Vera/n2bin_gu/BIO511-2026/containers/kraken2.sif"
+CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/kraken2.sif"
 DB_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/refs/kraken2db"
 
 # These ones need to be set by you 
