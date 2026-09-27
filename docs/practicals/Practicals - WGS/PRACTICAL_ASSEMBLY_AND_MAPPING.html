@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tor Kling">
+<meta name="author" content="Kaisa Thorell, Tor Kling">
 <meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 2: De novo Assembly and Mapping – BIO511 Genomics - Practical Repository</title>
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-fd3cdb6591c6e78768236938076114a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -376,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Tor Kling </p>
+             <p>Kaisa Thorell, Tor Kling </p>
           </div>
   </div>
     
@@ -412,20 +412,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-REMEMBER: Create a separate project folder
+Setting Up Data Access
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remember to make separate project folders for this practical</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># How you structure your workspace is up to you, but make sure to adjust the paths in the scripts below accordingly</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># EXAMPLE:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~yourdir/bio511/practical_2</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Symlink the data folder to your project directory</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data ./data</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Or if you need to use the data locally, copy it</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data ./data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Symlink the data directory in the n2bin-gu project dir for easy access on the HPC</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># From your home directory on the HPC</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span>  /cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026 .</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Data needed for today is in the `Assembly_reads` directory within the BIO511-2026 project.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -475,20 +470,20 @@ Learning Objectives
 <p>Flye is a repeat graph-based assembler designed for long noisy reads from PacBio and Oxford Nanopore technologies. Flye can be used both for mammalian and bacterial assemblies, and includes built-in polishing capabilities. We’ll explore two different assembly strategies using the same ONT reads but with different parameters to compare their performance.</p>
 <section id="job-1-basic-ont-assembly" class="level2">
 <h2 class="anchored" data-anchor-id="job-1-basic-ont-assembly">Job 1: Basic ONT Assembly</h2>
-<p>First, let’s create a job script for a basic assembly with no polishing:</p>
+<p>First, let’s create a job script for a basic assembly with no polishing. Same rules as last time, <strong>you need to make sure that paths are correct relative to your own directories</strong>. The reads for assembly are in the <code>Assembly_reads</code> directory.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -A C3SE408-25-2</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -J flye_basic</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p vera</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1 --cpus-per-task=16</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 01:30:00</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/flye_basic_%j.out</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/flye_basic_%j.err</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/path/to/logs/flye_basic_%j.out</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/path/to/logs/flye_basic_%j.err</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set paths - ADJUST THESE TO YOUR ACTUAL PATHS</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq/Assembly_reads"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="va">SINGULARITY_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/flye.sif"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"path/to/Assembly_reads"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/path/to/results"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="va">SINGULARITY_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/flye.sif"</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Set bind paths for Singularity</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_BINDPATH</span><span class="op">=</span><span class="st">"</span><span class="va">${DATA_PATH}</span><span class="st">:/data,</span><span class="va">${RESULTS_PATH}</span><span class="st">:/results"</span></span>
@@ -517,13 +512,13 @@ Learning Objectives
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p vera  </span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1 --cpus-per-task=12</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 02:30:00</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/flye_polished_%j.out</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/flye_polished_%j.err</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/path/to/logs/flye_polished_%j.out</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/path/to/logs/flye_polished_%j.err</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set paths - ADJUST THESE TO YOUR ACTUAL PATHS  </span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq/Assembly_reads"</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="va">SINGULARITY_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/flye.sif"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set paths - ADJUST THESE TO YOUR ACTUAL PATHS</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"path/to/Assembly_reads"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/path/to/results"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="va">SINGULARITY_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/flye.sif"</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Set bind paths for Singularity</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_BINDPATH</span><span class="op">=</span><span class="st">"</span><span class="va">${DATA_PATH}</span><span class="st">:/data,</span><span class="va">${RESULTS_PATH}</span><span class="st">:/results"</span></span>
@@ -563,18 +558,18 @@ Learning Objectives
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p vera</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1 --cpus-per-task=4</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 01:00:00</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/quast_%j.out</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/quast_%j.err</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/path/to/logs/quast_%j.out</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/path/to/logs/quast_%j.err</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load or use containerized QUAST</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/quast.sif"</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/quast.sif"</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set paths - ADJUST THESE TO YOUR ACTUAL PATHS</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq/Assembly_reads"</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"path/to/Assembly_reads"</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/path/to/results"</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RESULTS_PATH}</span><span class="st">/results/quast_results"</span></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path to the assemblies</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path to the assemblies (This should point to the directory containing the Flye assembly outputs)</span></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLIES_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RESULTS_PATH}</span><span class="st">/assembly"</span></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind paths for container</span></span>
@@ -609,10 +604,7 @@ Learning Objectives
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multiqc_analysis/<span class="dt">{assembly_qc</span><span class="op">,</span><span class="dt">quast_results</span><span class="op">,</span><span class="dt">kraken2_results}</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy QUAST results</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/name/results/quast_results/<span class="pp">*</span> multiqc_analysis/quast_results/</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We have also prepared some kraken2 results for the reads that you can include in your report</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/teachers/Tor/extra_data/kraken2_results/<span class="pp">*</span> multiqc_analysis/kraken2_results/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/path/to/results/quast_results/<span class="pp">*</span> multiqc_analysis/quast_results/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="running-multiqc" class="level2">
 <h2 class="anchored" data-anchor-id="running-multiqc">Running MultiQC</h2>
@@ -665,14 +657,14 @@ Learning Objectives
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p vera</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1 --cpus-per-task=12</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 03:00:00</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/hybrid_%j.out</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/hybrid_%j.err</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/path/to/logs/hybrid_%j.out</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/path/to/logs/hybrid_%j.err</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set paths - ADJUST THESE TO YOUR ACTUAL PATHS</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq/Assembly_reads"</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="va">FLYE_CONTAINER</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/flye.sif"</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="va">PP_CONTAINER</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/polypolish.sif"</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_PATH</span><span class="op">=</span><span class="st">"/path/to/Assembly_reads"</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/path/to/results"</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="va">FLYE_CONTAINER</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/flye.sif"</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="va">PP_CONTAINER</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/polypolish.sif"</span></span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Set bind paths for Singularity</span></span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_BINDPATH</span><span class="op">=</span><span class="st">"</span><span class="va">${DATA_PATH}</span><span class="st">:/data,</span><span class="va">${RESULTS_PATH}</span><span class="st">:/results"</span></span>
@@ -732,13 +724,13 @@ Learning Objectives
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p vera</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1 --cpus-per-task=4</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 01:00:00</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/quast_all_%j.out</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/quast_all_%j.err</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/path/logs/quast_all_%j.out</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/path/logs/quast_all_%j.err</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set paths - ADJUST THESE TO YOUR ACTUAL PATHS</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/quast.sif"</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RESULTS_PATH}</span><span class="st">/results/quast_all_results"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/quast.sif"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/path/to/results"</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RESULTS_PATH}</span><span class="st">/quast_all_results"</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the path to the assemblies</span></span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLIES_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RESULTS_PATH}</span><span class="st">/assembly"</span></span>
