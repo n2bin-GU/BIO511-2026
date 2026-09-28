@@ -42,10 +42,10 @@ The following practical exercises focus on genomics workflows:
 #### Genome workflows - Whole Genome Sequencing (WGS)
 - **[ Practical 1: Quality Control and Classification](practicals/Practicals%20-%20WGS/PRACTICAL_RAWDATA_AND_QC.qmd)**
 - **[ Practical 2: Genome Assembly and Mapping](practicals/Practicals%20-%20WGS/PRACTICAL_ASSEMBLY_AND_MAPPING.qmd)**
-- **[ 🔒 Practical 3: Genome Annotation](practicals/Practicals%20-%20WGS/PRACTICAL_FUNCTIONAL_ANNOTATION_.qmd)**
+- **[ Practical 3: Genome Annotation](practicals/Practicals%20-%20WGS/PRACTICAL_FUNCTIONAL_ANNOTATION.qmd)**
 
 #### Additional WGS Resources 
-- **[ 🔒 Additional: Build curated reference files](practicals/Practicals%20-%20WGS/ADDITIONAL_PREP_CURATED_PROTEINS_.qmd)**
+- **[ Additional: Build curated reference files](practicals/Practicals%20-%20WGS/ADDITIONAL_PREP_CURATED_PROTEINS.qmd)**
 
 ### 🐍 Python Programming
 Lastly, we cover Python programming with these practical exercises:

@@ -9,7 +9,7 @@ format:
     toc-depth: 3
     number-sections: false
     code-fold: false
-    theme: cosmo
+    theme: minty
 ---
 
 # Introduction
@@ -17,18 +17,17 @@ format:
 Annotation is the process of taking assembled genome sequences (or in some cases unassembled sequences) and identifying genomic features such as genes, coding sequences (CDS), tRNAs, rRNAs, and other functional elements. This is a critical step in guiding deeper analysis, as the annotated genes become guidemarks for functional identification and characterizing phenotypes. It is also typically the first step before more advanced downstream analysis after we've finished assembly and polishing. With annotated genomes, we can perform comparative genomics, functional profiling, and pangenome analyses.
 
 ::: {.callout-important}
-## REMEMBER: Create a separate project folder
+## Data access
+If you already have a symlink set up from last time, you dont need to make another one.
+
 ```bash
 # Remember to make separate project folders for this practical
 # How you structure your workspace is up to you, but make sure to adjust the paths in the scripts below accordingly
-# EXAMPLE:
-mkdir -p ~yourdir/bio511/practical_2
 
 # Symlink the data folder to your project directory
 ln -s /cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data ./data
 
-# Or if you need to use the data locally, copy it
-scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data ./data
+# The data you need for today is in the BIO511-2026/data/assemblies folder
 ```
 :::
 
@@ -57,21 +56,20 @@ For the first run, we'll perform a basic annotation using Prokka's default setti
 #SBATCH -p vera
 #SBATCH -N 1 --cpus-per-task=8
 #SBATCH -t 01:00:00
-#SBATCH --output=/cephyr/users/youruser/Vera/practical_3/logs/prokka_baseline_%j.out # output log, adjust path to where you want to save logs
-#SBATCH --error=/cephyr/users/youruser/Vera/practical_3/logs/prokka_baseline_%j.err # error log, adjust path to where you want to save logs
+#SBATCH --output=/path/to/logs/prokka_baseline_%j.out # output log, adjust path to where you want to save logs
+#SBATCH --error=/path/to/logs/prokka_baseline_%j.err # error log, adjust path to where you want to save logs
 
 # Set paths - ADJUST THESE TO YOUR ACTUAL PATHS
-CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/prokka.sif"
-RESULTS_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3"
-ASSEMBLIES_DIR="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/assemblies"
-OUTPUT_DIR="${RESULTS_PATH}/annotation/prokka_baseline"
-
-# Bind paths for container
-export SINGULARITY_BINDPATH="${ASSEMBLIES_DIR}:/assemblies,${RESULTS_PATH}:/results"
+CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/prokka.sif"
+RESULTS_PATH="/path/to/results"
+ASSEMBLIES_DIR="/path/to/data/assemblies"
 
 # Create output directories
 # If needed: mkdir -p ${RESULTS_PATH}
-mkdir -p ${OUTPUT_DIR}
+mkdir -p ${RESULTS_PATH}
+
+# Bind paths for container
+export SINGULARITY_BINDPATH="${ASSEMBLIES_DIR}:/assemblies,${RESULTS_PATH}:/results"
 
 # Input assembly
 ASSEMBLY="/assemblies/GU10.fa"
@@ -82,7 +80,7 @@ PREFIX="$(basename ${ASSEMBLY} .fa)_baseline"
 # Run Prokka (baseline)
 singularity exec ${CONTAINER_PATH} prokka \
   --cpus 8 \
-  --outdir /results/annotation/prokka_baseline \
+  --outdir /results/prokka_baseline \
   --prefix ${PREFIX} \
   --locustag BIO511 \
   --genus Escherichia \
@@ -116,17 +114,16 @@ Strains:
 #SBATCH --error=/cephyr/users/youruser/Vera/practical_3/logs/prokka_curated_%j.err # error log, adjust path to where you want to save logs
 
 # Set paths - ADJUST THESE TO YOUR ACTUAL PATHS
-CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/prokka.sif"
-RESULTS_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3"
-ASSEMBLIES_DIR="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/assemblies"
-CURATED_PROTEINS="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/curated_refs/curatedRef.faa"
-OUTPUT_DIR="${RESULTS_PATH}/annotation/prokka_curated"
+CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/prokka.sif"
+RESULTS_PATH="/path/to/results"
+ASSEMBLIES_DIR="/path/to/data/assemblies"
+CURATED_PROTEINS="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/refs/prokka_curated_refs/curatedRef.faa"
+
+# Create output directories
+mkdir -p ${RESULTS_PATH}
 
 # Bind paths for container
 export SINGULARITY_BINDPATH="${ASSEMBLIES_DIR}:/assemblies,${RESULTS_PATH}:/results,${CURATED_PROTEINS}:/curatedRef.faa"
-
-# Create output directories
-mkdir -p ${OUTPUT_DIR}
 
 # Input assembly
 ASSEMBLY="/assemblies/GU10.fa"
@@ -137,7 +134,7 @@ PREFIX="$(basename ${ASSEMBLY} .fa)_curated"
 # Run Prokka (curated)
 singularity exec ${CONTAINER_PATH} prokka \
   --cpus 8 \
-  --outdir /results/annotation/prokka_curated \
+  --outdir ${RESULTS_PATH}/prokka_curated \
   --prefix ${PREFIX} \
   --locustag BIO511 \
   --genus Escherichia \
@@ -151,8 +148,8 @@ echo "Curated Prokka annotation completed"
 Submit jobs and monitor:
 
 ```bash
-sbatch prokka_baseline_job.slurm
-sbatch prokka_curated_job.slurm
+sbatch prokka_baseline_job.sh
+sbatch prokka_curated_job.sh
 squeue -u $USER
 ```
 
@@ -168,8 +165,8 @@ By now you guys are multiQC pros, so let's use MultiQC to aggregate and compare 
 mkdir -p multiqc_analysis/prokka
 
 # Copy Prokka result folders
-scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3/annotation/prokka_baseline ./multiqc_analysis/prokka/
-scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3/annotation/prokka_curated ./multiqc_analysis/prokka/
+scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/prokka_baseline ./multiqc_analysis/prokka/
+scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/prokka_curated ./multiqc_analysis/prokka/
 ```
 
 ## Run MultiQC
@@ -191,7 +188,7 @@ Open the HTML report and review the Prokka section comparing baseline vs curated
 1. How many CDS, tRNA, and rRNA features were called in each run? Why dont we see a difference?
 2. How many hypothetical proteins in baseline vs curated? What changed? (hint: Remember a certain script you made to look up a certain pattern in ffn files? or could you use grep or awk?)
 3. Which genes had improved product names with curated proteins? Name some examples. (hint: Open and look at the .tsv files)
-4. What additional curated sets could you add for better annotations?
+4. What additional curated sets could you add for better annotations? No right answer, just reflect on possibilities.
 
 ---
 
