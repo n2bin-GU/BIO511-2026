@@ -22,36 +22,73 @@ If you think there is a lot of new syntax, don't worry. We will begin explaining
 ## Some useful links
 [Jupyter notebooks (text)](https://www.datacamp.com/tutorial/tutorial-jupyter-notebook)
 
-[Jupyter notebooks (video)](https://www.youtube.com/watch?v=HW29067qVWk)
+[Python in VS Code](https://code.visualstudio.com/docs/languages/python)
 
+We are going to use github repos to present and compare assignments between groups. 
+One of the members of each group will create the repo and add the other members of the group as collaborators.
+Being able to work collaboratively on a github repo is among the leaning objectives of this part of the course.
 
 # Exercises
 
+## 1. Setup the github repo
 
-We are going to use github repos to present and compare each assignment within groups.
-Create a github repo for this course. Name it `BIO511_python_2026_<My-Name>`. Create a folder for the first assignment in your new git repo and push your solutions for the next exercise below. This should allow you to easily show the rest of the group what you did tomorrow.
+1. Have one group member Create a github repo for this course. Name it `BIO511_python_2026_Group<X>`. 
+  a.  Make sure it is public and add a README.md file.
+2. Add the other group members as collaborators to the repo.
+3. Each member of the group should clone the repo to their local machine.
+4. After cloning, make a directory `members` and each member should create a file called 
+`member_<name>.txt` in the `members` directory. Push the file to the repo. 
+If you pull after everyone is done, you should be able to see the other members' files in the repo.
+5. Add the url to your repo to your group's Canvas page.
 
-Let’s start exploring Python! Some of the terms and tools used below we will go through in greater detail later on in the course. For now, let’s just try them out. 
+## 2. Our first python script
 
-## The print command and your first script
+Let’s start exploring Python! Some of the terms and tools used below we will go through 
+in greater detail later on in the course. For now, let’s just try them out. 
 
 To print any string, in this case hello, you can use the following line of code in python:
 ```python
 print("hello!")
 ```
-- Try to create a script that prints a message using the command above
-Open a file called `my_python_script.py`. You can name it anything, just make sure it has the extension `.py`. Add a print command like the one above to print any string of text.
+- Create a script first_python_script.py in a directory `practical_0`. 
+Add a print command like the one above to print any string of text.
 - Save the file and find it in the terminal.
-Run your script using the following command in bash: 
+- Run your script using the following command in bash: 
 ```python
 python my_python_script.py
 ```
 Any line starting with a hash `#` will be interpreted as a comment by python. A reasonable comment to the print command above could look something like this: `# Print "Hello"`. 
 - Try adding a comment to your script as well.
+- Instead of printing the string "hello", save a string of your choice to a variable and print that variable instead.
 
-## Check your python version
+Tips:
+- You can check your python version by typing `python -V` in the terminal. 
+- Another useful argument is `-h`, which allows you to see what available options there are. Try it out by typing `python -h` in your terminal. 
+- Throughout the course it will be nice to keep your code saved in scripts. 
+By organizing them in directories for each practical, you will be able to easily find them later on.
 
-You can check your python version by typing `python -V` in the terminal. Another useful argument is `-h`, which allows you to see what available options there are. Try it out by typing `python -h` in your terminal. 
+
+## 3. Collaborating on a python script
+
+- Try to add the script you just created to your github repo.
+- See if each member can add their lines of code (i.e. initializing a variable and printing it) to the same script.
+- Resolve any conflicts that may arise and make sure the script runs correctly after everyone has added their code.
+
+Tips:
+- It is a good idea to pull the repo before you start working on it, to make sure you have the latest version of the code.
+- If issues arise when pulling the repo due to conflicts, you can try to stash your changes 
+`git stash`, pull the repo and then apply your stashed changes `git stash pop`. 
+- If you are not able to resolve the conflicts, you can always ask for help from your group members or the teachers.
+
+
+::: {.callout-note}
+## Learning Objectives So Far
+
+- Create a GitHub repository and add collaborators
+- Collaborate on a GitHub repository by cloning, adding files, and pushing changes
+- Create a Python script and run it from the terminal
+- Resolve conflicts when collaborating on a GitHub repository
+:::
 
 # Bash commands
 
