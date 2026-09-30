@@ -44,6 +44,12 @@ website:
           text: "Practical 4: Scripting and Advanced Text Manipulation"
         - href: "practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.qmd"
           text: "Practical 5: Software & Containers"
+      - section: "Additional Command Line Programming Resources"
+        contents:
+        - href: "practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.qmd"
+          text: "For Loops in Bash"
+        - href: "practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/PATHING.qmd"
+          text: "Pathing in Linux"
       - section: "Coding Best Practices"
         contents:
         - href: "practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.qmd"

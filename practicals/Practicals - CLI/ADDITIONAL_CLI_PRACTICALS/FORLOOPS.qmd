@@ -1,0 +1,152 @@
+---
+title: "Additional CLI Practicals: Loops"
+subtitle: "BIO511 Genomics - Scripting in bash"
+author: "Tor Kling"
+date: August 2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    code-fold: false
+    theme: minty
+---
+
+# Description 
+
+This additional segment focuses on the anatomy and usage of loops in bash scripting, particularly `for` loops, which allow for efficient iteration over a series of items or a range of numbers. If you had problems understanding how loops work from the previous sections, this will provide further clarification and practical examples.
+
+## Anatomy of a `for` Loop
+
+A `for` loop in bash allows you to iterate over a list of items or a range of numbers. The basic syntax is:
+
+```bash
+for variable in list
+do
+    command
+done
+```
+
+- `variable` is a placeholder that takes the value of each item in the `list` sequentially.
+- `list` can be a series of words, filenames, or a sequence of numbers.
+- The commands inside the `do` and `done` block are executed for each value of `variable`.
+
+The variable in the loop differs from the variables we might assign ourselves normally. The variable in this case is rather a *placeholder* that temporarily holds each value from the list as the loop iterates through all the elements in said list. This means for a list like `1, 2, 3`, the variable will first hold `1`, then `2`, and finally `3` as the loop executes. The easiest way to utilize a loop in bash is to iterate of a list of filenames.
+
+## Applying `for` Loops
+
+For example, to iterate over all `.txt` files in a directory:
+
+```bash
+for file in *.txt; do
+    echo "Processing $file"
+done
+```
+
+Here `file` is the placeholder variable that takes the value of each `.txt` file in the directory sequentially. The wildcard `*.txt` expands to all files ending with `.txt` in the current directory to a list of filenames without us having to manually specify each one. The loop will execute the `echo` command for each file, displaying a message indicating that the file is being processed. But we can also use it to iterate over a range of numbers or any other list of items.
+
+For example, to iterate over a range of numbers from 1 to 5:
+
+```bash
+for i in {1..5};do
+    echo "Number $i"
+done
+
+# Output:
+(base) torkl@torkl-Precision-3591:~$ bash test.sh
+Number 1
+Number 2
+Number 3
+Number 4
+Number 5
+```
+
+There are many ways to expand on the use of `for` loops in bash. One common technique is to use nested `for` loops, where a loop is placed inside another loop. There are also ways to combine `for` loops with conditional statements, such as `if` statements, to create more complex and dynamic scripts. Lastly the `for` loop is not the only type of loop available in bash; `while` and `until` loops offer additional control structures for iteration based on conditions rather than a predefined list.
+
+::: {.callout-important}
+## Exercise 1: A loop to transfer files
+
+Make a directory called "Ex1", then make two subdirectories inside it named "source" and "destination". Place some files in the "source" directory
+
+```bash
+mkdir -p Ex1
+mkdir -p Ex1/source Ex1/destination
+
+touch Ex1/source/file1.txt Ex1/source/file2.txt Ex1/source/file3.txt
+```
+
+Write a `for` loop to move all files from the "source" directory to the "destination" directory:
+
+::: {.callout-tip collapse="true"}
+### Solution
+```bash
+for file in Ex1/source/*; do
+    mv "$file" Ex1/destination/
+done
+```
+:::
+:::
+
+::: {.callout-important}
+## Exercise 2: Translating pseudocode into a `for` loop
+
+Below are some pseudocode instructions that need to be translated into a `for` loop in bash.
+
+Pseudocode 1:
+```
+start a variable `total` with the value 0
+for each number from 1 to 10
+    total = total + number
+end for
+print the value of `total`
+```
+
+Pseudocode 2:
+```
+for each fasta file in the genome_data directory
+    search for the gene "lacZ" and print the line + the following line to a new file
+end for loop
+```
+
+Pseudocode 3:
+```
+for each gff file in the annotations directory
+    store basename of the file
+    if the basename matches strain names "AF"
+        copy the file to the data/gff directory
+    end if
+end for
+```
+
+::: {.callout-tip collapse="true"}
+### Solution
+#### Solution for Pseudocode 1
+```bash
+total=0
+for i in {1..10}; do
+    total=$((total + i))
+done
+echo "Total: $total"
+```
+
+#### Solution for Pseudocode 2
+```bash
+for file in genome_data/*.fasta; do
+    grep -A 1 "lacZ" "$file" >> lacZ_results.txt
+done
+```
+
+#### Solution for Pseudocode 3
+```bash
+for file in annotations/*.gff; do
+    base_name=$(basename "$file" .gff)
+    if [[ $base_name == AF* ]]; then
+        cp "$file" data/gff/
+    fi
+done
+```
+:::
+:::
+
+::: {.callout-note}
+Additional information on loops can be found [here](https://www.geeksforgeeks.org/linux-unix/bash-scripting-for-loop/).

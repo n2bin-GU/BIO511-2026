@@ -32,6 +32,10 @@ Here are the practical exercises related to command line programming section of 
 - **[ Practical 4: Scripting and Advanced Text Manipulation](practicals/Practicals%20-%20CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.qmd)**
 - **[ Practical 5: Software & Containers](practicals/Practicals%20-%20CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.qmd)**
 
+### Additional Command Line Programming Resources
+- **[ For Loops in Bash](practicals/Practicals%20-%20CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.qmd)**
+- **[ Pathing in Linux](practicals/Practicals%20-%20CLI/ADDITIONAL_CLI_PRACTICALS/PATHING.qmd)**
+
 #### Coding Best Practices
 - **[ Practical 1: Best practices](practicals/Practicals%20-%20Best_practices/PRACTICAL_BEST_PRACTICES.qmd)**
 - **[ Practical 2: Version Control and Collaborative Coding](practicals/Practicals%20-%20Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.qmd)**

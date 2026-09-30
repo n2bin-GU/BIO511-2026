@@ -1,0 +1,237 @@
+---
+title: "Additional CLI Practicals: Pathing"
+subtitle: "BIO511 Genomics - Navigating in bash"
+author: "Tor Kling"
+date: August 2026
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    code-fold: false
+    theme: minty
+---
+
+# Description
+
+This additional segment exists for you to recap navigating the file system and to remember where you are within it. This is not obligatory, but if you are struggling with the LINUX filesystem, then it is highly recommended that you complete this.
+
+::: {.callout-warning}
+Make some example directories to practice navigating the file system.
+
+```bash
+# In a suitable directory
+mkdir pathing_test
+cd pathing_test
+mkdir dir1 dir2 dir3
+
+# Make some files in each directory
+touch dir1/file1.txt
+touch dir3/testfile.txt
+mkdir dir2/subdir1
+touch dir2/subdir1/file2.txt
+```
+:::
+
+## Directory Tree Structure
+The linux file structure is hierarchical, starting from the root directory `/` and branching out into various subdirectories. Imagine a tree, we climb from the root by entering one of the directories from `/` (ex. `/home`). Entering different subdirectories from there is akin to climbing out along different branches of the tree.
+
+For each directory, you can navigate using `relative` or `absolute` paths. A `relative` path specifies the location of a directory or file in relation to the current directory, a variable starting point or a symbolic link. An `absolute` path specifies the full path from the root directory, in the context of Linux's "everything is a file" philosophy, this is also the `true path` of the directory or file.
+
+You can list its contents to understand its structure. Using ls -la will show you something akin to the following output:
+
+```bash
+ls -la 
+
+#Output
+total 32
+drwxrwxr-x 8 torkl torkl 4096 Sep 24 01:08 .
+drwxrwxr-x 3 torkl torkl 4096 Aug  6 13:06 ..
+drwxrwxr-x 3 torkl torkl 4096 Sep 23 17:16 cloned
+drwxrwxr-x 3 torkl torkl 4096 Sep 24 01:06 gitlab_repository
+drwxrwxr-x 3 torkl torkl 4096 Sep 18 13:49 Intro_to_CLI
+drwxrwxr-x 3 torkl torkl 4096 Sep 24 00:05 my_project
+drwxrwxr-x 3 torkl torkl 4096 Sep 24 01:10 testdir
+drwxrwxr-x 3 torkl torkl 4096 Sep 23 23:33 Testrepo
+```
+
+The `.` represents the current directory, while `..` represents the parent directory. Both of these can be used as `relative paths` when navigating the file system:
+
+```bash
+# Navigate to the parent directory
+cd dir1
+cd ..
+ls -l
+
+# Navigate to a another subdirectory from the parent directory
+cd dir1
+pwd 
+# Output should show the current directory, ex., /pathing_test/dir1
+# Navigate to the testdir directory from the parent directory using a relative path
+cd ../dir2
+
+# Navigate to a directory using an absolute path
+pwd
+# Copy the full path from the terminal output above and use it to navigate directly to the directory
+cd "<full_path_to_directory>"
+```
+    
+So a relative path would be `../my_project`, an absolute path `/home/user/Mydirectory/project/data/mydata.txt`. When we use `symbolic links` (made with `ln -s`), we create shortcuts to directories or files, making navigation more convenient. Keep in mind that these are also relative paths to the symlinks themselves. So for some scripts (ex. those executed in a container), it is important to use the actual true path to the target file or directory rather than relying on the symlink.
+
+# Exercises
+
+::: {.callout-important}
+# Exercise: Navigate a directory tree
+Here below you have the output from the `tree` command for a directory. The path before the tree is "home/user/", use the tree and write out the full paths for the following file and directories:
+
+1. The file `grouped.fa` in the `genomes` directory.
+2. The README.md file in the `gitlab_repository` directory.
+3. The directory `Genome_files` inside the `CLI_intro` directory.
+4. The symlink `ref_test_link`
+    - What is the target of the symlink? What path does it point to?
+5. If i am in the `Intro_to_CLI` directory, what is the relative path to the `my_project` directory?
+
+```text
+.
+└── BIO511
+    ├── cloned
+    │   ├── analysis.sh
+    │   ├── anotherfile2.txt
+    │   └── testfile.txt
+    ├── gitlab_repository
+    │   ├── divtes
+    │   ├── divtextfile.txt
+    │   ├── file.txt
+    │   ├── newtextfile.txt
+    │   ├── README.md
+    │   └── textfile.txt
+    ├── Intro_to_CLI
+    │   ├── CLI_intro
+    │   │   ├── chromosomal_only.csv
+    │   │   ├── cleaned_gene_ids.txt
+    │   │   ├── data
+    │   │   │   ├── gene_annotations.tsv
+    │   │   │   └── metadata.tsv
+    │   │   ├── Escherica
+    │   │   │   ├── coli
+    │   │   │   ├── fergusonii
+    │   │   │   └── hermanni
+    │   │   ├── expression_data.csv
+    │   │   ├── ffn
+    │   │   │   ├── AF1002.ffn
+    │   │   │   ├── AF10.ffn
+    │   │   │   ├── AF1171.ffn
+    │   │   │   ├── AF2052.ffn
+    │   │   │   └── AF316.ffn
+    │   │   ├── gene_annotations.csv
+    │   │   ├── gene_annotations.tsv
+    │   │   ├── Genome_files
+    │   │   │   ├── AF1002_filtered.ffn
+    │   │   │   ├── AF1002.re
+    │   │   │   │   ├── AF1002.faa
+    │   │   │   │   ├── AF1002.ffn
+    │   │   │   │   ├── AF1002.txt
+    │   │   │   │   └── input.fa
+    │   │   │   ├── AF10_filtered.ffn
+    │   │   │   ├── AF10.re
+    │   │   │   │   ├── AF10.faa
+    │   │   │   │   ├── AF10.ffn
+    │   │   │   │   ├── AF10.txt
+    │   │   │   │   └── input.fa
+    │   │   │   ├── AF1171_filtered.ffn
+    │   │   │   ├── AF1171.re
+    │   │   │   │   ├── AF1171.faa
+    │   │   │   │   ├── AF1171.ffn
+    │   │   │   │   ├── AF1171.txt
+    │   │   │   │   ├── cds_features.tsv
+    │   │   │   │   └── input.fa
+    │   │   │   ├── AF2052_filtered.ffn
+    │   │   │   ├── AF2052.re
+    │   │   │   │   ├── AF2052.faa
+    │   │   │   │   ├── AF2052.ffn
+    │   │   │   │   ├── AF2052.txt
+    │   │   │   │   └── input.fa
+    │   │   │   ├── AF316_filtered.ffn
+    │   │   │   ├── AF316.re
+    │   │   │   │   ├── AF316.faa
+    │   │   │   │   ├── AF316.ffn
+    │   │   │   │   ├── AF316.txt
+    │   │   │   │   ├── cds_features_length.tsv
+    │   │   │   │   ├── genes.tsv
+    │   │   │   │   ├── Input.fa
+    │   │   │   │   └── metadata_echo.tsv
+    │   │   │   └── gene_counts.tsv
+    │   │   ├── genomes
+    │   │   │   ├── AF1002.ffn
+    │   │   │   ├── AF1002.gff
+    │   │   │   ├── AF10.ffn
+    │   │   │   ├── AF10.gff
+    │   │   │   ├── AF1171.ffn
+    │   │   │   ├── AF1171.gff
+    │   │   │   ├── AF2052.ffn
+    │   │   │   ├── AF2052.gff
+    │   │   │   ├── AF316.ffn
+    │   │   │   ├── AF316.gff
+    │   │   │   ├── bakta_only.tsv
+    │   │   │   ├── baktaonly.tsv
+    │   │   │   ├── output
+    │   │   │   │   └── grouped.fa
+    │   │   │   └── script.sh
+    │   │   ├── genomes.tar.gz
+    │   │   ├── hypothetical protein
+    │   │   ├── input_sed.txt
+    │   │   ├── output
+    │   │   │   ├── AF1002_filtered.ffn
+    │   │   │   ├── AF10_filtered.ffn
+    │   │   │   ├── AF1171_filtered.ffn
+    │   │   │   ├── AF2052_filtered.ffn
+    │   │   │   ├── AF316_filtered.ffn
+    │   │   │   ├── gene_counts.tsv
+    │   │   │   └── genomes_metadata_labeled.tsv
+    │   │   ├── output_sed.txt
+    │   │   ├── raw_data
+    │   │   │   └── test_file.txt
+    │   │   ├── refs
+    │   │   │   ├── ref_file_test_link.txt -> /home/torkl/Teaching/BIO511/Intro_to_CLI/ref_file_test.txt
+    │   │   │   ├── ref_test
+    │   │   │   └── ref_test_link -> /home/torkl/ref_db_test/
+    │   │   ├── sequences.fasta
+    │   │   ├── sorted_genes.txt
+    │   │   ├── test_file
+    │   │   ├── testscript1.sh
+    │   │   └── testscript.sh
+    │   ├── ref_file_test.txt
+    │   └── test.sh
+    ├── my_project
+    │   ├── analysis.sh
+    │   ├── anotherfile2.txt
+    │   ├── anotherfile.txt
+    │   ├── new-textfile.txt
+    │   ├── README.md
+    │   ├── testdata.txt
+    │   └── testfile.txt
+    ├── testdir
+    │   └── divtextfile.txt
+    └── Testrepo
+        └── testfile.txt
+
+28 directories, 95 files
+```
+
+::: {.callout-tip collapse="true"}
+## Answer
+
+1. /home/user/BIO511/Intro_to_CLI/Genome_files/genomes/output/grouped.fa
+2. /home/user/BIO511/gitlab_repository/README.md
+3. /home/user/BIO511/Intro_to_CLI/Genome_files
+4. /home/user/BIO511/Intro_to_CLI/Genome_files/refs/ref_test_link
+    - The target of the symlink is `/home/torkl/ref_db_test/`.
+5. ../my_project
+
+:::
+
+::: {.callout-note}
+Additional information on pathing, and what some of the directories from `/` do, you can read [here](https://medium.com/@haseebabdul480/the-linux-filesystem-hierarchy-explained-what-every-directory-actually-does-d6cecc88aab2).
+
+A little more on paths is available [here](https://opensource.com/article/19/8/understanding-file-paths-linux).
+:::
