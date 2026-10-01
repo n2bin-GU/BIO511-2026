@@ -163,3 +163,15 @@ def exercise_function(sequence_codons):
     return aa_string
 ```
 
+## Extra task: Codon usage
+
+This task is optional. Try it if you have finished the other exercises and have time left.
+
+The standard library is the collection of modules that comes with Python, so you never need to install them. In this task you will use one of them: `Counter` from the `collections` module. Look up how it works in the [Python documentation](https://docs.python.org/3/library/collections.html#collections.Counter).
+
+1. In `main.py`, import `Counter` from `collections`. Use it to count how many times each codon occurs in each sequence, and print the result for each sequence.
+
+2. Print only the most common codon of each sequence, together with the number of times it occurs.
+
+3. Use `Counter` to count the amino acids in each translated protein as well. Which amino acid is the most common one in each sequence?
+

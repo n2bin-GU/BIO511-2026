@@ -355,6 +355,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#count-numbers-above-a-limit" id="toc-count-numbers-above-a-limit" class="nav-link" data-scroll-target="#count-numbers-above-a-limit">Count numbers above a limit</a></li>
   <li><a href="#summarise-a-text" id="toc-summarise-a-text" class="nav-link" data-scroll-target="#summarise-a-text">Summarise a text</a></li>
   <li><a href="#aggregate-with-a-mode" id="toc-aggregate-with-a-mode" class="nav-link" data-scroll-target="#aggregate-with-a-mode">Aggregate with a mode</a></li>
+  <li><a href="#errors-and-tryexcept" id="toc-errors-and-tryexcept" class="nav-link" data-scroll-target="#errors-and-tryexcept">Errors and <code>try</code>/<code>except</code></a>
+  <ul class="collapse">
+  <li><a href="#handling-an-error" id="toc-handling-an-error" class="nav-link" data-scroll-target="#handling-an-error">Handling an error</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -531,8 +536,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ol>
 <p>What does <code>aggregate(nums, "max", 100)</code> return, and why?</p>
+</section>
+<section id="errors-and-tryexcept" class="level2">
+<h2 class="anchored" data-anchor-id="errors-and-tryexcept">Errors and <code>try</code>/<code>except</code></h2>
+<p>Errors are a normal part of programming. Python stops the program when it encounters an error unless we tell it how to respond.</p>
+<p>Run this example and observe the error:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>number <span class="op">=</span> <span class="bu">int</span>(<span class="st">'five'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(number)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>int()</code> function cannot convert the string <code>'five'</code> into a number. This produces a <code>ValueError</code>.</p>
+<section id="handling-an-error" class="level3">
+<h3 class="anchored" data-anchor-id="handling-an-error">Handling an error</h3>
+<p>A <code>try</code> block contains code that might cause an error. An <code>except</code> block says what to do if that error occurs.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    number <span class="op">=</span> <span class="bu">int</span>(<span class="st">'five'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(number)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'That is not a valid number.'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The program now prints a message instead of stopping with an error.</p>
+</section>
+<section id="exercise" class="level3">
+<h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
+<p>Use the following list of values:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="st">'10'</span>, <span class="st">'5'</span>, <span class="st">'hello'</span>, <span class="st">'8'</span>, <span class="st">'three'</span>, <span class="st">'2'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li><p>Loop through <code>values</code> and convert each value to an integer using <code>int()</code>. Print each converted number. Observe what happens when the loop reaches a value that cannot be converted.</p></li>
+<li><p>Put the conversion and printing inside a <code>try</code> block. Use an <code>except</code> block to catch <code>ValueError</code> and print:</p>
+<pre class="text"><code>Skipping invalid value: hello</code></pre>
+<p>Use the value from the list in the message rather than always printing <code>hello</code>.</p></li>
+<li><p>Improve your solution so that the loop continues after an invalid value.</p></li>
+<li><p>Change the list by adding another invalid value. Check that your code still handles it without stopping the loop.</p></li>
+</ol>
+<p>The goal is not to hide every error. Catch the specific error you expect, explain what happened, and let the program continue when that is appropriate.</p>
 
 
+</section>
 </section>
 </section>
 

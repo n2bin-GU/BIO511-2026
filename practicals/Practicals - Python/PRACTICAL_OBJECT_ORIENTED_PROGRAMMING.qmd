@@ -38,9 +38,9 @@ the keyword **class**.
 
 ```python
 class MyClass:
-	pass
-	# don't forget the indent; everything in the indent is part of the class
-	# the standard nomenclature is to Capitalize Class Names
+    pass
+    # don't forget the indent; everything in the indent is part of the class
+    # the standard nomenclature is to Capitalize Class Names
 ```
 The dunder method `__init__` is called automatically when an object is instantiated (created).
 The first argument you pass to `__init__` is the object itself. 
@@ -48,7 +48,7 @@ The first argument you pass to `__init__` is the object itself.
 ```python
 class MyClass:
     def __init__(self, arg1):
-		self.attribute1 = arg1
+        self.attribute1 = arg1
 ```
 
 Finally, you can use your class to create as many objects as you like
@@ -68,10 +68,10 @@ In the below code, we define a class `Car` which we can use to generate several 
 
 ```python
 class Car:
-	def __init__(self, brand, color, year):
-		self.brand = brand
-		self.color = color
-		self.year = year
+    def __init__(self, brand, color, year):
+        self.brand = brand
+        self.color = color
+        self.year = year
 
 car1 = Car("Ferrari", "red", 2018)
 car2 = Car("Toyota", "green", 2008)
@@ -104,8 +104,8 @@ To call a method the syntax is object.method(potential_arguments)
 
 ```python
 class Parrot:
-	def speak(self, text):
-		print(f"Parrot says: {text}")
+    def speak(self, text):
+        print(f"Parrot says: {text}")
 
 my_parrot = Parrot() 
 my_parrot.speak("Good day")
@@ -118,9 +118,9 @@ my_parrot.speak("Good day")
 and multiplication. You can use the below code to get started.
 ```python
 class Calculator:
-	def __init__(self, number1, number2):
-		self.number1 = number1
-		self.number2 = number2
+    def __init__(self, number1, number2):
+        self.number1 = number1
+        self.number2 = number2
 
 my_calc = Calculator(4,6)
 my_calc.add()
@@ -130,14 +130,14 @@ my_calc.multiply()
 2. Write a class "Circle" with attribute radius.
   - Methods:
     - `calc_perimeter()` returns the circumference
-	- `calc_area()` returns the area of the circle
+    - `calc_area()` returns the area of the circle
   - Optional:
-	- add area and circumference to attributes
-	- let the user input the radius and print the attributes
+    - add area and circumference to attributes
+    - let the user input the radius and print the attributes
   - Hints:
-	- You can use 3.14 as pi
-	- Python syntax for squaring is `** 2`
-	- User input can be defined with `input()`
+    - You can use 3.14 as pi
+    - Python syntax for squaring is `** 2`
+    - User input can be defined with `input()`
 
 # Part 3 | Classes/objects within classes
 
@@ -151,27 +151,27 @@ Consider the following classes:
 
 ```python
 class Book:
-	def __init__(self, title, author, year):
-		self.title = title
-		self.author = author
-		self.year = year
-		self.available = False
-		self.borrower = None
+    def __init__(self, title, author, year):
+        self.title = title
+        self.author = author
+        self.year = year
+        self.available = False
+        self.borrower = None
 
-	def __str__(self):
-		# The __str__ dunder method will be called when using print(book_obj)
-		return f"Informative message about the book. You can also use attributes {self.title}"
+    def __str__(self):
+        # The __str__ dunder method will be called when using print(book_obj)
+        return f"Informative message about the book. You can also use attributes {self.title}"
 
 
 class Library:
-	def __init__(self):
-		self.books = []
+    def __init__(self):
+        self.books = []
 
 
 class Member:
-	def __init__(self, name):
-		self.name = name
-		self.borrowed_books = []
+    def __init__(self, name):
+        self.name = name
+        self.borrowed_books = []
 
 
 # Example usage

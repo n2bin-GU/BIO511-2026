@@ -63,19 +63,15 @@ sequence = 'GATTACAGAACTGATAC'
 ```
 
 Your task is to find the position of the **third `A`** in the sequence. Use
-zero-based indexing, so the first character is at position `0`. The expected
-answer is:
-
-```text
-The third A is at position 6
-```
+zero-based indexing, so the first character is at position `0`.
 
 1. **Use a `while` loop.**
 
    Start at position `0` and keep track of how many `A` bases you have seen.
    Use `a_count < 3` as the condition for the `while` loop. Each time you
-   inspect a base, increase the position by `1`. When the loop ends, the third
-   `A` has been found at the resulting position.
+   inspect a base, increase the position by `1`. When the loop ends, the position
+   has already moved one step past the third `A`, so the third `A` is at the
+   resulting position minus `1`.
 
 2. **Use a `for` loop.**
 
@@ -160,11 +156,7 @@ Work through the following steps. Do not import any additional modules.
    through each patient's list of bacteria. Add a bacterium to
    `unique_bacteria` only if it is not already in the list.
 
-   Print the list. It should contain each bacterium once:
-
-   ```python
-   ['bacZZt98', 'bac889Ytd', 'bac0GFrr', 'bacFq55Hj']
-   ```
+   Print the list. It should contain each bacterium once.
 
    *Hint:* Use the `append()` method and an `if` statement.
 
@@ -174,17 +166,6 @@ Work through the following steps. Do not import any additional modules.
    step 1 to add each unique bacterium as a key. Give every key an empty list
    as its value.
 
-   At this stage, the dictionary should have this structure:
-
-   ```python
-   {
-       'bacZZt98': [],
-       'bac889Ytd': [],
-       'bac0GFrr': [],
-       'bacFq55Hj': []
-   }
-   ```
-
    *Hint:* To check whether a bacterium is already a dictionary key, use
    `if bacterium not in bacteria_to_patients`.
 
@@ -193,13 +174,4 @@ Work through the following steps. Do not import any additional modules.
    Loop through `data` again. For each patient and bacterium, append the
    patient ID to the list belonging to that bacterium.
 
-   Print the completed dictionary. It should look like this:
-
-   ```python
-   {
-       'bacZZt98': ['pat_001', 'pat_003'],
-       'bac889Ytd': ['pat_001', 'pat_003'],
-       'bac0GFrr': ['pat_002'],
-       'bacFq55Hj': ['pat_003']
-   }
-   ```
+   Print the completed dictionary.

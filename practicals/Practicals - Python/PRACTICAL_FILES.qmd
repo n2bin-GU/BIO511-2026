@@ -16,55 +16,59 @@ format:
 
 Today's topics include: Reading and writing to files, working with pandas dataframes and some of the functionality in biopython
 
+Before you start, make sure that pandas, NumPy and Biopython are installed in the environment you are using. NumPy is installed automatically together with pandas, and you should already have Biopython from Practical 4.
+
 # Useful links
 
 [Files (text)](https://www.geeksforgeeks.org/python/file-handling-python/)
 
 [Files (video)](https://www.youtube.com/watch?v=Uh2ebFW8OYM)
 
+[Reading and writing files, including appending (Python docs)](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
+
+[The csv module (Python docs)](https://docs.python.org/3/library/csv.html#examples)
+
 [Pandas tutorial](https://www.w3schools.com/python/pandas/default.asp)
+
+[10 minutes to pandas (text)](https://pandas.pydata.org/docs/user_guide/10min.html)
 
 [Biopython (text tutorial)](https://biopython.org/docs/latest/Tutorial/index.html)
 
 [Biopython (video)](https://www.youtube.com/watch?v=ocA2IMe7dpA)
 
+[NumPy basics (text)](https://numpy.org/doc/stable/user/absolute_beginners.html)
+
 
 
 # Exercises
 
-<br>
-
-**File Manipulation**
+## File manipulation
 
 Create a script that:
 
-a. Uses with open() to create a csv file with 5 rows and 5 columns. Make sure to save the file and use comma as the separator.
+1. Uses `with open()` to create a csv file with 5 rows and 5 columns. Make sure to save the file and use comma as the separator.
 
-b. Appends a row to the file based on the user's input, using argv.
+2. Appends a row to the file based on the user's input, using `argv`.
 
-<br>
+## Arguments and pandas
 
-**Arguments and pandas**
+1. Create a second script that takes the file you created in the previous task as a user defined input argument. Use `argparse` for this.
 
-a. Create a second script that takes the file you created in the previous task as a user defined input argument. Use argparse for this.
+2. Make sure to add useful help messages to the arguments in your script.
 
-b. Make sure to add useful help messages to the arguments in your script.
+3. Use the `csv` module to read the csv file you created.
 
-c. Use the csv module to read the csv file you created
+4. Convert the data to a pandas dataframe. Print a statistical summary of your data.
 
-d. Convert the data to a pandas dataframe. Print a statistical summary of your data.
+## Mini FASTA toolkit with Biopython
 
-<br>
+In this exercise you will use three parts of Biopython: `Seq`, `SeqRecord` and `SeqIO`.
 
-```python
-"""
-Biopython Exercise — Mini FASTA toolkit with Biopython (Seq, SeqRecord, SeqIO)
+### Create the input file
 
-Remember that you can copy these commented code blocks into your script to not have to refer back to your browser window
-
-Step 0 — Create the input file:
 Save the text below as a file named `dna.fasta` in the same folder as your script:
 
+```text
 >seq1
 ATGCATGCATGCATGCATGCATGCATGC
 >seq2
@@ -81,47 +85,78 @@ ATATATATATATATATATATAT
 ACGTTGCAACGTTGCAACGTTGCAACGTTGCA
 >seq8
 CATGACTGACTGATGCTAGCTAGCTGATCGTACGATC
-"""
 ```
 
-<br>
+### Load and report
+
+Use `SeqIO` for this task.
+
+1. Read all records from `dna.fasta`.
+
+2. For each record, print the record ID and the sequence length.
+
+3. Also print the first 10 bases of the sequence.
+
+### Reverse complements to a new FASTA
+
+Use `Seq`, `SeqRecord` and `SeqIO` for this task.
+
+1. For each original record, create the reverse complement of its sequence.
+
+2. Make a new `SeqRecord` for the reverse complement.
+
+3. Set the new ID to `<oldid>_rc` and the description to `reverse complement of <oldid>`.
+
+4. Write all reverse-complement records to a file named `dna_rc.fasta`.
+
+### GC% annotation to a new FASTA
+
+Use `SeqRecord` and `SeqIO` for this task.
+
+1. For each original record, calculate the GC% as `100 * (count of 'G' + count of 'C') / length`.
+
+2. Round to 1 decimal place.
+
+3. Create a copy of the record where the description includes `GC=<value>%`.
+
+4. Write these annotated records to `dna_with_gc.fasta`.
+
+### Translation
+
+1. Translate each DNA sequence and print the first 10 amino acids.
+
+2. Read `dna_rc.fasta` back in and confirm that the IDs and descriptions look correct.
+
+## Extra task: Vector maths with NumPy
+
+This task is optional. Try it if you have finished the other exercises and have time left.
+
+NumPy is a Python library for calculating with many numbers at once. You don't need to install it separately, because it is installed together with pandas.
+
+A small experiment measured the number of reads for five genes, in a control sample and in a treated sample:
 
 ```python
-# A) Load and report (use SeqIO)
-
-# - Read all records from `dna.fasta`.
-# - For each record, print the record ID and the sequence length.
-# - Also print the first 10 bases of the sequence.
+genes = ["geneA", "geneB", "geneC", "geneD", "geneE"]
+control = [120, 340, 15, 800, 60]
+treated = [240, 340, 60, 200, 30]
 ```
 
-<br>
+1. **Add the lists.**
 
-```python
-# B) Reverse complements to a new FASTA (use Seq, SeqRecord, SeqIO)
+   Calculate `control + treated` and print the result. Is it what you expected?
 
-# - For each original record, create the reverse complement of its sequence.
-# - Make a new SeqRecord for the reverse complement.
-# - Set the new ID to "<oldid>_rc" and the description to "reverse complement of <oldid>".
-# - Write all reverse-complement records to a file named `dna_rc.fasta`.
-```
+2. **Make arrays.**
 
-<br>
+   Import NumPy with `import numpy as np` and turn both lists into NumPy arrays with `np.array()`. Add the two arrays together and compare the result with step 1.
 
-```python
-# C) GC% annotation to a new FASTA (use SeqRecord, SeqIO)
+3. **Calculate the fold change.**
 
-# - For each original record, calculate GC% = 100 * (count of 'G' + count of 'C') / length.
-# - Round to 1 decimal place.
-# - Create a copy of the record where the description includes "GC=<value>%".
-# - Write these annotated records to `dna_with_gc.fasta`.
-```
+   The fold change of a gene is its value in the treated sample divided by its value in the control sample. Calculate the fold change of all five genes in one line of code.
 
-<br>
+4. **Calculate the log2 fold change.**
 
-```python
-# D) Translation (Optional, do if you have extra time)
+   Use `np.log2()` to calculate the log2 fold change of all genes. Which genes went up in the treated sample, which went down, and which stayed the same?
 
-# - Translate each DNA sequence and print the first 10 amino acids.
-# - Read `dna_rc.fasta` back in and confirm IDs/descriptions look correct.
-```
+5. **Normalise the samples.**
 
+   The two samples did not get the same total number of reads. Use `np.sum()` to divide each array by its own total, so that the values in each array add up to 1. Calculate the log2 fold change again from the normalised arrays. Do you come to the same conclusions as in step 4?

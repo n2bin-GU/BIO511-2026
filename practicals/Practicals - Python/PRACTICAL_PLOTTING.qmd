@@ -21,9 +21,13 @@ Plotting is a necessity in most omics projects. A good plot can help the viewer 
 
 [Matplotlib intro tutorial (text)](https://www.geeksforgeeks.org/python/pyplot-in-matplotlib/)
 
-[Seaborn (text)](https://www.w3schools.com/python/numpy/numpy_random_seaborn.asp)
+[Matplotlib pyplot tutorial (text)](https://matplotlib.org/stable/tutorials/pyplot.html)
+
+[Seaborn introduction (text)](https://seaborn.pydata.org/tutorial/introduction.html)
 
 [Plotly intro (text)](https://www.geeksforgeeks.org/python/python-plotly-tutorial/)
+
+[Saving Plotly plots as interactive HTML (text)](https://plotly.com/python/interactive-html-export/)
 
 [Plotnine (video)](https://www.youtube.com/watch?v=2KrJ2tNrvGo)
 
@@ -50,7 +54,7 @@ Create a histogram to show the distribution of the bill lengths in the data. Use
 
 <br>
 
-Use the `pandas` library to group the penguins data by body mass and island and calculate the mean value of body mass per island. Save the results to a new variable. Create a bar plot where each bar represents the average body mass of one island. 
+Use the `pandas` library to group the penguins data by island and calculate the mean value of body mass per island. Save the results to a new variable. Create a bar plot where each bar represents the average body mass of one island. 
 
 <br>
 

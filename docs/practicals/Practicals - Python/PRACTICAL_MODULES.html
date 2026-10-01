@@ -350,6 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#explore-the-exercise_function" id="toc-explore-the-exercise_function" class="nav-link" data-scroll-target="#explore-the-exercise_function">Explore the exercise_function</a></li>
   <li><a href="#make-the-exercise_function-work" id="toc-make-the-exercise_function-work" class="nav-link" data-scroll-target="#make-the-exercise_function-work">Make the exercise_function work</a></li>
   <li><a href="#the-scripts" id="toc-the-scripts" class="nav-link" data-scroll-target="#the-scripts">The scripts</a></li>
+  <li><a href="#extra-task-codon-usage" id="toc-extra-task-codon-usage" class="nav-link" data-scroll-target="#extra-task-codon-usage">Extra task: Codon usage</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -525,6 +526,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        amino_acid <span class="op">=</span> Seq(codon).translate()</span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        aa_string <span class="op">+=</span> <span class="bu">str</span>(amino_acid)</span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> aa_string</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="extra-task-codon-usage" class="level2">
+<h2 class="anchored" data-anchor-id="extra-task-codon-usage">Extra task: Codon usage</h2>
+<p>This task is optional. Try it if you have finished the other exercises and have time left.</p>
+<p>The standard library is the collection of modules that comes with Python, so you never need to install them. In this task you will use one of them: <code>Counter</code> from the <code>collections</code> module. Look up how it works in the <a href="https://docs.python.org/3/library/collections.html#collections.Counter">Python documentation</a>.</p>
+<ol type="1">
+<li><p>In <code>main.py</code>, import <code>Counter</code> from <code>collections</code>. Use it to count how many times each codon occurs in each sequence, and print the result for each sequence.</p></li>
+<li><p>Print only the most common codon of each sequence, together with the number of times it occurs.</p></li>
+<li><p>Use <code>Counter</code> to count the amino acids in each translated protein as well. Which amino acid is the most common one in each sequence?</p></li>
+</ol>
 
 
 </section>

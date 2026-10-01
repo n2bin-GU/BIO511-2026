@@ -231,16 +231,6 @@ values = ['10', '5', 'hello', '8', 'three', '2']
    `hello`.
 
 3. Improve your solution so that the loop continues after an invalid value.
-   The expected output is:
-
-   ```text
-   10
-   5
-   Skipping invalid value: hello
-   8
-   Skipping invalid value: three
-   2
-   ```
 
 4. Change the list by adding another invalid value. Check that your code still
    handles it without stopping the loop.
