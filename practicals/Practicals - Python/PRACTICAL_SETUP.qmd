@@ -135,7 +135,7 @@ When coding we often work with file paths. However, we want to avoid hardcoding 
 
 Start by moving the file `first_python_script.py` to one of the subdirectories you created, by using `os.rename()`:
 ```python
-os.rename("/path/to/first_python_script.py", "test_dir_from_python/subdir1/first_python_script.py")
+os.rename("/path/to/first_python_script.py", "test_dir_from_python/subdir2/first_python_script.py")
 ```
 We can use a function called `basename` to work with any path we’re given. The `basename` function comes from a submodule within `os` called `path`. You can get only the file name from an entire path like this:
 ```python
