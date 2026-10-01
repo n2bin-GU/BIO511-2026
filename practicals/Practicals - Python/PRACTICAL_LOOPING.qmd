@@ -139,7 +139,7 @@ for key_patient, value_bact_list in data.items():
 for key_patient, value_bact_list in data.items():  
   print(key_patient)
   print(value_bact_list)
-  'bac889Ytd' in value_bact_list
+  print('bac889Ytd' in value_bact_list)
 ```
 
 ### Exercise: Reverse the dictionary
