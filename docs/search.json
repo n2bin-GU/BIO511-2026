@@ -58,7 +58,7 @@
     "href": "practicals/Practicals - Python/PRACTICAL_SETUP.html",
     "title": "Practical 0: Introduction",
     "section": "",
-    "text": "Welcome!!\nThe exercises for this first lesson are meant to connect the python part of the course to what you have previously done in the unix shell scripting part of the course and are meant to be done in the terminal (not jupyter). You can start using jupyter after today.\nIf you think there is a lot of new syntax, don’t worry. We will begin explaining the python syntax from the ground up starting tomorrow.\n\n\nJupyter notebooks (text)\nPython in VS Code\nWe are going to use github repos to present and compare assignments between groups. One of the members of each group will create the repo and add the other members of the group as collaborators. Being able to work collaboratively on a github repo is among the leaning objectives of this part of the course.",
+    "text": "Welcome!!\nThe exercises for this first lesson are meant to connect the python part of the course to what you have previously done in the unix shell scripting part of the course and are meant to be done in the terminal (not jupyter). You can start using jupyter after today, if you want.\nIf you think there is a lot of new syntax, don’t worry. We will begin explaining the python syntax from the ground up starting tomorrow.\n\n\nJupyter notebooks (text)\nPython in VS Code\nWe are going to use github repos to present and compare assignments between groups. One of the members of each group will create the repo and add the other members of the group as collaborators. Being able to work collaboratively on a github repo is among the leaning objectives of this part of the course.",
     "crumbs": [
       "Practical 0: Introduction"
     ]

@@ -1,7 +1,7 @@
 ---
 title: "Practical 0: Introduction"
 subtitle: "BIO511 Genomics - Python Introduction and Setup"
-author: "Alvar Almstedt, Emma Västerviga"
+author: "Alvar Almstedt, Emma Västerviga, Bart Edelbroek"
 date: August 2026
 format: 
   html:
@@ -15,7 +15,7 @@ format:
 # Introduction to Python
 Welcome!!
 
-The exercises for this first lesson are meant to connect the python part of the course to what you have previously done in the unix shell scripting part of the course and are meant to be done in the terminal (not jupyter). You can start using jupyter after today.
+The exercises for this first lesson are meant to connect the python part of the course to what you have previously done in the unix shell scripting part of the course and are meant to be done in the terminal (not jupyter). You can start using jupyter after today, if you want.
 
 If you think there is a lot of new syntax, don't worry. We will begin explaining the python syntax from the ground up starting tomorrow.
 
