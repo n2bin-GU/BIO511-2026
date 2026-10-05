@@ -55,7 +55,7 @@ The following practical exercises focus on genomics workflows:
 Lastly, we cover Python programming with these practical exercises:
 
 - **[ Practical 0: Introduction](practicals/Practicals%20-%20Python/PRACTICAL_SETUP.qmd)**
-- **[ 🔒 Practical 1: Python Data Types and If/Else Clauses](practicals/Practicals%20-%20Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE_.qmd)**
+- **[ Practical 1: Python Data Types and If/Else Clauses](practicals/Practicals%20-%20Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE.qmd)**
 - **[ 🔒 Practical 2: Python Loops](practicals/Practicals%20-%20Python/PRACTICAL_LOOPING_.qmd)**
 - **[ 🔒 Practical 3: Python Functions](practicals/Practicals%20-%20Python/PRACTICAL_FUNCTIONS_.qmd)**
 - **[ 🔒 Practical 4: Python Modules](practicals/Practicals%20-%20Python/PRACTICAL_MODULES_.qmd)**

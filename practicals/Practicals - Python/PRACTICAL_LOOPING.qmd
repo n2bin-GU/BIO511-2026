@@ -2,7 +2,7 @@
 title: "Practical 2: Python Loops"
 subtitle: "BIO511 Genomics - Think iteration and loops"
 author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
-date: August 2026
+date: Oct 7 2026
 format: 
   html:
     toc: true
@@ -14,9 +14,11 @@ format:
 
 # Introduction
 
-Looping over different types of sequences is key in most programming languages and python is no different. Today the exercises will involve creating some simple loops followed by some more involved loop constructs where you will combine looping with the if clauses we learned yesterday. 
+Looping over different types of sequences is key in most programming languages and python is no different. 
+Today the exercises will involve creating some simple loops followed by some more involved 
+loop constructs where you will combine looping with the if clauses we learned yesterday. 
 
-
+Please save today's work in a directory `practical_2` in your group repo.
 
 # Useful links
 [Loops (text)](https://www.dataquest.io/blog/python-for-loop-tutorial/)

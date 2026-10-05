@@ -2,7 +2,7 @@
 title: "Practical 7: Object Oriented Programming"
 subtitle: "BIO511 Genomics -  Object Oriented Programming (OOP) in Python"
 author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
-date: October 2026
+date: Oct 14 2026
 format: 
   html:
     toc: true
@@ -30,6 +30,8 @@ these objects, you can avoid duplicating code for similar objects.
 - When to use OOP
 - Practice designing and implementing OOP systems
 :::
+
+Please save today's work in a directory `practical_7` in your group repo.
 
 # Part 1 | Build your first Python object
 

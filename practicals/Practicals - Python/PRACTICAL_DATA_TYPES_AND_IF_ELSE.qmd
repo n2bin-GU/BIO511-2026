@@ -2,7 +2,7 @@
 title: "Practical 1: Python Data Types and If/Else Clauses"
 subtitle: "BIO511 Genomics - Python Introduction"
 author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
-date: August 2026
+date: Oct 6 2026
 format: 
   html:
     toc: true
@@ -17,7 +17,8 @@ format:
 Now we are finally getting into the bread and butter of python syntax! Today you will do some very simple exercises with some of the most commonly used python data types as well as starting with boolean logic using if/else clauses.
 
 You can copy the code blocks containing comments below and work on the tasks from within your IDE (Integrated Development Environment)/text editor or a jupyter notebook.
-Remember, comments are the lines that start with `#` and will be ignored when you run your code
+Remember, comments are the lines that start with `#` and will be ignored when you run your code.
+Please save your work for today in a directory `practical_1` in your group repo.
 
  
 Remember to refer back to today's presentations for help or ask the teachers - It's what we are here for :)

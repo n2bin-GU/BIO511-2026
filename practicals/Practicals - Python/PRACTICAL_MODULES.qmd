@@ -2,7 +2,7 @@
 title: "Practical 4: Python Modules"
 subtitle: "BIO511 Genomics - Importing and the standard Library (stdlib)"
 author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga, Emilio Rudbeck"
-date: August 2026
+date: Oct 9 2026
 format: 
   html:
     toc: true
@@ -27,6 +27,8 @@ Remember the suggested general workflow when attempting to install something:
 * If you still can't find the thing you need you can attempt to install from source via a github repo but that can be a little bit annoying (especially for a beginner)
 
 *(You don't have to use conda if you know what you're doing. It's just a convenient suggestion. Other package managers are available)*
+
+Please save today's work in a directory `practical_4` in your group repo.
 
 # Useful links
 
