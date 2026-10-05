@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-fd3cdb6591c6e78768236938076114a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -172,10 +172,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Practical 5: Software &amp; Containers</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Additional Command Line Programming Resources</li>
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.html">
+ <span class="dropdown-text">For Loops in Bash</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/PATHING.html">
+ <span class="dropdown-text">Pathing in Linux</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
     <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html">
  <span class="dropdown-text">Practical 1: Best Practices</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html">
+ <span class="dropdown-text">Practical 2: Version Control and Collaborative Coding</span></a>
   </li>  
     </ul>
   </li>
@@ -383,20 +397,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-REMEMBER: Create a separate project folder
+Data access
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>If you already have a symlink set up from last time, you dont need to make another one.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remember to make separate project folders for this practical</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># How you structure your workspace is up to you, but make sure to adjust the paths in the scripts below accordingly</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># EXAMPLE:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~yourdir/bio511/practical_2</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Symlink the data folder to your project directory</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data ./data</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Or if you need to use the data locally, copy it</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data ./data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Symlink the data folder to your project directory</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data ./data</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The data you need for today is in the BIO511-2026/data/assemblies folder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -432,39 +444,38 @@ Learning Objectives
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -p vera</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -N 1 --cpus-per-task=8</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -t 01:00:00</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/cephyr/users/youruser/Vera/practical_3/logs/prokka_baseline_%j.out # output log, adjust path to where you want to save logs</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/cephyr/users/youruser/Vera/practical_3/logs/prokka_baseline_%j.err # error log, adjust path to where you want to save logs</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=/path/to/logs/prokka_baseline_%j.out # output log, adjust path to where you want to save logs</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/path/to/logs/prokka_baseline_%j.err # error log, adjust path to where you want to save logs</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set paths - ADJUST THESE TO YOUR ACTUAL PATHS</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/prokka.sif"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3"</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLIES_DIR</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/assemblies"</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RESULTS_PATH}</span><span class="st">/annotation/prokka_baseline"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind paths for container</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_BINDPATH</span><span class="op">=</span><span class="st">"</span><span class="va">${ASSEMBLIES_DIR}</span><span class="st">:/assemblies,</span><span class="va">${RESULTS_PATH}</span><span class="st">:/results"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/prokka.sif"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/path/to/results"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLIES_DIR</span><span class="op">=</span><span class="st">"/path/to/data/assemblies"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create output directories</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># If needed: mkdir -p ${RESULTS_PATH}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${RESULTS_PATH}</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create output directories</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># If needed: mkdir -p ${RESULTS_PATH}</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${OUTPUT_DIR}</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Input assembly</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLY</span><span class="op">=</span><span class="st">"/assemblies/GU10.fa"</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a prefix variable for naming outputs</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="va">PREFIX</span><span class="op">=</span><span class="st">"</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${ASSEMBLY}</span> .fa<span class="va">)</span><span class="st">_baseline"</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Prokka (baseline)</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> exec <span class="va">${CONTAINER_PATH}</span> prokka <span class="dt">\</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">--cpus</span> 8 <span class="dt">\</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">--outdir</span> /results/annotation/prokka_baseline <span class="dt">\</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">--prefix</span> <span class="va">${PREFIX}</span> <span class="dt">\</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">--locustag</span> BIO511 <span class="dt">\</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">--genus</span> Escherichia <span class="dt">\</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">--species</span> coli <span class="dt">\</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="va">${ASSEMBLY}</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Baseline Prokka annotation completed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind paths for container</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_BINDPATH</span><span class="op">=</span><span class="st">"</span><span class="va">${ASSEMBLIES_DIR}</span><span class="st">:/assemblies,</span><span class="va">${RESULTS_PATH}</span><span class="st">:/results"</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Input assembly</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLY</span><span class="op">=</span><span class="st">"/assemblies/GU10.fa"</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a prefix variable for naming outputs</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="va">PREFIX</span><span class="op">=</span><span class="st">"</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${ASSEMBLY}</span> .fa<span class="va">)</span><span class="st">_baseline"</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Prokka (baseline)</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> exec <span class="va">${CONTAINER_PATH}</span> prokka <span class="dt">\</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">--cpus</span> 8 <span class="dt">\</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">--outdir</span> /results/prokka_baseline <span class="dt">\</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">--prefix</span> <span class="va">${PREFIX}</span> <span class="dt">\</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">--locustag</span> BIO511 <span class="dt">\</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">--genus</span> Escherichia <span class="dt">\</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">--species</span> coli <span class="dt">\</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="va">${ASSEMBLY}</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Baseline Prokka annotation completed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 <section id="prokka-with-curated-proteins" class="level2">
@@ -487,39 +498,38 @@ Learning Objectives
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=/cephyr/users/youruser/Vera/practical_3/logs/prokka_curated_%j.err # error log, adjust path to where you want to save logs</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set paths - ADJUST THESE TO YOUR ACTUAL PATHS</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/prokka.sif"</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3"</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLIES_DIR</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/assemblies"</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="va">CURATED_PROTEINS</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/curated_refs/curatedRef.faa"</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">${RESULTS_PATH}</span><span class="st">/annotation/prokka_curated"</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind paths for container</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_BINDPATH</span><span class="op">=</span><span class="st">"</span><span class="va">${ASSEMBLIES_DIR}</span><span class="st">:/assemblies,</span><span class="va">${RESULTS_PATH}</span><span class="st">:/results,</span><span class="va">${CURATED_PROTEINS}</span><span class="st">:/curatedRef.faa"</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Create output directories</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${OUTPUT_DIR}</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Input assembly</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLY</span><span class="op">=</span><span class="st">"/assemblies/GU10.fa"</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a prefix variable for naming outputs</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="va">PREFIX</span><span class="op">=</span><span class="st">"</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${ASSEMBLY}</span> .fa<span class="va">)</span><span class="st">_curated"</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Prokka (curated)</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> exec <span class="va">${CONTAINER_PATH}</span> prokka <span class="dt">\</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">--cpus</span> 8 <span class="dt">\</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">--outdir</span> /results/annotation/prokka_curated <span class="dt">\</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">--prefix</span> <span class="va">${PREFIX}</span> <span class="dt">\</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">--locustag</span> BIO511 <span class="dt">\</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">--genus</span> Escherichia <span class="dt">\</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">--species</span> coli <span class="dt">\</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">--proteins</span> /curatedRef.faa <span class="dt">\</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="va">${ASSEMBLY}</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Curated Prokka annotation completed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">CONTAINER_PATH</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/prokka.sif"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">RESULTS_PATH</span><span class="op">=</span><span class="st">"/path/to/results"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLIES_DIR</span><span class="op">=</span><span class="st">"/path/to/data/assemblies"</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="va">CURATED_PROTEINS</span><span class="op">=</span><span class="st">"/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/refs/prokka_curated_refs/curatedRef.faa"</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create output directories</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">${RESULTS_PATH}</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Bind paths for container</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SINGULARITY_BINDPATH</span><span class="op">=</span><span class="st">"</span><span class="va">${ASSEMBLIES_DIR}</span><span class="st">:/assemblies,</span><span class="va">${RESULTS_PATH}</span><span class="st">:/results,</span><span class="va">${CURATED_PROTEINS}</span><span class="st">:/curatedRef.faa"</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Input assembly</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="va">ASSEMBLY</span><span class="op">=</span><span class="st">"/assemblies/GU10.fa"</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a prefix variable for naming outputs</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="va">PREFIX</span><span class="op">=</span><span class="st">"</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">${ASSEMBLY}</span> .fa<span class="va">)</span><span class="st">_curated"</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Prokka (curated)</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="ex">singularity</span> exec <span class="va">${CONTAINER_PATH}</span> prokka <span class="dt">\</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">--cpus</span> 8 <span class="dt">\</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">--outdir</span> <span class="va">${RESULTS_PATH}</span>/prokka_curated <span class="dt">\</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">--prefix</span> <span class="va">${PREFIX}</span> <span class="dt">\</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">--locustag</span> BIO511 <span class="dt">\</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">--genus</span> Escherichia <span class="dt">\</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">--species</span> coli <span class="dt">\</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">--proteins</span> /curatedRef.faa <span class="dt">\</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  <span class="va">${ASSEMBLY}</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Curated Prokka annotation completed"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Submit jobs and monitor:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> prokka_baseline_job.slurm</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> prokka_curated_job.slurm</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> prokka_baseline_job.sh</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> prokka_curated_job.sh</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="va">$USER</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
@@ -533,8 +543,8 @@ Learning Objectives
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> multiqc_analysis/prokka</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy Prokka result folders</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3/annotation/prokka_baseline ./multiqc_analysis/prokka/</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_3/annotation/prokka_curated ./multiqc_analysis/prokka/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/prokka_baseline ./multiqc_analysis/prokka/</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/prokka_curated ./multiqc_analysis/prokka/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="run-multiqc" class="level2">
 <h2 class="anchored" data-anchor-id="run-multiqc">Run MultiQC</h2>
@@ -554,7 +564,7 @@ Learning Objectives
 <li>How many CDS, tRNA, and rRNA features were called in each run? Why dont we see a difference?</li>
 <li>How many hypothetical proteins in baseline vs curated? What changed? (hint: Remember a certain script you made to look up a certain pattern in ffn files? or could you use grep or awk?)</li>
 <li>Which genes had improved product names with curated proteins? Name some examples. (hint: Open and look at the .tsv files)</li>
-<li>What additional curated sets could you add for better annotations?</li>
+<li>What additional curated sets could you add for better annotations? No right answer, just reflect on possibilities.</li>
 </ol>
 <hr>
 </section>

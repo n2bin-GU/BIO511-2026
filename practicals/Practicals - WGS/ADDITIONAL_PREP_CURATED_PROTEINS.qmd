@@ -9,7 +9,7 @@ format:
     toc-depth: 3
     number-sections: false
     code-fold: false
-    theme: cosmo
+    theme: minty
 ---
 
 Since we know that annotation/classification databases have their limits, especially with **novel or poorly characterized proteins**, its a good idea to create a curated reference set. This page shows how to manually create a curated reference protein FASTA file for use with Prokka.

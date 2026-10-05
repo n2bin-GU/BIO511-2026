@@ -1,7 +1,7 @@
 ---
 title: "Practical 5: Software Installation and Containers"
 subtitle: "BIO511 Genomics - Package managers, Conda locally, and Singularity on HPC"
-author: "Tor Kling, Stuti Jain"
+author: "Tor Kling, Vahid Ataibaigielmi"
 date: August 2026
 format:
   html:
@@ -41,7 +41,7 @@ cd ~/yourdir/practical_5
 
 # Finding software: package managers and repositories
 
-While paid licensed software are often hosted on their own websites, and are delivered via installers, open source software are often hosted on public repositories, such as GitHub, CRAN (R language), PyPI (Python language). Downloading and installing software from these sources can in many cases be harder, as you sometimes need to manually resolve *dependencies* (other software or libraries that the tool relies on) and ensure compatibility with your operating system. 
+While paid licensed software are often hosted on their own websites, and are delivered via installers, open source software are often hosted on public repositories, such as GitHub, CRAN (R language), PyPI (Python language). Downloading and installing software from these sources can in many cases be harder, as you sometimes need to manually resolve *dependencies* (other software or libraries that the tool relies on) and ensure compatibility with your operating system. [For Mac users] If apt does not work for you, some of these packages might also be available with `brew`
 
 ## Exercises: Discover tools
 ```bash
@@ -75,6 +75,8 @@ Local installation means setting up software on your own computer, as opposed to
 
 To begin with, we will install Miniconda, a minimal installer for Conda. Conda is an open-source package management system and environment management system that runs on Windows, macOS, and Linux. It quickly installs, runs, and updates packages and their dependencies. Conda also creates, saves, loads, and switches between environments on your local computer. This is particularly useful in bioinformatics, where different projects may require different versions of software and libraries.
 
+[For Mac users] You should not use the link in the wget command, instead go to the [webpage](https://continuumio-docs.readthedocs-hosted.com/miniconda/install/#quick-command-line-install) for miniconda and install it correctly for Mac
+
 ```bash
 # Install Miniconda
 # For this we need to fetch files from the internet via wget 
@@ -97,7 +99,7 @@ conda config --set channel_priority strict
 
 ## Install fastp locally via apt
 
-Next up, we will install `fastp` locally using apt, the default package manager for Debian-based Linux distributions. You will encounter fastp later in the genomics workflow praticals, its a tool inteded for quality control and preprocessing of FASTQ read files. 
+Next up, we will install `fastp` locally using apt, the default package manager for Debian-based Linux distributions. You will encounter fastp later in the genomics workflow praticals, its a tool intended for quality control and preprocessing of FASTQ read files.
 
 ```bash
 # Before we install anything via apt, its always a good idea to update the package lists
@@ -120,8 +122,8 @@ fastp --version
 For this segment we will install MultiQC, a tool that aggregates results from bioinformatics analyses across many samples into a single report. This is particularly useful for summarizing the output of tools like FastQC. Our install will be done in a conda enviroment, installing the version hosted on bioconda.
 
 ```bash
-# Create a new conda environment named MultiQC with python 3.9
-conda create -n MultiQC python=3.9
+# Create a new conda environment named MultiQC with python 3.11
+conda create -n MultiQC python=3.11
 
 # Activate the environment
 conda activate MultiQC
@@ -149,9 +151,14 @@ On HPC you usually cannot sudo and may not be allowed to build images on the log
 - Copy the .sif to the HPC.
 - Bind-mount data and databases at runtime.
 
+::: {.callout-important}
+### Installing singularity-CE
+The instructions for installing Singularity CE can be found [here](https://docs.sylabs.io/guides/4.5/user-guide/quick_start.html#quick-installation-steps)
+:::
+
 ## A minimal kraken2 Singularity definition file
 
-The first step to creating a singularity container is to write a definition file. This file describes the base image, metadata, and the steps needed to install and configure the software inside the container. In many cases it will be simple, if an already hosted image exists (e.g. on BioContainers), luckily kraken2 is one of those cases. if you want to learn more about writing definition files, check out the [Singularity documentation](https://sylabs.io/guides/3.0/user-guide/definition_files.html).
+The first step to creating a singularity container is to write a definition file. This file describes the base image, metadata, and the steps needed to install and configure the software inside the container. In many cases it will be simple, if an already hosted image exists (e.g. on BioContainers), luckily kraken2 is one of those cases. if you want to learn more about writing definition files, check out the [Singularity documentation](https://docs.sylabs.io/guides/4.5/user-guide/definition_files.html).
 
 Create a file named kraken2.def with the contents below. It uses the BioContainers kraken2 image as a base.
 
@@ -224,7 +231,7 @@ singularity exec /home/user/containers/kraken2.sif kraken2 --version
 
 ## SLURM job script to invoke singularity container based software
 
-As you already know, running software in the login node of an HPC is frowned upon. Instead, you should submit jobs to the scheduler (SLURM in this case), which allows you to take up space on one of the production nodes in the cluster. Below is a example of a SLURM job script that i (Tor) have used to run a Roary pangenome analysis on another cluster. **Se if you can configure it to run kraken2 instead**. All HPCs are different, so make sure to adjust paths, partitions, memory, time, etc to fit your HPC. The manual for Vera can be found [here](https://www.c3se.chalmers.se/documentation/submitting_jobs/running_jobs/#writing-a-job-script).
+As you already know, running software in the login node of an HPC is frowned upon. Instead, you should submit jobs to the scheduler (SLURM in this case), which allows you to take up space on one of the production nodes in the cluster. Below is a example of a SLURM job script that i (Tor) have used to run a Roary pangenome analysis on another cluster. **Se if you can configure it to run kraken2 instead**. All HPCs are different, so sure to adjust paths, partitions, memory, time, etc to fit your HPC. The manual for Vera can be found [here](https://www.c3se.chalmers.se/documentation/submitting_jobs/running_jobs/#writing-a-job-script).
 
 ```bash
 #!/bin/bash -l

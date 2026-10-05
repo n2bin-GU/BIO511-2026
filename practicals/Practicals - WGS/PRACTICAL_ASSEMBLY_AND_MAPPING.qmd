@@ -1,7 +1,7 @@
 ---
 title: "Practical 2: De novo Assembly and Mapping"
 subtitle: "BIO511 Genomics - De Novo Assembly using long reads"
-author: "Tor Kling"
+author: "Kaisa Thorell, Tor Kling"
 date: August 2026
 format:
   html:
@@ -9,7 +9,7 @@ format:
     toc-depth: 3
     number-sections: false
     code-fold: false
-    theme: cosmo
+    theme: minty
 ---
 
 # Introduction
@@ -25,18 +25,13 @@ The documentation for each tool used in this practical can be found here:
 - [Polypolish](https://github.com/rrwick/Polypolish/wiki)
 
 ::: {.callout-important}
-## REMEMBER: Create a separate project folder
+## Setting Up Data Access
 ```bash
-# Remember to make separate project folders for this practical
-# How you structure your workspace is up to you, but make sure to adjust the paths in the scripts below accordingly
-# EXAMPLE:
-mkdir -p ~yourdir/bio511/practical_2
+# Symlink the data directory in the n2bin-gu project dir for easy access on the HPC
+# From your home directory on the HPC
+ln -s  /cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026 .
 
-# Symlink the data folder to your project directory
-ln -s /cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data ./data
-
-# Or if you need to use the data locally, copy it
-scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data ./data
+# Data needed for today is in the `Assembly_reads` directory within the BIO511-2026 project.
 
 ```
 :::
@@ -80,7 +75,7 @@ Flye is a repeat graph-based assembler designed for long noisy reads from PacBio
 
 ## Job 1: Basic ONT Assembly
 
-First, let's create a job script for a basic assembly with no polishing:
+First, let's create a job script for a basic assembly with no polishing. Same rules as last time, **you need to make sure that paths are correct relative to your own directories**. The reads for assembly are in the `Assembly_reads` directory.
 
 ```bash
 #!/bin/bash
@@ -89,13 +84,13 @@ First, let's create a job script for a basic assembly with no polishing:
 #SBATCH -p vera
 #SBATCH -N 1 --cpus-per-task=16
 #SBATCH -t 01:30:00
-#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/flye_basic_%j.out
-#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/flye_basic_%j.err
+#SBATCH --output=/path/to/logs/flye_basic_%j.out
+#SBATCH --error=/path/to/logs/flye_basic_%j.err
 
 # Set paths - ADJUST THESE TO YOUR ACTUAL PATHS
-DATA_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq/Assembly_reads"
-RESULTS_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"
-SINGULARITY_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/flye.sif"
+DATA_PATH="path/to/Assembly_reads"
+RESULTS_PATH="/path/to/results"
+SINGULARITY_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/flye.sif"
 
 # Set bind paths for Singularity
 export SINGULARITY_BINDPATH="${DATA_PATH}:/data,${RESULTS_PATH}:/results"
@@ -127,13 +122,13 @@ Now create a second job with more aggressive polishing parameters:
 #SBATCH -p vera  
 #SBATCH -N 1 --cpus-per-task=12
 #SBATCH -t 02:30:00
-#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/flye_polished_%j.out
-#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/flye_polished_%j.err
+#SBATCH --output=/path/to/logs/flye_polished_%j.out
+#SBATCH --error=/path/to/logs/flye_polished_%j.err
 
-# Set paths - ADJUST THESE TO YOUR ACTUAL PATHS  
-DATA_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq/Assembly_reads"
-RESULTS_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"
-SINGULARITY_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/flye.sif"
+# Set paths - ADJUST THESE TO YOUR ACTUAL PATHS
+DATA_PATH="path/to/Assembly_reads"
+RESULTS_PATH="/path/to/results"
+SINGULARITY_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/flye.sif"
 
 # Set bind paths for Singularity
 export SINGULARITY_BINDPATH="${DATA_PATH}:/data,${RESULTS_PATH}:/results"
@@ -180,18 +175,18 @@ After both assemblies have completed, we need to assess their quality using QUAS
 #SBATCH -p vera
 #SBATCH -N 1 --cpus-per-task=4
 #SBATCH -t 01:00:00
-#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/quast_%j.out
-#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/quast_%j.err
+#SBATCH --output=/path/to/logs/quast_%j.out
+#SBATCH --error=/path/to/logs/quast_%j.err
 
 # Load or use containerized QUAST
-CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/quast.sif"
+CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/quast.sif"
 
 # Set paths - ADJUST THESE TO YOUR ACTUAL PATHS
-DATA_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq/Assembly_reads"
-RESULTS_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"
+DATA_PATH="path/to/Assembly_reads"
+RESULTS_PATH="/path/to/results"
 OUTPUT_DIR="${RESULTS_PATH}/results/quast_results"
 
-# Set the path to the assemblies
+# Set the path to the assemblies (This should point to the directory containing the Flye assembly outputs)
 ASSEMBLIES_DIR="${RESULTS_PATH}/assembly"
 
 # Bind paths for container
@@ -227,10 +222,7 @@ Now we'll generate a comprehensive report using MultiQC to summarize the QUAST r
 mkdir -p multiqc_analysis/{assembly_qc,quast_results,kraken2_results}
 
 # Copy QUAST results
-scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/students/name/results/quast_results/* multiqc_analysis/quast_results/
-
-# We have also prepared some kraken2 results for the reads that you can include in your report
-scp -r CID@vera2.c3se.chalmers.se:/cephyr/NOBACKUP/groups/n2bin_gu/teachers/Tor/extra_data/kraken2_results/* multiqc_analysis/kraken2_results/
+scp -r CID@vera2.c3se.chalmers.se:/path/to/results/quast_results/* multiqc_analysis/quast_results/
 
 ```
 
@@ -288,14 +280,14 @@ An example of a hybrid assembly workflow is:
 #SBATCH -p vera
 #SBATCH -N 1 --cpus-per-task=12
 #SBATCH -t 03:00:00
-#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/hybrid_%j.out
-#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/hybrid_%j.err
+#SBATCH --output=/path/to/logs/hybrid_%j.out
+#SBATCH --error=/path/to/logs/hybrid_%j.err
 
 # Set paths - ADJUST THESE TO YOUR ACTUAL PATHS
-DATA_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/data/fastq/Assembly_reads"
-RESULTS_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"
-FLYE_CONTAINER="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/flye.sif"
-PP_CONTAINER="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/polypolish.sif"
+DATA_PATH="/path/to/Assembly_reads"
+RESULTS_PATH="/path/to/results"
+FLYE_CONTAINER="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/flye.sif"
+PP_CONTAINER="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/polypolish.sif"
 
 # Set bind paths for Singularity
 export SINGULARITY_BINDPATH="${DATA_PATH}:/data,${RESULTS_PATH}:/results"
@@ -361,13 +353,13 @@ After the hybrid assembly completes, you can compare all three approaches:
 #SBATCH -p vera
 #SBATCH -N 1 --cpus-per-task=4
 #SBATCH -t 01:00:00
-#SBATCH --output=/cephyr/users/ktor/Vera/practical_2/logs/quast_all_%j.out
-#SBATCH --error=/cephyr/users/ktor/Vera/practical_2/logs/quast_all_%j.err
+#SBATCH --output=/path/logs/quast_all_%j.out
+#SBATCH --error=/path/logs/quast_all_%j.err
 
 # Set paths - ADJUST THESE TO YOUR ACTUAL PATHS
-CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511/singularity_images/quast.sif"
-RESULTS_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/students/yourname/practical_2"
-OUTPUT_DIR="${RESULTS_PATH}/results/quast_all_results"
+CONTAINER_PATH="/cephyr/NOBACKUP/groups/n2bin_gu/BIO511-2026/containers/quast.sif"
+RESULTS_PATH="/path/to/results"
+OUTPUT_DIR="${RESULTS_PATH}/quast_all_results"
 
 # Set the path to the assemblies
 ASSEMBLIES_DIR="${RESULTS_PATH}/assembly"

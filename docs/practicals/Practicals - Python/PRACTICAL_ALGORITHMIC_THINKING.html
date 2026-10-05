@@ -178,10 +178,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Practical 5: Software &amp; Containers</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Additional Command Line Programming Resources</li>
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.html">
+ <span class="dropdown-text">For Loops in Bash</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/PATHING.html">
+ <span class="dropdown-text">Pathing in Linux</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
     <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html">
  <span class="dropdown-text">Practical 1: Best Practices</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html">
+ <span class="dropdown-text">Practical 2: Version Control and Collaborative Coding</span></a>
   </li>  
     </ul>
   </li>
@@ -348,8 +362,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#where-does-the-word-algorithm-come-from" id="toc-where-does-the-word-algorithm-come-from" class="nav-link" data-scroll-target="#where-does-the-word-algorithm-come-from">Where Does the Word Algorithm Come From?</a></li>
   <li><a href="#warm-up-algorithmic-thinking-as-planning" id="toc-warm-up-algorithmic-thinking-as-planning" class="nav-link" data-scroll-target="#warm-up-algorithmic-thinking-as-planning">Warm-up: Algorithmic Thinking as Planning</a></li>
-  <li><a href="#why-genomics-needs-sophisticated-algorithms" id="toc-why-genomics-needs-sophisticated-algorithms" class="nav-link" data-scroll-target="#why-genomics-needs-sophisticated-algorithms">Why Genomics Needs Sophisticated Algorithms</a></li>
-  <li><a href="#algorithmic-vocabulary" id="toc-algorithmic-vocabulary" class="nav-link" data-scroll-target="#algorithmic-vocabulary">Algorithmic Vocabulary</a></li>
+  <li><a href="#why-genomics-needs-efficient-algorithms" id="toc-why-genomics-needs-efficient-algorithms" class="nav-link" data-scroll-target="#why-genomics-needs-efficient-algorithms">Why Genomics Needs Efficient Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#essential-vocabulary" id="toc-essential-vocabulary" class="nav-link" data-scroll-target="#essential-vocabulary">Essential Vocabulary</a></li>
+  </ul></li>
   <li><a href="#example-1-exact-string-matching-and-k-mers" id="toc-example-1-exact-string-matching-and-k-mers" class="nav-link" data-scroll-target="#example-1-exact-string-matching-and-k-mers">Example 1: Exact String Matching and k-mers</a></li>
   <li><a href="#example-2-dynamic-programming-for-sequence-alignment" id="toc-example-2-dynamic-programming-for-sequence-alignment" class="nav-link" data-scroll-target="#example-2-dynamic-programming-for-sequence-alignment">Example 2: Dynamic Programming for Sequence Alignment</a></li>
   <li><a href="#example-3-blast-and-seed-and-extend" id="toc-example-3-blast-and-seed-and-extend" class="nav-link" data-scroll-target="#example-3-blast-and-seed-and-extend">Example 3: BLAST and Seed-and-Extend</a></li>
@@ -433,16 +449,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>By this point in the course you have worked with the command line, Git, Python, files, functions, plotting, and genomics workflows. This practical is meant as a capstone. Instead of asking only “how do I write this loop?”, we now ask a deeper question:</p>
-<p><strong>What kind of problem is this, and what kind of algorithm is powerful enough to solve it at genomic scale?</strong></p>
-<p>Modern bioinformatics depends on a small number of recurring algorithmic ideas. Sequence alignment, read mapping, genome assembly, gene prediction, taxonomic classification, and variant calling all look different on the surface, but many of them reuse the same patterns:</p>
-<ul>
-<li>break a biological object into computable pieces</li>
-<li>score many possible explanations</li>
-<li>search efficiently through a huge space of possibilities</li>
-<li>use data structures that avoid scanning everything</li>
-<li>accept tradeoffs between exactness, speed, memory, and biological realism</li>
-</ul>
+<p>By this point in the course you have used the command line, Git, Python, files, functions, plotting, and several genomics workflows. This practical connects those experiences by asking a deeper question:</p>
+<p><strong>What kind of computational problem is this, and what algorithmic idea makes it possible at genomic scale?</strong></p>
+<p>We will focus on algorithms that appeared inside tools already used in the course:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Earlier workflow</th>
+<th>Tool</th>
+<th>Algorithmic idea in this practical</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Taxonomic classification</td>
+<td>Kraken2</td>
+<td>k-mers, indexes, and lowest common ancestors</td>
+</tr>
+<tr class="even">
+<td>Read mapping</td>
+<td>BWA</td>
+<td>exact seeds, local alignment, and genome indexes</td>
+</tr>
+<tr class="odd">
+<td>Functional annotation</td>
+<td>Prokka</td>
+<td>BLAST-like sequence search and profile HMMs</td>
+</tr>
+</tbody>
+</table>
+<p>The purpose is not to reproduce these production tools. Instead, we will build small examples that expose their most important ideas.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -455,11 +496,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>By the end of this practical, you should be able to:</p>
 <ul>
-<li>Explain why naive algorithms often fail on genomic-scale data</li>
-<li>Recognize common genomics algorithms and the problems they solve</li>
-<li>Describe dynamic programming, seed-and-extend search, indexing, graph assembly, hidden Markov models, and probabilistic variant calling at a conceptual level</li>
-<li>Compare algorithmic tradeoffs: exact vs heuristic, fast vs sensitive, memory-efficient vs simple</li>
-<li>Design pseudocode for a realistic genomics problem before writing code</li>
+<li>Explain why a simple algorithm may fail when applied to millions of reads</li>
+<li>Describe how k-mers can represent and classify sequences</li>
+<li>Explain the difference between exact search, local alignment, and heuristic seed-and-extend search</li>
+<li>Explain why genome indexes make read mapping scalable</li>
+<li>Connect Kraken2, BWA, and Prokka to the algorithmic ideas they use</li>
+<li>Compare exact and heuristic approaches in terms of speed, memory, and sensitivity</li>
+<li>Write pseudocode for a realistic genomics problem before writing code</li>
 </ul>
 </div>
 </div>
@@ -627,36 +670,23 @@ useDisinfectant</code></pre>
 -&gt; biological interpretation</code></pre>
 <p>This is why algorithmic thinking matters. A workflow is not only a list of tools. It is a plan where every step has inputs, assumptions, outputs, and consequences.</p>
 </section>
-<section id="why-genomics-needs-sophisticated-algorithms" class="level1">
-<h1>Why Genomics Needs Sophisticated Algorithms</h1>
-<p>A small Python exercise might loop through four sequences. A real genomics dataset might contain:</p>
-<ul>
-<li>millions of short reads</li>
-<li>billions of reference genome positions</li>
-<li>sequencing errors</li>
-<li>repeated regions</li>
-<li>contamination</li>
-<li>uneven coverage</li>
-<li>uncertain biological signals</li>
-</ul>
-<p>A naive solution often looks reasonable until the dataset becomes real.</p>
-<p>For example, imagine mapping 10 million reads to a 5 million base pair bacterial genome by checking each read at every possible position.</p>
+<section id="why-genomics-needs-efficient-algorithms" class="level1">
+<h1>Why Genomics Needs Efficient Algorithms</h1>
+<p>Imagine mapping 10 million reads to a bacterial reference genome by testing every read at every possible genome position:</p>
 <pre class="text"><code>For each read:
     For each position in the genome:
-        Compare the read to the genome at that position</code></pre>
-<p>If the reads are 150 bp long, this can require trillions of character comparisons. The algorithm is simple, but not practical.</p>
-<p>Bioinformatics therefore depends on better strategies:</p>
+        Compare the read with the reference at that position</code></pre>
+<p>The instructions are correct, but the amount of work is enormous. Real genomic data also contain sequencing errors, repeated regions, contamination, and genuine biological variation.</p>
+<p>Bioinformatics tools therefore rely on several recurring strategies:</p>
 <ul>
-<li><strong>indexing</strong>: build a searchable representation of the genome</li>
-<li><strong>dynamic programming</strong>: reuse partial results instead of recomputing them</li>
-<li><strong>heuristics</strong>: quickly find likely answers when exact search is too expensive</li>
-<li><strong>graphs</strong>: represent relationships between k-mers, reads, genes, or genomes</li>
-<li><strong>probabilistic models</strong>: reason under uncertainty</li>
+<li><strong>Break sequences into smaller pieces</strong>, such as k-mers or seeds</li>
+<li><strong>Build indexes</strong> so that the program does not repeatedly scan the complete database</li>
+<li><strong>Score candidate answers</strong> rather than treating every match as equally plausible</li>
+<li><strong>Use heuristics</strong> when checking every possible answer would be too slow</li>
+<li><strong>Represent uncertainty</strong> when the data do not support one certain answer</li>
 </ul>
-</section>
-<section id="algorithmic-vocabulary" class="level1">
-<h1>Algorithmic Vocabulary</h1>
-<p>Before looking at genomics examples, it helps to name a few core ideas.</p>
+<section id="essential-vocabulary" class="level2">
+<h2 class="anchored" data-anchor-id="essential-vocabulary">Essential Vocabulary</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -671,43 +701,43 @@ useDisinfectant</code></pre>
 <tbody>
 <tr class="odd">
 <td>Input</td>
-<td>The data the algorithm starts with, such as reads, sequences, or tables</td>
+<td>Data given to an algorithm, such as reads or a reference genome</td>
 </tr>
 <tr class="even">
 <td>Output</td>
-<td>The result, such as an alignment, assembly, variant list, or classification</td>
+<td>The result, such as a taxon or mapping position</td>
 </tr>
 <tr class="odd">
 <td>State</td>
-<td>Information the algorithm remembers while running</td>
+<td>Information remembered while the algorithm runs</td>
 </tr>
 <tr class="even">
 <td>Score</td>
-<td>A number used to compare possible answers</td>
+<td>A number used to compare candidate answers</td>
 </tr>
 <tr class="odd">
 <td>Search space</td>
-<td>All possible solutions the algorithm could consider</td>
+<td>All answers the algorithm could consider</td>
 </tr>
 <tr class="even">
-<td>Complexity</td>
-<td>How runtime or memory grows as input grows</td>
+<td>Index</td>
+<td>A data structure that makes later searches faster</td>
 </tr>
 <tr class="odd">
 <td>Exact algorithm</td>
-<td>Guaranteed to find the optimal answer under its model</td>
+<td>Returns an exact answer under its model</td>
 </tr>
 <tr class="even">
-<td>Heuristic algorithm</td>
-<td>Faster strategy that may approximate or miss some answers</td>
+<td>Heuristic</td>
+<td>A faster strategy that may miss some possible answers</td>
 </tr>
 <tr class="odd">
-<td>Data structure</td>
-<td>A special organization of data that makes some operations efficient</td>
+<td>Complexity</td>
+<td>How runtime or memory grows as the input grows</td>
 </tr>
 </tbody>
 </table>
-<p>In genomics, the most important question is often not “can I solve this for one sequence?” but “can I solve this for millions of sequences before tomorrow morning?”</p>
+</section>
 </section>
 <section id="example-1-exact-string-matching-and-k-mers" class="level1">
 <h1>Example 1: Exact String Matching and k-mers</h1>

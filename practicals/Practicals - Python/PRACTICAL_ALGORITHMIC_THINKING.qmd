@@ -2,7 +2,7 @@
 title: "Practical 8: Algorithmic Thinking in Genomics"
 author: "Vahid Atabaigielmi"
 date: August 2026
-format: 
+format:
   html:
     toc: true
     toc-depth: 3
@@ -13,30 +13,33 @@ format:
 
 # Introduction
 
-By this point in the course you have worked with the command line, Git, Python, files, functions, plotting, and genomics workflows. This practical is meant as a capstone. Instead of asking only "how do I write this loop?", we now ask a deeper question:
+By this point in the course you have used the command line, Git, Python, files, functions, plotting, and several genomics workflows. This practical connects those experiences by asking a deeper question:
 
-**What kind of problem is this, and what kind of algorithm is powerful enough to solve it at genomic scale?**
+**What kind of computational problem is this, and what algorithmic idea makes it possible at genomic scale?**
 
-Modern bioinformatics depends on a small number of recurring algorithmic ideas. Sequence alignment, read mapping, genome assembly, gene prediction, taxonomic classification, and variant calling all look different on the surface, but many of them reuse the same patterns:
+We will focus on algorithms that appeared inside tools already used in the course:
 
-- break a biological object into computable pieces
-- score many possible explanations
-- search efficiently through a huge space of possibilities
-- use data structures that avoid scanning everything
-- accept tradeoffs between exactness, speed, memory, and biological realism
+| Earlier workflow | Tool | Algorithmic idea in this practical |
+|---|---|---|
+| Taxonomic classification | Kraken2 | k-mers, indexes, and lowest common ancestors |
+| Read mapping | BWA | exact seeds, local alignment, and genome indexes |
+| Functional annotation | Prokka | BLAST-like sequence search and profile HMMs |
+
+The purpose is not to reproduce these production tools. Instead, we will build small examples that expose their most important ideas.
 
 ::: {.callout-note}
 ## Learning Objectives
 
 By the end of this practical, you should be able to:
 
-- Explain why naive algorithms often fail on genomic-scale data
-- Recognize common genomics algorithms and the problems they solve
-- Describe dynamic programming, seed-and-extend search, indexing, graph assembly, hidden Markov models, and probabilistic variant calling at a conceptual level
-- Compare algorithmic tradeoffs: exact vs heuristic, fast vs sensitive, memory-efficient vs simple
-- Design pseudocode for a realistic genomics problem before writing code
+- Explain why a simple algorithm may fail when applied to millions of reads
+- Describe how k-mers can represent and classify sequences
+- Explain the difference between exact search, local alignment, and heuristic seed-and-extend search
+- Explain why genome indexes make read mapping scalable
+- Connect Kraken2, BWA, and Prokka to the algorithmic ideas they use
+- Compare exact and heuristic approaches in terms of speed, memory, and sensitivity
+- Write pseudocode for a realistic genomics problem before writing code
 :::
-
 # Where Does the Word Algorithm Come From?
 
 The word **algorithm** comes from the name of the Persian mathematician **Muhammad ibn Musa al-Khwarizmi**, who lived around the 9th century. His name was later Latinized in Europe as **Algoritmi**.
@@ -151,55 +154,39 @@ raw FASTQ files
 
 This is why algorithmic thinking matters. A workflow is not only a list of tools. It is a plan where every step has inputs, assumptions, outputs, and consequences.
 
-# Why Genomics Needs Sophisticated Algorithms
+# Why Genomics Needs Efficient Algorithms
 
-A small Python exercise might loop through four sequences. A real genomics dataset might contain:
-
-- millions of short reads
-- billions of reference genome positions
-- sequencing errors
-- repeated regions
-- contamination
-- uneven coverage
-- uncertain biological signals
-
-A naive solution often looks reasonable until the dataset becomes real.
-
-For example, imagine mapping 10 million reads to a 5 million base pair bacterial genome by checking each read at every possible position.
+Imagine mapping 10 million reads to a bacterial reference genome by testing every read at every possible genome position:
 
 ```text
 For each read:
     For each position in the genome:
-        Compare the read to the genome at that position
+        Compare the read with the reference at that position
 ```
 
-If the reads are 150 bp long, this can require trillions of character comparisons. The algorithm is simple, but not practical.
+The instructions are correct, but the amount of work is enormous. Real genomic data also contain sequencing errors, repeated regions, contamination, and genuine biological variation.
 
-Bioinformatics therefore depends on better strategies:
+Bioinformatics tools therefore rely on several recurring strategies:
 
-- **indexing**: build a searchable representation of the genome
-- **dynamic programming**: reuse partial results instead of recomputing them
-- **heuristics**: quickly find likely answers when exact search is too expensive
-- **graphs**: represent relationships between k-mers, reads, genes, or genomes
-- **probabilistic models**: reason under uncertainty
+- **Break sequences into smaller pieces**, such as k-mers or seeds
+- **Build indexes** so that the program does not repeatedly scan the complete database
+- **Score candidate answers** rather than treating every match as equally plausible
+- **Use heuristics** when checking every possible answer would be too slow
+- **Represent uncertainty** when the data do not support one certain answer
 
-# Algorithmic Vocabulary
-
-Before looking at genomics examples, it helps to name a few core ideas.
+## Essential Vocabulary
 
 | Concept | Meaning in practice |
 |---|---|
-| Input | The data the algorithm starts with, such as reads, sequences, or tables |
-| Output | The result, such as an alignment, assembly, variant list, or classification |
-| State | Information the algorithm remembers while running |
-| Score | A number used to compare possible answers |
-| Search space | All possible solutions the algorithm could consider |
-| Complexity | How runtime or memory grows as input grows |
-| Exact algorithm | Guaranteed to find the optimal answer under its model |
-| Heuristic algorithm | Faster strategy that may approximate or miss some answers |
-| Data structure | A special organization of data that makes some operations efficient |
-
-In genomics, the most important question is often not "can I solve this for one sequence?" but "can I solve this for millions of sequences before tomorrow morning?"
+| Input | Data given to an algorithm, such as reads or a reference genome |
+| Output | The result, such as a taxon or mapping position |
+| State | Information remembered while the algorithm runs |
+| Score | A number used to compare candidate answers |
+| Search space | All answers the algorithm could consider |
+| Index | A data structure that makes later searches faster |
+| Exact algorithm | Returns an exact answer under its model |
+| Heuristic | A faster strategy that may miss some possible answers |
+| Complexity | How runtime or memory grows as the input grows |
 
 # Example 1: Exact String Matching and k-mers
 

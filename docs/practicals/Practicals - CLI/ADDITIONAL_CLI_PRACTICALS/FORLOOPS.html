@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alvar Almstedt, Emma Västerviga, Bart Edelbroek">
+<meta name="author" content="Tor Kling">
 <meta name="dcterms.date" content="2026-08-01">
 
-<title>Practical 0: Introduction – BIO511 Genomics - Practical Repository</title>
+<title>Additional CLI Practicals: Loops – BIO511 Genomics - Practical Repository</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,24 +60,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-684f5c8cc4ce7c0ec5f1fb4a38df694e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-fd3cdb6591c6e78768236938076114a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../../pages/styles.css">
+<link rel="stylesheet" href="../../../pages/styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light">
@@ -117,9 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">BIO511 Genomics - Practical Repository</span>
     </a>
   </div>
@@ -130,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -139,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-pre-course-setup">    
         <li>
-    <a class="dropdown-item" href="../../practicals/Pre-course-setup_BIO511.html">
+    <a class="dropdown-item" href="../../../practicals/Pre-course-setup_BIO511.html">
  <span class="dropdown-text">Practical 0: Pre-course Setup</span></a>
   </li>  
     </ul>
@@ -151,47 +148,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-command-line-programming">    
         <li class="dropdown-header">Intro to Command Line</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.html">
  <span class="dropdown-text">Practical 1: CLI Basics</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_HPC_CLUSTERS_INTRO.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - CLI/PRACTICAL_HPC_CLUSTERS_INTRO.html">
  <span class="dropdown-text">Lecture: HPC Clusters Intro</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html">
  <span class="dropdown-text">Practical 2: Setting up the HPC</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_WORKSPACE_MANAGEMENT.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - CLI/PRACTICAL_WORKSPACE_MANAGEMENT.html">
  <span class="dropdown-text">Practical 3: Workspace Management and Data Management</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.html">
  <span class="dropdown-text">Practical 4: Scripting and Advanced Text Manipulation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html">
  <span class="dropdown-text">Practical 5: Software &amp; Containers</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Additional Command Line Programming Resources</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.html">
  <span class="dropdown-text">For Loops in Bash</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/PATHING.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/PATHING.html">
  <span class="dropdown-text">Pathing in Linux</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Coding Best Practices</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html">
  <span class="dropdown-text">Practical 1: Best Practices</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html">
  <span class="dropdown-text">Practical 2: Version Control and Collaborative Coding</span></a>
   </li>  
     </ul>
@@ -203,21 +200,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-genomics-workflows">    
         <li class="dropdown-header">Genome workflows - Whole Genome Sequencing (WGS)</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - WGS/PRACTICAL_RAWDATA_AND_QC.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - WGS/PRACTICAL_RAWDATA_AND_QC.html">
  <span class="dropdown-text">Practical 1: Quality Control and Classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - WGS/PRACTICAL_ASSEMBLY_AND_MAPPING.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - WGS/PRACTICAL_ASSEMBLY_AND_MAPPING.html">
  <span class="dropdown-text">Practical 2: Genome Assembly and Mapping</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - WGS/PRACTICAL_FUNCTIONAL_ANNOTATION.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - WGS/PRACTICAL_FUNCTIONAL_ANNOTATION.html">
  <span class="dropdown-text">Practical 3: Genome Annotation</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Additional Genomics Resources</li>
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - WGS/ADDITIONAL_PREP_CURATED_PROTEINS.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - WGS/ADDITIONAL_PREP_CURATED_PROTEINS.html">
  <span class="dropdown-text">Preparing Curated Protein Databases</span></a>
   </li>  
     </ul>
@@ -228,40 +225,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-python-programming">    
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_SETUP.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_SETUP.html">
  <span class="dropdown-text">Practical 0: Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE.html">
  <span class="dropdown-text">Practical 1: Python Data Types and If/Else Clauses</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_LOOPING.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_LOOPING.html">
  <span class="dropdown-text">Practical 2: Python Loops</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_FUNCTIONS.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_FUNCTIONS.html">
  <span class="dropdown-text">Practical 3: Python Functions</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_MODULES.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_MODULES.html">
  <span class="dropdown-text">Practical 4: Python Modules</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_FILES.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_FILES.html">
  <span class="dropdown-text">Practical 5: Files</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_PLOTTING.html">
+    <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_PLOTTING.html">
  <span class="dropdown-text">Practical 6: Plotting</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html">
- <span class="dropdown-text">Practical 7: Object Oriented Programming</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html">
- <span class="dropdown-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
+    <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html">
+ <span class="dropdown-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
   </li>  
     </ul>
   </li>
@@ -276,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../practicals/Practicals - Python/PRACTICAL_SETUP.html">Practical 0: Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.html">Additional Command Line Programming Resources</a></li><li class="breadcrumb-item"><a href="../../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.html">For Loops in Bash</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -286,66 +279,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../../index.html" class="sidebar-logo-link">
-      </a>
-      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Intro to Command Line</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_SETUP.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Practical 0: Introduction</span></a>
+  <a href="../../../practicals/Practicals - CLI/PRACTICAL_INTRO_TO_COMMAND_LINE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 1: CLI Basics</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_DATA_TYPES_AND_IF_ELSE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 1: Python Data Types and If/Else Clauses</span></a>
+  <a href="../../../practicals/Practicals - CLI/PRACTICAL_HPC_CLUSTERS_INTRO.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture: HPC Clusters Intro</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_LOOPING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 2: Python Loops</span></a>
+  <a href="../../../practicals/Practicals - CLI/PRACTICAL_SETTING_UP_THE_HPC.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 2: Setting up the HPC</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_FUNCTIONS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 3: Python Functions</span></a>
+  <a href="../../../practicals/Practicals - CLI/PRACTICAL_WORKSPACE_MANAGEMENT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 3: Workspace Management and Data Management</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_MODULES.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 4: Python Modules</span></a>
+  <a href="../../../practicals/Practicals - CLI/PRACTICAL_SCRIPTS_AND_ADVANCED_TEXT_MANIPULATION.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 4: Scripting and Advanced Text Manipulation</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_FILES.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 5: Files</span></a>
+  <a href="../../../practicals/Practicals - CLI/PRACTICAL_SOFTWARE_INSTALLATION_AND_CONTAINERS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 5: Software &amp; Containers</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Additional Command Line Programming Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_PLOTTING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 6: Plotting</span></a>
+  <a href="../../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">For Loops in Bash</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 7: Object Oriented Programming</span></a>
+  <a href="../../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/PATHING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pathing in Linux</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Coding Best Practices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
+  <a href="../../../practicals/Practicals - Best_practices/PRACTICAL_BEST_PRACTICES.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 1: Best Practices</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../practicals/Practicals - Best_practices/PRACTICAL_VERSION_CONTROL_AND_COLLABORATIVE_CODING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 2: Version Control and Collaborative Coding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -356,20 +384,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-python" id="toc-introduction-to-python" class="nav-link active" data-scroll-target="#introduction-to-python">Introduction to Python</a>
+  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description">Description</a>
   <ul class="collapse">
-  <li><a href="#some-useful-links" id="toc-some-useful-links" class="nav-link" data-scroll-target="#some-useful-links">Some useful links</a></li>
-  </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
-  <ul class="collapse">
-  <li><a href="#setup-the-github-repo" id="toc-setup-the-github-repo" class="nav-link" data-scroll-target="#setup-the-github-repo">1. Setup the github repo</a></li>
-  <li><a href="#our-first-python-script" id="toc-our-first-python-script" class="nav-link" data-scroll-target="#our-first-python-script">2. Our first python script</a></li>
-  <li><a href="#collaborating-on-a-python-script" id="toc-collaborating-on-a-python-script" class="nav-link" data-scroll-target="#collaborating-on-a-python-script">3. Collaborating on a python script</a></li>
-  </ul></li>
-  <li><a href="#bash-commands" id="toc-bash-commands" class="nav-link" data-scroll-target="#bash-commands">Bash commands</a>
-  <ul class="collapse">
-  <li><a href="#basename" id="toc-basename" class="nav-link" data-scroll-target="#basename">basename</a></li>
-  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">arguments</a></li>
+  <li><a href="#anatomy-of-a-for-loop" id="toc-anatomy-of-a-for-loop" class="nav-link" data-scroll-target="#anatomy-of-a-for-loop">Anatomy of a <code>for</code> Loop</a></li>
+  <li><a href="#applying-for-loops" id="toc-applying-for-loops" class="nav-link" data-scroll-target="#applying-for-loops">Applying <code>for</code> Loops</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -377,10 +395,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.html">Additional Command Line Programming Resources</a></li><li class="breadcrumb-item"><a href="../../../practicals/Practicals - CLI/ADDITIONAL_CLI_PRACTICALS/FORLOOPS.html">For Loops in Bash</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Practical 0: Introduction</h1>
-<p class="subtitle lead">BIO511 Genomics - Python Introduction and Setup</p>
+<h1 class="title">Additional CLI Practicals: Loops</h1>
+<p class="subtitle lead">BIO511 Genomics - Scripting in bash</p>
 </div>
 
 
@@ -390,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Alvar Almstedt, Emma Västerviga, Bart Edelbroek </p>
+             <p>Tor Kling </p>
           </div>
   </div>
     
@@ -409,123 +427,162 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction-to-python" class="level1">
-<h1>Introduction to Python</h1>
-<p>Welcome!!</p>
-<p>The exercises for this first lesson are meant to connect the python part of the course to what you have previously done in the unix shell scripting part of the course and are meant to be done in the terminal (not jupyter). You can start using jupyter after today, if you want.</p>
-<p>If you think there is a lot of new syntax, don’t worry. We will begin explaining the python syntax from the ground up starting tomorrow.</p>
-<section id="some-useful-links" class="level2">
-<h2 class="anchored" data-anchor-id="some-useful-links">Some useful links</h2>
-<p><a href="https://www.datacamp.com/tutorial/tutorial-jupyter-notebook">Jupyter notebooks (text)</a></p>
-<p><a href="https://code.visualstudio.com/docs/languages/python">Python in VS Code</a></p>
-<p>We are going to use github repos to present and compare assignments between groups. One of the members of each group will create the repo and add the other members of the group as collaborators. Being able to work collaboratively on a github repo is among the leaning objectives of this part of the course.</p>
-</section>
-</section>
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
-<section id="setup-the-github-repo" class="level2">
-<h2 class="anchored" data-anchor-id="setup-the-github-repo">1. Setup the github repo</h2>
-<ol type="1">
-<li>Have one group member Create a github repo for this course. Name it <code>BIO511_python_2026_Group&lt;X&gt;</code>.</li>
-</ol>
-<ol type="a">
-<li>Make sure it is public and add a README.md file.</li>
-</ol>
-<ol start="2" type="1">
-<li>Add the other group members as collaborators to the repo.</li>
-<li>Each member of the group should clone the repo to their local machine.</li>
-<li>After cloning, make a directory <code>members</code> and each member should create a file called <code>member_&lt;name&gt;.txt</code> in the <code>members</code> directory. Push the file to the repo. If you pull after everyone is done, you should be able to see the other members’ files in the repo.</li>
-<li>Add the url to your repo to your group’s Canvas page.</li>
-</ol>
-</section>
-<section id="our-first-python-script" class="level2">
-<h2 class="anchored" data-anchor-id="our-first-python-script">2. Our first python script</h2>
-<p>Let’s start exploring Python! Some of the terms and tools used below we will go through in greater detail later on in the course. For now, let’s just try them out.</p>
-<p>To print any string, in this case hello, you can use the following line of code in python:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="description" class="level1">
+<h1>Description</h1>
+<p>This additional segment focuses on the anatomy and usage of loops in bash scripting, particularly <code>for</code> loops, which allow for efficient iteration over a series of items or a range of numbers. If you had problems understanding how loops work from the previous sections, this will provide further clarification and practical examples.</p>
+<section id="anatomy-of-a-for-loop" class="level2">
+<h2 class="anchored" data-anchor-id="anatomy-of-a-for-loop">Anatomy of a <code>for</code> Loop</h2>
+<p>A <code>for</code> loop in bash allows you to iterate over a list of items or a range of numbers. The basic syntax is:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> variable <span class="kw">in</span> list</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">command</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Create a script <code>first_python_script.py</code> in a directory <code>practical_0</code>. Add a print command like the one above to print any string of text.</li>
-<li>Save the file and find it in the terminal.</li>
-<li>Run your script using the following command in bash:</li>
+<li><code>variable</code> is a placeholder that takes the value of each item in the <code>list</code> sequentially.</li>
+<li><code>list</code> can be a series of words, filenames, or a sequence of numbers.</li>
+<li>The commands inside the <code>do</code> and <code>done</code> block are executed for each value of <code>variable</code>.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>python first_python_script.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Any line starting with a hash <code>#</code> will be interpreted as a comment by python. A reasonable comment to the print command above could look something like this: <code># Print "Hello"</code>. - Try adding a comment to your script as well. - Instead of printing the string “hello”, save a string of your choice to a variable and print that variable instead.</p>
-<p>Tips: - You can check your python version by typing <code>python -V</code> in the terminal. - Another useful argument is <code>-h</code>, which allows you to see what available options there are. Try it out by typing <code>python -h</code> in your terminal. - Throughout the course it will be nice to keep your code saved in scripts. By organizing them in directories for each practical, you will be able to easily find them later on.</p>
+<p>The variable in the loop differs from the variables we might assign ourselves normally. The variable in this case is rather a <em>placeholder</em> that temporarily holds each value from the list as the loop iterates through all the elements in said list. This means for a list like <code>1, 2, 3</code>, the variable will first hold <code>1</code>, then <code>2</code>, and finally <code>3</code> as the loop executes. The easiest way to utilize a loop in bash is to iterate of a list of filenames.</p>
 </section>
-<section id="collaborating-on-a-python-script" class="level2">
-<h2 class="anchored" data-anchor-id="collaborating-on-a-python-script">3. Collaborating on a python script</h2>
-<ul>
-<li>Try to add the script you just created to your github repo.</li>
-<li>See if each member can add their lines of code (i.e.&nbsp;initializing a variable and printing it) to the same script.</li>
-<li>Resolve any conflicts that may arise and make sure the script runs correctly after everyone has added their code.</li>
-</ul>
-<p>Tips: - It is a good idea to pull the repo before you start working on it, to make sure you have the latest version of the code. - If issues arise when pulling the repo due to conflicts, you can try to stash your changes <code>git stash</code>, pull the repo and then apply your stashed changes <code>git stash pop</code>. - If you are not able to resolve the conflicts, you can always ask for help from your group members or the teachers.</p>
+<section id="applying-for-loops" class="level2">
+<h2 class="anchored" data-anchor-id="applying-for-loops">Applying <code>for</code> Loops</h2>
+<p>For example, to iterate over all <code>.txt</code> files in a directory:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> <span class="pp">*</span>.txt<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Processing </span><span class="va">$file</span><span class="st">"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here <code>file</code> is the placeholder variable that takes the value of each <code>.txt</code> file in the directory sequentially. The wildcard <code>*.txt</code> expands to all files ending with <code>.txt</code> in the current directory to a list of filenames without us having to manually specify each one. The loop will execute the <code>echo</code> command for each file, displaying a message indicating that the file is being processed. But we can also use it to iterate over a range of numbers or any other list of items.</p>
+<p>For example, to iterate over a range of numbers from 1 to 5:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">5</span><span class="dt">}</span><span class="kw">;</span><span class="cf">do</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Number </span><span class="va">$i</span><span class="st">"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Output:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">torkl@torkl-Precision-3591:~$</span> bash test.sh</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Number</span> 1</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Number</span> 2</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Number</span> 3</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Number</span> 4</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Number</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There are many ways to expand on the use of <code>for</code> loops in bash. One common technique is to use nested <code>for</code> loops, where a loop is placed inside another loop. There are also ways to combine <code>for</code> loops with conditional statements, such as <code>if</code> statements, to create more complex and dynamic scripts. Lastly the <code>for</code> loop is not the only type of loop available in bash; <code>while</code> and <code>until</code> loops offer additional control structures for iteration based on conditions rather than a predefined list.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 1: A loop to transfer files
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make a directory called “Ex1”, then make two subdirectories inside it named “source” and “destination”. Place some files in the “source” directory</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Ex1</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> Ex1/source Ex1/destination</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> Ex1/source/file1.txt Ex1/source/file2.txt Ex1/source/file3.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Write a <code>for</code> loop to move all files from the “source” directory to the “destination” directory:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> Ex1/source/<span class="pp">*</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mv</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span> Ex1/destination/</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 2: Translating pseudocode into a <code>for</code> loop
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Below are some pseudocode instructions that need to be translated into a <code>for</code> loop in bash.</p>
+<p>Pseudocode 1:</p>
+<pre><code>start a variable `total` with the value 0
+for each number from 1 to 10
+    total = total + number
+end for
+print the value of `total`</code></pre>
+<p>Pseudocode 2:</p>
+<pre><code>for each fasta file in the genome_data directory
+    search for the gene "lacZ" and print the line + the following line to a new file
+end for loop</code></pre>
+<p>Pseudocode 3:</p>
+<pre><code>for each gff file in the annotations directory
+    store basename of the file
+    if the basename matches strain names "AF"
+        copy the file to the data/gff directory
+    end if
+end for</code></pre>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="solution-for-pseudocode-1" class="level4">
+<h4 class="anchored" data-anchor-id="solution-for-pseudocode-1">Solution for Pseudocode 1</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">total</span><span class="op">=</span>0</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">10</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">total</span><span class="op">=</span><span class="va">$((total</span> <span class="op">+</span> <span class="va">i))</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Total: </span><span class="va">$total</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="solution-for-pseudocode-2" class="level4">
+<h4 class="anchored" data-anchor-id="solution-for-pseudocode-2">Solution for Pseudocode 2</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> genome_data/<span class="pp">*</span>.fasta<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grep</span> <span class="at">-A</span> 1 <span class="st">"lacZ"</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span> <span class="op">&gt;&gt;</span> lacZ_results.txt</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="solution-for-pseudocode-3" class="level4">
+<h4 class="anchored" data-anchor-id="solution-for-pseudocode-3">Solution for Pseudocode 3</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> annotations/<span class="pp">*</span>.gff<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">base_name</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span> .gff<span class="va">)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$base_name</span> <span class="ot">==</span> AF<span class="pp">*</span> <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cp</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span> data/gff/</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Learning Objectives So Far
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li>Create a GitHub repository and add collaborators</li>
-<li>Collaborate on a GitHub repository by cloning, adding files, and pushing changes</li>
-<li>Create a Python script and run it from the terminal</li>
-<li>Resolve conflicts when collaborating on a GitHub repository</li>
-</ul>
-</div>
-</div>
-</section>
-</section>
-<section id="bash-commands" class="level1">
-<h1>Bash commands</h1>
-<p>You already had an introduction to bash. Did you know you can run bash commands in python as well?</p>
-<p>Open a python session by typing <code>python</code> in your terminal. To exit python, you’ll just have to type <code>quit()</code>.</p>
-<p>Let’s open python and try out some commands. A typical python module that you can use to perform the following commands is called <code>os</code>. First we have to import it in the python session to allow us to use the various tools provided by <code>os</code>. Start by opening a python session. Then, try out the following commands:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In bash we would write pwd to print the current working directory. In python it’s:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>os.getcwd()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Create a new directory in the one you’re in right now</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>os.mkdir(<span class="st">"test_dir_from_python"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Create a subdirectory in the one you just created</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>os.mkdir(<span class="st">"test_dir_from_python/subdir1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You can create a new directory with a subdirectory in one line of code should you use the function makedirs() instead</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"test_dir_from_python/subdir2/subdir2.1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>What happens if you try to create the directories you just made again? Try it out.</p>
-<p>Should you want to create a directory that might already exist without getting an error message, just to create it if it doesn’t exist and otherwise do nothing, you can use the command <code>os.makedirs()</code> with an input argument especially made for cases like these, called <code>exist_ok</code>. <code>exist_ok</code> is set to <code>False</code> by default so we need to set it to <code>True</code> like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"test_dir_from_python/subdir2/"</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>To list the contents of a directory, use <code>os.listdir()</code>. To have a look inside the directory we just made, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>os.listdir(<span class="st">"test_dir_from_python"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Try to list the contents of the subdirectories <code>subdir1</code> and <code>subdir2</code> as well.</p>
-<section id="basename" class="level2">
-<h2 class="anchored" data-anchor-id="basename">basename</h2>
-<p>When coding we often work with file paths. However, we want to avoid hardcoding any path. Usually, we write scripts where we allow the user to set any path they want. Let’s say we’re working on a script where the user can specify their own input file path.</p>
-<p>Start by moving the file <code>first_python_script.py</code> to one of the subdirectories you created, by using <code>os.rename()</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>os.rename(<span class="st">"/path/to/first_python_script.py"</span>, <span class="st">"test_dir_from_python/subdir2/first_python_script.py"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>We can use a function called <code>basename</code> to work with any path we’re given. The <code>basename</code> function comes from a submodule within <code>os</code> called <code>path</code>. You can get only the file name from an entire path like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the path to a variable called my_file_path</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>my_file_path <span class="op">=</span> <span class="st">'test_dir_from_python/subdir2/first_python_script.py'</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get only the file name</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>os.path.basename(my_file_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="arguments" class="level2">
-<h2 class="anchored" data-anchor-id="arguments">arguments</h2>
-<p>But how can we allow any user of a script to specify their own path? We allow them to specify it when running the script from the terminal, to avoid them going in and messing with the actual script.</p>
-<p>Now we are going to import a module called <code>sys</code>. Then, we will use a function from <code>sys</code> called <code>argv</code> to allow us to work with the command line argument that the user will give. Open up a new python script named <code>input_arguments_test.py</code>, preferably in <code>test_dir_from_python/subdir2/</code>, to allow us to work in the same directories. Write the following code in your file:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use the first and only argument from the user and save it as "input_string"</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>input_string <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># print the input argument</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(input_string)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Save the file and try to run it from the terminal. This time we should give an input argument, something it could print. Run it like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>python test_dir_from_python<span class="op">/</span>subdir2<span class="op">/</span>input_arguments_test.py <span class="st">"This is a test string"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Finally, we will combine what we’ve gone through so far. Create a script with an input argument that is a path to one of your files. Make the script print the basename of the file.</p>
+<p>Additional information on loops can be found <a href="https://www.geeksforgeeks.org/linux-unix/bash-scripting-for-loop/">here</a>.</p>
 
 
+</div>
+</div>
 </section>
 </section>
 
@@ -581,14 +638,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
