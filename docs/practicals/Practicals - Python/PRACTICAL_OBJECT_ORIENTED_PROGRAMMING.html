@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alvar Almstedt, Emma Västerviga, Bart Edelbroek">
-<meta name="dcterms.date" content="2026-08-01">
+<meta name="author" content="Alvar Almstedt, Bart Edelbroek, Emma Västerviga">
+<meta name="dcterms.date" content="2026-10-01">
 
-<title>Practical 0: Introduction – BIO511 Genomics - Practical Repository</title>
+<title>Practical 7: Object Oriented Programming – BIO511 Genomics - Practical Repository</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../practicals/Practicals - Python/PRACTICAL_SETUP.html">Practical 0: Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html">Practical 7: Object Oriented Programming</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -294,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_SETUP.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../practicals/Practicals - Python/PRACTICAL_SETUP.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practical 0: Introduction</span></a>
   </div>
 </li>
@@ -336,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html" class="sidebar-item-text sidebar-link">
+  <a href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Practical 7: Object Oriented Programming</span></a>
   </div>
 </li>
@@ -356,20 +356,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-python" id="toc-introduction-to-python" class="nav-link active" data-scroll-target="#introduction-to-python">Introduction to Python</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#part-1-build-your-first-python-object" id="toc-part-1-build-your-first-python-object" class="nav-link" data-scroll-target="#part-1-build-your-first-python-object">Part 1 | Build your first Python object</a>
   <ul class="collapse">
-  <li><a href="#some-useful-links" id="toc-some-useful-links" class="nav-link" data-scroll-target="#some-useful-links">Some useful links</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <li><a href="#part-2-working-with-methods" id="toc-part-2-working-with-methods" class="nav-link" data-scroll-target="#part-2-working-with-methods">Part 2 | Working with methods</a>
   <ul class="collapse">
-  <li><a href="#setup-the-github-repo" id="toc-setup-the-github-repo" class="nav-link" data-scroll-target="#setup-the-github-repo">1. Setup the github repo</a></li>
-  <li><a href="#our-first-python-script" id="toc-our-first-python-script" class="nav-link" data-scroll-target="#our-first-python-script">2. Our first python script</a></li>
-  <li><a href="#collaborating-on-a-python-script" id="toc-collaborating-on-a-python-script" class="nav-link" data-scroll-target="#collaborating-on-a-python-script">3. Collaborating on a python script</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise</a></li>
   </ul></li>
-  <li><a href="#bash-commands" id="toc-bash-commands" class="nav-link" data-scroll-target="#bash-commands">Bash commands</a>
+  <li><a href="#part-3-classesobjects-within-classes" id="toc-part-3-classesobjects-within-classes" class="nav-link" data-scroll-target="#part-3-classesobjects-within-classes">Part 3 | Classes/objects within classes</a>
   <ul class="collapse">
-  <li><a href="#basename" id="toc-basename" class="nav-link" data-scroll-target="#basename">basename</a></li>
-  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">arguments</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -379,8 +378,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practical 0: Introduction</h1>
-<p class="subtitle lead">BIO511 Genomics - Python Introduction and Setup</p>
+<h1 class="title">Practical 7: Object Oriented Programming</h1>
+<p class="subtitle lead">BIO511 Genomics - Object Oriented Programming (OOP) in Python</p>
 </div>
 
 
@@ -390,14 +389,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Alvar Almstedt, Emma Västerviga, Bart Edelbroek </p>
+             <p>Alvar Almstedt, Bart Edelbroek, Emma Västerviga </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 1, 2026</p>
+      <p class="date">October 1, 2026</p>
     </div>
   </div>
   
@@ -409,121 +408,178 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction-to-python" class="level1">
-<h1>Introduction to Python</h1>
-<p>Welcome!!</p>
-<p>The exercises for this first lesson are meant to connect the python part of the course to what you have previously done in the unix shell scripting part of the course and are meant to be done in the terminal (not jupyter). You can start using jupyter after today, if you want.</p>
-<p>If you think there is a lot of new syntax, don’t worry. We will begin explaining the python syntax from the ground up starting tomorrow.</p>
-<section id="some-useful-links" class="level2">
-<h2 class="anchored" data-anchor-id="some-useful-links">Some useful links</h2>
-<p><a href="https://www.datacamp.com/tutorial/tutorial-jupyter-notebook">Jupyter notebooks (text)</a></p>
-<p><a href="https://code.visualstudio.com/docs/languages/python">Python in VS Code</a></p>
-<p>We are going to use github repos to present and compare assignments between groups. One of the members of each group will create the repo and add the other members of the group as collaborators. Being able to work collaboratively on a github repo is among the leaning objectives of this part of the course.</p>
-</section>
-</section>
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
-<section id="setup-the-github-repo" class="level2">
-<h2 class="anchored" data-anchor-id="setup-the-github-repo">1. Setup the github repo</h2>
-<ol type="1">
-<li>Have one group member Create a github repo for this course. Name it <code>BIO511_python_2026_Group&lt;X&gt;</code>.</li>
-</ol>
-<ol type="a">
-<li>Make sure it is public and add a README.md file.</li>
-</ol>
-<ol start="2" type="1">
-<li>Add the other group members as collaborators to the repo.</li>
-<li>Each member of the group should clone the repo to their local machine.</li>
-<li>After cloning, make a directory <code>members</code> and each member should create a file called <code>member_&lt;name&gt;.txt</code> in the <code>members</code> directory. Push the file to the repo. If you pull after everyone is done, you should be able to see the other members’ files in the repo.</li>
-<li>Add the url to your repo to your group’s Canvas page.</li>
-</ol>
-</section>
-<section id="our-first-python-script" class="level2">
-<h2 class="anchored" data-anchor-id="our-first-python-script">2. Our first python script</h2>
-<p>Let’s start exploring Python! Some of the terms and tools used below we will go through in greater detail later on in the course. For now, let’s just try them out.</p>
-<p>To print any string, in this case hello, you can use the following line of code in python:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Create a script <code>first_python_script.py</code> in a directory <code>practical_0</code>. Add a print command like the one above to print any string of text.</li>
-<li>Save the file and find it in the terminal.</li>
-<li>Run your script using the following command in bash:</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>python first_python_script.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Any line starting with a hash <code>#</code> will be interpreted as a comment by python. A reasonable comment to the print command above could look something like this: <code># Print "Hello"</code>. - Try adding a comment to your script as well. - Instead of printing the string “hello”, save a string of your choice to a variable and print that variable instead.</p>
-<p>Tips: - You can check your python version by typing <code>python -V</code> in the terminal. - Another useful argument is <code>-h</code>, which allows you to see what available options there are. Try it out by typing <code>python -h</code> in your terminal. - Throughout the course it will be nice to keep your code saved in scripts. By organizing them in directories for each practical, you will be able to easily find them later on.</p>
-</section>
-<section id="collaborating-on-a-python-script" class="level2">
-<h2 class="anchored" data-anchor-id="collaborating-on-a-python-script">3. Collaborating on a python script</h2>
-<ul>
-<li>Try to add the script you just created to your github repo.</li>
-<li>See if each member can add their lines of code (i.e.&nbsp;initializing a variable and printing it) to the same script.</li>
-<li>Resolve any conflicts that may arise and make sure the script runs correctly after everyone has added their code.</li>
-</ul>
-<p>Tips: - It is a good idea to pull the repo before you start working on it, to make sure you have the latest version of the code. - If issues arise when pulling the repo due to conflicts, you can try to stash your changes <code>git stash</code>, pull the repo and then apply your stashed changes <code>git stash pop</code>. - If you are not able to resolve the conflicts, you can always ask for help from your group members or the teachers.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Object oriented programming (OOP) is a fundamental way to structure your code. It can be used for many programming languages, and python is one of the languages that was built with OOP in mind from the beginning.</p>
+<p>The general idea behind OOP is that you create <strong>objects</strong> which can have their own <strong>attributes</strong> and functions, called <strong>methods</strong>. By storing information in objects, it is easy to keep the code organized. Also, since you will have a blueprint to build these objects, you can avoid duplicating code for similar objects.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Learning Objectives So Far
+<span class="screen-reader-only">Note</span>Learning objectives/Goals
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Create a GitHub repository and add collaborators</li>
-<li>Collaborate on a GitHub repository by cloning, adding files, and pushing changes</li>
-<li>Create a Python script and run it from the terminal</li>
-<li>Resolve conflicts when collaborating on a GitHub repository</li>
+<li>What are classes and objects</li>
+<li>Basic OOP syntax in python</li>
+<li>When to use OOP</li>
+<li>Practice designing and implementing OOP systems</li>
 </ul>
 </div>
 </div>
 </section>
+<section id="part-1-build-your-first-python-object" class="level1">
+<h1>Part 1 | Build your first Python object</h1>
+<p>In python, the blueprint for an object is called a <strong>Class</strong>. To write a Class, start with the keyword <strong>class</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyClass:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># don't forget the indent; everything in the indent is part of the class</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the standard nomenclature is to Capitalize Class Names</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The dunder method <code>__init__</code> is called automatically when an object is instantiated (created). The first argument you pass to <code>__init__</code> is the object itself.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyClass:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, arg1):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.attribute1 <span class="op">=</span> arg1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Finally, you can use your class to create as many objects as you like</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>object1 <span class="op">=</span> MyClass(<span class="st">"test1"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>object2 <span class="op">=</span> MyClass(<span class="st">"test2"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(object1)  <span class="co"># would print "&lt;__main__.MyClass object at 0x100dbc3b0&gt;"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(object2.attribute1)  <span class="co"># would print "test2"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>In the below code, we define a class <code>Car</code> which we can use to generate several cars (objects), each with attributes set to different values.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Car:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, brand, color, year):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.brand <span class="op">=</span> brand</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.color <span class="op">=</span> color</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>car1 <span class="op">=</span> Car(<span class="st">"Ferrari"</span>, <span class="st">"red"</span>, <span class="dv">2018</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>car2 <span class="op">=</span> Car(<span class="st">"Toyota"</span>, <span class="st">"green"</span>, <span class="dv">2008</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>car3 <span class="op">=</span> Car(<span class="st">"Volvo"</span>, <span class="st">"blue"</span>, <span class="dv">2024</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../pages/images/car_class.png" class="img-fluid figure-img" style="width:45.0%" alt="Illustration of the Car class."></p>
+<figcaption>Illustration of the Car class</figcaption>
+</figure>
+</div>
 </section>
-<section id="bash-commands" class="level1">
-<h1>Bash commands</h1>
-<p>You already had an introduction to bash. Did you know you can run bash commands in python as well?</p>
-<p>Open a python session by typing <code>python</code> in your terminal. To exit python, you’ll just have to type <code>quit()</code>.</p>
-<p>Let’s open python and try out some commands. A typical python module that you can use to perform the following commands is called <code>os</code>. First we have to import it in the python session to allow us to use the various tools provided by <code>os</code>. Start by opening a python session. Then, try out the following commands:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In bash we would write pwd to print the current working directory. In python it’s:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>os.getcwd()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Create a new directory in the one you’re in right now</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>os.mkdir(<span class="st">"test_dir_from_python"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Create a subdirectory in the one you just created</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>os.mkdir(<span class="st">"test_dir_from_python/subdir1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You can create a new directory with a subdirectory in one line of code should you use the function makedirs() instead</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"test_dir_from_python/subdir2/subdir2.1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>What happens if you try to create the directories you just made again? Try it out.</p>
-<p>Should you want to create a directory that might already exist without getting an error message, just to create it if it doesn’t exist and otherwise do nothing, you can use the command <code>os.makedirs()</code> with an input argument especially made for cases like these, called <code>exist_ok</code>. <code>exist_ok</code> is set to <code>False</code> by default so we need to set it to <code>True</code> like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"test_dir_from_python/subdir2/"</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>To list the contents of a directory, use <code>os.listdir()</code>. To have a look inside the directory we just made, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>os.listdir(<span class="st">"test_dir_from_python"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Try to list the contents of the subdirectories <code>subdir1</code> and <code>subdir2</code> as well.</p>
-<section id="basename" class="level2">
-<h2 class="anchored" data-anchor-id="basename">basename</h2>
-<p>When coding we often work with file paths. However, we want to avoid hardcoding any path. Usually, we write scripts where we allow the user to set any path they want. Let’s say we’re working on a script where the user can specify their own input file path.</p>
-<p>Start by moving the file <code>first_python_script.py</code> to one of the subdirectories you created, by using <code>os.rename()</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>os.rename(<span class="st">"/path/to/first_python_script.py"</span>, <span class="st">"test_dir_from_python/subdir2/first_python_script.py"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>We can use a function called <code>basename</code> to work with any path we’re given. The <code>basename</code> function comes from a submodule within <code>os</code> called <code>path</code>. You can get only the file name from an entire path like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the path to a variable called my_file_path</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>my_file_path <span class="op">=</span> <span class="st">'test_dir_from_python/subdir2/first_python_script.py'</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get only the file name</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>os.path.basename(my_file_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
+<ol type="1">
+<li><p>Think of some classes you could define for the following domains:</p>
+<ul>
+<li>Hospital</li>
+<li>Video game</li>
+<li>University</li>
+<li>Library</li>
+</ul></li>
+<li><p>Create a <code>Book</code> class with the following attributes:</p>
+<ul>
+<li><code>title</code></li>
+<li><code>author</code></li>
+<li><code>year</code></li>
+</ul></li>
+</ol>
 </section>
-<section id="arguments" class="level2">
-<h2 class="anchored" data-anchor-id="arguments">arguments</h2>
-<p>But how can we allow any user of a script to specify their own path? We allow them to specify it when running the script from the terminal, to avoid them going in and messing with the actual script.</p>
-<p>Now we are going to import a module called <code>sys</code>. Then, we will use a function from <code>sys</code> called <code>argv</code> to allow us to work with the command line argument that the user will give. Open up a new python script named <code>input_arguments_test.py</code>, preferably in <code>test_dir_from_python/subdir2/</code>, to allow us to work in the same directories. Write the following code in your file:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use the first and only argument from the user and save it as "input_string"</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>input_string <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># print the input argument</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(input_string)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Save the file and try to run it from the terminal. This time we should give an input argument, something it could print. Run it like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>python test_dir_from_python<span class="op">/</span>subdir2<span class="op">/</span>input_arguments_test.py <span class="st">"This is a test string"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Finally, we will combine what we’ve gone through so far. Create a script with an input argument that is a path to one of your files. Make the script print the basename of the file.</p>
+</section>
+<section id="part-2-working-with-methods" class="level1">
+<h1>Part 2 | Working with methods</h1>
+<p>Methods give your classes the ability to do something with the attributes you provided. They also provide a nice way to collect several functions together.</p>
+<p>To call a method the syntax is object.method(potential_arguments)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Parrot:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> speak(<span class="va">self</span>, text):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Parrot says: </span><span class="sc">{</span>text<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>my_parrot <span class="op">=</span> Parrot() </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>my_parrot.speak(<span class="st">"Good day"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Parrot says: Good day</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">Exercise</h2>
+<ol type="1">
+<li>Create a calculator class, which has methods for addition, subtraction and multiplication. You can use the below code to get started.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Calculator:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, number1, number2):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.number1 <span class="op">=</span> number1</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.number2 <span class="op">=</span> number2</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>my_calc <span class="op">=</span> Calculator(<span class="dv">4</span>,<span class="dv">6</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>my_calc.add()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>my_calc.subtract()</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>my_calc.multiply()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li>Write a class “Circle” with attribute radius.</li>
+</ol>
+<ul>
+<li>Methods:
+<ul>
+<li><code>calc_perimeter()</code> returns the circumference</li>
+<li><code>calc_area()</code> returns the area of the circle</li>
+</ul></li>
+<li>Optional:
+<ul>
+<li>add area and circumference to attributes</li>
+<li>let the user input the radius and print the attributes</li>
+</ul></li>
+<li>Hints:
+<ul>
+<li>You can use 3.14 as pi</li>
+<li>Python syntax for squaring is <code>** 2</code></li>
+<li>User input can be defined with <code>input()</code></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="part-3-classesobjects-within-classes" class="level1">
+<h1>Part 3 | Classes/objects within classes</h1>
+<p>If you want to further structure your code it is possible to store and modify objects within other objects. You can imagine a <code>Dealership</code> class which contains <code>Cars</code>, or a <code>Hospital</code> class which can store and manage e.g.&nbsp;<code>Patients</code>, <code>Doctors</code>, and <code>Beds</code>.</p>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">Exercise</h2>
+<p>Consider the following classes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Book:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, title, author, year):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.title <span class="op">=</span> title</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.author <span class="op">=</span> author</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.available <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.borrower <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The __str__ dunder method will be called when using print(book_obj)</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"Informative message about the book. You can also use attributes </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>title<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Library:</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.books <span class="op">=</span> []</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Member:</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name):</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.borrowed_books <span class="op">=</span> []</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>book1 <span class="op">=</span> Book(<span class="st">"1984"</span>, <span class="st">"George Orwell"</span>, <span class="dv">1949</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>book2 <span class="op">=</span> Book(<span class="st">"To Kill a Mockingbird"</span>, <span class="st">"Harper Lee"</span>, <span class="dv">1960</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>library <span class="op">=</span> Library()</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>library.add_book(book1)  <span class="co"># Should add book1 to the library and make it available for borrowing</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>member1 <span class="op">=</span> Member(<span class="st">"Alice"</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>member1.borrow_book(library, book1)  <span class="co"># Now the book should be borrowed by Alice</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Available books:"</span>, [<span class="bu">str</span>(book) <span class="cf">for</span> book <span class="kw">in</span> library.available_books])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Add the necessary methods to support the example usage</li>
+<li>Expand the usage as you see fit, for example:
+<ul>
+<li>Add meaningful messages when the book cannot be borrowed</li>
+</ul></li>
+<li>Make informative messages for the objects using the <code>__str__</code> dunder method</li>
+</ul>
 
 
 </section>

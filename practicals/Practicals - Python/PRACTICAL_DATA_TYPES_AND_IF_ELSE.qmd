@@ -1,7 +1,7 @@
 ---
 title: "Practical 1: Python Data Types and If/Else Clauses"
 subtitle: "BIO511 Genomics - Python Introduction"
-author: "Alvar Almstedt, Emma Västerviga"
+author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
 date: August 2026
 format: 
   html:
@@ -16,11 +16,11 @@ format:
 
 Now we are finally getting into the bread and butter of python syntax! Today you will do some very simple exercises with some of the most commonly used python data types as well as starting with boolean logic using if/else clauses.
 
-You can copy the code blocks containing comments below and work on the tasks from within your IDE (Integrated Developer Environment)/text editor or a jupyter notebook.
+You can copy the code blocks containing comments below and work on the tasks from within your IDE (Integrated Development Environment)/text editor or a jupyter notebook.
 Remember, comments are the lines that start with `#` and will be ignored when you run your code
 
  
-Remember to refer back to todays presentations for help or ask the teachers - It's what we are here for :)
+Remember to refer back to today's presentations for help or ask the teachers - It's what we are here for :)
 
 
 ## Some links that you may find helpful
@@ -61,10 +61,11 @@ The variables need to be created in the same script that you use to solve the fo
 
 ::: {.callout-tip} 
 ### Hint
-Double check what type a variable is with `type(variablename)`, to deremine which variable to use.
+Double check what type a variable is with `type(variablename)`, to determine which variable to use.
 :::
 
-###
+<br>
+
 Let's start with strings! Below is an example code block of how to determine the length of a string:
 
 ```python
@@ -99,7 +100,7 @@ Compare the integer to zero.
 
 
 ### Type gate + nested classification (Nested If/elif/else)
-Pick a SEQUENCE you created (list, tuple or range). Here, we want you to cerate a nested loop.
+Pick a SEQUENCE you created (list, tuple or range). Here, we want you to create a nested if-statement.
 
 In the outer if-statement, check if your choice of variable matches any of the data types list **or** tuple **or** range. Use `or` to allow the variable to match any of them. If the variable is not a match, print "wrong type for this task".
 
@@ -111,4 +112,74 @@ The inner if-statement should be used IF the variable was a match. Here, you nee
 
 - Should the length be > 1, print "multiple items"
 
+### Look up a sample (dictionaries, `in` and `None`)
 
+A sequencing run produced the dictionary below. The keys are sample names and the values are the number of reads for each sample. Sequencing failed for one sample, so it has no value.
+
+```python
+read_counts = {"sample_A": 1520000, "sample_B": 830000, "sample_C": None}
+```
+
+You can check whether a key exists in a dictionary with `in`:
+
+```python
+print("sample_A" in read_counts) # prints True
+```
+
+1. Save the name of one sample to a variable called `sample`. Write an if/elif/else statement that prints:
+
+   - "unknown sample" if `sample` is not in the dictionary
+   - "sequencing failed" if the value for `sample` is `None`
+   - "enough reads" if the sample has at least 1000000 reads
+   - "too few reads" otherwise
+
+2. Run your code with `sample` set to each of the three samples, and then to a name that is not in the dictionary. Check that you get the right message every time.
+
+3. Create a variable `passed_qc` and set it to `True`. Change your code so that it prints "ready for analysis" instead of "enough reads", but only if the sample has enough reads **and** `passed_qc` is `True`. What is printed for `sample_A` when you change `passed_qc` to `False`?
+
+
+
+## Extra task: GC content
+
+This task is optional. Try it if you have finished the other exercises and have time left.
+
+The GC content of a DNA sequence is the percentage of its bases that are either `G` or `C`. It is one of the first things you check when you get new sequencing data.
+
+You can get a single base out of a string with square brackets and its position. Positions start at `0`:
+
+```python
+dna = "TGCA"
+
+print(dna[0]) # prints T
+print(dna[1]) # prints G
+```
+
+Use this sequence:
+
+```python
+sequence = "ATGCGTACTTAGCAAT"
+```
+
+1. **Check one base.**
+
+   Write an `if` statement that checks whether the first base of `sequence` is a `G` or a `C`. Print a message saying whether it is or not.
+
+2. **Count the G and C bases.**
+
+   Create a variable `gc_count` that starts at `0`. Check every base in `sequence` and increase `gc_count` by `1` each time you find a `G` or a `C`. Print `gc_count`.
+
+3. **Calculate the GC content.**
+
+   Use `gc_count` and `len(sequence)` to calculate the GC content as a percentage. Print it.
+
+4. **A new sequence arrives.**
+
+   A colleague sends you a second sequence:
+
+   ```python
+   sequence = "TTAGGCATGCCGATATCGGCTTA"
+   ```
+
+   Calculate the GC content of this sequence too.
+
+   Which parts of your code did you have to change? What would you have to do if the sequence was a whole bacterial genome with several million bases?

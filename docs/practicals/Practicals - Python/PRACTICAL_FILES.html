@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alvar Almstedt, Emma Västerviga">
+<meta name="author" content="Alvar Almstedt, Bart Edelbroek, Emma Västerviga">
 <meta name="dcterms.date" content="2026-08-01">
 
 <title>Practical 5: Files – BIO511 Genomics - Practical Repository</title>
@@ -69,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5d43e23f0b9b8f30d83c127b083e847e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-684f5c8cc4ce7c0ec5f1fb4a38df694e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,6 +117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">BIO511 Genomics - Practical Repository</span>
     </a>
@@ -127,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -253,8 +256,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Practical 6: Plotting</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html">
+ <span class="dropdown-text">Practical 7: Object Oriented Programming</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html">
- <span class="dropdown-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="dropdown-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </li>  
     </ul>
   </li>
@@ -279,6 +286,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -325,8 +336,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practical 7: Object Oriented Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="menu-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </div>
 </li>
     </ul>
@@ -343,15 +360,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful links</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a>
+  <li><a href="#file-manipulation" id="toc-file-manipulation" class="nav-link" data-scroll-target="#file-manipulation">File manipulation</a></li>
+  <li><a href="#arguments-and-pandas" id="toc-arguments-and-pandas" class="nav-link" data-scroll-target="#arguments-and-pandas">Arguments and pandas</a></li>
+  <li><a href="#mini-fasta-toolkit-with-biopython" id="toc-mini-fasta-toolkit-with-biopython" class="nav-link" data-scroll-target="#mini-fasta-toolkit-with-biopython">Mini FASTA toolkit with Biopython</a>
   <ul class="collapse">
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"></a></li>
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"></a></li>
+  <li><a href="#create-the-input-file" id="toc-create-the-input-file" class="nav-link" data-scroll-target="#create-the-input-file">Create the input file</a></li>
+  <li><a href="#load-and-report" id="toc-load-and-report" class="nav-link" data-scroll-target="#load-and-report">Load and report</a></li>
+  <li><a href="#reverse-complements-to-a-new-fasta" id="toc-reverse-complements-to-a-new-fasta" class="nav-link" data-scroll-target="#reverse-complements-to-a-new-fasta">Reverse complements to a new FASTA</a></li>
+  <li><a href="#gc-annotation-to-a-new-fasta" id="toc-gc-annotation-to-a-new-fasta" class="nav-link" data-scroll-target="#gc-annotation-to-a-new-fasta">GC% annotation to a new FASTA</a></li>
+  <li><a href="#translation" id="toc-translation" class="nav-link" data-scroll-target="#translation">Translation</a></li>
   </ul></li>
+  <li><a href="#extra-task-vector-maths-with-numpy" id="toc-extra-task-vector-maths-with-numpy" class="nav-link" data-scroll-target="#extra-task-vector-maths-with-numpy">Extra task: Vector maths with NumPy</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -372,7 +391,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Alvar Almstedt, Emma Västerviga </p>
+             <p>Alvar Almstedt, Bart Edelbroek, Emma Västerviga </p>
           </div>
   </div>
     
@@ -393,99 +412,122 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>Todays topics include: Reading and writing to files, working with pandas dataframes and some of the functionality in biopython</p>
+<p>Today’s topics include: Reading and writing to files, working with pandas dataframes and some of the functionality in biopython</p>
+<p>Before you start, make sure that pandas, NumPy and Biopython are installed in the environment you are using. NumPy is installed automatically together with pandas, and you should already have Biopython from Practical 4.</p>
 </section>
 <section id="useful-links" class="level1">
 <h1>Useful links</h1>
 <p><a href="https://www.geeksforgeeks.org/python/file-handling-python/">Files (text)</a></p>
 <p><a href="https://www.youtube.com/watch?v=Uh2ebFW8OYM">Files (video)</a></p>
+<p><a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Reading and writing files, including appending (Python docs)</a></p>
+<p><a href="https://docs.python.org/3/library/csv.html#examples">The csv module (Python docs)</a></p>
 <p><a href="https://www.w3schools.com/python/pandas/default.asp">Pandas tutorial</a></p>
+<p><a href="https://pandas.pydata.org/docs/user_guide/10min.html">10 minutes to pandas (text)</a></p>
 <p><a href="https://biopython.org/docs/latest/Tutorial/index.html">Biopython (text tutorial)</a></p>
 <p><a href="https://www.youtube.com/watch?v=ocA2IMe7dpA">Biopython (video)</a></p>
+<p><a href="https://numpy.org/doc/stable/user/absolute_beginners.html">NumPy basics (text)</a></p>
 </section>
 <section id="exercises" class="level1">
 <h1>Exercises</h1>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
-<p><strong>File Manipulation</strong></p>
+<section id="file-manipulation" class="level2">
+<h2 class="anchored" data-anchor-id="file-manipulation">File manipulation</h2>
 <p>Create a script that:</p>
-<ol type="a">
-<li><p>Uses with open() to create a csv file with 5 rows and 5 columns. Make sure to save the file and use comma as the separator.</p></li>
-<li><p>Appends a row to the file based on the users input, using argv.</p></li>
+<ol type="1">
+<li><p>Uses <code>with open()</code> to create a csv file with 5 rows and 5 columns. Make sure to save the file and use comma as the separator.</p></li>
+<li><p>Appends a row to the file based on the user’s input, using <code>argv</code>.</p></li>
 </ol>
 </section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1"></h2>
-<p><strong>Arguments and pandas</strong></p>
-<ol type="a">
-<li><p>Create a second script that takes the file you created in the previous task as a user defined input argument. Use argparse for this.</p></li>
+<section id="arguments-and-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="arguments-and-pandas">Arguments and pandas</h2>
+<ol type="1">
+<li><p>Create a second script that takes the file you created in the previous task as a user defined input argument. Use <code>argparse</code> for this.</p></li>
 <li><p>Make sure to add useful help messages to the arguments in your script.</p></li>
-<li><p>use the csv module to read the csv file you created</p></li>
+<li><p>Use the <code>csv</code> module to read the csv file you created.</p></li>
 <li><p>Convert the data to a pandas dataframe. Print a statistical summary of your data.</p></li>
 </ol>
 </section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2"></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">Biopython Exercise — Mini FASTA toolkit with Biopython (Seq, SeqRecord, SeqIO)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">Remember that you can copy these commented code blocks into your script to not have to refer back to your browser window</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">Step 0 — Create the input file:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">Save the text below as a file named `dna.fasta` in the same folder as your script:</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">&gt;seq1</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">ATGCATGCATGCATGCATGCATGCATGC</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">&gt;seq2</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">GATTACAGATTACAGATTACA</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">&gt;seq3</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">CGCGATATCGCGATATCGCGATATCGCGATATCGCGATATC</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">&gt;seq4</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">TTTAAACCCGGGTTTAAA</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">&gt;seq5</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">GCCGCGGCGCGCCGCGGCGCGCCGCGGCGC</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">&gt;seq6</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">ATATATATATATATATATATAT</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">&gt;seq7</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">ACGTTGCAACGTTGCAACGTTGCAACGTTGCA</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">&gt;seq8</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">CATGACTGACTGATGCTAGCTAGCTGATCGTACGATC</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="section-3" class="level3">
-<h3 class="anchored" data-anchor-id="section-3"></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A) Load and report (use SeqIO)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Read all records from `dna.fasta`.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - For each record, print the record ID and the sequence length.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Also print the first 10 bases of the sequence.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="mini-fasta-toolkit-with-biopython" class="level2">
+<h2 class="anchored" data-anchor-id="mini-fasta-toolkit-with-biopython">Mini FASTA toolkit with Biopython</h2>
+<p>In this exercise you will use three parts of Biopython: <code>Seq</code>, <code>SeqRecord</code> and <code>SeqIO</code>.</p>
+<section id="create-the-input-file" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-input-file">Create the input file</h3>
+<p>Save the text below as a file named <code>dna.fasta</code> in the same folder as your script:</p>
+<pre class="text"><code>&gt;seq1
+ATGCATGCATGCATGCATGCATGCATGC
+&gt;seq2
+GATTACAGATTACAGATTACA
+&gt;seq3
+CGCGATATCGCGATATCGCGATATCGCGATATCGCGATATC
+&gt;seq4
+TTTAAACCCGGGTTTAAA
+&gt;seq5
+GCCGCGGCGCGCCGCGGCGCGCCGCGGCGC
+&gt;seq6
+ATATATATATATATATATATAT
+&gt;seq7
+ACGTTGCAACGTTGCAACGTTGCAACGTTGCA
+&gt;seq8
+CATGACTGACTGATGCTAGCTAGCTGATCGTACGATC</code></pre>
 </section>
-<section id="section-4" class="level3">
-<h3 class="anchored" data-anchor-id="section-4"></h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># B) Reverse complements to a new FASTA (use Seq, SeqRecord, SeqIO)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - For each original record, create the reverse complement of its sequence.</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Make a new SeqRecord for the reverse complement.</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Set the new ID to "&lt;oldid&gt;_rc" and the description to "reverse complement of &lt;oldid&gt;".</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># - Write all reverse-complement records to a file named `dna_rc.fasta`.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="load-and-report" class="level3">
+<h3 class="anchored" data-anchor-id="load-and-report">Load and report</h3>
+<p>Use <code>SeqIO</code> for this task.</p>
+<ol type="1">
+<li><p>Read all records from <code>dna.fasta</code>.</p></li>
+<li><p>For each record, print the record ID and the sequence length.</p></li>
+<li><p>Also print the first 10 bases of the sequence.</p></li>
+</ol>
 </section>
-<section id="section-5" class="level3">
-<h3 class="anchored" data-anchor-id="section-5"></h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C) GC% annotation to a new FASTA (use SeqRecord, SeqIO)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - For each original record, calculate GC% = 100 * (count of 'G' + count of 'C') / length.</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Round to 1 decimal place.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Create a copy of the record where the description includes "GC=&lt;value&gt;%".</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># - Write these annotated records to `dna_with_gc.fasta`.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="reverse-complements-to-a-new-fasta" class="level3">
+<h3 class="anchored" data-anchor-id="reverse-complements-to-a-new-fasta">Reverse complements to a new FASTA</h3>
+<p>Use <code>Seq</code>, <code>SeqRecord</code> and <code>SeqIO</code> for this task.</p>
+<ol type="1">
+<li><p>For each original record, create the reverse complement of its sequence.</p></li>
+<li><p>Make a new <code>SeqRecord</code> for the reverse complement.</p></li>
+<li><p>Set the new ID to <code>&lt;oldid&gt;_rc</code> and the description to <code>reverse complement of &lt;oldid&gt;</code>.</p></li>
+<li><p>Write all reverse-complement records to a file named <code>dna_rc.fasta</code>.</p></li>
+</ol>
 </section>
-<section id="section-6" class="level3">
-<h3 class="anchored" data-anchor-id="section-6"></h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># D) Translation (Optional, do if you have extra time)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Translate each DNA sequence and print the first 10 amino acids.</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Read `dna_rc.fasta` back in and confirm IDs/descriptions look correct.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="gc-annotation-to-a-new-fasta" class="level3">
+<h3 class="anchored" data-anchor-id="gc-annotation-to-a-new-fasta">GC% annotation to a new FASTA</h3>
+<p>Use <code>SeqRecord</code> and <code>SeqIO</code> for this task.</p>
+<ol type="1">
+<li><p>For each original record, calculate the GC% as <code>100 * (count of 'G' + count of 'C') / length</code>.</p></li>
+<li><p>Round to 1 decimal place.</p></li>
+<li><p>Create a copy of the record where the description includes <code>GC=&lt;value&gt;%</code>.</p></li>
+<li><p>Write these annotated records to <code>dna_with_gc.fasta</code>.</p></li>
+</ol>
+</section>
+<section id="translation" class="level3">
+<h3 class="anchored" data-anchor-id="translation">Translation</h3>
+<ol type="1">
+<li><p>Translate each DNA sequence and print the first 10 amino acids.</p></li>
+<li><p>Read <code>dna_rc.fasta</code> back in and confirm that the IDs and descriptions look correct.</p></li>
+</ol>
+</section>
+</section>
+<section id="extra-task-vector-maths-with-numpy" class="level2">
+<h2 class="anchored" data-anchor-id="extra-task-vector-maths-with-numpy">Extra task: Vector maths with NumPy</h2>
+<p>This task is optional. Try it if you have finished the other exercises and have time left.</p>
+<p>NumPy is a Python library for calculating with many numbers at once. You don’t need to install it separately, because it is installed together with pandas.</p>
+<p>A small experiment measured the number of reads for five genes, in a control sample and in a treated sample:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>genes <span class="op">=</span> [<span class="st">"geneA"</span>, <span class="st">"geneB"</span>, <span class="st">"geneC"</span>, <span class="st">"geneD"</span>, <span class="st">"geneE"</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>control <span class="op">=</span> [<span class="dv">120</span>, <span class="dv">340</span>, <span class="dv">15</span>, <span class="dv">800</span>, <span class="dv">60</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>treated <span class="op">=</span> [<span class="dv">240</span>, <span class="dv">340</span>, <span class="dv">60</span>, <span class="dv">200</span>, <span class="dv">30</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li><p><strong>Add the lists.</strong></p>
+<p>Calculate <code>control + treated</code> and print the result. Is it what you expected?</p></li>
+<li><p><strong>Make arrays.</strong></p>
+<p>Import NumPy with <code>import numpy as np</code> and turn both lists into NumPy arrays with <code>np.array()</code>. Add the two arrays together and compare the result with step 1.</p></li>
+<li><p><strong>Calculate the fold change.</strong></p>
+<p>The fold change of a gene is its value in the treated sample divided by its value in the control sample. Calculate the fold change of all five genes in one line of code.</p></li>
+<li><p><strong>Calculate the log2 fold change.</strong></p>
+<p>Use <code>np.log2()</code> to calculate the log2 fold change of all genes. Which genes went up in the treated sample, which went down, and which stayed the same?</p></li>
+<li><p><strong>Normalise the samples.</strong></p>
+<p>The two samples did not get the same total number of reads. Use <code>np.sum()</code> to divide each array by its own total, so that the values in each array add up to 1. Calculate the log2 fold change again from the normalised arrays. Do you come to the same conclusions as in step 4?</p></li>
+</ol>
 
 
-</section>
 </section>
 </section>
 
@@ -541,13 +583,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
