@@ -2,7 +2,7 @@
 title: "Practical 6: Python Plotting"
 subtitle: "BIO511 Genomics - Plotting using matplotlib, plotly and plotnine"
 author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
-date: August 2026
+date: Oct 13 2026
 format: 
   html:
     toc: true
@@ -14,6 +14,8 @@ format:
 
 # Introduction
 Plotting is a necessity in most omics projects. A good plot can help the viewer to quickly get an understanding of the data and the project. A bad plot can be misguiding and lead to general confusion or, if worst comes to worst, incorrect conclusions. Plotting is a central part of sharing and visualizing results. It’s a way to investigate, create an overview of and validate the data you are working with. For now, however, we’ll start with making some simple plots, using a few popular plotting libraries. Hopefully, this will give you the confidence to create spectacular ones in the future!
+
+Please save today's work in a directory `practical_6` in your group repo.
 
 # Useful links
 

@@ -2,7 +2,7 @@
 title: "Practical 3: Python Functions"
 subtitle: "BIO511 Genomics -  Python Functions (and more looping)"
 author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
-date: August 2026
+date: Oct 8 2026
 format:
   html:
     toc: true
@@ -22,6 +22,8 @@ Two things to keep in mind:
 
 * A function has to be both **defined** with a `def` block and then **called** before the code inside it actually runs. Calling a function means running the function.
 * A function has its own **namespace**. Code outside the function cannot access the variables that only exist inside the function. If you want to use a value outside the function, the function needs to `return` it.
+
+Please save today's work in a directory `practical_3` in your group repo.
 
 # Useful links
 

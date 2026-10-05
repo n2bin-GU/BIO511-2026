@@ -2,7 +2,7 @@
 title: "Practical 5: Files"
 subtitle: "BIO511 Genomics - Python File Manipulation and Command Line Arguments"
 author: "Alvar Almstedt, Bart Edelbroek, Emma Västerviga"
-date: August 2026
+date: Oct 12 2026
 format: 
   html:
     toc: true
@@ -17,6 +17,8 @@ format:
 Today's topics include: Reading and writing to files, working with pandas dataframes and some of the functionality in biopython
 
 Before you start, make sure that pandas, NumPy and Biopython are installed in the environment you are using. NumPy is installed automatically together with pandas, and you should already have Biopython from Practical 4.
+
+Please save today's work in a directory `practical_5` in your group repo.
 
 # Useful links
 
