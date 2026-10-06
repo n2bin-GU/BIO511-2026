@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>Additional CLI Practicals: Pathing – BIO511 Genomics - Practical Repository</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-fd3cdb6591c6e78768236938076114a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-fe7ce69853b96be4afbeeddfbd468f14.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -253,8 +256,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Practical 6: Plotting</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_OBJECT_ORIENTED_PROGRAMMING.html">
+ <span class="dropdown-text">Practical 7: Object Oriented Programming</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../../practicals/Practicals - Python/PRACTICAL_ALGORITHMIC_THINKING.html">
- <span class="dropdown-text">Practical 7: Algorithmic Thinking in Genomics</span></a>
+ <span class="dropdown-text">Practical 8: Algorithmic Thinking in Genomics</span></a>
   </li>  
     </ul>
   </li>
@@ -441,7 +448,7 @@ Warning
 </div>
 <div class="callout-body-container callout-body">
 <p>Make some example directories to practice navigating the file system.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In a suitable directory</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In a suitable directory</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> pathing_test</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> pathing_test</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> dir1 dir2 dir3</span>
@@ -450,7 +457,7 @@ Warning
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> dir1/file1.txt</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> dir3/testfile.txt</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> dir2/subdir1</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> dir2/subdir1/file2.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> dir2/subdir1/file2.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <section id="directory-tree-structure" class="level2">
@@ -458,7 +465,7 @@ Warning
 <p>The linux file structure is hierarchical, starting from the root directory <code>/</code> and branching out into various subdirectories. Imagine a tree, we climb from the root by entering one of the directories from <code>/</code> (ex. <code>/home</code>). Entering different subdirectories from there is akin to climbing out along different branches of the tree.</p>
 <p>For each directory, you can navigate using <code>relative</code> or <code>absolute</code> paths. A <code>relative</code> path specifies the location of a directory or file in relation to the current directory, a variable starting point or a symbolic link. An <code>absolute</code> path specifies the full path from the root directory, in the context of Linux’s “everything is a file” philosophy, this is also the <code>true path</code> of the directory or file.</p>
 <p>You can list its contents to understand its structure. Using ls -la will show you something akin to the following output:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Output</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span> 32</span>
@@ -469,9 +476,9 @@ Warning
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxrwxr-x</span> 3 torkl torkl 4096 Sep 18 13:49 Intro_to_CLI</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxrwxr-x</span> 3 torkl torkl 4096 Sep 24 00:05 my_project</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxrwxr-x</span> 3 torkl torkl 4096 Sep 24 01:10 testdir</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxrwxr-x</span> 3 torkl torkl 4096 Sep 23 23:33 Testrepo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxrwxr-x</span> 3 torkl torkl 4096 Sep 23 23:33 Testrepo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>.</code> represents the current directory, while <code>..</code> represents the parent directory. Both of these can be used as <code>relative paths</code> when navigating the file system:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Navigate to the parent directory</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Navigate to the parent directory</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> dir1</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
@@ -486,7 +493,7 @@ Warning
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Navigate to a directory using an absolute path</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the full path from the terminal output above and use it to navigate directly to the directory</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"&lt;full_path_to_directory&gt;"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"&lt;full_path_to_directory&gt;"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>So a relative path would be <code>../my_project</code>, an absolute path <code>/home/user/Mydirectory/project/data/mydata.txt</code>. When we use <code>symbolic links</code> (made with <code>ln -s</code>), we create shortcuts to directories or files, making navigation more convenient. Keep in mind that these are also relative paths to the symlinks themselves. So for some scripts (ex. those executed in a container), it is important to use the actual true path to the target file or directory rather than relying on the symlink.</p>
 </section>
 </section>
@@ -498,7 +505,7 @@ Warning
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise: Navigate a directory tree
+<span class="screen-reader-only">Important</span>Exercise: Navigate a directory tree
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -638,12 +645,12 @@ Exercise: Navigate a directory tree
 
 28 directories, 95 files</code></pre>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+<span class="screen-reader-only">Tip</span>Answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -734,13 +741,14 @@ Note
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

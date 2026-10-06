@@ -1,6 +1,6 @@
 ---
 title: "Practical 7: Algorithmic Thinking in Genomics"
-author: "Vahid Atabaigielmi"
+author: "Vahid Atabaigielmi, Tor Kling"
 date: August 2026
 format:
   html:
