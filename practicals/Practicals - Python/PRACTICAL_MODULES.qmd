@@ -41,7 +41,7 @@ Please save today's work in a directory `practical_4` in your group repo.
 
 In these exercises you will learn how you can import functions from other scripts that you have written as well as install an external module.
 
-You will be given two scripts (see below), where the main.py will import the codons function from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to amino acids. You will also need a FASTA file to run the scripts on, which you can find on Canvas.
+You will be given two scripts (see below), where the main.py will import the codons function from a separate script premade_script.py which first parses a fasta-file into codons, and then translates these to amino acids. You will also need a FASTA file to run the scripts on, located here: [sequences.fa](sequences.fa).
 To get this to work, you first need to import the amino acid translation function, install Biopython and call Bio.Seq and see how variables are passed between two files.
 
 
@@ -156,10 +156,10 @@ def codons(sequence_file):
     return sequence_codons
 
 
-def exercise_function(sequence_codons):
+def exercise_function(codon_list):
     """What does this function do?"""
     aa_string = ""
-    for codon in sequence_codons:
+    for codon in codon_list:
         amino_acid = Seq(codon).translate()
         aa_string += str(amino_acid)
     return aa_string
