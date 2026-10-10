@@ -242,27 +242,27 @@ Real Kraken2 uses minimizers and highly optimized data structures. The following
 ## Runnable Example: k-mer Index and LCA Classification
 
 ```python
-def kmers(sequence, k):
+def _kmers(sequence, k):
     """Return every k-mer in order, including repeated k-mers."""
     if k <= 0 or k > len(sequence):
         return []
-    list =[]
+    list_kmers =[]
     for i in range(len(sequence) - k + 1):
-        list.append(sequence[i:i + k])
-    return list
+        list_kmers.append(sequence[i:i + k])
+    return list_kmers
 
 
 def count_kmers(sequence, k):
     """Return the number of occurrences of each k-mer."""
     counts = {}
 
-    for kmer in kmers(sequence, k):
+    for kmer in _kmers(sequence, k):
         counts[kmer] = counts.get(kmer, 0) + 1
 
     return counts
 
 
-def lineage(taxon, parent):
+def _lineage(taxon, parent):
     """Return a taxon and all of its ancestors."""
     ancestors = []
 
@@ -273,14 +273,16 @@ def lineage(taxon, parent):
     return ancestors
 
 
-def lowest_common_ancestor(taxa, parent):
+def _lowest_common_ancestor(taxa, parent):
     """Return the most specific ancestor shared by all taxa."""
     if len(taxa) == 0:
         return None
 
     taxa = list(taxa)
-    first_lineage = lineage(taxa[0], parent)
-    remaining_lineages = [lineage(taxon, parent) for taxon in taxa[1:]]
+    first_lineage = _lineage(taxa[0], parent)
+    remaining_lineages = [ ]
+    for taxon in taxa[1:]:
+        remaining_lineages.append(_lineage(taxon, parent))
 
     for ancestor in first_lineage:
         if all(ancestor in other for other in remaining_lineages):
@@ -294,7 +296,8 @@ def build_kmer_taxon_index(reference_sequences, k):
     index = {}
 
     for taxon, sequence in reference_sequences.items():
-        for kmer in kmers(sequence, k):
+        list_kmers = _kmers(sequence, k)
+        for kmer in list_kmers:
             if kmer not in index:
                 index[kmer] = set()
             index[kmer].add(taxon)
@@ -305,12 +308,12 @@ def build_kmer_taxon_index(reference_sequences, k):
 def classify_read(read, k, kmer_index, parent):
     """Let matching k-mers vote for taxa or shared ancestors."""
     votes = {}
-
-    for kmer in kmers(read, k):
+    list_kmers = _kmers(read, k)
+    for kmer in list_kmers:
         matching_taxa = kmer_index.get(kmer, set())
 
         if matching_taxa:
-            taxon = lowest_common_ancestor(matching_taxa, parent)
+            taxon = _lowest_common_ancestor(matching_taxa, parent)
             votes[taxon] = votes.get(taxon, 0) + 1
 
     return sorted(votes.items(), key=lambda item: -item[1])
