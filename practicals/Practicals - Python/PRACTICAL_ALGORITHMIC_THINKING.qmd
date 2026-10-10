@@ -246,8 +246,10 @@ def kmers(sequence, k):
     """Return every k-mer in order, including repeated k-mers."""
     if k <= 0 or k > len(sequence):
         return []
-
-    return [sequence[i:i + k] for i in range(len(sequence) - k + 1)]
+    list =[]
+    for i in range(len(sequence) - k + 1):
+        list.append(sequence[i:i + k])
+    return list
 
 
 def count_kmers(sequence, k):
