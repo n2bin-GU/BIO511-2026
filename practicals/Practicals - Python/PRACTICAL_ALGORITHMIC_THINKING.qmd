@@ -252,16 +252,6 @@ def _kmers(sequence, k):
     return list_kmers
 
 
-def count_kmers(sequence, k):
-    """Return the number of occurrences of each k-mer."""
-    counts = {}
-
-    for kmer in _kmers(sequence, k):
-        counts[kmer] = counts.get(kmer, 0) + 1
-
-    return counts
-
-
 def _lineage(taxon, parent):
     """Return a taxon and all of its ancestors."""
     ancestors = []
@@ -333,8 +323,6 @@ references = {
 
 k = 3
 kmer_index = build_kmer_taxon_index(references, k)
-
-print(count_kmers(references["E_coli"], k))
 print(classify_read("ATGC", k, kmer_index, parent))
 ```
 
