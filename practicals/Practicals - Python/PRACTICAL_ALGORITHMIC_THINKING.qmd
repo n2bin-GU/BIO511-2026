@@ -22,13 +22,14 @@ By this point in the course you have used the command line, Git, Python, files, 
 
 We will focus on algorithms that appeared inside tools already used in the course:
 
-| Earlier workflow | Tool | Algorithmic idea in this practical |
+| Earlier workflow | Tool | Algorithmic idea in this tool |
 |---|---|---|
 | Taxonomic classification | Kraken2 | k-mers, indexes, and lowest common ancestors |
-| Read mapping | BWA | exact seeds, local alignment, and genome indexes |
-| Functional annotation[^1] | Prokka | BLAST-like sequence search and profile HMMs |
+| Read mapping[^1] | BWA | exact seeds, local alignment, and genome indexes |
+| Functional annotation[^2] | Prokka | BLAST-like sequence search and profile HMMs |
 
-[^1]: Functional annotation is not covered in this lecture.
+[^1]: Only exact seeds is covered in this lecture.
+[^2]: Functional annotation is not covered in this lecture.
 
 The purpose is not to reproduce these production tools. Instead, we will build small examples that expose their most important ideas.
 
