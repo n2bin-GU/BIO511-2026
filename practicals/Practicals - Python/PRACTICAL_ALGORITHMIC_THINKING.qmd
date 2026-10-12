@@ -12,7 +12,7 @@ format:
 ---
 **Tools for Visualize code execution:**
 
-https://pythontutor.com/
+[Python Tutor](https://pythontutor.com/)
 
 # Introduction
 
@@ -26,7 +26,9 @@ We will focus on algorithms that appeared inside tools already used in the cours
 |---|---|---|
 | Taxonomic classification | Kraken2 | k-mers, indexes, and lowest common ancestors |
 | Read mapping | BWA | exact seeds, local alignment, and genome indexes |
-| Functional annotation | Prokka | BLAST-like sequence search and profile HMMs |
+| Functional annotation[^1] | Prokka | BLAST-like sequence search and profile HMMs |
+
+[^1]: Functional annotation is not covered in this lecture.
 
 The purpose is not to reproduce these production tools. Instead, we will build small examples that expose their most important ideas.
 
@@ -211,6 +213,20 @@ For each possible start position:
         Report the position
 ```
 
+Python example:
+```python
+genome = "TTGATGCCCATGAAATGA"
+pattern = "ATG"
+
+matches = []
+
+for i in range(len(genome) - len(pattern) + 1):
+    if genome[i:i + len(pattern)] == pattern:
+        matches.append(i)
+
+print(matches)
+```
+
 This is manageable for a short sequence, but repeatedly scanning a large reference database is expensive.
 
 ## Representing Sequences with k-mers
@@ -228,6 +244,22 @@ The value of `k` creates a trade-off:
 - Small `k`: more matches, but many are non-specific
 - Large `k`: more specific, but more sensitive to sequencing errors
 
+
+Python example:
+```python
+sequence = "ATGACCATGATTACGCCAAGCT"
+k = 3
+
+kmer_counts = {}
+
+for i in range(len(sequence) - k + 1):
+    kmer = sequence[i:i + k]
+    if kmer not in kmer_counts:
+        kmer_counts[kmer] = 0
+    kmer_counts[kmer] = kmer_counts[kmer] + 1
+
+print(kmer_counts)
+```
 ## From k-mers to Kraken2-style Classification
 
 In the WGS workflow, Kraken2 classified reads taxonomically. Conceptually, its database connects sequence words to taxa. If the same sequence evidence occurs in several taxa, that evidence can be assigned to their **lowest common ancestor**, or LCA.
