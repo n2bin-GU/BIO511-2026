@@ -10,6 +10,9 @@ format:
     code-fold: false
     theme: cosmo
 ---
+**Tools for Visualize code execution:**
+
+https://pythontutor.com/
 
 # Introduction
 
@@ -326,6 +329,20 @@ kmer_index = build_kmer_taxon_index(references, k)
 print(classify_read("ATGC", k, kmer_index, parent))
 ```
 
+## What the Functions Do
+
+| Part of the k-mer/LCA example | Purpose |
+|---|---|
+| Extract words with `_kmers()` | Take every overlapping word of length `k` from a sequence, including repeated words |
+| Build `kmer_index` with `build_kmer_taxon_index()` | Connect each reference word to the taxa containing it; a set records each taxon only once per word |
+| Find `matching_taxa` in `classify_read()` | Look up a read word in the index; an absent word gives an empty set and no vote |
+| Follow parents with `_lineage()` | Start at a taxon and collect its ancestors up to the root |
+| Find a shared label with `_lowest_common_ancestor()` | Assign the most specific ancestor shared by all matching taxa; a word matching one taxon keeps that taxon's label |
+| Update `votes` in `classify_read()` | Add one vote to the selected label for each matching read word |
+| Return the sorted votes | Put labels with more votes first; equal counts remain tied |
+
+Here, `k = 3` sets the word length for both index construction and read lookup. In `ATGC`, the shared word `ATG` gives one vote to `Bacteria`, and `TGC` gives one vote to `E_coli`. The returned list is `[('Bacteria', 1), ('E_coli', 1)]`: a summary of the evidence, with tied counts.
+
 ::: {.callout-tip}
 ## What to Notice
 
@@ -335,62 +352,41 @@ print(classify_read("ATGC", k, kmer_index, parent))
 - Changing `k` changes sensitivity and specificity.
 :::
 
-# Core Idea 2: Local Alignment and Seed-and-Extend
+# Core Idea 2: Seed-and-Extend Sequence Search
 
-Exact matching is too strict when two sequences differ by substitutions, insertions, or deletions. Sequence alignment instead searches for a high-scoring explanation of how the sequences correspond.
+## Biological Problem: Where Could This Read Match?
 
-## Local Alignment with Dynamic Programming
+In a read-mapping workflow, we want to find where a sequencing read fits in a longer reference sequence. A read may contain a changed base, so we want to allow a small number of differences.
 
-**Smith-Waterman local alignment** finds the best matching subsequences within two longer sequences. Dynamic programming builds a score matrix and reuses solutions to smaller alignment problems.
+A **seed** is a short piece of the read that must match the reference exactly. Once we find a seed, we compare the surrounding reference window with the complete read. This is the seed-and-extend idea.
 
-At each matrix cell, the algorithm considers:
-
-```text
-diagonal: align two bases
-up:       align a base with a gap
-left:     align a gap with a base
-zero:     begin a new local alignment
-```
-
-The scoring rules form a biological model:
-
-- A match receives a positive score
-- A mismatch receives a penalty
-- A gap receives a penalty
-
-Dynamic programming is sensitive, but aligning a query against every sequence in a large database is expensive.
-
-## The Seed-and-Extend Heuristic
-
-BLAST and BWA-MEM use the broader **seed-and-extend** pattern:
+For our small example:
 
 ```text
-Break the query into short seeds
-Find seed matches quickly
-Extend only the promising matches
-Score the extended candidates
-Report the strongest results
+Reference: GGG ATGACCATGATT ACGCCAAGCTTT
+Read:          ATGACCATGATT
+First seed:    ATGA
 ```
 
-This illustrates an important trade-off:
+The spaces in the reference line separate the surrounding DNA from the matching window. The first seed starts at reference position 3, counting from zero. Comparing the complete read at that position gives zero mismatches.
 
-| Strategy | Strength | Limitation |
-|---|---|---|
-| Full local alignment | Sensitive under its scoring model | Expensive across a large database |
-| Exact matching | Fast and unambiguous | Misses sequences containing differences |
-| Seed-and-extend | Fast and usually sensitive | May miss a match with no usable seed |
+## The Algorithm
 
-In the earlier workflows:
-
-- Prokka uses BLAST-like protein searches during functional annotation.
-- BWA-MEM finds exact seeds and extends candidate read mappings.
+```text
+For each seed in the read:
+    Find every exact occurrence of that seed in the reference
+    Use the seed's position to place the complete read
+    Compare the read with the reference window
+    Keep the placement if it has few enough mismatches
+Return the retained placements
+```
 
 ## Runnable Example: Simplified Seed-and-Extend
 
-This example looks for exact seeds, places the complete query around each seed, and retains windows with few mismatches. Real BLAST and BWA use more sophisticated seeds, scoring, gaps, and statistical filters.
+This is the original seed-and-extend example. It searches two reference fragments and returns candidate positions. The extension step counts base differences in a window of the same length as the read; it does not handle insertions or deletions.
 
 ```python
-def seed_and_extend(query, target, k=4, max_mismatches=2):
+def seed_and_extend(query=None, target=None, k=None, max_mismatches=None):
     """Return candidate placements supported by an exact seed."""
     hits = set()
 
@@ -425,188 +421,133 @@ database = {
 query = "ATGACCATGATT"
 
 for name, sequence in database.items():
-    for hit in seed_and_extend(query, sequence, k=4):
+    for hit in seed_and_extend(query=query, target=sequence, k=4, max_mismatches=2):
         print(name, hit)
 ```
 
-Try changing one base in the query and then changing `k`. Does the algorithm still find the correct target? This is the sensitivity-specificity trade-off in miniature.
-
-# Core Idea 3: Indexing for Read Mapping
-
-A naive mapper repeatedly scans the reference genome. An indexed mapper performs additional work once so that every later read can be searched more efficiently.
-
-An everyday analogy is the index at the back of a textbook. Finding every occurrence of a term by reading the entire book is slow. Building the index takes work and space, but later searches become much faster.
-
-## BWT and the FM-index
-
-BWA and Bowtie use indexes based on the **Burrows-Wheeler Transform (BWT)** and **FM-index**. At a conceptual level, these methods reorganize information about the reference so that an exact seed can be located without checking every position.
+Expected output:
 
 ```text
-Build once:
-    Reference genome -> searchable index
-
-For every read:
-    Find exact seeds in the index
-    Extend candidate locations
-    Score candidate alignments
-    Report the best location or mark the read as ambiguous
+gene_A (3, 'ATGACCATGATT', 0)
 ```
 
-The important idea is not the exact BWT construction. It is the trade-off:
+The result means: a candidate was found in `gene_A`, starting at position **3**, with reference window **`ATGACCATGATT`** and **0 mismatches**. No candidate was retained for `gene_B`.
 
-- Building the index costs time and memory
-- The same index can be reused for millions of reads
-- Fast seed lookup makes large-scale mapping practical
+## What the Function Does
 
-This connects directly to the optional mapping workflow:
+| Part of `seed_and_extend()` | Purpose |
+|---|---|
+| Extract `seed` | Take a word of length `k` from the read |
+| Find `target_start` | Locate that word in the reference; `.find()` returns `-1` when no occurrence remains |
+| Calculate `placement_start` | Work backward from the seed to the start of the complete read |
+| Count `mismatches` | Compare each read base with the corresponding reference base |
+| Store a hit in `hits` | Keep an acceptable placement; the set avoids reporting it repeatedly when several seeds support it |
+| Return the sorted hits | Put placements with fewer mismatches first |
 
-```bash
-bwa index assembly.fasta
-bwa mem assembly.fasta reads.fastq
+Here, `k = 4` sets the seed length. `max_mismatches = 2` allows at most two base differences across the complete read window. A placement must have both an exact seed and an acceptable mismatch count to be returned.
+
+## Try One Changed Base
+
+Change the read to `ATGACCATGACT` and allow one mismatch:
+
+```python
+query = "ATGACCATGACT"
+print(seed_and_extend(query, database["gene_A"], k=4, max_mismatches=1))
 ```
 
-## Ambiguous Mapping
-
-An index can find candidate locations quickly, but it cannot remove biological ambiguity. Repeats, conserved genes, paralogs, and low-complexity regions may give a read several plausible locations.
-
-A mapper must then decide whether to:
-
-- report multiple locations
-- choose one location
-- lower the mapping-quality score
-- leave the read unmapped
-
-This is a useful general lesson: a faster search does not automatically create more informative data.
-
-# Optional Concept: Hidden Markov Models in Annotation
-
-::: {.callout-note collapse="true"}
-## HMMs, HMMER, and Prokka
-
-A hidden Markov model, or HMM, is useful when we observe a biological sequence but want to infer an underlying state.
+Expected output:
 
 ```text
-Observed sequence: A T G G C A T A A ...
-Hidden state:      noncoding, coding, protein-family domain, ...
+[(3, 'ATGACCATGATT', 1)]
 ```
 
-An HMM contains:
-
-- **States**, such as coding and noncoding
-- **Transition probabilities** between states
-- **Emission probabilities** for the observed bases or amino acids
-
-The Viterbi algorithm finds a most-likely path through the hidden states. Profile HMM tools such as HMMER use related probabilistic models to recognize conserved protein families. Prokka searches HMM databases as part of its annotation workflow.
-
-Conceptual pseudocode:
-
-```text
-For each sequence position:
-    For each possible hidden state:
-        Calculate the best score for reaching that state
-        Remember the preceding state
-Trace backward to recover the best state path
-```
-
-The main lesson is that annotation is not simply exact string matching. A probabilistic model can recognize a biological pattern even when individual sequences differ.
-:::
-
-# Comparing the Core Ideas
-
-| Genomics task | Main algorithmic idea | Course tool |
-|---|---|---|
-| Taxonomic classification | k-mer index and lowest common ancestor | Kraken2 |
-| Local sequence comparison | dynamic programming and scoring | Smith-Waterman-style alignment |
-| Database similarity search | seed-and-extend heuristic | BLAST through Prokka |
-| Read mapping | reference index, exact seeds, and extension | BWA |
-| Protein-family recognition | profile HMMs | HMMER through Prokka |
-
-No algorithm is best for every problem. The right choice depends on the biological question, dataset size, error profile, memory limit, and acceptable loss of sensitivity.
-
-# A Capstone Approach to Bioinformatics Problems
-
-When you meet a new bioinformatics problem, ask five questions.
-
-## 1. What is the biological goal?
-
-Examples include identifying an organism, locating a read, or assigning a function to a predicted protein.
-
-## 2. What are the computational input and output?
-
-Be specific. For example:
-
-```text
-Input:  paired FASTQ reads and a reference genome
-Output: likely reference position for each read
-```
-
-## 3. How large is the problem?
-
-Ask how many sequences there are, how long they are, and whether the data and index fit in memory.
-
-## 4. What trade-off is acceptable?
-
-Decide whether the task needs an exact answer or whether a fast, high-quality heuristic is appropriate.
-
-## 5. What could make the answer ambiguous?
-
-Consider sequencing errors, shared k-mers, repeated regions, contamination, incomplete databases, and novel biology.
-
-Only after answering these questions should you choose a tool or write detailed code.
+The first seed still matches, but the complete read differs from the reference window at one base. The placement is retained because one mismatch is allowed. If `max_mismatches` is changed to zero, the result is an empty list.
 
 # Exercises
 
 ## Exercise 1: Explore k-mer Classification
 
-Use the k-mer/LCA code above.
+Use the original k-mer/LCA code from Core Idea 1.
 
-1. Classify the read with `k = 3`, `k = 5`, and `k = 7`.
-2. Which value produces the most shared evidence?
-3. Change one base in the read. Which values of `k` are most affected?
-4. Explain why a short k-mer can support a high taxonomic rank rather than one species.
+1. Classify `ATGC` with `k = 2`, 3, and 4. Rebuild the reference index for each value of `k`.
+2. List the read's k-mers and explain where each vote goes.
+3. Change the read to `ATGA`, using `k = 3`. Which vote changes?
 
-## Exercise 2: From Naive Search to BWA-like Mapping
+## Exercise 2: Explore Seed-and-Extend
 
-A student proposes this mapping algorithm:
+Use the seed-and-extend code above.
 
-```text
-For each read:
-    For every position in the reference genome:
-        Count mismatches
-        Keep the position with the fewest mismatches
+1. Find the first seed of length four in `ATGACCATGATT`. Where does it occur in `gene_A`?
+2. Run the original read and the changed read `ATGACCATGACT` with `max_mismatches = 0`, then with `max_mismatches = 1`. Explain the outputs.
+3. Explain why the function stores hits in a set even though several different seeds can find the same placement.
+4. Write down the function's inputs, the result it returns, and the steps it follows before returning that result.
+
+## Exercise 3: Classify Several Reads
+
+Use the original references and parent dictionary with `k = 3`:
+
+```python
+reads = ["TGC", "ATG", "ATGA", "CCC"]
 ```
 
-Answer:
+1. Before running the code, list the k-mers and predict the votes for each read.
+2. Build the reference index once. Write a loop that calls `classify_read()` for each read and prints the read beside its returned evidence.
+3. Which read has only species-specific evidence? Which has only shared evidence? Which has tied counts? Which has no matching evidence?
+4. Explain why `votes` must start empty for each read, while the reference index can be reused.
 
-1. Why is this too slow for millions of reads?
-2. What work can be performed once and reused for every read?
-3. Where do exact seeds, local alignment, and an index enter the improved algorithm?
-4. Why could a read still have several equally good locations?
+## Exercise 4: Find Repeated Matches
 
-## Exercise 3: Workflow-to-Algorithm Map
+Use the seed-and-extend function with this reference containing two copies of the same sequence:
 
-You receive paired-end bacterial reads from an unknown isolate. You want to identify the organism, map the reads to a candidate reference, and annotate likely genes.
+```python
+target = "GGGATGACCATGATTCCCATGACCATGATT"
+query = "ATGACCATGATT"
+```
 
-For each step, write:
+1. Find the two complete occurrences of the query by hand. Write their start positions, counting from zero.
+2. Run `seed_and_extend(query, target, k=4, max_mismatches=0)`. How many placements are returned? Why is each placement reported once even though several seeds support it?
+3. Replace the target with `"GGGATGACCATGATTCCCATGACCAT"`. The second copy is now incomplete. Which placement disappears, and which condition in the function prevents a read from extending beyond the reference?
 
-1. The expected input and output
-2. A suitable course tool
-3. The main algorithmic idea inside that tool
-4. One important parameter or trade-off
-5. One biological or computational failure mode
+## Exercise 5: Rewrite k-mer Classification as One Function
+
+Rewrite the **Runnable Example: k-mer Index and LCA Classification** so that all its processing happens inside one function. Keep the same logic and outputs, but do not call the original helper functions or define functions inside the new function.
+
+Start with this signature. The body is for you to complete:
+
+```python
+def classify_read_one_function(read, k, reference_sequences, parent):
+    """Build a reference index and return the read's taxonomic votes."""
+    # Write all the processing steps here.
+    pass
+```
+
+Use this checklist to organize the body:
+
+1. Return an empty list if `k <= 0` or `k > len(read)`.
+2. Extract the reference k-mers and build a lookup from each word to its set of taxa.
+3. Extract the read's k-mers and look up the matching taxa for each word.
+4. Follow the parent links for each matching taxon and find the most specific shared ancestor. If only one taxon matches, use that taxon.
+5. Add one vote per matching read word, then return the votes sorted from largest to smallest.
+
+Keep `references` and `parent` from the original example as inputs to your function. Check that your completed function produces these results with `k = 3`:
+
+| Read | Expected return value |
+|---|---|
+| `ATGC` | `[('Bacteria', 1), ('E_coli', 1)]` |
+| `ATGA` | `[('Bacteria', 1), ('S_enterica', 1)]` |
+| `CCC` | `[]` |
+| `AT` | `[]` |
+
+Finally, identify the lines in your new function that replace `_kmers()`, `_lineage()`, `_lowest_common_ancestor()`, `build_kmer_taxon_index()`, and `classify_read()`.
 
 # Summary
 
-The most important lesson is not how to reproduce Kraken2, BWA, or Prokka in a few lines of Python. It is how to recognize the recurring ideas inside them:
+We used two concrete examples to practice algorithmic thinking:
 
-- k-mers turn sequences into searchable pieces
-- indexes trade preparation and memory for faster repeated searches
-- seed-and-extend heuristics avoid unnecessary alignments
-- scoring distinguishes stronger candidates from weaker ones
-- shared evidence and repeats create genuinely ambiguous answers
-- probabilistic models can recognize variable biological patterns
+- **k-mer classification:** break a read into words, look them up, and collect taxonomic evidence.
+- **Seed-and-extend search:** find exact short matches, compare the surrounding sequence, and retain candidate placements with few mismatches.
 
-Algorithmic thinking connects biological questions, computational scale, tool choice, and critical interpretation of results.
+For each example, identify the inputs, follow the steps, inspect the output, and explain what that output means biologically.
 
 # References
 
@@ -619,11 +560,6 @@ Algorithmic thinking connects biological questions, computational scale, tool ch
 
 ## Algorithm and Tool References
 
-- Smith, T. F. and Waterman, M. S. (1981). [Identification of common molecular subsequences](https://doi.org/10.1016/0022-2836(81)90087-5). *Journal of Molecular Biology*.
 - Altschul, S. F. et al. (1990). [Basic local alignment search tool](https://doi.org/10.1016/S0022-2836(05)80360-2). *Journal of Molecular Biology*.
-- Burrows, M. and Wheeler, D. J. (1994). [A block-sorting lossless data compression algorithm](https://www.hpl.hp.com/techreports/Compaq-DEC/SRC-RR-124.pdf). Digital Systems Research Center Research Report.
-- Ferragina, P. and Manzini, G. (2000). [Opportunistic data structures with applications](https://doi.org/10.1109/SFCS.2000.892127). *Proceedings of FOCS*.
-- Li, H. and Durbin, R. (2009). [Fast and accurate short read alignment with Burrows-Wheeler transform](https://doi.org/10.1093/bioinformatics/btp324). *Bioinformatics*.
 - Li, H. (2013). [Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM](https://arxiv.org/abs/1303.3997).
-- Eddy, S. R. (2011). [Accelerated profile HMM searches](https://doi.org/10.1371/journal.pcbi.1002195). *PLOS Computational Biology*.
 - Wood, D. E. et al. (2019). [Improved metagenomic analysis with Kraken 2](https://doi.org/10.1186/s13059-019-1891-0). *Genome Biology*.
