@@ -586,7 +586,7 @@ def classify_read_one_function(read, k, reference_sequences, taxonomy):
         pass
 
 
-    # 3. TODO: what does this block do?
+    # 3. TODO: what does the  block 3 do?
     votes = {}
     for i in range(len(read) - k + 1):
         kmer = read[i:i + k]
@@ -595,7 +595,7 @@ def classify_read_one_function(read, k, reference_sequences, taxonomy):
             continue
 
 
-        # 4. TODO: what does this block do?
+        # 3.1. TODO: what does this sub-block do?
         lineages = []
         for taxon in matching_taxa:
             ancestors = []
@@ -605,14 +605,14 @@ def classify_read_one_function(read, k, reference_sequences, taxonomy):
             lineages.append(ancestors)
 
 
-        # 5. TODO: Search from the first taxon toward the root.
+        # 3.2. TODO: Search from the first taxon toward the root to find the LCA.
         lca = "root"
 
         
-        # 6. TODO: what does this block do?
+        # 3.3. TODO: what does this sub-block do?
         votes[lca] = votes.get(lca, 0) + 1
 
-    return sorted(votes.items(), key=lambda item: -item[1])
+    return votes
 ```
 
 Keep `references` and `taxonomy` from the original example as inputs to your function. Check that your completed function produces these results with `k = 3`:
