@@ -586,24 +586,51 @@ query = "ATGACCATGATT"
 
 ## Exercise 5: Rewrite k-mer Classification as One Function
 
-Rewrite the **Runnable Example: k-mer Index and LCA Classification** so that all its processing happens inside one function. Keep the same logic and outputs, but do not call the original helper functions or define functions inside the new function.
-
-Start with this signature. The body is for you to complete:
+We partially rewrite the **Runnable Example: k-mer Index and LCA Classification** so that all its processing happens inside one function. Complate the code and and explian what each numbered code block does.
 
 ```python
 def classify_read_one_function(read, k, reference_sequences, parent):
     """Build a reference index and return the read's taxonomic votes."""
-    # Write all the processing steps here.
-    pass
+
+    # 1. TODO: what does this block do?
+    if k <= 0 or k > len(read):
+        return []
+
+
+    # 2. TODO: Extract reference k-mers and build the index.
+    index = {}
+    for taxon, sequence in reference_sequences.items():
+        pass
+
+
+    # 3. TODO: what does this block do?
+    votes = {}
+    for i in range(len(read) - k + 1):
+        kmer = read[i:i + k]
+        matching_taxa = list(index.get(kmer, set()))
+        if not matching_taxa:
+            continue
+
+
+        # 4. TODO: what does this block do?
+        lineages = []
+        for taxon in matching_taxa:
+            ancestors = []
+            while taxon is not None:
+                ancestors.append(taxon)
+                taxon = parent[taxon]
+            lineages.append(ancestors)
+
+
+        # 5. TODO: Search from the first taxon toward the root.
+        label = "root"
+
+        
+        # 6. TODO: what does this block do?
+        votes[label] = votes.get(label, 0) + 1
+
+    return sorted(votes.items(), key=lambda item: -item[1])
 ```
-
-Use this checklist to organize the body:
-
-1. Return an empty list if `k <= 0` or `k > len(read)`.
-2. Extract the reference k-mers and build a lookup from each word to its set of taxa.
-3. Extract the read's k-mers and look up the matching taxa for each word.
-4. Follow the parent links for each matching taxon and find the most specific shared ancestor. If only one taxon matches, use that taxon.
-5. Add one vote per matching read word, then return the votes sorted from largest to smallest.
 
 Keep `references` and `parent` from the original example as inputs to your function. Check that your completed function produces these results with `k = 3`:
 
@@ -613,8 +640,6 @@ Keep `references` and `parent` from the original example as inputs to your funct
 | `ATGA` | `[('Bacteria', 1), ('S_enterica', 1)]` |
 | `CCC` | `[]` |
 | `AT` | `[]` |
-
-Finally, identify the lines in your new function that replace `_kmers()`, `_lineage()`, `_lowest_common_ancestor()`, `build_kmer_taxon_index()`, and `classify_read()`.
 
 # Summary
 
