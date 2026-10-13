@@ -230,6 +230,16 @@ The value of `k` creates a trade-off:
 - Small `k`: more matches, but many are non-specific
 - Large `k`: more specific, but more sensitive to sequencing errors
 
+k-mers are used in many genomics tools:
+
+- read error correction
+- genome assembly
+- metagenomic classification
+- contamination checks
+- genome distance estimation
+- fast pre-filtering before alignment
+
+The key idea is that long biological sequences can be represented as collections of shorter sequence words.
 
 Python example: naive search vs indexed k-mer search
 ```python
