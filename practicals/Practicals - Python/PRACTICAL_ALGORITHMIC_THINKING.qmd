@@ -213,21 +213,6 @@ For each possible start position:
     If the window equals the pattern:
         Report the position
 ```
-
-Python example:
-```python
-genome = "TTGATGCCCATGAAATGA"
-pattern = "ATG"
-
-matches = []
-
-for i in range(len(genome) - len(pattern) + 1):
-    if genome[i:i + len(pattern)] == pattern:
-        matches.append(i)
-
-print(matches)
-```
-
 This is manageable for a short sequence, but repeatedly scanning a large reference database is expensive.
 
 ## Representing Sequences with k-mers
@@ -246,20 +231,68 @@ The value of `k` creates a trade-off:
 - Large `k`: more specific, but more sensitive to sequencing errors
 
 
-Python example:
+Python example: naive search vs indexed k-mer search
 ```python
-sequence = "ATGACCATGATTACGCCAAGCT"
+def naive_map(read, reference):
+    hits = []
+    comparisons = 0
+    for start in range(len(reference) - len(read) + 1):
+        window = reference[start:start + len(read)]
+        comparisons += 1
+        if window == read:
+            hits.append(start)
+    return hits, comparisons
+
+def build_kmer_index(reference, k):
+    index = {}
+    for start in range(len(reference) - k + 1):
+        kmer = reference[start:start + k]
+        if kmer not in index:
+            index[kmer] = []
+        index[kmer].append(start)
+    return index
+
+
+def indexed_map(read, reference, index, k):
+    hits = []
+    comparisons = 0
+    seed = read[:k]
+    candidate_positions = index.get(seed)
+    for start in candidate_positions:
+        window = reference[start:start + len(read)]
+        comparisons += 1
+        if window == read:
+            hits.append(start)
+    return hits, comparisons
+
+reference = "TTGATGAGCCCCATGAGATGA"
+reads = ["ATGAG"]
 k = 3
 
-kmer_counts = {}
+# Build once and reuse for every read.
+index = build_kmer_index(reference, k)
 
-for i in range(len(sequence) - k + 1):
-    kmer = sequence[i:i + k]
-    if kmer not in kmer_counts:
-        kmer_counts[kmer] = 0
-    kmer_counts[kmer] = kmer_counts[kmer] + 1
+total_naive = 0
+total_indexed = 0
 
-print(kmer_counts)
+for read in reads:
+    naive_hits, naive_checks = naive_map(read, reference)
+    indexed_hits, indexed_checks = indexed_map(read, reference, index, k)
+    total_naive += naive_checks
+    total_indexed += indexed_checks
+    print("Read:", read)
+    print("Naive:", naive_hits, "comparisons:", naive_checks)
+    print("Indexed:", indexed_hits, "comparisons:", indexed_checks)
+
+print("Total naive comparisons:", total_naive)
+print("Total indexed comparisons:", total_indexed)
+
+# output:
+# Read: ATGAG
+# Naive: [3, 12] comparisons: 17
+# Indexed: [3, 12] comparisons: 3
+# Total naive comparisons: 17
+# Total indexed comparisons: 3
 ```
 ## From k-mers to Kraken2-style Classification
 
