@@ -377,7 +377,7 @@ def classify_read(read, k, kmer_index, taxonomy):
             taxon = _lowest_common_ancestor(matching_taxa, taxonomy)
             votes[taxon] = votes.get(taxon, 0) + 1
 
-    return sorted(votes.items(), key=lambda item: item[1], reverse=True)
+    return votes
 
 
 taxonomy = {"root": None, "Bacteria": "root", "E_coli": "Bacteria", "S_enterica": "Bacteria"}
@@ -469,7 +469,7 @@ def seed_and_extend(query=None, target=None, k=None, max_mismatches=None):
 
             target_start = target.find(seed, target_start + 1)
 
-    return sorted(hits, key=lambda hit: (hit[2], hit[0]))
+    return hits
 
 
 database = {
